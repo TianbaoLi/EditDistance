@@ -1,0 +1,5 @@
+1|4401 1st Avenue SE|Seattle|WA|98105|5|14|10000
+2|Shakeit Shakeit Baby lane|Las Vegas|NV|07312|1|19|9000
+3|Seinfeld Avenue North|New York|NY|00145|13|21|12000
+4|23 Crazy Bird Circle|Tuscon|AZ|43002|3|15|12000
+5|777 Hibiscus Street|Thousand oaks|CA|97012|11|12|7000

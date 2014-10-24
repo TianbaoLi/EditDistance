@@ -1,0 +1,7 @@
+114 Sieg Hall | Seattle | WA |98195 | 206-543-7798| 206-543-8988| David Notkin | 12 | 34908
+332 Alcatraz Ave | Oakland | CA | 94618 | 510-652-0240 | 510-652-0630 | Ed. Kang | 400 | 298492
+459 Putnam Ave| Cambridge| MA | 02139 | 617-877-1166 | 617-877-1167 | David Um | 22| 33874
+1801 Oak Ave | Davis |CA | 95616 | 530-750-3256 | 530-750-3257 | Jonathan Lee | 34| 2343
+22301 Western Ave | Torrance | CA | 90501 | 310-212-0950 |310-212-0951| Daniel Im |10 | 3435
+2490 Middlefield Rd | Palo Alto |CA | 94301 | Not Available | Not Available | Chris Pak | 5 | 234
+5671 Western Ave. NW | Washington D.C | DC | 20015 | 301-792-8518 | 301-792-8519 | Peter Lee | 2| 50

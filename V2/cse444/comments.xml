@@ -1,0 +1,239 @@
+<comments>
+<domain name="inventory">
+<schema name="Aaron Day" use="yes">
+Reasonable number of instances, good comments, schema seems useful,
+entries are a bit fake.
+</schema>
+<schema name="Adam Fuchs" use="?">
+Very detailed schema with a lot of structural difference. Very few
+data instances. Good comments.
+</schema>
+<schema name="Alex Cho" use="yes">
+<quality> Good schema. </quality>
+<instances> Yes... later </instances> 
+<comment> Good comment </comment>
+</schema>
+<schema name="Barrett Arney" use="yes">
+<quality> Ok schema, some errors. </quality>
+<instances> Sufficient data instances. </instances>
+<comment> No comments. </comment>
+</schema>
+<schema name="Chris Good" use="?">
+Ok schema. No comments. Few data instances.
+</schema>
+<schema name="Colin Bleckner" use="yes">
+<quality> Simple schema. Music and books in the same table. </quality> 
+<comment> Good comments. </comment>
+<instances> Very few data instances. Parag's providing data. </instances>
+</schema>
+<schema name="Jacques Crocker" use="?">
+Very detailed schema with comments. useless instances.
+</schema>
+<schema name="Jagroop Dhillon" use="yes">
+<quality> Good schema </quality>
+<comment> Comments. </comment>
+<instances> No... Mausam is providing the instances </instances>
+</schema>
+<schema name="Jake Foster" use="?">
+<quality>Small reasonable schema.</quality>
+<instances> Few data instances. Parag will give instances. </instances>
+</schema>
+<schema name="Ksenia Guerstenberg" use="yes">
+<quality> Good schema. </quality>
+<comment> A few sprinkled comments. </comment>
+<instances> Sufficient instances. </instances>
+</schema>
+<schema name="Mellisa Garcia" use="yes">
+<quality> standard, like most </quality>
+<comment> reasonable. </comment>
+<instances> few. Amlan is providing data. </instances>
+</schema>
+<schema name="Nick Benson" use="?">
+Schema not great. Very few instances. Few not very helpful comments.
+</schema>
+<schema name="Paul Collins" use="yes">
+<quality> Simple Small schema. </quality>
+<comment> Few sprinkled comments.</comment>
+<instances> Very few instances... Sumit is providing more </instances>
+</schema>
+<schema name="Rachel Hunt" use="yes">
+<quality> Good schema. </quality> 
+<comment> Lotsa comments. </comment>
+<instances> Very few instances. Ashish is providing data </instances>
+</schema>
+<schema name="Rob Hanson" use="?">
+Reasonable schema. No comments  Very few instances.
+</schema>
+<schema name="Ryan Eyers" use="yes">
+<quality> Simple small schema. Made minor changes to availability table </quality>
+<comment> Yes. </comment>
+<instances> Very few instances. Kimmy is providing some </instances>
+</schema>
+</domain>
+
+<domain name="shipping">
+<schema name="Adam Moore" use="yes">
+Good schema. Good comments. Good data.
+</schema>
+<schema name="Aliseya Wright" use="yes">
+Reasonable schema. No comments. Reasonable data.
+</schema>
+<schema name="Alison Nimura" use="yes">
+Good but small schema. Good comments. Very few, but clean data.
+</schema>
+<schema name="Blake Norrish" use="?">
+Good schema. Good comments. Very, very few, but clean data instances.
+</schema>
+<schema name="Brian Rogers" use="?">
+Good schema. No comments. Very few, but clean data instances.
+</schema>
+<schema name="Bryan Shiflett" use="yes">
+Good schema. Good comment. Reasonable number of sensible instances.
+</schema>
+<schema name="Chris Mordue" use="almost">
+Reasonable schema with comments. Few instances.
+</schema>
+<schema name="Dan Thompson" use="?">
+<quality> reasonable </quality>
+<comment> none </comment>
+<instances>  very few </instances>
+</schema>
+<schema name="Dave Sedlack" use="yes">
+<quality> ok </quality>
+<comment> no </comment>
+<instances> yes </instances>
+</schema>
+<schema name="Geoff Van Ess" use="almost">
+<quality> good... submitted a new one (not this)</quality>
+<comment> yes </comment>
+<instances> just more than a few </instances>
+</schema>
+<schema name="Jai Patel" use="?">
+<quality> ok/simiple </quality>
+<comment> yes, but somewhat redundant </comment>
+<instances> very few </instances>
+</schema>
+<schema name="John Weekes" use="?">
+<quality> good/simple </quality>
+<comment> yes, very detailed and good </comment>
+<instances> very few </instances>
+</schema>
+<schema name="JungJoon Park" use="almost">
+<quality> ok </quality>
+<comment> yes </comment>
+<instances> few, but almost there </instances>
+</schema>
+<schema name="Lam Nguyen" use="?">
+<quality> ok </quality>
+<comment> few </comment>
+<instances> very few </instances>
+</schema>
+<schema name="Michael Stark" use="yes">
+<quality> yes </quality>
+<comment> yes </comment>
+<instances> sufficient </instances>
+</schema>
+<schema name="Michelle Moravan" use="?">
+<quality> has flaws </quality>
+<comment> no </comment>
+<instances> very, very few </instances>
+</schema>
+<schema name="Sawsson Taha" use="?">
+<quality> reasonable </quality>
+<comment> no </comment>
+<instances> very few </instances>
+</schema>
+<schema name="Shiqing Yu" use="almost">
+<quality> reasonable </quality>
+<comment> no </comment>
+<instances> sufficient </instances>
+</schema>
+
+</domain>
+
+<domain name="billing">
+<schema name="Ben Irwin" use="yes">
+<quality> reasonable </quality>
+<comment> yes </comment>
+<instances> yes ... later... mdb </instances>
+</schema>
+<schema name="Dennis Jacobs" use="yes">
+<quality> reasonable </quality>
+<comment> yes </comment>
+<instances> yes... later </instances>
+</schema>
+<schema name="Derek Leslie Cook" use="?">
+<quality> reasonable </quality>
+<comment> yes </comment>
+<instances> very few </instances>
+</schema>
+<schema name="Derek Mehlhorn" use="?">
+<quality> reasonable </quality>
+<comment> yes, but in a different format </comment>
+<instances> no </instances>
+</schema>
+<schema name="Ho Lim" use="?">
+<quality> has mistakes </quality>
+<comment> few </comment>
+<instances> very few </instances>
+</schema>
+<schema name="Jeburn Kim" use="?">
+<quality> has some issues </quality>
+<comment> no </comment>
+<instances> few </instances>
+</schema>
+<schema name="Jordan Kiang" use="yes">
+<quality> reasonable </quality>
+<comment> yes </comment>
+<instances> few </instances>
+</schema>
+<schema name="Karthink Jeyabalan" use="?">
+<quality> reasonable </quality>
+<comment> no </comment>
+<instances> yes... later</instances>
+</schema>
+<schema name="Margaret Lye" use="yes">
+<quality> Reasonable schema. </quality>
+<comment> Few comments. </comment>
+<instances> Very few instances. </instances>
+</schema>
+<schema name="Moran Lee" use="?">
+<quality> Not a relational model. Has hierachy </quality>
+<comment> Some </comment>
+<instances> None </instances>
+</schema>
+<schema name="Paul Larpenteur" use="yes">
+<quality> ok.. just three tables </quality>
+<instances> yes... later </instances>
+<comment> yes </comment>
+</schema>
+<schema name="Scott Jones" use="?">
+<quality> ok... standard </quality>
+<comment> yes, and good </comment>
+<instances> very few </instances>
+</schema>
+<schema name="Tessa MacDuff" use="?">
+<quality> good, some detail </quality>
+<comment> yes, for most </comment>
+<instances> few.. can use for test </instances>
+</schema>
+<schema name="Vadim Lobanov" use="?">
+<quality> good </quality>
+<comment> very sparse </comment>
+<instances> few... can use for test </instances>
+</schema>
+<schema name="Vivian Li" use="?">
+<quality> good </quality>
+<comment> yes </comment>
+<instances> few... but good, again sufficient for test </instances>
+</schema>
+</domain>
+
+<ask>
+Jayant, Pradeep, Ken, Eric, 
+Ashish S., Deepak, Miryung, 
+Rachel, Igor, Peter, Gerome, Yana, Luna, Ashish G., 
+Amol, Parag, Sumeet, Nilesh, Mausam, Sushant, Amlan 
+</ask>
+
+</comments>

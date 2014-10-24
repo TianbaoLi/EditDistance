@@ -1,0 +1,125 @@
+<database name="Billing">
+<createdby name="Derek Mehlhorn"/>
+
+<Schema>
+ <table name="Invoice">
+      <column name="ID" type="INTEGER" key="yes">
+       <!-- ForeignKey: 'InvoiceID' in TABLE 'Items'. -->
+      </column>
+      <column name="OrderDate" type="DATETIME" key="no"/>
+
+      <!-- Purchaser/Purchase Method information -->
+      <column name="BuyerName" type="STRING" key="no">
+       <!-- ForeignKey: 'CustomerName' in TABLE 'Customer'. -->
+      </column>
+      <column name="Subtotal" type="FLOAT" key="no"/>
+      <column name="Discounts" type="FLOAT" key="no"/>
+      <column name="Tax" type="FLOAT" key="no"/>
+      <column name="ShippingPrice" type="FLOAT" key="no"/>
+      <column name="FinalPrice" type="FLOAT" key="no"/>
+      <column name="PaymentMethod" type="STRING" key="no">
+       <!--
+        Methods of payment are:
+        Visa, Mastercard, GiftCard
+       -->
+      </column>
+      <column name="CCNumber" type="INTEGER" key="no"/>
+      <column name="CCExpireMonth" type="INTEGER" key="no"/>
+      <column name="CCExpireYear" type="INTEGER" key="no"/>
+
+      <!-- Shipping Information -->
+      <column name="ShippingName" type="STRING" key="no">
+       <!-- ForeignKey: 'CustomerName' in TABLE 'Customer'. -->
+      </column>
+      <column name="ShippingMethod" type="INTEGER" key="no">
+       <!--
+        Shipping Methods are:
+        FedEx, UPS Ground, Express Mail, Overnight
+         -->
+      </column>
+ </table>
+
+ <table name="Items">
+       <column name="InvoiceID" type="INTEGER" key="no">
+        <!-- ForeignKey: 'InvoiceID' in TABLE 'Invoice'. -->
+       </column>
+
+       <column name="ItemID" type="INTEGER" key="yes"/>
+       <column name="ItemName" type="STRING" key="no"/>
+       <column name="Quantity" type="INTEGER" key="no"/>
+       <column name="Price" type="FLOAT" key="no"/>
+       <column name="Location" type="STRING" key="no">
+        <!-- ForeignKey: 'WarehouseName' in TABLE 'Warehouses'. -->
+       </column>
+       <column name="EstDeliveryDate" type="DATETIME" key="no"/>
+       <column name="Description" type="STRING" key="no"/>
+       <column name="ShipStatus" type="STRING" key="no"/>
+ </table>
+
+
+ <table name="Warehouses">
+      <column name="WarehouseName" type="STRING" key="yes"/>
+      <column name="Address" type="STRING" key="no"/>
+ </table>
+
+
+ <table name="Customer">
+      <column name="CustomerName" type="STRING" key="yes"/>
+
+      <!-- Contact Information -->
+      <column name="Address" type="STRING" key="no"/>
+      <column name="City" type="STRING" key="no"/>
+      <column name="State" type="STRING" key="no"/>
+      <column name="ZipCode" type="INTEGER" key="no"/>
+      <column name="PhoneNumber" type="INTEGER" key="no"/>
+      <column name="EmailAddress" type="STRING" key="no"/>
+
+      <!-- Additional Information -->
+      <column name="NewsletterSubscriber" type="BOOLEAN" key="no"/>
+      <column name="Age" type="INTEGER" key="no"/>
+ </table>
+
+
+<!-- Each invoice must have sold at least one item -->
+<foreignkeyconstraint>
+ <source table="Invoice">
+  <column name="InvoiceID"/>
+ </source>
+ <target table="Items">
+  <column name="InvoiceID"/>
+ </target>
+</foreignkeyconstraint>
+
+<!-- Each Biller must have a corresponding customer name -->
+<foreignkeyconstraint>
+ <source table="Invoice">
+  <column name="BillingName"/>
+ </source>
+ <target table="Customer">
+  <column name="CustomerName"/>
+ </target>
+</foreignkeyconstraint>
+
+<!-- Each Shipper must have a corresponding customer name -->
+<foreignkeyconstraint>
+ <source table="Invoice">
+  <column name="ShippingName"/>
+ </source>
+ <target table="Customer">
+  <column name="CustomerName"/>
+ </target>
+</foreignkeyconstraint>
+
+ <!-- ForeignKey: 'WarehouseName' in TABLE 'Warehouses'. -->
+<foreignkeyconstraint>
+ <source table="Items">
+  <column name="Location"/>
+ </source>
+ <target table="Warehouses">
+  <column name="WarehouseName"/>
+ </target>
+</foreignkeyconstraint>
+
+
+</Schema>
+</database>

@@ -1,0 +1,21 @@
+ID|Name|Street|City|State|Zip|Phone|Email|login
+1|John Doe|2123 Pine St.|Seattle|WA|98084|206-555-1212|JohnD@doe.com|john
+2|Jane Doe|2123 Pine St.|Seattle|WA|98084|206-555-1212|Tigress75@doe.com|doe
+3|Dick Tracey|12345 Mob Ave.|Las Vegas|NV|34567|303-111-1111|PI4hire@yahoo.com|dick
+4|Cristopher Columbus|1492 Explorer Ln.|Boston|MA|82847|909-343-9797|columbus02@msn.com|chris
+5|Will Smith|23423 Fresh St.|Beverly Hills|CA|90210|543-892-3232|wsmith@yahoo.com|will
+6|Bruce Wayne|1200 Manor Dr.|Gotham City|NY|45643|212-300-9999|batman@hotmail.com|bruce
+7|Matt Stone|23423 Oak St.|Boise|ID|73232|316-707-7777||matt
+8|Trey Parker|4236 Maple St.|Boise|ID|73232|316-735-2342|trey232@parker.com|trey
+9|Kenny McKormick|2342 Industry Dr.|South Park|CO|54321|555-202-2222||kenny
+10|Kyle Brovlofski|23825 Main St.|South Park|CO|54321|555-202-6789||kyle
+11|Adam Corolla|2872 Alder Ave.|Culver City|CA|90890|543-789-8989|AceRockola@radio.com|adam
+12|Col. Sanders|9853 Extra Crispy Ave.|Arlington|VA|52343||chickenman@kfc.com|chicken
+13|Joe Bob|3249 Trailer Ct.|Marion|AR|42245|987-333-3333|joebob@hick.net|joe
+14|Kate Brovlofski|34524 Interrurban Ave.|Salem|OR|96078||angelkate@msn.com|kate
+15|Satan|666 Brimstone Pit|Hell|TX|66666|666-666-6666|princeofdarkness@hell.net|sata
+16|Santa Claus|4141 Candy Cane Ln.|Orlando|FL|78979||Santa123@home.com|santa
+17|Peter Cottontail|9877 Bunny Trail|Cleveland|OH|98765|||peter
+18|Easter Bunny|3116 Main St.|Athens|OH|98740|323-999-1800|eggbringer@msn.com|bunny
+19|George W. Bush|1600 Pennsylvania Ave. NW|Washington|DC|20500|||w
+20|William Doe|36302 Walnut Dr.|Detriot|MI|37898|509-345-2000|billy@doe.com|william

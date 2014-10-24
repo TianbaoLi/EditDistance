@@ -1,0 +1,317 @@
+<database name="BillingAndInvoice">
+
+<createdby name="Scott Jones"/>
+
+<Schema>
+  
+  <table name="Invoice">
+	<column name="ID" type="Integer" key="yes">
+	  <comment>
+	    The invoice ID is key for all orders.
+	  </comment>
+	</column>
+	
+	<column name="OrderDate" type="Date" key="no">
+	  <comment> 
+	    The date the order was placed.
+	  </comment>
+	</column>
+	
+	<column name="ShipDate" type="Date" key="no">
+	  <comment> 
+	    The date the order will be shipped.
+	  </comment>
+	</column>
+	
+	<column name="BuyerID" type="Integer" key="no">
+    <comment>
+      The buyer's unique ID number.
+    </comment>
+  </column>
+  
+  <column name="ShippingID" type="Integer" key="no">
+    <comment>
+      The unique ID number of the person who will receive the package.
+    </comment>
+  </column>
+  
+  <column name="ShippingMethod" type="String" key="no">
+    <comment>
+      The method to be used to ship the order.
+    </comment>
+  </column>
+  </table>
+  
+  
+  
+  <table name="Price">
+  <column name="ID" type="Integer" key="yes">
+	  <comment>
+	    The ID number of the invoice that this entry is associated with.
+	  </comment>
+	</column>
+	
+	<column name="ItemCost" type="Float" key="no">
+	  <comment>
+	    The cost of all the products ordered.
+	  </comment>
+	</column>
+
+	<column name="TaxCost" type="Float" key="no">
+	  <comment>
+	    The cost of tax.
+	  </comment>
+	</column>
+	
+	<column name="Discount" type="Float" key="no">
+	  <comment>
+	    The total discount on this order.
+	  </comment>
+	</column>
+
+  <column name="ShippingCost" type="Float" key="no">
+	  <comment>
+	    The cost of shipping.
+	  </comment>
+	</column>
+	
+	<column name="TotalCost" type="Float" key="no">
+	  <comment>
+	    The total cost of the order.
+	  </comment>
+	</column>
+	</table>
+	
+	<table name="Payment">
+  <column name="ID" type="Integer" key="yes">
+	  <comment>
+	    The ID number of the invoice that this entry is associated with.
+	  </comment>
+	</column>
+	
+	<column name="Type" type="String" key="no">
+	  <comment>
+	    The type of payment. Could be Visa, MC, COD, etc.
+	  </comment>
+	</column>
+
+	<column name="CCNumber" type="Integer" key="no">
+	  <comment>
+	    The credit card number associated with this order.
+	  </comment>
+	</column>
+	
+	<column name="CCDate" type="Date" key="no">
+	  <comment>
+	    The expiration date for the credit card.
+	  </comment>
+	</column>
+	</table>
+	
+	
+
+  <table name="Customers">
+  <column name="ID" type="Integer" key="yes">
+    <comment>
+      The customer's unique ID number.
+    </comment>
+	</column>
+	
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    The customer's name.
+    </comment>
+	</column>
+	
+	<column name="Street" type="String" key="no">
+	  <comment>
+	    The customer's street address.
+    </comment>
+  </column>
+  
+  <column name="City" type="String" key="no">
+    <comment>
+      The customer's city of residence."
+    </comment>
+  </column>
+  
+  <column name="State" type="String" key="no">
+  </column>
+  
+  <column name="Zip" type="Integer" key="no">
+  </column>
+  
+  <column name="Phone" type="Integer" key="no">
+    <comment>
+      The customer's phone number.
+    </comment>
+  </column>
+  
+  <column name="Email" type="String" key="no">
+    <comment>
+      The customer's e-mail address.
+    </comment>
+  </column>
+  </table>
+  
+  <table name="Items">
+  <column name="ID" type="Integer" key="yes">
+	  <comment>
+	    The ID number of the invoice that this entry is associated with.
+	  </comment>
+	</column>
+	
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    The name of the product being ordered.
+	  </comment>
+	</column>
+	
+	<column name="UIN" type="Integer" key="no">
+	  <comment>
+	    The uniquie identification number of this item.
+	  </comment>
+	</column>
+	
+	<column name="Cost" type="Float" key="no">
+	  <comment>
+	    The cost of this item.
+	  </comment>
+	</column>
+
+  <column name="Quantity" type="Integer" key="no">
+	  <comment>
+	    The quantity of this item being ordered.
+	  </comment>
+	</column>
+	
+	<column name="Warehouse" type="String" key="no">
+	  <comment>
+	    The warehouse where this item will ship from.
+	  </comment>
+	</column>
+	</table>
+
+  <foreignkeyconstraint>
+    <source table="Invoice">
+	  <column name="BuyerID"/>
+	</source>
+	<target table="Customers">
+	  <column name="ID"/>
+	</target>
+    <comment> 
+	  Every customer that makes a purchase must have a record in the Customers table.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Invoice">
+	  <column name="ShippingID"/>
+	</source>
+	<target table="Customers">
+	  <column name="ID"/>
+	</target>
+	<comment>
+	  Every customer that has an order shipped to them must have a record in the Customers table.
+  </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Price">
+	  <column name="ID"/>
+	</source>
+	<target table="Invoice">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Payment">
+	  <column name="ID"/>
+	</source>
+	<target table="Invoice">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Items">
+	  <column name="ID"/>
+	</source>
+	<target table="Invoice">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+  <Invoice>
+    
+	<tuple>
+	  <ID> 123456 </ID>
+	  <OrderDate> 01/10/03 </OrderDate>
+	  <ShipDate> 01/25/03 </ShipDate>
+	  <BuyerID> 902 </BuyerID>
+	  <ShippingID> 902 </ShippingID>
+	  <ShippingMethod> UPS </ShippingMethod>
+	</tuple>
+	
+	</Invoice>
+
+  <Price>
+
+  <tuple>
+	  <ID> 123456 </ID>
+	  <ItemCost> 20.00 </ItemCost>
+	  <TaxCost> 1.50 </TaxCost>
+	  <Discount> 0.00 </Discount>
+	  <ShippingCost> 3.00 </ShippingCost>
+	  <TotalCost> 24.50 </TotalCost>
+	</tuple>
+
+	</Price>
+
+  <Payment>
+  
+  <tuple>
+	  <ID> 123456 </ID>
+	  <Type> Visa </Type>
+	  <CCNumber> 1234567890123456 </CCNumber>
+	  <CCDate> 09/03 </CCDate>
+	</tuple>
+
+  </Payment>
+  
+  <Customers>
+  
+  <tuple>
+	  <ID> 902 </ID>
+	  <Name> Joe Peterson </Name>
+	  <Street> 10101 SE 10th Street </Street>
+	  <City> Seattle </City>
+	  <State> WA </State>
+	  <Zip> 98105 </Zip>
+    <Phone> 2069119111 </Phone>
+	  <email> fake@email.com </email>
+	</tuple>
+
+  </Customers>
+  
+  <Items>
+  
+  <tuple>
+	  <ID> 123456 </ID>
+	  <Name> SuperSoaker100 </Name>
+	  <UIN> 8675309 </UIN>
+	  <Cost> 10.00 </Cost>
+	  <Quantity> 2 </Quantity>
+	  <Warehouse> Olympia </Warehouse>
+	</tuple>
+
+  </Items>
+
+</Data>
+
+</database>

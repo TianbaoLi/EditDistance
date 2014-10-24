@@ -1,0 +1,9 @@
+ground|ups|.5|12.5|20|50|200|7
+next day|ups|5|75|100|5|100|1
+three day|ups|2.5|35|50|15|150|3
+ground|dhl|.6|11|15|40|250|6
+next day|dhl|4.95|40|80|7|75|1
+three day|dhl|2.75|22|35|20|175|3
+ground|fedex|.35|10|25|10000|350|5
+next day|fedex|7.5|50|70|100|50|1
+three day|fedex|3|27|42.5|1000|125|3

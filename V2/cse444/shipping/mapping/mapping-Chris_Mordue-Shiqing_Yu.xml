@@ -1,0 +1,99 @@
+<mapping>
+  <Chris_Mordue correct="doublechecked">
+    <Packages m="Package">
+      <Invoice m="Package/Invoice"/>
+      <Weight m="Package/Weight"/>
+      <Item_count m="Package/TotalItems"/>
+      <Date/>
+      <Buyer m="Package/DeliveryName"/>
+      <Gift_wrapped/>
+    </Packages>
+    <Shipping m="Package">
+      <Invoice m="Package/Invoice"/>
+      <Method m="Package/ShippingMethod"/>
+      <Tracking m="Package/TrackNumber"/>
+      <Company m="Package/ShippingAgent"/>
+      <Destination m="Package/DeliveryAddress"/>
+    </Shipping>
+    <Vendors m="ShippingAgents">
+      <Name m="ShippingAgents/AgentName"/>
+      <Address/>
+      <URL m="ShippingAgents/AgentURL"/>
+      <Warehouse m="ShippingAgentLocalOffice/WarehouseId"/>
+      <Phone m="ShippingAgents/AgentTollFreeNumber"/>
+      <Pick_up m="ShippingAgentLocalOffice/AgentDailyPickupTime"/>
+      <Rating/>
+    </Vendors>
+    <Transit m="Package">
+      <Tracking m="Package/TrackNumber"/>
+      <Delivery_instr m="Package/DeliveryInstruction"/>
+      <Warehouse_from m="Package/WarehouseId"/>
+      <Status m="Package/OrderStatus"/>
+      <Delivery_time m="Package/DeliveryTime"/>
+      <Pick_up_time m="Package/PickupTime"/>
+      <Name m="Package/TrackNumber"/>
+      <Address m="Package/DeliveryAddress"/>
+    </Transit>
+    <Methods m="ShippingMethodInfo">
+      <Shipping_co m="ShippingMethodInfo/AgentName"/>
+      <Options m="ShippingMethodInfo/ShippingOption"/>
+      <Price m="ShippingMethod/ShippingOptionPrice"/>
+      <Weight m="ShippingMethodInfo/MaximumWeight"/>
+      <Delivery_time m="ShippingMethodInfo/GuranteedTime"/>
+    </Methods>
+    <Warehouses m="ShippingAgentLocalOffice">
+      <Warehouse m="ShippingAgentLocalOffice/WarehouseId"/>
+      <Address m="ShippingAgentLocalOffice/AgentLocalAddress"/>
+      <Shipping_co m="ShippingAgentLocalOffice/AgentName"/>
+      <Capacity/>
+    </Warehouses>
+  </Chris_Mordue>
+  <Shiqing_Yu correct="doublechecked">
+    <Package m="Packages">
+      <Invoice m="Packages/Invoice"/>
+      <Weight m="Packages/Weight"/>
+      <TotalItems m="Packages/Item_count"/>
+      <PromoteShipping/>
+      <DeliveryName m="Packages/Buyer"/>
+      <ShippingMethod m="Shipping/Method"/>
+      <TrackNumber m="Shipping/Tracking"/>
+      <ShippingAgent m="Shipping/Company"/>
+      <DeliveryAddress m="Shipping/Destination"/>
+      <WarehouseId m="Transit/Warehouse_from"/>
+      <DeliveryContact m="Packages/Buyer"/>
+      <DeliveryInstruction m="Transit/Delivery_instr"/>
+      <PickupTime m="Transit/Pick_up_time"/>
+      <DeliveryTime m="Transit/Delivery_time"/>
+      <OrderStatus m="Transit/Status"/>
+    </Package>
+    <ShippingAgents m="Vendors">
+      <AgentName m="Vendors/Name"/>
+      <AgentURL m="Vendors/URL"/>
+      <AgentTollFreeNumber m="Vendors/Phone"/>
+      <AgentTollFreeNumberTime/>
+    </ShippingAgents>
+    <ShippingAgentLocalOffice m="Warehouses">
+      <AgentName m="Warehouses/Shipping_co"/>
+      <WarehouseId/>
+      <AgentLocalName m="Warehouses/Warehouse"/>
+      <AgentLocalAddress m="Warehouses/Address"/>
+      <AgentDailyPickupTime/>
+    </ShippingAgentLocalOffice>
+    <ShippingMethod m="Methods">
+      <ShippingMethodId m="Methods/Options"/>
+      <ShippingOptionPrice m="Methods/Price"/>
+      <UnitPriceOption/>
+      <UnitPrice/>
+      <SpecialHandling/>
+    </ShippingMethod>
+    <ShippingMethodInfo m="Methods">
+      <ShippingMethodId m="Methods/Options"/>
+      <AgentName m="Methods/Shipping_co"/>
+      <ShippingOption m="Methods/Options"/>
+      <GuranteedTime m="Methods/Delivery_time"/>
+      <MaximumWeight m="Methods/Weight"/>
+      <MaximumDimension/>
+      <RestrictedCities/>
+    </ShippingMethodInfo>
+  </Shiqing_Yu>
+</mapping>

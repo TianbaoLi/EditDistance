@@ -1,0 +1,86 @@
+<mapping>
+  <Alison_Nimura correct="yes">
+    <Package m="Package" c="Package Customer">
+      <TrackingNo m="Package/TrackNumber"/>
+      <Carrier m="Package/ShipperID"/>
+      <InvoiceNo m="Package/InvoiceID"/>
+      <Weight m="Package/Weight"/>
+      <ItemAmount m="Package/ItemCount"/>
+      <ShippingMethod m="Package/ShipMethod"/>
+      <HandlingNotes m="Customer/Comments"/>
+      <Warehouse m="Package/SourceWarehouse"/>
+      <RecipientName m="Customer/ShipTo"/>
+      <RecipientAddr m="Customer/ShipToAddress"/>
+      <ContactNo m="Customer/Phone"/>
+      <PickUpDate m="Package/PickupDateTime"/>
+      <EstDeliveryDate/>
+      <DeliveryDate m="Package/DeliveryDateTime"/>
+      <OrderStatus m="Package/PackageStatus"/>
+    </Package>
+    <Carriers m="Vendors">
+      <CarrierName m="Vendors/ShipperID"/>
+      <LocalAddr m="Vendors/Address1" c="Vendors/Address1 Vendors/Address2 Vendors/City Vendors/State Vendors/Zip"/>
+      <Url m="Vendors/URL"/>
+      <TelephoneNo m="Vendors/Phone"/>
+      <PickUpTime/>
+      <Methods/>
+    </Carriers>
+    <ShippingOptions m="Methods">
+      <OptionName m="Methods/ShipMethod"/>
+      <Carrier m="Methods/ShipperID"/>
+      <PricingMethod/>
+      <PricePerUnit m="Methods/PricePerPound" u="Methods/PricePerPound Methods/PriceEach"/>
+      <DeliveryTime m="Methods/DeliveryGuarantee"/>
+      <MaxWeight m="Methods/MaxWeight"/>
+      <MaxLength/>
+      <MaxWidth/>
+      <MaxHeight/>
+      <DestCities/>
+    </ShippingOptions>
+  </Alison_Nimura>
+  <Bryan_Shiflett correct="yes">
+    <Package m="Package">
+      <TrackNumber m="Package/TrackingNo"/>
+      <Insured/>
+      <DeclaredValue/>
+      <Weight m="Package/Weight"/>
+      <ItemCount m="Package/ItemAmount"/>
+      <InvoiceID m="Package/InvoiceNo"/>
+      <ShipMethod m="Package/ShippingMethod"/>
+      <ShipperID m="Package/Carrier"/>
+      <PackageStatus m="Package/OrderStatus"/>
+      <SourceWarehouse m="Package/Warehouse"/>
+      <PickupDateTime m="Package/PickUpDate"/>
+      <DeliveryDateTime m="Package/DeliveryDate"/>
+    </Package>
+    <Customer>
+      <BillTo/>
+      <ShipTo m="Package/RecipientName"/>
+      <Phone m="Package/ContactNo"/>
+      <OrderNumber m="Package/InvoiceNo"/>
+      <BillToAddress/>
+      <ShipToAddress m="Package/RecipientAddr"/>
+      <Comments m="Package/HandlingNotes"/>
+    </Customer>
+    <Methods m="ShippingOptions">
+      <ShipMethod m="ShippingOptions/OptionName"/>
+      <ShipperID m="ShippingOptions/Carrier"/>
+      <PricePerPound m="ShippingOptions/PricePerUnit"/>
+      <PriceEach m="ShippingOptions/PricePerUnit"/>
+      <FixedFee/>
+      <MaxItems/>
+      <MaxWeight m="ShippingOptions/MaxWeight"/>
+      <DeliveryGuarantee m="ShippingOptions/DeliveryTime"/>
+    </Methods>
+    <Vendors m="Carriers">
+      <ShipperID m="Carriers/CarrierName"/>
+      <Address1 m="Carriers/LocalAddr"/>
+      <Address2/>
+      <City/>
+      <State/>
+      <Zip/>
+      <URL m="Carriers/Url"/>
+      <Phone m="Carriers/TelephoneNo"/>
+    </Vendors>
+  </Bryan_Shiflett>
+</mapping>

@@ -1,0 +1,3 @@
+UPS|2345 4th Ave. Seattle, WA 98101|http://www.ups.com|1-800-WITHUPS|1600
+FedEx|1827 185th Ave. Seattle, WA 98102|http://www.fedex.com|1-800-GOFEDEX|1300
+USPS|4344 University Way Seattle, WA 98105|http://www.usps.com|1-800-547-8949|1400

@@ -1,0 +1,113 @@
+<mapping>
+  <Geoff_Van_Ess correct="doublechecked">
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/Method"/>
+      <Company m="ShippingMethods/VendorName"/>
+      <Price m="ShippingMethods/PricePerUnit"/>
+      <UnitOfPrice m="ShippingMethods/UnitPriceDescriptor"/>
+      <GaurenteedDeliveryTime m="ShippingMethods/GuaranteedShipDur"/>
+      <AverageTimeToDeliver/>
+      <Restrictions m="ShippingMethods/RestrictedCities"/>
+    </ShippingMethods>
+    <ShippingVendors m="ShippingVendors">
+      <Vendor m="ShippingVendors/Name"/>
+      <HQAddress m="ShippingVendors/StreetAddress"/>
+      <HQCity m="ShippingVendors/City"/>
+      <HQState m="ShippingVendors/State"/>
+      <HQZipCode m="ShippingVendors/Zip"/>
+      <Url m="VendorInfo/URL"/>
+      <PhoneNumber m="VendorInfo/PhoneNumber"/>
+    </ShippingVendors>
+    <Packages m="Package">
+      <InvoiceNumber m="Package/OrderNo"/>
+      <WeightPounds m="Package/Weight"/>
+      <WeightOunces m="Package/Weight"/>
+      <ItemCount m="Package/NoItems"/>
+      <Method m="OrderInfo/ShipMethod"/>
+      <Company m="OrderInfo/ShipCo"/>
+      <TrackingNumber m="Package/TrackingNo"/>
+      <SpecialInstructions m="Package/DeliveryInst"/>
+    </Packages>
+    <LocalAgents m="ShippingVendors">
+      <Warehouse m="ShippingVendors/AssocWarehouse"/>
+      <Company m="ShippingVendors/Name"/>
+      <DailyPickUpTime m="ShippingVendors/SchedPickupTime"/>
+      <LocalAddress/>
+      <LocalCity/>
+      <LocalState/>
+      <LocalZipCode/>
+      <LocalPhoneNumber/>
+    </LocalAgents>
+    <DeliveryStatus m="OrderInfo">
+      <TrackingNumber m="Package/TrackingNo"/>
+      <Warehouse m="Package/SrcWarehouse"/>
+      <DeliveryName m="OrderInfo/DeliveryName"/>
+      <DeliveryAddress m="OrderInfo/StreetAdd"/>
+      <DeliveryCity m="OrderInfo/City"/>
+      <DeliveryState m="OrderInfo/State"/>
+      <DeliveryZipCode m="OrderInfo/Zip"/>
+      <DeliveryContact m="OrderInfo/Contact"/>
+      <PickUpTime m="Package/PickupTime"/>
+      <DeliveryTime m="Package/DeliveryTime"/>
+      <Status m="Package/DeliveryStatus"/>
+    </DeliveryStatus>
+  </Geoff_Van_Ess>
+  <Michael_Stark correct="doublechecked">
+    <Package m="Packages">
+      <OrderNo m="Packages/InvoiceNumber"/>
+      <Weight m="Packages/WeightPounds"/>
+      <Width/>
+      <Height/>
+      <Depth/>
+      <NoItems m="Packages/ItemCount"/>
+      <TrackingNo m="DeliveryStatus/TrackingNumber"/>
+      <DeliveryInst m="Packages/SpecialInstructions"/>
+      <SrcWarehouse m="DeliveryStatus/Warehouse"/>
+      <PickupTime m="DeliveryStatus/PickUpTime"/>
+      <DeliveryTime m="DeliveryStatus/DeliveryTime"/>
+      <DeliveryStatus m="DeliveryStatus/Status"/>
+      <ShippingCost/>
+      <ExpectedDelivery/>
+    </Package>
+    <OrderInfo m="DeliveryStatus">
+      <OrderNo m="Packages/InvoiceNumber"/>
+      <ShipMethod m="Packages/Method"/>
+      <ShipCo m="ShippingMethods/Company"/>
+      <DeliveryName m="DeliveryStatus/DeliveryName"/>
+      <StreetAdd m="DeliveryStatus/DeliveryAddress"/>
+      <City m="DeliveryStatus/DeliveryCity"/>
+      <State m="DeliveryStatus/DeliveryState"/>
+      <Zip m="DeliveryStatus/DeliveryZipCode"/>
+      <Contact m="DeliveryStatus/DeliveryContact"/>
+      <OrderShippingCost/>
+    </OrderInfo>
+    <ShippingVendors m="ShippingVendors">
+      <Name m="ShippingVendors/Vendor"/>
+      <AssocWarehouse m="LocalAgents/Warehouse"/>
+      <StreetAddress m="ShippingVendors/HQAddress"/>
+      <City m="ShippingVendors/HQCity"/>
+      <State m="ShippingVendors/HQState"/>
+      <Zip m="ShippingVendors/HQZipCode"/>
+      <SchedPickupTime m="LocalAgents/DailyPickUpTime"/>
+    </ShippingVendors>
+    <VendorInfo m="ShippingVendors">
+      <Name m="ShippingVendors/Vendor"/>
+      <PhoneNumber m="ShippingVendors/PhoneNumber"/>
+      <URL m="ShippingVendors/Url"/>
+    </VendorInfo>
+    <ShippingMethods m="ShippingMethods">
+      <VendorName m="ShippingMethods/Company"/>
+      <Method m="ShippingMethods/Method"/>
+      <UnitPriceDescriptor m="ShippingMethods/UnitOfPrice"/>
+      <PricePerUnit m="ShippingMethods/Price"/>
+      <GuaranteedShipDur m="ShippingMethods/GaurenteedDeliveryTime"/>
+      <MaxWeight/>
+      <MaxWidth/>
+      <MaxHeight/>
+      <MaxDepth/>
+      <RestrictedCities m="ShippingMethods/Restrictions"/>
+      <MinPrice/>
+      <MaxPrice/>
+    </ShippingMethods>
+  </Michael_Stark>
+</mapping>

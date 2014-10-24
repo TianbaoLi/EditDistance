@@ -1,0 +1,15 @@
+Bart Simpson                  |23346 Main St|Springfield|IL|23764|2346434575|doo@cartoons.com
+Chris Marich                  |2456 84th |Olympia|WA|98734|3600929838|chrismarich@hotmail.com
+George Bush                   |43256 Partner|Dallas|TX|98675|9299384848|ex@pres.com
+George W. Bush                |24554 Whitehouse|Washington DC|DC|84264|8372863637|cur@pres.com
+Homer Simpson                 |23346 Main St|Springfield|IL|23764|2346434575|doo@cartoons.com
+James Hetfield                |2365 Metallica Rd|Los Angeles|CA|34564|2325564432|singer@band.com
+Jerry Cantrell                |1335 Boggy Rd|Helena|MT|12784|4873094792|boggydepot@aic.com
+John Stockton                 |23074 Lake st|Salt Lake City|UT|28478|2346776543|assist@jazz.com
+Karl Malone                   |58354 Utah Dr|Salt Lake City|UT|82349|3490982787|mailman@jazz.com
+Lars Ulrich                   |6527 Metal Ln|Los Angeles|CA|27424|2432555468|lars@drummer.com
+Layne Staley                  |123 15th Ave|Seattle|WA|98073|3605552420|staley@aic.com
+Lisa Simpson                  |23346 Main St|Springfield|IL|23764|2346434575|doo@cartoons.com
+Marge Simpson                 |23346 Main St|Springfield|IL|23764|2346434575|doo@cartoons.com
+Nick Robertson                |23434 Slater st|Rochester|WA|98579|3602735435|bobarobe@hotmai.com
+Santa Claus                   |25th South St|Nome|AK|12250|8005552528|satan@anagram.com

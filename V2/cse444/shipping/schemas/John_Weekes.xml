@@ -1,0 +1,280 @@
+<database name="Shipping">
+  <createdby name="John Weekes" />
+  <Schema>
+    <table name="Packages">
+      <column name="PackageID" type="Integer" key="yes">
+        <comment>This is a unique key to identify the package. Autoincremented.</comment>
+      </column>
+      <column name="InvoiceNumber" type="Integer" key="no">
+        <comment>This represents which invoice (effectively, package group) this package belongs to. There may be several packages with the same InvoiceNumber.</comment>
+      </column>
+      <column name="Weight" type="Float" key="no">
+        <comment>This represents the weight of the package in pounds, and isn't necessarily a whole number.</comment>
+      </column>
+      <column name="NumberOfItems" type="Integer" key="no">
+        <comment>This represents the number of items inside the package. To keep track of which items are in each package, we might use another table.</comment>
+      </column>
+      <column name="ShippingMethod" type="Varchar(20)" key="no">
+        <comment>Could be Ground, Priority Overnight, 2-day, 3-day.</comment>
+      </column>
+      <column name="ShippingCompany" type="Varchar(30)" key="no">
+        <comment>The company being used to ship the product.</comment>
+      </column>
+      <column name="ShippingCompanyWarehouse" type="Varchar(30)" key="no">
+        <comment>Once the warehouse being used is determined, this value needs to be set, for recordkeeping purposes. Until then, NULL.</comment>
+      </column>
+      <column name="TrackingNumber" type="Varchar(50)" key="no">
+        <comment>The tracking number provided by the ShippingCompany. NULL if not yet known.</comment>
+      </column>
+      <column name="SpecialInstructions" type="Varchar(300)" key="no">
+        <comment>Text of any special instructions that might need to be heeded when delivering the package.</comment>
+      </column>
+      <column name="SourceWarehouse" type="Varchar(30)" key="no">
+        <comment>The string identifier of the warehouse we are sending the package from.</comment>
+      </column>
+      <column name="DeliveryNameLast" type="Varchar(20)" key="no">
+        <comment>The last name of the person it is being delivered to. This, combined with other Delivery attributes excepting DeliveryContact's, is used in the label on the package.</comment>
+      </column>
+      <column name="DeliveryNameFirst" type="Varchar(20)" key="no">
+        <comment>The first name of the person it is being delivered to.</comment>
+      </column>
+      <column name="DeliveryCompany" type="Varchar(50)" key="no">
+        <comment>The name of the company it is being delivered to. Can be NULL.</comment>
+      </column>
+      <column name="DeliveryStreetAddress" type="Varchar(100)" key="no">
+        <comment>The delivery street address, e.g. "666 Elm St.".</comment>
+      </column>
+      <column name="DeliveryCity" type="Varchar(30)" key="no">
+        <comment>The name of the city the package is being sent to.</comment>
+      </column>
+      <column name="DeliveryState" type="Varchar(3)" key="no">
+        <comment>The two-letter state abbreviation, if the package is being delivered to a state, or the up to 3-letter region abbreviation if it is not going to the U.S. (if needed).</comment>
+      </column>
+      <column name="DeliveryZip" type="Varchar(5)" key="no">
+        <comment>The U.S. zip code, if applicable (if needed).</comment>
+      </column>
+      <column name="DeliveryCountry" type="Varchar(40)" key="no">
+        <comment>The country to deliver to. Defaults to USA.</comment>
+      </column>
+      <column name="DeliveryContactName" type="Varchar(40)" key="no">
+        <comment>First and last name of the person to contact if there are problems delivering the package. NULL indicates it is the same as the label information.</comment>
+      </column>
+      <column name="DeliveryContactEmail" type="Varchar(50)" key="no">
+        <comment>The e-mail address of the person to contact if there are problems delivering the package.</comment>
+      </column>
+      <column name="DeliveryContactPhone" type="Varchar(20)" key="no">
+        <comment>The phone number of the person to contact if there are problems delivering the package.</comment>
+      </column>
+      <column name="TimePickup" type="Datetime" key="no">
+        <comment>The date and time the package will be picked by the ShippingCompany.</comment>
+      </column>
+      <column name="TimeDelivery" type="Datetime" key="no">
+        <comment>The anticipated delivery date to the consumer.</comment>
+      </column>
+      <column name="Status" type="Integer" key="no">
+        <comment>The status of the package in the system. 0 = Pending, 1 = In process, 2 = Completed and ready for shipping, 3 = Shipped, 4 = Verified received</comment>
+      </column>
+    </table>
+    <table name="ShippingCompanies">
+      <column name="ShippingCompanyWarehouse" type="Varchar(30)" key="yes">
+        <comment>An identifying string for a company's local warehouse. A shipping company may have multiple warehouses locally.</comment>
+      </column>
+      <column name="ShippingCompany" type="Varchar(30)" key="no">
+        <comment>This corresponds to ShippingCompany in Packages and ShippingMethods. Could be UPS, FedEx, USPS, or Airborne Express.</comment>
+      </column>
+      <column name="Address" type="Varchar(300)" key="no">
+        <comment>The address of the company locally. Contains full street address, city, state, and zip. Here mainly for reference; should not be needed.</comment>
+      </column>
+      <column name="URL" type="Varchar(200)" key="no">
+        <comment>The web URL for the company. There could be a separate URL for each warehouse, also.</comment>
+      </column>
+      <column name="TollFreeNumber" type="Varchar(20)" key="no">
+        <comment>The toll-free number to contact this company regarding.</comment>
+      </column>
+      <column name="DailyPickupTime" type="Integer" key="no">
+        <comment>When this warehouse performs its daily pickup at our facility. In military time, 0000 to 2400.</comment>
+      </column>
+      <column name="SatisfactionRating" type="Integer" key="no">
+        <comment>A number in the range of 0 to 100 representing our general satisfaction level with this company. Should be the same for all of the company's warehouses. (100 highest; starts at 90.)</comment>
+      </column>
+    </table>
+    <table name="ShippingMethods">
+      <column name="MethodID" type="Integer" key="yes">
+        <comment>A unique key for this record. ShippingCompany and ShippingMethod can generally create a unique key together, but for added flexibility it is good to have this as well (for instance, a company could have multiple methods, each with several types of pricing). Autoincremented.</comment>
+      </column>
+      <column name="ShippingCompany" type="Varchar(30)" key="no">
+        <comment>As in other shipping tables, the shipping company.</comment>
+      </column>
+      <column name="ShippingMethod" type="Varchar(30)" key="no">
+        <comment>The method of shipping. Described in Packages.</comment>
+      </column>
+      <column name="PricingUnit" type="Integer" key="no">
+        <comment>0 = Weight pounds, 1 = Size cubic feet</comment>
+      </column>
+      <column name="PricePerUnit" type="Float" key="no">
+        <comment>Price per unit, in numeric money terms.</comment>
+      </column>
+      <column name="TimeToDelivery" type="Datetime" key="no">
+        <comment>How long it takes to deliver the package (guaranteed).</comment>
+      </column>
+      <column name="RestrictionMaxWeight" type="Float" key="no">
+        <comment>The maximum weight of package we can send with this method. NULL if no restriction.</comment>
+      </column>
+      <column name="RetrictionMaxDimension" type="Float" key="no">
+        <comment>The largest this package can be in any dimension, in feet. NULL if no restriction.</comment>
+      </column>
+      <column name="RestrictionToCities" type="Varchar(8192)" key="no">
+        <comment>If this method restricts sending to specific cities, then a comment-delimited list of city-state/region-country names. Otherwise, NULL.</comment>
+      </column>
+    </table>
+    <foreignkeyconstraint>
+      <source table="Packages">
+        <column name="ShippingMethod" />
+      </source>
+      <target table="ShippingMethods">
+        <column name="ShippingMethod" />
+      </target>
+      <comment>Every package must have a ShippingMethod from the ShippingMethods table.</comment>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Packages">
+        <column name="ShippingCompanyWarehouse" />
+      </source>
+      <target table="ShippingCompanies">
+        <column name="ShippingCompanyWarehouse" />
+      </target>
+      <comment>If a package has a non-NULL ShippingCompanyWarehouse, it must specified in ShippingCompanies.</comment>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Packages">
+        <column name="ShippingCompany" />
+      </source>
+      <target table="ShippingCompanies">
+        <column name="ShippingCompany" />
+      </target>
+      <comment>Every package must have a ShippingCompany from the ShippingCompanies table.</comment>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="ShippingMethods">
+        <column name="ShippingCompany" />
+      </source>
+      <target table="ShippingCompanies">
+        <column name="ShippingCompany" />
+      </target>
+      <comment>Every ShippingMethod must have a ShippingCompany from the ShippingCompanies table.</comment>
+    </foreignkeyconstraint>
+  </Schema>
+  <Data>
+    <Packages>
+      <tuple>
+        <PackageID>0</PackageID>
+        <InvoiceNumber>0</InvoiceNumber>
+        <Weight>5.84</Weight>
+        <NumberOfItems>2</NumberOfItems>
+        <ShippingMethod>Ground</ShippingMethod>
+        <ShippingCompany>UPS</ShippingCompany>
+        <ShippingCompanyWarehouse />
+        <TrackingNumber />
+        <SpecialInstructions>Don't open it!</SpecialInstructions>
+        <SourceWarehouse>Downtown</SourceWarehouse>
+        <DeliveryNameLast>Bubba</DeliveryNameLast>
+        <DeliveryNameFirst>Boofle</DeliveryNameFirst>
+        <DeliveryCompany>Flimflam Enterprises, Inc.</DeliveryCompany>
+        <DeliveryStreetAddress>666 Sup St.</DeliveryStreetAddress>
+        <DeliveryCity>Seattle</DeliveryCity>
+        <DeliveryState>WA</DeliveryState>
+        <DeliveryZip>84911</DeliveryZip>
+        <DeliveryCountry>USA</DeliveryCountry>
+        <DeliveryContactName />
+        <DeliveryContactEmail>boofle@boofle.com</DeliveryContactEmail>
+        <DeliveryContactPhone>333-333-3333</DeliveryContactPhone>
+        <TimePickup>December 12, 1960</TimePickup>
+        <TimeDelivery>December 17, 1960</TimeDelivery>
+        <Status>1</Status>
+      </tuple>
+      <tuple>
+        <PackageID>1</PackageID>
+        <InvoiceNumber>1</InvoiceNumber>
+        <Weight>40.51</Weight>
+        <NumberOfItems>6</NumberOfItems>
+        <ShippingMethod>2-day</ShippingMethod>
+        <ShippingCompany>FedEx</ShippingCompany>
+        <ShippingCompanyWarehouse>Downtown Drop</ShippingCompanyWarehouse>
+        <TrackingNumber>ZZ10S-11810</TrackingNumber>
+        <SpecialInstructions />
+        <SourceWarehouse>Downtown</SourceWarehouse>
+        <DeliveryNameLast>Appo</DeliveryNameLast>
+        <DeliveryNameFirst>McFly</DeliveryNameFirst>
+        <DeliveryCompany>Gizmo Industries, Inc.</DeliveryCompany>
+        <DeliveryStreetAddress>629 Elm St.</DeliveryStreetAddress>
+        <DeliveryCity>Anchorage</DeliveryCity>
+        <DeliveryState>AK</DeliveryState>
+        <DeliveryZip>97554</DeliveryZip>
+        <DeliveryCountry>USA</DeliveryCountry>
+        <DeliveryContactName>Bimbo Shnark</DeliveryContactName>
+        <DeliveryContactEmail>roger@hotmail.com</DeliveryContactEmail>
+        <DeliveryContactPhone>333-323-5212</DeliveryContactPhone>
+        <TimePickup>February 3, 2001</TimePickup>
+        <TimeDelivery>February 5, 2001</TimeDelivery>
+        <Status>4</Status>
+      </tuple>
+    </Packages>
+    <ShippingCompanies>
+      <tuple>
+        <ShippingCompanyWarehouse>King Street</ShippingCompanyWarehouse>
+        <ShippingCompany>UPS</ShippingCompany>
+        <Address>291 Roger Rd., Seattle, WA 98111</Address>
+        <URL>http://www.ups.com</URL>
+        <TollFreeNumber>1-800-UPS-G0G0G0</TollFreeNumber>
+        <DailyPickupTime>1100</DailyPickupTime>
+        <SatisfactionRating>20</SatisfactionRating>
+      </tuple>
+      <tuple>
+        <ShippingCompanyWarehouse>Downtown Drop</ShippingCompanyWarehouse>
+        <ShippingCompany>FedEx</ShippingCompany>
+        <Address>1223 Hello St., Seattle, WA 98111</Address>
+        <URL>http://www.fedex.com</URL>
+        <TollFreeNumber>1-800-FEDEX-ARR</TollFreeNumber>
+        <DailyPickupTime>1300</DailyPickupTime>
+        <SatisfactionRating>20</SatisfactionRating>
+      </tuple>
+    </ShippingCompanies>
+    <ShippingMethods>
+      <tuple>
+        <MethodID>6</MethodID>
+        <ShippingCompany>UPS</ShippingCompany>
+        <ShippingMethod>Ground</ShippingMethod>
+        <PricingUnit>0</PricingUnit>
+        <PricePerUnit>60.04</PricePerUnit>
+        <TimeToDelivery>5</TimeToDelivery>
+        <RestrictionMaxWeight>115</RestrictionMaxWeight>
+        <RestrictionMaxDimension>2.3</RestrictionMaxDimension>
+        <RestrictionToCities />
+      </tuple>
+      <tuple>
+        <MethodID>7</MethodID>
+        <ShippingCompany>FedEx</ShippingCompany>
+        <ShippingMethod>Ground</ShippingMethod>
+        <PricingUnit>1</PricingUnit>
+        <PricePerUnit>65.82</PricePerUnit>
+        <TimeToDelivery>4</TimeToDelivery>
+        <RestrictionMaxWeight>100</RestrictionMaxWeight>
+        <RestrictionMaxDimension>4</RestrictionMaxDimension>
+        <RestrictionToCities />
+      </tuple>
+      <tuple>
+        <MethodID>8</MethodID>
+        <ShippingCompany>FedEx</ShippingCompany>
+        <ShippingMethod>2-day</ShippingMethod>
+        <PricingUnit>1</PricingUnit>
+        <PricePerUnit>5</PricePerUnit>
+        <TimeToDelivery>2</TimeToDelivery>
+        <RestrictionMaxWeight>50</RestrictionMaxWeight>
+        <RestrictionMaxDimension>2</RestrictionMaxDimension>
+        <RestrictionToCities />
+      </tuple>
+    </ShippingMethods>
+  </Data>
+</database>
+
+

@@ -1,0 +1,10 @@
+1402888007 | The Universal Computer: The Road from Leibniz to Turing | $26.95 | $6.98 | Computer History | 8 | no | 2000 | september
+0691024170 | QED: The Strange Theory of Light and Matter | $13.95 | $12.55 | Science | 9 | yes | 1988 | november
+0385495323 | The Code Book: The Evolution of Secrecy from Mary, Queen of Scots, to Quantum Cryptography | | |Science | 7 | no | 1999 | september
+0471010901 | Topics in Algebra | $99.75 | $99.75 | Mathematics | 8 | no | 1975 | june
+0152023984 | The Little Prince | $18.00 | $14.40 | Children Fiction | 10 | no | 2000 | may
+0151008116 | Life of Pi | $25.00 | $15.00 | Fiction | 8 | no | 2002 | may
+0553278827 | Linda Goodman's Sun Signs | $7.99 | $7.99 | Astrology | 7 | yes | 1976 | may
+0898864275 | Mountaineering: The Freedom of the Hills | $24.95 | $19.96 | Adventure Sports | 9 | yes | 1997 | october
+0395528089 | Stretch and Strengthen | $17.00 | $15.30 | Exercise and Fitness | 8 | yes | 1992 | february
+0942637763 | Living the Martial Way: A Manual for the Way a Modern Warrior Should Think | $16.95 | $15.25 | Martial Arts | 8 | yes | 1992 | august

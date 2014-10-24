@@ -1,0 +1,13 @@
+B00004ZAV3|The Beatles 1|Capitol|$18.98|$13.49|rock oldies|4.5|2000|november
+B00005YW4H|Come Away with Me|Blue Note Records|$18.98|$12.98|Jazz|4.5|2002|February
+B00004XQ83|O Brother, Where Art Thou?|Universal|$18.98|$14.99|Country, Folk|4.2|2000|December
+B00005RGNI|Josh Groban|Warner Brothers|$18.98|$14.49|Pop, Classical|5|2001|November
+B000069HKH|The Rising|Sony|$18.98|$13.49|Anthems|4.2|2002|July
+B00006BIMO|Home|Sony|$18.98|$13.49|Pop, Country|4.3|2002|August
+B0000636UN|C'mon C'mon|Interscope Records|$18.98|$13.49|Rock|4.2|2002|April
+B00005YXJA|Silver Lining|Capitol|$18.98|$13.49|Boogie, Blues|4.4|2002|April
+B00006696R|Busted Stuff|RCA|$18.98|$13.49|Rock|4|2002|July
+B00005USBH|Ultimate Manilow|Arista|$18.98|$12.98|Country|4|2002|February
+B00006AG5N|Elvis 30 #1 Hits|RCA|$18.98|$13.49|Rock|4.2|2002|September
+B00005YXZI|A New Day Has Come|Sony|$18.98|$13.49|Jazz, Pop, Rock|4.2|2002|March
+B00006LIRI|U2 - The Best of 1990-2000|Interscope Records|$18.98|$13.49|Rock|4|2002|November

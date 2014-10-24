@@ -1,0 +1,5 @@
+Peir 32|UPS|12:00|123 Peanut Brittle Way|San Jose|California|12345|3095556793
+Suite 16|US Post Office|10:00|987 1st Street|Belleveue|Washington|98203|2065556782
+Shackland|DHL|14:00|12 Kansas Road|Smallville|Kansas|12543|4565558169
+The Den|Fed-Ex|13:00|6454 New Street|Here|Florida|42357|8005557689
+Housey|Fed-Ex|11:00|99 Another Way|There|Texas|18883|2535559221

@@ -1,0 +1,87 @@
+<mapping>
+  <Melissa_Garcia>
+    <Items>
+      <Type/>
+      <ID/>
+    </Items>
+    <Books m="Books">
+      <Title m="Books/BookTitle"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <BookListPrice m="Books/SellingPrice"/>
+      <BookSellPrice m="Books/DiscountedPrice"/>
+      <Publisher/>
+      <PubYear/>
+      <CustomerRating m="Books/Rating"/>
+      <Category m="Books/Category"/>
+      <Keyword m="Books/Keywords"/>
+    </Books>
+    <Music m="Music">
+      <Album m="Music/CDTitle"/>
+      <Artist m="Music/Artist"/>
+      <Label m="Music/Company"/>
+      <ASIN m="Music/IDNumber"/>
+      <CDListPrice m="Music/SellingPrice"/>
+      <CDSellPrice m="Books/DiscountedPrice"/>
+      <ChartNumber/>
+      <Genre m="Music/Genre"/>
+      <CDType m="Music/CDType"/>
+    </Music>
+    <Availability m="Availability">
+      <ItemID m="Availability/ItemNumber"/>
+      <InStock m="Availability/Quantity"/>
+      <ShipTime/>
+      <LocsAvailable m="Availability/WarehouseID"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zip m="Warehouses/Zip"/>
+      <Telephone m="Warehouses/Telephone"/>
+      <Fax m="Warehouses/FAX"/>
+      <Manager m="Warehouses/ManagerName"/>
+      <EmployeeCount m="Warehouses/NumEmployees"/>
+    </Warehouses>
+  </Melissa_Garcia>
+  <Jake_Foster>
+    <Books m="Books">
+      <BookTitle m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <SellingPrice m="Books/BookListPrice"/>
+      <DiscountedPrice m="Books/BookSellPrice"/>
+      <Category m="Books/Category"/>
+      <Keywords m="Books/Keyword"/>
+      <Rating m="Books/CustomerRating"/>
+    </Books>
+    <Music m="Music">
+      <CDTitle m="Music/Album"/>
+      <Artist m="Music/Artist"/>
+      <Company m="Music/Label"/>
+      <IDNumber m="Music/ASIN"/>
+      <SellingPrice m="Music/CDListPrice"/>
+      <Genre m="Music/Genre"/>
+      <CDType m="Music/CDType"/>
+      <Rating m="Books/CustomerRating"/>
+    </Music>
+    <Availability m="Availability">
+      <ItemNumber m="Availability/ItemID"/>
+      <WarehouseID m="Availability/LocsAvailable"/>
+      <Quantity m="Availability/InStock"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <IDNumber m="Warehouses/Zip"/>
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zip m="Warehouses/Zip"/>
+      <Telephone m="Warehouses/Telephone"/>
+      <FAX m="Warehouses/Fax"/>
+      <ManagerName m="Warehouses/Manager"/>
+      <NumEmployees m="Warehouses/EmployeeCount"/>
+      <ItemsShippedAnnually/>
+      <AnnualOperatingCost/>
+    </Warehouses>
+  </Jake_Foster>
+</mapping>

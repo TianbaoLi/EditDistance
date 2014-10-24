@@ -1,0 +1,124 @@
+<mapping>
+  <Rachel_Hunt>
+    <Book m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Title m="Books/Title"/>
+      <MSRP m="Books/Price"/>
+      <Price m="Books/DiscountPrice"/>
+      <Category m="BookCategories/Category"/>
+      <Rating/>
+      <Paperback/>
+      <Year m="Books/CopyrightYear"/>
+      <Month/>
+    </Book>
+    <Author m="Author">
+      <ISBN m="Author/ISBN"/>
+      <FirstName m="Author/FirstName"/>
+      <LastName m="Author/LastName"/>
+      <MiddleName/>
+    </Author>
+    <Keyword m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Word m="Books/Description"/>
+    </Keyword>
+    <CD m="CDs">
+      <ISBN m="CDs/ASIN"/>
+      <Name m="CDs/Title"/>
+      <Company m="CDs/Studio"/>
+      <MSRP m="CDs/Price"/>
+      <Price m="CDs/DiscountPrice"/>
+      <Category m="CDCategories/Category"/>
+      <Rating/>
+      <Year m="Books/CopyrightYear"/>
+      <Month/>
+    </CD>
+    <Artist m="Artist">
+      <ISBN m="Artist/ASIN"/>
+      <Name m="Artist/LastName" c="Artist/FirstName Artist/LastName Artist/GroupName"/>
+    </Artist>
+    <Type m="CDTypes">
+      <ISBN m="CDTypes/ASIN"/>
+      <Kind m="CDTypes/Type"/>
+    </Type>
+    <Availability m="Availability">
+      <ISBN m="Availability/ItemId"/>
+      <Warehouse m="Availability/WarehouseId"/>
+      <Quantity m="Availability/Quantity"/>
+    </Availability>
+    <Warehouse m="Warehouses">
+      <Name m="Warehouses/Id"/>
+      <Street m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zipcode m="Warehouses/ZipCode"/>
+      <Telephone m="Warehouses/Telephone"/>
+      <Fax m="Warehouses/Fax"/>
+      <Manager m="Warehouses/ManagerName"/>
+      <MaxEmployees m="Warehouses/NumberOfEmployees"/>
+      <Volume/>
+      <Capacity/>
+    </Warehouse>
+  </Rachel_Hunt>
+  <Alex_Cho>
+    <Books m="Book">
+      <Title m="Book/Title"/>
+      <ISBN m="Book/ISBN"/>
+      <Price m="Book/MSRP"/>
+      <DiscountPrice m="Book/Price"/>
+      <Edition/>
+      <CopyrightYear m="Book/Year"/>
+      <Publisher/>
+      <Description/>
+    </Books>
+    <BookCategories m="Book">
+      <Category m="Book/Category"/>
+      <ISBN m="Book/ISBN"/>
+    </BookCategories>
+    <Author m="Author">
+      <FirstName m="Author/FirstName"/>
+      <LastName m="Author/LastName"/>
+      <ISBN m="Author/ISBN"/>
+    </Author>
+    <CDs m="CD">
+      <Title m="CD/Name"/>
+      <ASIN m="CD/ISBN"/>
+      <Price m="CD/MSRP"/>
+      <DiscountPrice m="CD/Price"/>
+      <ReleaseDate m="CD/Year"/>
+      <Studio m="CD/Company"/>
+      <Description/>
+    </CDs>
+    <Artist m="Artist">
+      <FirstName m="Artist/Name"/>
+      <LastName m="Artist/Name"/>
+      <GroupName m="Artist/Name"/>
+      <ASIN m="Artist/ISBN"/>
+    </Artist>
+    <CDCategories m="CD">
+      <Category m="CD/Category"/>
+      <ASIN m="CD/ISBN"/>
+    </CDCategories>
+    <CDTypes m="Type">
+      <Type m="Type/Kind"/>
+      <ASIN m="Type/ISBN"/>
+    </CDTypes>
+    <Warehouses m="Warehouse">
+      <Id m="Warehouse/Name"/>
+      <StreetAddress m="Warehouse/Street"/>
+      <City m="Warehouse/City"/>
+      <State m="Warehouse/State"/>
+      <ZipCode m="Warehouse/Zipcode"/>
+      <Country/>
+      <Telephone m="Warehouse/Telephone"/>
+      <Fax m="Warehouse/Fax"/>
+      <ManagerName m="Warehouse/Manager"/>
+      <NumberOfEmployees m="Warehouse/MaxEmployees"/>
+    </Warehouses>
+    <Availability m="Availability">
+      <ItemId m="Availability/ISBN"/>
+      <ItemType/>
+      <WarehouseId m="Availability/Warehouse"/>
+      <Quantity m="Availability/Quantity"/>
+    </Availability>
+  </Alex_Cho>
+</mapping>

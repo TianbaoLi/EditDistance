@@ -1,0 +1,4 @@
+1234|West Coast Shipping|1472 San Bernadino Blvd|San Diego|CA|92817|18001283942|http://www.westcoastshipping.com|12:00|0001
+1908|Next Day Delivery|1 Next Day Parkway|New York City|NY|21412|18008372616|http://www.nextdaydelivery.com|12:00|0002
+1906|East Side Packaging|12713 33rd Ave West|New York City|NY|21416|18008372345|http://www.esp.com|12:00|0002
+1267|Corn Field Shiping|1897 East Kodak Street|Kansas City|MO|73628|18009482719|http://www.cornfieldshiping.com|12:00|0003

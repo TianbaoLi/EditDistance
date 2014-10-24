@@ -1,0 +1,103 @@
+<mapping>
+  <Jagroop_Singh_Dhillon>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Author/LastName" c="Author/LastName Author/FirstName"/>
+      <ISBN m="Books/ISBN"/>
+      <SalePrice m="Books/Price"/>
+      <Discount m="Books/DiscountPrice"/>
+      <Category m="BookCategories/Category"/>
+      <Keywords m="Books/Description"/>
+    </Books>
+    <CompactDiscs m="CDs">
+      <AlbumName m="CDs/Title"/>
+      <Artist m="Artist/LastName" c="Artist/LastName Artist/FirstName Artist/GroupName"/>
+      <RecordCompany m="CDs/Studio"/>
+      <RecordNumber m="CDs/ASIN"/>
+      <SalePrice m="CDs/Price"/>
+      <Discount m="CDs/DiscountPrice"/>
+      <Genre m="CDCategories/Category"/>
+      <Type m="CDTypes/Type"/>
+    </CompactDiscs>
+    <Warehouses m="Warehouses">
+      <Location m="Warehouses/StreetAddress" c="Warehouses/StreetAddress Warehouses/State Warehouses/City"/>
+      <ZipCode m="Warehouses/ZipCode"/>
+      <StoreNumber m="Warehouses/Id"/>
+      <Contact m="Warehouses/Telephone" c="Warehouses/Telephone Warehouses/ManagerName"/>
+      <EmployeeNumber m="Warehouses/NumberOfEmployees"/>
+      <AnnualSale/>
+    </Warehouses>
+    <BookAvailability m="Availability">
+      <BookId m="Availability/ItemId"/>
+      <Units m="Availability/Quantity"/>
+      <WarehouseNumber m="Availability/WarehouseId"/>
+    </BookAvailability>
+    <CdAvailability m="Availability">
+      <CompactDiscId m="Availability/ItemId"/>
+      <Units m="Availability/Quantity"/>
+      <WarehouseNumber m="Availability/WarehouseId"/>
+    </CdAvailability>
+  </Jagroop_Singh_Dhillon>
+  <Alex_Cho>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/SalePrice"/>
+      <DiscountPrice m="Books/Discount"/>
+      <Edition/>
+      <CopyrightYear/>
+      <Publisher/>
+      <Description m="Books/Keywords"/>
+    </Books>
+    <BookCategories m="Books">
+      <Category m="Books/Category"/>
+      <ISBN m="Books/ISBN"/>
+    </BookCategories>
+    <Author m="Books">
+      <FirstName m="Books/Author"/>
+      <LastName m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+    </Author>
+    <CDs m="CompactDiscs">
+      <Title m="CompactDiscs/AlbumName"/>
+      <ASIN m="CompactDiscs/RecordNumber"/>
+      <Price m="CompactDiscs/SalePrice"/>
+      <DiscountPrice m="CompactDiscs/Discount"/>
+      <ReleaseDate/>
+      <Studio m="CompactDiscs/RecordCompany"/>
+      <Description/>
+    </CDs>
+    <Artist m="CompactDiscs">
+      <FirstName m="CompactDiscs/Artist"/>
+      <LastName m="CompactDiscs/Artist"/>
+      <GroupName m="CompactDiscs/Artist"/>
+      <ASIN m="CompactDiscs/RecordNumber"/>
+    </Artist>
+    <CDCategories m="CompactDiscs">
+      <Category m="CompactDiscs/Genre"/>
+      <ASIN m="CompactDiscs/RecordNumber"/>
+    </CDCategories>
+    <CDTypes m="CompactDiscs">
+      <Type m="CompactDiscs/Type"/>
+      <ASIN m="CompactDiscs/RecordNumber"/>
+    </CDTypes>
+    <Warehouses m="Warehouses">
+      <Id m="Warehouses/StoreNumber"/>
+      <StreetAddress m="Warehouses/Location"/>
+      <City m="Warehouses/Location"/>
+      <State m="Warehouses/Location"/>
+      <ZipCode m="Warehouses/ZipCode"/>
+      <Country/>
+      <Telephone m="Warehouses/Contact"/>
+      <Fax m="Warehouses/Contact"/>
+      <ManagerName m="Warehouses/Contact"/>
+      <NumberOfEmployees m="Warehouses/EmployeeNumber"/>
+    </Warehouses>
+    <Availability m="BookAvailability" c="BookAvailability CdAvailability">
+      <ItemId m="BookAvailability/BookId"  c="BookAvailability/BookId CdAvailability/CompactDiscId"/>
+      <ItemType/>
+      <WarehouseId m="BookAvailability/WarehouseNumber" c="BookAvailability/WarehouseNumber CdAvailability/WarehouseNumber"/>
+      <Quantity m="BookAvailability/Units" c="BookAvailability/Units CdAvailability/Units"/>
+    </Availability>
+  </Alex_Cho>
+</mapping>

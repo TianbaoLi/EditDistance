@@ -1,0 +1,4 @@
+FedExpress|Air_2day|47.00|2000|2
+UPS|Ground|12.00|5300|6
+UPS|Air_1day|29.00|200|1
+Couriers|Bicycle|35.00|9850|20

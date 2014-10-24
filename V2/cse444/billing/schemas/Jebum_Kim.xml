@@ -1,0 +1,224 @@
+<database name = "InvocingSystem">
+	<createdby name="Jebum Kim" />
+	<Schema>
+		<table name="Invoice">
+			<column name="InvoiceID" type="Integer" key="yes">
+				<comment>This is the primary key for this table. </comment>
+			</column>
+			<column name="Order_date" type="Date" key="no" />
+			<column name="OrderID" type="Integer" key="yes" />
+			<column name="Customer_Acct" type="Integer" key="no"/>
+			<column name="TotalPrice" type="Money" key="no">
+				<comment>Total price of purchased products</comment>
+			</column>
+			<column name="Discounts" type="Float" key="no">
+				<comment>If we have any</comment>
+			</column>
+			<column name="ShippingCost" type="Money" key="no" />
+			<column name="LocalTax" type="Float" key="no">
+				<comment>If we have any</comment>
+			</column>
+			<column name="PaymentMethod" type="String" key="no" />
+			<column name="CreditCardNum" type="Integer" key="no">
+				<comment>If making a credit card payment</comment>
+			</column>
+			<column name="ExpirationDate" type="String" key="no">
+				<comment>If making a credit card payment</comment>
+			</column>
+		</table>
+		<table name="SoldItems">
+			<column name="OriginatingInvoice" type="Integer" key="yes" />
+			<column name="OrderID" type="Integer" key="yes">
+			</column>
+			<column name="ExpectedDeliverDate" type="Date" key="no" />
+			<column name="SpecialComment" type="String" key="no">
+				<comment> Special delivery request or remark about product or special conditions requested</comment>
+			</column>
+		</table>
+		<table name="Customer">
+			<column name="CustomerID" type="Integer" key="yes" />
+			<column name="Name" type="String" key="no" />
+			<column name="St_Address" type="String" key="no" />
+			<column name="City" type="String" key="no" />
+			<column name="State" type="String" key="no" />
+			<column name="Zip" type="Integer" key="no" />
+			<column name="ShippingName" type="String" key="no">
+				<comment> If buyer and person getting the product have a different addresses. </comment>
+			</column>
+			<column name="ShippingAddress" type="String" key="no" />
+			<column name="ShippingCity" type="String" key="no" />
+			<column name="ShippingState" type="String" key="no" />
+			<column name="ShippingZip" type="Integer" key="no" />
+		</table>
+		<table name="OrderDetail">
+			<column name="OrderID" type="Integer" key="yes" />
+			<column name="ProductID" type="Integer" key="no" />
+			<column name="ProductName" type="String" key="no" />
+			<column name="OrderQuantity" type="Integer" key="no" />
+			<column name="UnitPrice" type="Money" key="no" />
+			<column name="TotalOrderPrice" type="Money" key="no" />			
+		</table>
+		<foreignkeyconstraint>
+			<source table="SoldItems">
+				<column name="OriginatingInvoice" />
+				<column name="OrderID" />
+			</source>
+			<target table="Invoice">
+				<column name="InvoiceID" />
+				<column name="OrderID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="Customer_Acct" />
+			</source>
+			<target table="Customer">
+				<column name="CustomerID" />
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+	<Data>
+		<Invoice>
+			<tuple>
+				<InvoiceID>012333450</InvoiceID>
+				<Order_date>'2002-12-20'</Order_date>
+				<OrderID>1010123</OrderID>
+				<Customer_Acct>123456789</Customer_Acct>
+				<TotalPrice>50</TotalPrice>
+				<Discounts></Discounts>
+				<ShippingCost>10</ShippingCost>
+				<LocalTax>7.0</LocalTax>
+				<PaymentMethod>Check</PaymentMethod>
+				<CreditCardNum></CreditCardNum>
+				<ExpirationDate></ExpirationDate>
+			</tuple>
+			<tuple>
+				<InvoiceID>012333451</InvoiceID>
+				<Order_date>'2002-12-20'</Order_date>
+				<OrderID>1010124</OrderID>
+				<Customer_Acct>123456790</Customer_Acct>
+				<TotalPrice>75</TotalPrice>
+				<Discounts></Discounts>
+				<ShippingCost>10</ShippingCost>
+				<LocalTax>7.0</LocalTax>
+				<PaymentMethod>Check</PaymentMethod>
+				<CreditCardNum></CreditCardNum>
+				<ExpirationDate></ExpirationDate>
+			</tuple>
+			<tuple>
+				<InvoiceID>012333452</InvoiceID>
+				<Order_date>'2002-12-20'</Order_date>
+				<OrderID>1010125</OrderID>
+				<Customer_Acct>123456791</Customer_Acct>
+				<TotalPrice>50</TotalPrice>
+				<Discounts>10.0</Discounts>
+				<ShippingCost>10</ShippingCost>
+				<LocalTax>7.0</LocalTax>
+				<PaymentMethod>Check</PaymentMethod>
+				<CreditCardNum></CreditCardNum>
+				<ExpirationDate></ExpirationDate>
+			</tuple>
+		</Invoice>
+		<SoldItems>
+			<tuple>
+				<OriginatingInvoice>012333450</OriginatingInvoice>
+				<OrderID>1010123</OrderID>
+				<ExpectedDeliverDate>'2002-12-30'</ExpectedDeliverDate>
+				<SpecialComment></SpecialComment>
+			</tuple>
+			<tuple>
+				<OriginatingInvoice>012333451</OriginatingInvoice>
+				<OrderID>1010124</OrderID>
+				<ExpectedDeliverDate>'2002-12-30'</ExpectedDeliverDate>
+				<SpecialComment></SpecialComment>
+			</tuple>
+			<tuple>
+				<OriginatingInvoice>012333451</OriginatingInvoice>
+				<OrderID>1010125</OrderID>
+				<ExpectedDeliverDate>'2002-12-30'</ExpectedDeliverDate>
+				<SpecialComment></SpecialComment>
+			</tuple>
+			<tuple>
+				<OriginatingInvoice>012333452</OriginatingInvoice>
+				<OrderID>1010126</OrderID>
+				<ExpectedDeliverDate>'2002-12-30'</ExpectedDeliverDate>
+				<SpecialComment></SpecialComment>
+			</tuple>
+		</SoldItems>
+		<Customer>
+			<tuple>
+				<CustomerID>123456789</CustomerID>
+				<Name>Jebum Kim</Name>
+				<St_Address>4729 21st NE</St_Address>
+				<City>Seattle</City>
+				<State>WA</State>
+				<Zip>98105</Zip>
+				<ShippingName></ShippingName>
+				<ShippingAddress></ShippingAddress>
+				<ShippingCity></ShippingCity>
+				<ShippingState></ShippingState>
+				<ShippingZip></ShippingZip>
+			</tuple>
+			<tuple>
+				<CustomerID>123456790</CustomerID>
+				<Name>John Park</Name>
+				<St_Address>4721 13rd Apt #5</St_Address>
+				<City>Seattle</City>
+				<State>WA</State>
+				<Zip>98105</Zip>
+				<ShippingName></ShippingName>
+				<ShippingAddress></ShippingAddress>
+				<ShippingCity></ShippingCity>
+				<ShippingState></ShippingState>
+				<ShippingZip></ShippingZip>
+			</tuple>
+			<tuple>
+				<CustomerID>123456791</CustomerID>
+				<Name>Martin Luther King</Name>
+				<St_Address>735 Pineview St</St_Address>
+				<City>Eugene</City>
+				<State>OR</State>
+				<Zip>97405</Zip>
+				<ShippingName></ShippingName>
+				<ShippingAddress></ShippingAddress>
+				<ShippingCity></ShippingCity>
+				<ShippingState></ShippingState>
+				<ShippingZip></ShippingZip>
+			</tuple>
+		</Customer>
+		<OrderDetail>
+			<tuple>
+				<OrderID>1010123</OrderID>
+				<ProductID>12121212</ProductID>
+				<ProductName>DatabaseSystem-CompleteBook</ProductName>
+				<OrderQuantity>1</OrderQuantity>
+				<UnitPrice>50</UnitPrice>
+				<TotalOrderPrice>50</TotalOrderPrice>
+			</tuple>
+			<tuple>
+				<OrderID>1010124</OrderID>
+				<ProductID>12121212</ProductID>
+				<ProductName>DatabaseSystem-CompleteBook</ProductName>
+				<OrderQuantity>1</OrderQuantity>
+				<UnitPrice>50</UnitPrice>
+				<TotalOrderPrice>50</TotalOrderPrice>
+			</tuple>
+			<tuple>
+				<OrderID>1010125</OrderID>
+				<ProductID>12121210</ProductID>
+				<ProductName>ExpensiveBinder</ProductName>
+				<OrderQuantity>1</OrderQuantity>
+				<UnitPrice>25</UnitPrice>
+				<TotalOrderPrice>25</TotalOrderPrice>
+			</tuple>
+			<tuple>
+				<OrderID>1010126</OrderID>
+				<ProductID>12121210</ProductID>
+				<ProductName>ExpensiveBinder</ProductName>
+				<OrderQuantity>2</OrderQuantity>
+				<UnitPrice>25</UnitPrice>
+				<TotalOrderPrice>50</TotalOrderPrice>
+			</tuple>
+		</OrderDetail>
+	</Data>
+</database>

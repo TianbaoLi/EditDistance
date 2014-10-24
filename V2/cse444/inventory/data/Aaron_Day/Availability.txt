@@ -1,0 +1,41 @@
+123 Fake St. 		PhonyVille, WA 98234|Great Expectations|12345678|1000
+321 Phony St. 		FakeVille, WA 98235|Great Expectations|12345678|500
+123 Fake St. 		PhonyVille, WA 98234|The Great Gatsby|22345678|1000
+321 Phony St. 		FakeVille, WA 98235|The Catcher in the Rhye|32345678|500
+321 Phony St. 		FakeVille, WA 98235|Romeo and Juliet|42345678|750
+321 Phony St. 		FakeVille, WA 98235|The Grapes of Wrath|52345678|400
+321 Phony St. 		FakeVille, WA 98235|The Hitchhiker's Guide to the Galaxy|62345678|42
+321 Phony St. 		FakeVille, WA 98235|So Long and Thanks for all the Fish|72345678|380
+321 Phony St. 		FakeVille, WA 98235|Hard Times|82345678|800
+321 Phony St. 		FakeVille, WA 98235|Oliver Twist|92345678|450
+321 Phony St. 		FakeVille, WA 98235|Moby Dick|11345678|550
+321 Phony St. 		FakeVille, WA 98235|Green Eggs and Ham|13345678|2500
+321 Phony St. 		FakeVille, WA 98235|The Cat in the Hat|14345678|3800
+321 Phony St. 		FakeVille, WA 98235|A Wrinkle in Time|15345678|600
+321 Phony St. 		FakeVille, WA 98235|A Brief History of Time|16345678|220
+321 Phony St. 		FakeVille, WA 98235|The Universe in a Nutshell|17345678|250
+123 Fake St. 		PhonyVille, WA 98234|The Eagle Flys West|18345678|7823
+123 Fake St. 		PhonyVille, WA 98234|To Kill a Mocking Bird|55555555|300
+123 Fake St. 		PhonyVille, WA 98234|A Tale of Two Cities|77777777|150
+123 Fake St. 		PhonyVille, WA 98234|The Hobbit|99999999|780
+123 Fake St. 		PhonyVille, WA 98234|Hamlet|33333333|310
+123 Fake St. 		PhonyVille, WA 98234|From the Choir Girl Hotel|11111111|750
+123 Fake St. 		PhonyVille, WA 98234|To Venus and Back|22222222|0
+123 Fake St. 		PhonyVille, WA 98234|Strange Little Girls|33333333|500
+123 Fake St. 		PhonyVille, WA 98234|Boys For Pele|44444444|300
+123 Fake St. 		PhonyVille, WA 98234|Scarlet's Walk|55555555|75
+123 Fake St. 		PhonyVille, WA 98234|Little Earthquakes|66666666|40
+123 Fake St. 		PhonyVille, WA 98234|Under the Pink|77777777|460
+123 Fake St. 		PhonyVille, WA 98234|Winter|88888888|670
+123 Fake St. 		PhonyVille, WA 98234|Nirvana|99999999|800
+123 Fake St. 		PhonyVille, WA 98234|Riot Act|12222222|930
+123 Fake St. 		PhonyVille, WA 98234|Pearl Jam|13333333|230
+123 Fake St. 		PhonyVille, WA 98234|Almost Happy|14444444|150
+123 Fake St. 		PhonyVille, WA 98234|Dookie|15555555|75
+123 Fake St. 		PhonyVille, WA 98234|A New Day Has Come|66666666|0
+123 Fake St. 		PhonyVille, WA 98234|Adore|17589724|475
+123 Fake St. 		PhonyVille, WA 98234|Mellon Collie and the Infinite Sadness|24098076|280
+123 Fake St. 		PhonyVille, WA 98234|Parachutes|27809409|300
+123 Fake St. 		PhonyVille, WA 98234|Pisces Iscariot|12309856|30
+123 Fake St. 		PhonyVille, WA 98234|Formica Blues|90065702|600
+123 Fake St. 		PhonyVille, WA 98234|Vespertine||300

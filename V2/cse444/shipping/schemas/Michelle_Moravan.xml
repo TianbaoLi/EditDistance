@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database name="ShippingInfo">
+  <createdby name="Michelle Moravan"/>
+  <Schema>
+    <table name="Vendors">
+      <column name="businessName" type="String" key="yes"/>
+      <column name="url" type="String" key="no"/>
+      <column name="phone" type="Integer" key="no"/>
+    </table>
+    <table name="Sources">
+      <column name="vendorName" type="String" key="yes"/>
+      <column name="warehouse" type="String" key="yes"/>
+      <column name="localAddr" type="String" key="no"/>
+      <column name="dailyPickupTime" type="Integer" key="no"/>
+    </table>
+    <table name="Methods">
+      <column name="agentName" type="String" key="yes"/>
+      <column name="speed" type="Integer" key="yes"/>
+      <column name="price" type="Integer" key="no"/>
+      <column name="priceUnits" type="Integer" key="no"/>
+      <column name="restrictions" type="String" key="no"/>
+    </table>
+    <table name="Destinations">
+      <column name="custName" type="String" key="yes"/>
+      <column name="custAddr" type="String" key="yes"/>
+      <column name="contact" type="Integer" key="no"/>
+    </table>
+    <table name="Cost">
+      <column name="invoice" type="Integer" key="yes"/>
+      <column name="numItems" type="Integer" key="no"/>
+      <column name="weight" type="Integer" key="no"/>
+      <column name="vendor" type="String" key="no"/>
+      <column name="method" type="String" key="no"/>
+      <column name="totalPrice" type="Integer" key="no"/>
+    </table>
+    <table name="Status">
+      <column name="trackingNum" type="Integer" key="yes"/>
+      <column name="sourceAddr" type="String" key="no"/>
+      <column name="destAddr" type="String" key="no"/>
+      <column name="pickupTime" type="Integer" key="no"/>
+      <column name="deliveryTime" type="Integer" key="no"/>
+    </table>
+    <table name="Package">
+      <column name="invoice" type="Integer" key="yes"/>
+      <column name="trackingNum" type="Integer" key="yes"/>
+    </table>
+    <foreignkeyconstraint>
+      <source table="Sources">
+        <column name="vendorName"/>
+      </source>
+      <target table="Vendors">
+        <column name="businessName"/>
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Methods">
+        <column name="agentName"/>
+      </source>
+      <target table="Vendors">
+        <column name="businessName"/>
+      </target>
+    </foreignkeyconstraint>
+  </Schema>
+  <data>
+    <Vendors>
+      <tuple>
+        <businessName>Fed Ex</businessName>
+        <url>http://fedex.com</url>
+        <phone>18004633339</phone>
+      </tuple>
+    </Vendors>
+    <Sources>
+      <tuple>
+        <vendorName>Fed Ex</vendorName>
+        <warehouse>Sammamish</warehouse>
+        <localAddr>100 Front St</localAddr>
+        <dailyPickupTime>1600</dailyPickupTime>
+      </tuple>
+    </Sources>
+    <Methods>
+      <tuple>
+        <agentName>Fed Ex</agentName>
+        <speed>Overnight</speed>
+        <price>2995</price>
+        <priceUnits>dollars per package</priceUnits>
+        <restrictions>12 in x 18 in</restrictions>
+      </tuple>
+    </Methods>
+    <Destinations>
+      <tuple>
+        <custName>Alex Schmoe</custName>
+        <custAddr>232 Daisy Blvd</custAddr>
+        <contact>4252228989</contact>
+      </tuple>
+    </Destinations>
+    <Cost>
+      <tuple>
+        <invoice>1234567890</invoice>
+        <numItems>2</numItems>
+        <weight>23</weight>
+        <vendor>Fed Ex</vendor>
+        <method>Overnight</method>
+        <totalPrice>3250</totalPrice>
+      </tuple>
+    </Cost>
+    <Status>
+      <tuple>
+        <trackingNum>0987654321</trackingNum>
+        <sourceAddr>100 Front St</sourceAddr>
+        <destAddr>232 Daisy Blvd</destAddr>
+        <pickupTime>0900</pickupTime>
+        <deliveryTime>1400</deliveryTime>
+      </tuple>
+    </Status>
+    <Package>
+      <tuple>
+        <invoice>1234567890</invoice>
+        <trackingNum>0987654321</trackingNum>
+      </tuple>
+    </Package>
+  </data>
+</database>

@@ -1,0 +1,20 @@
+01|Fly with Me|Gigi Agnostino|Techno|20|9|021
+02|Shine|Cyndi Lauper|Techno|20|9|022
+03|Terms of Endearment Soundtrack|Micheal|Instrumental|20|9|023
+04|Vanilla Sky Soundtrack|Sigur Ros|Gothic|20|8|024
+05|Legend Soundtrack|Tangerine Dream|Instrumental|20|9|025
+06|Chariots of Fire Soundtrack|Vangelis|Instrumental|20|10|026
+07|Jurassic Park Soundtrack|John Williams|Instrumental|20|9|027
+08|Spirits Within Soundtrack|John Williams|Instrumental|20|8|028
+09|Blade Runner Soundtrack|John Williams|Instruamental|20|7|029
+10|Delirium Featuring Sara McLachlan|Delirium|Techno|16|9|030
+11|The Promise|When in Rome|80s|16|9|031
+12|Day would Never Come|New Order|80s|16|7|032
+13|Forget About Me|New Order|80s|16|9|033
+14|Streets with No End|U2|90s|16|9|034
+15|With or Without You|U2|90s|16|10|035
+16|Oranocale Float|Enya|90s|16|9|036
+17|Only Time|Enya|90s|16|6|037
+18|Just a Prayer|Bon Jovi|80s|16|6|038
+19|Fly with Me Remix|Gigi Agnostino|Techno|16|8|039
+20|TV Theme Songs|Universal|90s|16|7|040

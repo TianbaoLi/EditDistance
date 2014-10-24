@@ -1,0 +1,108 @@
+<mapping>
+  <Michael_Stark correct="yes">
+    <Package m="Package">
+      <OrderNo m="Package/Invoice"/>
+      <Weight m="Package/Weight"/>
+      <Width/>
+      <Height/>
+      <Depth/>
+      <NoItems m="Package/TotalItems"/>
+      <TrackingNo m="Package/TrackNumber"/>
+      <DeliveryInst m="Package/DeliveryInstruction"/>
+      <SrcWarehouse m="Package/WarehouseId"/>
+      <PickupTime m="Package/PickupTime"/>
+      <DeliveryTime m="Package/DeliveryTime"/>
+      <DeliveryStatus m="Package/OrderStatus"/>
+      <ShippingCost/>
+      <ExpectedDelivery/>
+    </Package>
+    <OrderInfo m="Package">
+      <OrderNo m="Package/Invoice"/>
+      <ShipMethod m="Package/ShippingMethod"/>
+      <ShipCo m="Package/ShippingAgent"/>
+      <DeliveryName m="Package/DeliveryName"/>
+      <StreetAdd m="Package/DeliveryAddress"/>
+      <City/>
+      <State/>
+      <Zip/>
+      <Contact m="Package/DeliveryContact"/>
+      <OrderShippingCost/>
+    </OrderInfo>
+    <ShippingVendors m="ShippingAgentLocalOffice">
+      <Name m="ShippingAgentLocalOffice/AgentName"/>
+      <AssocWarehouse m="ShippingAgentLocalOffice/WarehouseId"/>
+      <StreetAddress m="ShippingAgentLocalOffice/AgentLocalAddress"/>
+      <City/>
+      <State/>
+      <Zip/>
+      <SchedPickupTime m="ShippingAgentLocalOffice/AgentDailyPickupTime"/>
+    </ShippingVendors>
+    <VendorInfo m="ShippingAgents">
+      <Name m="ShippingAgents/AgentName"/>
+      <PhoneNumber m="ShippingAgents/AgentTollFreeNumber"/>
+      <URL m="ShippingAgents/AgentURL"/>
+    </VendorInfo>
+    <ShippingMethods m="ShippingMethod" c="ShippingMethod ShippingMethodInfo">
+      <VendorName m="ShippingMethodInfo/AgentName"/>
+      <Method m="ShippingMethodInfo/ShippingMethodId"/>
+      <UnitPriceDescriptor m="ShippingMethod/UnitPriceOption"/>
+      <PricePerUnit m="ShippingMethod/UnitPrice"/>
+      <GuaranteedShipDur m="ShippingMethodInfo/GuranteedTime"/>
+      <MaxWeight m="ShippingMethodInfo/MaximumWeight"/>
+      <MaxWidth m="ShippingMethodInfo/MaximumDimension"/>
+      <MaxHeight m="ShippingMethodInfo/MaximumDimension"/>
+      <MaxDepth m="ShippingMethodInfo/MaximumDimension"/>
+      <RestrictedCities m="ShippingMethodInfo/RestrictedCities"/>
+      <MinPrice m="ShippingMethod/ShippingOptionPrice"/>
+      <MaxPrice/>
+    </ShippingMethods>
+  </Michael_Stark>
+  <Shiqing_Yu correct="yes">
+    <Package m="Package" c="Package OrderInfo">
+      <Invoice m="Package/OrderNo"/>
+      <Weight m="Package/Weight"/>
+      <TotalItems m="Package/NoItems"/>
+      <ShippingMethod m="OrderInfo/ShipMethod"/>
+      <TrackNumber m="Package/TrackingNo"/>
+      <ShippingAgent m="OrderInfo/ShipCo"/>
+      <WarehouseId m="Package/SrcWarehouse"/>
+      <DeliveryName m="OrderInfo/DeliveryName"/>
+      <DeliveryAddress m="OrderInfo/StreetAdd"/>
+      <DeliveryContact m="OrderInfo/Contact"/>
+      <DeliveryInstruction m="Package/DeliveryInst"/>
+      <PickupTime m="Package/PickupTime"/>
+      <DeliveryTime m="Package/DeliveryTime"/>
+      <OrderStatus m="Package/DeliveryStatus"/>
+      <PromoteShipping/>
+    </Package>
+    <ShippingAgents m="VendorInfo">
+      <AgentName m="VendorInfo/Name"/>
+      <AgentURL m="VendorInfo/URL"/>
+      <AgentTollFreeNumber m="VendorInfo/PhoneNumber"/>
+      <AgentTollFreeNumberTime/>
+    </ShippingAgents>
+    <ShippingAgentLocalOffice m="ShippingVendors">
+      <AgentName m="ShippingVendors/Name"/>
+      <AgentLocalName m="ShippingVendors/Name"/>
+      <AgentLocalAddress m="ShippingVendors/StreetAddress"/>
+      <AgentDailyPickupTime m="ShippingVendors/SchedPickupTime"/>
+      <WarehouseId m="ShippingVendors/AssocWarehouse"/>
+    </ShippingAgentLocalOffice>
+    <ShippingMethod m="ShippingMethods">
+      <ShippingMethodId m="ShippingMethods/Method"/>
+      <ShippingOptionPrice m="ShippingMethods/MinPrice"/>
+      <UnitPriceOption m="ShippingMethods/UnitPriceDescriptor"/>
+      <UnitPrice m="ShippingMethods/PricePerUnit"/>
+      <SpecialHandling />
+    </ShippingMethod>
+    <ShippingMethodInfo m="ShippingMethods">
+      <ShippingMethodId m="ShippingMethods/Method"/>
+      <AgentName m="ShippingMethods/VendorName"/>
+      <ShippingOption m="ShippingMethods/MinPrice"/>
+      <GuranteedTime m="ShippingMethods/GuaranteedShipDur"/>
+      <MaximumWeight m="ShippingMethods/MaxWeight"/>
+      <MaximumDimension m="ShippingMethods/MaxWidth" c="ShippingMethods/MaxWeight ShippingMethods/MaxHeight ShippingOptions/MaxDepth"/>
+      <RestrictedCities m="ShippingMethods/RestrictedCities"/>
+    </ShippingMethodInfo>
+  </Shiqing_Yu>
+</mapping>

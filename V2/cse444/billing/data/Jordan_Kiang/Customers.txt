@@ -1,0 +1,31 @@
+number|first_name|last_name|street_address|city|state|zip|area_code|phone|email
+AE-002340002|Andrew|Ernie|1293 Constitution Rd.|Paris|KY|40361|859|2344449|andrewe@aol.com
+AR-002991123|Amad|Rishad|758 18th St. #24|Renton|WA|98055|425|7224568|amad@attbi.com
+CA-666823442|Chester|Arthur|32 Saginaw Rd.|Burlington|VT|05401|802|3495959|carthur@email.com
+CE-411120900|Cory|Enston|788 87th St. #81|Boston|MA|02120|857|8473689|enston@freemail.com
+CS-849599123|Chad|Samson|8882 Peterson St.|Chicago|IL|60601|312|9385267|samson@philton.com
+DE-101233345|Drew|Elken|8822 Broadway Blvd.|Elkin|NC|28621|336|4054922|drewelken@eskimo.com
+DF-093884511|David|Furman|233 More Dr.|San Diego|CA|92101|619|4888234|furman23@elego.com
+EZ-533048578|Emile|Zola|12 Llama Blvd.|Crawford|TX|76638|254|2838468|zola@jaccuse.net
+FB-008224094|Francine|Boylston|1822 Princeton Ave.|San Francisco|CA|94121|415|2929932|boil@mail.com
+FM-000004858|Fernando|Mendoza|911 Okra St.|Portland|MI|48875|517|3939345|mendy@hotmail.com
+FT-002349245|Filber|Torrenson|156 Council St.|New York|NY|10001|212|2429999|torr@uwa.edu
+GB-883223458|George|Bush|1600 Pennsylvania Ave.|Washington DC|DC|20500|202|3998473|gwb@whitehouse.gov
+GM-452094850|George|Mason|1823 5th Ave. #200|Cairo|GA|31728|229|8522947|foobar@statesec.org
+GN-554299853|Georgette|Nixon|231 Joschka St.|Miami|FL|33010|305|1223229|nix@rentnet.com
+GU-000238854|Gene|Ulman|3888 Solana Rd.|Los Angeles|CA|90020|562|9229422|ul@wsu.edu
+HJ-388290872|Homer|Johnston|129 Main St.|Ritzville|WA|99169|509|8227643|hj42@ritznet.com
+JB-223949530|Justin|Webb|203 White Rd.|Ramer|AL|36069|334|1384847|webbster@zombo.com
+JJ-294500091|Janet|Jaxon|9922 Pacific St.|Augusta|MI|49012|269|4824929|jax823@aol.com
+JJ-992341245|Jieshi|Jiang|9834 University St.|Chicago|IL|60601|773|3243923|jiang@qhnu.edu.cn
+JM-340511920|James|McDonald|332 Courtier Rd.|Anchorage|AK|99501|907|9993847|mcdonald@scots.com
+JW-488248859|Jim|Weinberger|742 Hook St.|Andrews|IN|46702|260|3934844|wein@hotmail.com
+KG-222330000|Keith|Goldberg|623 Peninsula Rd.|Butte|MT|59701|406|9327485|keithgold@wwf.com
+LP-122234005|Linda|Pettigrew|0945 Turkey Ave.|Los Angeles|CA|90001|818|1666288|pettigrew@ciccio.org
+MS-948538495|Marge|Stantson|882 Governess Ave.|Portland|OR|97201|503|8344586|stant@hotmail.com
+NB-002434467|Nolan|Bolger|2344 Beale St.|Memphis|TN|37501|901|2322445|nbolger@yahoo.com
+PH-499518222|Phil|Henlen|429 34th St. #4A|New York|NY|10292|212|5938588|philh@scopes.net
+SG-018843954|Suzie|Groner|9933 6th St.|San Francisco|CA|94101|415|9122432|grome@bayview.com
+TN-000231112|Tina|Nordon|382 Blix Rd.|Blair|IL|62858|618|5747922|tinan@uva.edu
+TT-842999033|Thomas|Thomlinson|983 22nd Ave. #15P|St. Louis|MO|63101|314|2022234|tthomas@isp.com
+WA-011119234|Wade|Allen|2222 3rd Ave.|Boston|MA|02101|617|2422858|wade@yahoo.com

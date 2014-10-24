@@ -1,0 +1,98 @@
+<mapping>
+  <Dave_Sedlacek correct="yes">
+    <Packages m="Packages">
+      <ID m="Packages/TrackingNumber"/>
+      <ShipAgent m="Packages/Company"/>
+      <ShipServiceType m="Packages/Method"/>
+      <Warehouse m="DeliveryStatus/Warehouse"/>
+      <InvoiceNo m="Packages/InvoiceNumber"/>
+      <DestName m="DeliveryStatus/DeliveryName"/>
+      <DestAddr m="DeliveryStatus/DeliveryAddress"/>
+      <DestCity m="DeliveryStatus/DeliveryCity"/>
+      <DestContact m="DeliveryStatus/DeliveryContact"/>
+      <Residential/>
+      <Status m="DeliveryStatus/Status"/>
+      <PkgWt m="Packages/WeightPounds" c="Packages/WeightPounds Packages/WeightOunces"/>
+      <NumItems m="Packages/ItemCount"/>
+      <DeclaredValue/>
+      <Insured/>
+      <InsuranceFee/>
+      <TrackingNo m="Packages/TrackingNumber"/>
+      <ShipDate/>
+      <EstDeliveryDate/>
+      <ActualDeliveryDate m="DeliveryStatus/DeliveryTime"/>
+      <SpecialInstr m="Packages/SpecialInstructions"/>
+    </Packages>
+    <ShippingProviders m="ShippingVendors">
+      <Name m="ShippingVendors/Vendor"/>
+      <Addr m="ShippingVendors/HQAddress"/>
+      <Phone m="ShippingVendors/PhoneNumber"/>
+      <Url m="ShippingVendors/Url"/>
+      <Warehouse m="LocalAgents/Warehouse"/>
+      <AcctNo/>
+      <StdPickupTime m="LocalAgents/DailyPickUpTime"/>
+    </ShippingProviders>
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/Method"/>
+      <Provider m="ShippingMethods/Company"/>
+      <ShippingUnit m="ShippingMethods/UnitOfPrice"/>
+      <PricePerUnit m="ShippingMethods/Price"/>
+      <MaxDays m="GaurenteedDeliveryTime"/>
+      <MaxWt/>
+      <MaxSize/>
+    </ShippingMethods>
+  </Dave_Sedlacek>
+  <Geoff_Van_Ess correct="yes">
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/Method"/>
+      <Company m="ShippingMethods/Provider"/>
+      <Price m="ShippingMethods/PricePerUnit"/>
+      <UnitOfPrice m="ShippingMethods/ShippingUnit"/>
+      <GaurenteedDeliveryTime m="ShippingMethods/MaxDays"/>
+      <AverageTimeToDeliver/>
+      <Restrictions/>
+    </ShippingMethods>
+    <ShippingVendors m="ShippingProviders">
+      <Vendor m="ShippingProviders/Name"/>
+      <HQAddress m="ShippingProviders/Addr"/>
+      <HQCity/>
+      <HQState/>
+      <HQZipCode/>
+      <Url m="ShippingProviders/Url"/>
+      <PhoneNumber m="ShippingProviders/Phone"/>
+    </ShippingVendors>
+    <Packages m="Packages">
+      <InvoiceNumber m="Packages/InvoiceNo"/>
+      <WeightPounds m="Packages/PkgWt"/>
+      <WeightOunces m="Packages/PkgWt"/>
+      <ItemCount m="Packages/NumItems"/>
+      <Method m="Packages/ShipServiceType"/>
+      <Company m="Packages/ShipAgent"/>
+      <TrackingNumber m="Packages/TrackingNo"/>
+      <SpecialInstructions m="Packages/SpecialInstr"/>
+    </Packages>
+    <LocalAgents m="ShippingProviders">
+      <Warehouse m="ShippingProviders/Warehouse"/>
+      <Company m="ShippingProviders/Name"/>
+      <DailyPickUpTime m="ShippingProviders/StdPickupTime"/>
+      <LocalAddress m="ShippingProviders/Addr"/>
+      <LocalCity/>
+      <LocalState/>
+      <LocalZipCode/>
+      <LocalPhoneNumber m="ShippingProviders/Phone"/>
+    </LocalAgents>
+    <DeliveryStatus m="Packages">
+      <TrackingNumber m="Packages/TrackingNo"/>
+      <Warehouse m="Packages/Warehouse"/>
+      <DeliveryName m="Packages/DestName"/>
+      <DeliveryAddress m="Packages/DestName"/>
+      <DeliveryCity m="Packages/DestCity"/>
+      <DeliveryState m="Packages/DestCity"/>
+      <DeliveryZipCode m="Packages/DestCity"/>
+      <DeliveryContact m="Packages/DestContact"/>
+      <PickUpTime/>
+      <DeliveryTime m="Packages/ActualDeliveryDate"/>
+      <Status m="Packages/Status"/>
+    </DeliveryStatus>
+  </Geoff_Van_Ess>
+</mapping>

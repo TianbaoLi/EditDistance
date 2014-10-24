@@ -1,0 +1,91 @@
+<mapping>
+  <Barrett_Arney>
+    <Inventory m="Items">
+      <ProductID m="Items/ID"/>
+      <ProductType m="Items/Type"/>
+      <Price/>
+    </Inventory>
+    <Books m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <Genre m="Books/Category"/>
+      <Price m="Books/BookListPrice"/>
+      <CustomerRating m="Books/CustomerRating"/>
+      <ProductID m="Books/ISBN"/>
+    </Books>
+    <CDs m="Music">
+      <UniversalID m="ASIN"/>
+      <Album m="Music/Album"/>
+      <Artist m="Music/Artist"/>
+      <Genre m="Music/Genre"/>
+      <Price m="Music/CDListPrice"/>
+      <CustomerRating/>
+      <ProductID  m="ASIN"/>
+    </CDs>
+    <ProductAvailability m="Availability">
+      <ProductID m="Availability/ItemID"/>
+      <WarehouseName m="Availability/LocsAvailable"/>
+      <Quantity/>
+      <InStock m="Availability/InStock"/>
+      <ExpectedInStock/>
+    </ProductAvailability>
+    <WarehouseInformation m="Warehouses">
+      <WarehouseName m="Warehouses/Zip"/>
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <ZIP m="Warehouses/Zip"/>
+      <PhoneNumber m="Warehouses/Telephone"/>
+      <FaxNumber m="Warehouses/Fax"/>
+      <Manager m="Warehouses/Manager"/>
+      <StorageRating/>
+      <Trucks/>
+      <StaffSize m="Warehouses/EmployeeCount"/>
+    </WarehouseInformation>
+  </Barrett_Arney>
+  <Melissa_Garcia>
+    <Items m="Inventory">
+      <Type m="Inventory/ProductType"/>
+      <ID m="Inventory/ProductID"/>
+    </Items>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <BookListPrice m="Books/Price"/>
+      <BookSellPrice m="Books/Price"/>
+      <Publisher/>
+      <PubYear/>
+      <CustomerRating m="Books/CustomerRating"/>
+      <Category m="Books/Genre"/>
+      <Keyword/>
+    </Books>
+    <Music m="CDs">
+      <Album m="CDs/Album"/>
+      <Artist m="CDs/Artist"/>
+      <Label/>
+      <ASIN m="CDs/UniversalID"/>
+      <CDListPrice m="CDs/Price"/>
+      <CDSellPrice m="CDs/Price"/>
+      <ChartNumber/>
+      <Genre m="CDs/Genre"/>
+      <CDType/>
+    </Music>
+    <Availability m="ProductAvailability">
+      <ItemID m="ProductAvailability/ProductID"/>
+      <InStock m="ProductAvailability/InStock"/>
+      <ShipTime/>
+      <LocsAvailable m="ProductAvailability/WarehouseName"/>
+    </Availability>
+    <Warehouses m="WarehouseInformation">
+      <StreetAddress m="WarehouseInformation/StreetAddress"/>
+      <City m="WarehouseInformation/City"/>
+      <State/>
+      <Zip m="WarehouseInformation/ZIP"/>
+      <Telephone m="WarehouseInformation/PhoneNumber"/>
+      <Fax m="WarehouseInformation/FaxNumber"/>
+      <Manager m="WarehouseInformation/Manager"/>
+      <EmployeeCount m="WarehouseInformation/StaffSize"/>
+    </Warehouses>
+  </Melissa_Garcia>
+</mapping>

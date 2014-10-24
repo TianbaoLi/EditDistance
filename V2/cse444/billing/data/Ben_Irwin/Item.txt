@@ -1,0 +1,29 @@
+1|2|Jumbo Ham|$0.59|3|FOOD
+2|1|Electric Guitar|$199.99|1|MUSIC
+3|2|Fun|$1.00|2|TOY
+4|3|Slingshot|$5.00|1|TOY
+5|3|Slingshot Pellets|$0.25|10|TOY
+6|4|Slingshot Pellets|$0.25|20|TOY
+7|5|Bubble Gum|$0.50|2|FOOD
+8|5|Butterfingers|$0.50|8|FOOD
+9|6|Sneakers|$170.00|1|CLOTHING
+10|6|Basketball|$40.00|1|SPORTS
+11|7|Baseball Cards|$2.00|400|TOY
+12|7|Baseballs|$1.00|39|SPROTS
+13|8|Drum set|$2830.00|1|MUSIC
+14|8|Drum sticks|$0.50|14|MUSIC
+15|9|Electric Guitar|$288.00|1|MUSIC
+16|10|Oil|$1.50|2896|BLACK GOLD
+17|11|Comic Books|$20.00|5|BOOK
+18|12|Comic Books|$20.00|5|BOOK
+19|12|Figurines|$10.00|20|TOY
+20|13|Limp Bizkit|$20.00|1|CD
+21|13|Brittney Spears|$15.00|2|CD
+22|14|Dell|$1000.00|1|COMPUTER
+23|15|Rocks|$4.00|20|OBJECT
+24|16|Wedding Ring|$123.00|2|JEWLERY
+25|17|Roast Beef|$7.50|2|FOOD
+26|18|Basketball|$40.00|10|SPORTS
+27|18|1 Iron|$582.00|1|SPORTS
+28|19|Electric Guitar|$928.00|1|MUSIC
+29|20|Mrs. Claus|$10000.00|1|WIFE

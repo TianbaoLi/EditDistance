@@ -1,0 +1,12 @@
+1|ups|standard|7 days|100|200*200|none
+2|ups|overnight|1 days|100|200*200|none
+3|ups|secondday|2 days|100|200*200|none
+4|usps|standard|7 days|100|200*200|none
+5|usps|overnight|1 days|100|200*200|none
+6|usps|secondday|2 days|100|200*200|none
+7|dhl|standard|7 days|100|200*200|none
+8|dhl|overnight|1 days|100|200*200|none
+9|dhl|secondday|2 days|100|200*200|none
+10|fedex|standard|7 days|100|200*200|none
+11|fedex|overnight|1 days|100|200*200|none
+12|fedex|secondday|2 days|100|200*200|none

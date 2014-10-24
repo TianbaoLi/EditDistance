@@ -1,0 +1,22 @@
+uaaaa1|y|300|13|1|3098624|three day|ups|delivered|CA|1/2/2003 7:20:55 PM|1/5/2003 7:20:55 PM
+faaaa1|n|125|3|1|2917834|ground|ups|delivered|CA|1/2/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+uaaaa2|n|250|21|17|4150880|next day|ups|delivered|WA|1/2/2003 7:20:55 PM|1/3/2003 7:20:55 PM
+uaaaa3|y|550|8|1|3244032|ground|ups|delivered|MO|1/3/2003 7:20:55 PM|1/10/2003 7:20:55 PM
+faaaa2|y|300|12|1|5824512|ground|fedex|delivered|WA|1/4/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+faaaa3|y|500|35|5|4608000|ground|fedex|delivered|WA|1/4/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+faaaa4|n|150|20|2|6287960|ground|fedex|delivered|CA|1/4/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+faaaa5|y|35|1|3|2887387|ground|fedex|delivered|WA|1/5/2003 7:20:55 PM|1/10/2003 7:20:55 PM
+uaaaa4|n|45|1|1|3335024|three day|ups|delivered|WA|1/6/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+faaaa6|y|400|10|1|3565319|ground|fedex|delivered|WA|1/6/2003 7:20:55 PM|1/11/2003 7:20:55 PM
+uaaaa5|y|135|10|8|5322732|ground|ups|delivered|ID|1/6/2003 7:20:55 PM|1/13/2003 7:20:55 PM
+uaaaa6|n|2180|50|4|6244032|next day|ups|delivered|WA|1/7/2003 7:20:55 PM|1/8/2003 7:20:55 PM
+daaaa1|n|1565|30|4|3983360|next day|dhl|delivered|CA|1/8/2003 7:20:55 PM|1/9/2003 7:20:55 PM
+uaaaa7|n|2100|25|2|5711872|ground|ups|in transit|WA|1/9/2003 7:20:55 PM|<NULL>
+daaaa2|n|40|2|91|2768401|three day|dhl|delivered|WA|1/10/2003 7:20:55 PM|1/13/2003 7:20:55 PM
+daaaa3|y|325|19|16|3102720|ground|dhl|in transit|CA|1/11/2003 7:20:55 PM|<NULL>
+faaaa7|n|1800|300|3|3348294|ground|fedex|in transit|WA|1/12/2003 7:20:55 PM|<NULL>
+uaaaa8|y|75|45|1|2251928|three day|ups|in transit|OR|1/13/2003 7:20:55 PM|<NULL>
+uaaaa9|n|220|90|3|3451926|next day|ups|delivered|WA|1/13/2003 7:20:55 PM|1/14/2003 7:20:55 PM
+<NULL>|n|10|2|20|5407346|ground|dhl|pending|WA|1/14/2003 7:20:55 PM|<NULL>
+<NULL>|n|1700|20|20|4029574|ground|ups|pending|IL|1/14/2003 7:20:55 PM|<NULL>
+<NULL>|n|250|2|1|2944492|three day|dhl|pending|WA|1/14/2003 7:20:55 PM|<NULL>

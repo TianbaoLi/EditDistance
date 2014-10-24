@@ -1,0 +1,967 @@
+<database name="Shipping">
+
+<createdby name="Alison Nimura"/>
+
+<Schema>
+  
+  <table name="Package">
+	<column name="TrackingNo" type="Integer" key="yes">
+	  <comment>
+	    The tracking number is used to track a package's status.
+	  </comment>
+	</column>
+	
+	<column name="Carrier" type="String" key="no">
+	  <comment> 
+	    The shipping company used.
+	  </comment>
+	</column>
+
+	<column name="InvoiceNo" type="Integer" key="no">
+	  <comment>
+	    The package contains items ordered by this invoice.
+	  </comment>
+	</column>
+
+	<column name="Weight" type="Real" key="no">
+	  <comment>
+	    The weight of package in lbs.
+	  </comment>
+	</column>
+
+	<column name="ItemAmount" type="Integer" key="no">
+	  <comment> 
+	    The amount of items in the package.
+	  </comment>
+	</column>
+	
+	<column name="ShippingMethod" type="String" key="no">
+	  <comment> 
+	    Method used to ship package
+	  </comment>
+	</column>
+
+	<column name="HandlingNotes" type="String" key="no">
+	  <comment> 
+	    Miscellaneous comments to handler.
+	  </comment>
+	</column>
+
+	<column name="Warehouse" type="String" key="no">
+	  <comment> 
+	    The warehouse from which the package came.
+	  </comment>
+	</column>
+
+	<column name="RecipientName" type="String" key="no">
+	  <comment> 
+	    Name of person recieving the package.
+	  </comment>
+	</column>
+
+	<column name="RecipientAddr" type="String" key="no">
+	  <comment> 
+	    Address to where the package is being delivered.
+	  </comment>
+	</column>
+
+	<column name="ContactNo" type="Integer" key="no">
+	  <comment> 
+	    Telephone number to contact if there are questions about handling.
+	  </comment>
+	</column>
+
+	<column name="PickUpDate" type="Datetime" key="no">
+	  <comment> 
+	    Date and time when the package was picked up by mail carrier.
+	  </comment>
+	</column>
+
+	<column name="EstDeliveryDate" type="Datetime" key="no">
+	  <comment> 
+	   Date when the package is estimated to be delivered.
+	  </comment>
+	</column>
+
+	<column name="DeliveryDate" type="Datetime" key="no">
+	  <comment> 
+	    Date when package was delivered.
+	  </comment>
+	</column>
+
+	<column name="OrderStatus" type="String" key="no">
+	  <comment> 
+	    Status of order.
+	  </comment>
+	</column>
+
+  </table>
+
+  <table name="Carriers">
+    <column name="CarrierName" type="String" key="no">
+	</column>
+	<column name="LocalAddr" type="String" key="yes">
+	</column>
+	<column name="Url" type="String" key="no">
+	</column>
+	<column name="TelephoneNo" type="Integer" key="no">
+	</column>
+	<column name="PickUpTime" type="String" key="no">
+	  <comment> 
+	    Daily pick-up time(s).
+	  </comment>
+	</column>
+	<column name="Methods" type="String" key="no">
+	  <comment> 
+	    Shipping methods offered by carrier.
+	  </comment>
+	</column>
+
+  </table>
+
+  <table name="ShippingOptions">
+     <column name="OptionName" type="String" key="yes">
+	  </column>
+	<column name="Carrier" type="String" key="no">
+	    <comment> The carrier(s) who provide this option. </comment>
+	 </column>
+
+	 <column name="PricingMethod" type="String" key="no">
+	    <comment> How the shipping price is determined. </comment>
+	 </column>
+	<column name="PricePerUnit" type="Real" key="no">
+	    <comment> The price per unit of measurement.</comment>
+	 </column>
+	
+	<column name="DeliveryTime" type="Integer" key="no">
+	    <comment> The maximum days until delivery.</comment>
+	 </column>
+	
+	<column name="MaxWeight" type="Integer" key="no">
+	    <comment> The maximum weight allowed.</comment>
+	 </column>
+
+	<column name="MaxLength" type="Integer" key="no">
+	    <comment> The maximum length allowed.</comment>
+	 </column>
+	
+	<column name="MaxWidth" type="Integer" key="no">
+	    <comment> The maximum width allowed.</comment>
+	 </column>
+	
+	<column name="MaxHeight" type="Integer" key="no">
+	    <comment> The maximum height allowed.</comment>
+	 </column>
+
+	<column name="DestCities" type="Integer" key="no">
+	    <comment> The cities the option is available between.</comment>
+	 </column>
+
+  </table>
+
+ <foreignkeyconstraint>
+    <source table="Package">
+	  <column name="ShippingMethod"/>
+	</source>
+	<target table="ShippingOptions">
+	  <column name="OptionName"/>
+	</target>
+    <comment> 
+	  Every shipping method used for a package should be listed in ShippingOptions.
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <TrackingNo>876342121</TrackingNo>
+        <Carrier>FedEx</Carrier>
+        <InvoiceNo>983234343</InvoiceNo>
+        <Weight>4.3399999999999999</Weight>
+        <ItemAmount>1</ItemAmount>
+        <ShippingMethod>Standard Ground</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Seattle, WA</Warehouse>
+        <RecipientName>Joanne Holmes</RecipientName>
+        <RecipientAddr>342 E 98th Circle, Springbrook, NE, 52312</RecipientAddr>
+        <ContactNo>302-493-9431</ContactNo>
+        <PickUpDate>2003-01-15 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-25 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>546345213</TrackingNo>
+        <Carrier>USPS</Carrier>
+        <InvoiceNo>324443654</InvoiceNo>
+        <Weight>6.21</Weight>
+        <ItemAmount>3</ItemAmount>
+        <ShippingMethod>2-day Priority</ShippingMethod>
+        <HandlingNotes>Fragile</HandlingNotes>
+        <Warehouse>Los Angeles, CA</Warehouse>
+        <RecipientName>Quincy Lovelace</RecipientName>
+        <RecipientAddr>2831 N Western Dr., Montgomery, NY, 87392</RecipientAddr>
+        <ContactNo>707-324-5732</ContactNo>
+        <PickUpDate>2002-11-02 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-11-05 00:00:00</EstDeliveryDate>
+        <DeliveryDate>2003-11-06 00:00:00</DeliveryDate>
+        <OrderStatus>Delivered</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>478523421</TrackingNo>
+        <Carrier>FedEx</Carrier>
+        <InvoiceNo>423423425</InvoiceNo>
+        <Weight>3.98</Weight>
+        <ItemAmount>2</ItemAmount>
+        <ShippingMethod>Next Day</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>New York, NY</Warehouse>
+        <RecipientName>Stef Cambell</RecipientName>
+        <RecipientAddr>153 SW Main, Northwester, WI, 04256</RecipientAddr>
+        <ContactNo>233-131-6432</ContactNo>
+        <PickUpDate>2002-12-03 00:00:00</PickUpDate>
+        <EstDeliveryDate>2002-12-04 00:00:00</EstDeliveryDate>
+        <DeliveryDate>2002-12-04 00:00:00</DeliveryDate>
+        <OrderStatus>Delivered</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>654688788</TrackingNo>
+        <Carrier>UPS</Carrier>
+        <InvoiceNo>546884623</InvoiceNo>
+        <Weight>24.399999999999999</Weight>
+        <ItemAmount>6</ItemAmount>
+        <ShippingMethod>3-day Select</ShippingMethod>
+        <HandlingNotes>Leave on side of house</HandlingNotes>
+        <Warehouse>Chicago, IL</Warehouse>
+        <RecipientName>Curis Niles</RecipientName>
+        <RecipientAddr>6848 NW Caller Dr, Killingsworth, PA</RecipientAddr>
+        <ContactNo>864-325-4581</ContactNo>
+        <PickUpDate>2003-01-15 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-18 00:00:00</EstDeliveryDate>
+        <DeliveryDate>2003-01-20 00:00:00</DeliveryDate>
+        <OrderStatus>Delivered</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>484848999</TrackingNo>
+        <Carrier>USPS</Carrier>
+        <InvoiceNo>581884884</InvoiceNo>
+        <Weight>13.199999999999999</Weight>
+        <ItemAmount>3</ItemAmount>
+        <ShippingMethod>Economy</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Seattle, WA</Warehouse>
+        <RecipientName>Richard Burke</RecipientName>
+        <RecipientAddr>546 SW 93rd Ave, Misty, WI 93526</RecipientAddr>
+        <ContactNo>546-235-7824</ContactNo>
+        <PickUpDate>2003-01-20 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-02-06 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>548794564</TrackingNo>
+        <Carrier>USPS</Carrier>
+        <InvoiceNo>581884884</InvoiceNo>
+        <Weight>2.4300000000000002</Weight>
+        <ItemAmount>1</ItemAmount>
+        <ShippingMethod>Economy</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Los Angeles, CA</Warehouse>
+        <RecipientName>Richard Burke</RecipientName>
+        <RecipientAddr>546 SW 93rd Ave, Misty, WI 93526</RecipientAddr>
+        <ContactNo>546-235-7824</ContactNo>
+        <PickUpDate>2003-01-20 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-02-06 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>546878796</TrackingNo>
+        <Carrier>UPS</Carrier>
+        <InvoiceNo>546848215</InvoiceNo>
+        <Weight>9.6500000000000004</Weight>
+        <ItemAmount>2</ItemAmount>
+        <ShippingMethod>Expedited Ground</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>New York, NY</Warehouse>
+        <RecipientName>Corbin Lovelace</RecipientName>
+        <RecipientAddr>325 E Pole St, Eugene, OR, 32532</RecipientAddr>
+        <ContactNo>645-812-5345</ContactNo>
+        <PickUpDate>2003-01-23 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>461254848</TrackingNo>
+        <Carrier>FedEx</Carrier>
+        <InvoiceNo>125564325</InvoiceNo>
+        <Weight>1.45</Weight>
+        <ItemAmount>1</ItemAmount>
+        <ShippingMethod>Next Day</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Chicago, IL</Warehouse>
+        <RecipientName>Lawrence Kart</RecipientName>
+        <RecipientAddr>431 W Nox St, Albuquerque, NM 87109</RecipientAddr>
+        <ContactNo>505-286-4865</ContactNo>
+        <PickUpDate>2003-01-23 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-24 00:00:00</EstDeliveryDate>
+        <DeliveryDate>2003-01-24 00:00:00</DeliveryDate>
+        <OrderStatus>Delivered</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>546813584</TrackingNo>
+        <Carrier>USPS</Carrier>
+        <InvoiceNo>548151543</InvoiceNo>
+        <Weight>0.97999999999999998</Weight>
+        <ItemAmount>1</ItemAmount>
+        <ShippingMethod>Economy</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Seattle, WA</Warehouse>
+        <RecipientName>Kirsten Williams</RecipientName>
+        <RecipientAddr>124 N 32nd Way, Portland, OR, 98423</RecipientAddr>
+        <ContactNo>458-546-3322</ContactNo>
+        <PickUpDate>2003-01-15 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-28 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>484684665</TrackingNo>
+        <Carrier>USPS</Carrier>
+        <InvoiceNo>584325484</InvoiceNo>
+        <Weight>2.2200000000000002</Weight>
+        <ItemAmount>3</ItemAmount>
+        <ShippingMethod>2-day Priority</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Chicago, IL</Warehouse>
+        <RecipientName>Kent Massax</RecipientName>
+        <RecipientAddr>563 SE 1st Ave, Austin, TX 43253</RecipientAddr>
+        <ContactNo>481-252-3636</ContactNo>
+        <PickUpDate>2003-01-27 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>548164868</TrackingNo>
+        <Carrier>UPS</Carrier>
+        <InvoiceNo>455853333</InvoiceNo>
+        <Weight>1.78</Weight>
+        <ItemAmount>4</ItemAmount>
+        <ShippingMethod>Expedited Ground</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>New York, NY</Warehouse>
+        <RecipientName>Lori Marx</RecipientName>
+        <RecipientAddr>398 N Prim St, Evans, OH, 34526</RecipientAddr>
+        <ContactNo>321-465-7898</ContactNo>
+        <PickUpDate>2003-01-27 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-02-02 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>302848325</TrackingNo>
+        <Carrier>UPS</Carrier>
+        <InvoiceNo>320540181</InvoiceNo>
+        <Weight>0.79000000000000004</Weight>
+        <ItemAmount>1</ItemAmount>
+        <ShippingMethod>Expedited Ground</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Seattle, WA</Warehouse>
+        <RecipientName>Kyle Nathan</RecipientName>
+        <RecipientAddr>935 SW Jumper St, San Francisco, CA 84536</RecipientAddr>
+        <ContactNo>530-425-0654</ContactNo>
+        <PickUpDate>2003-01-25 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-02-01 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>956348321</TrackingNo>
+        <Carrier>DHL</Carrier>
+        <InvoiceNo>505448132</InvoiceNo>
+        <Weight>1.2</Weight>
+        <ItemAmount>2</ItemAmount>
+        <ShippingMethod>International</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>New York, NY</Warehouse>
+        <RecipientName>Cori Clasp</RecipientName>
+        <RecipientAddr>12 3rd Cr, Monte Verde, Chile</RecipientAddr>
+        <ContactNo>95-456-458-3548</ContactNo>
+        <PickUpDate>2003-01-18 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-02-04 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>210215014</TrackingNo>
+        <Carrier>FedEx</Carrier>
+        <InvoiceNo>356645848</InvoiceNo>
+        <Weight>2.1000000000000001</Weight>
+        <ItemAmount>4</ItemAmount>
+        <ShippingMethod>Standard Ground</ShippingMethod>
+        <HandlingNotes>Fragile</HandlingNotes>
+        <Warehouse>New York, NY</Warehouse>
+        <RecipientName>Michael Sturges</RecipientName>
+        <RecipientAddr>24 N Clairmot Dr, Horkling, NE 32534</RecipientAddr>
+        <ContactNo>203-460-4560</ContactNo>
+        <PickUpDate>2003-01-19 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>546044833</TrackingNo>
+        <Carrier>DHL</Carrier>
+        <InvoiceNo>404506545</InvoiceNo>
+        <Weight>1.97</Weight>
+        <ItemAmount>3</ItemAmount>
+        <ShippingMethod>International Express</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Los Angeles, CA</Warehouse>
+        <RecipientName>Marta Greco</RecipientName>
+        <RecipientAddr>18 Cebolla Cr, Madrid, Spain</RecipientAddr>
+        <ContactNo>25-468-320-1350</ContactNo>
+        <PickUpDate>2003-01-24 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-30 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+      <tuple>
+        <TrackingNo>230548068</TrackingNo>
+        <Carrier>FedEx</Carrier>
+        <InvoiceNo>125564325</InvoiceNo>
+        <Weight>3.5</Weight>
+        <ItemAmount>6</ItemAmount>
+        <ShippingMethod>Standard Ground</ShippingMethod>
+        <HandlingNotes></HandlingNotes>
+        <Warehouse>Chicago, IL</Warehouse>
+        <RecipientName>Lawrence Kart</RecipientName>
+        <RecipientAddr>431 W Nox St, Albuquerque, NM 87109</RecipientAddr>
+        <ContactNo>505-286-4865</ContactNo>
+        <PickUpDate>2003-01-23 00:00:00</PickUpDate>
+        <EstDeliveryDate>2003-01-31 00:00:00</EstDeliveryDate>
+        <DeliveryDate></DeliveryDate>
+        <OrderStatus>In Transit</OrderStatus>
+      </tuple>
+
+    </Package>
+
+    <Carriers>
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>3242 SE Dover St, New York, NY 34523</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>325-352-3421</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International Express</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>3242 SE Dover St, New York, NY 34523</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>325-352-3421</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>Next Day</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>235 N Main St, Los Angeles, CA 53263</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>417-582-3624</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>Next Day</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>932 SE Mann St, Seattle, WA 98306</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>206-753-3431</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International Express</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>932 SE Mann St, Seattle, WA 98306</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>206-753-3431</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>Next Day</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>8312 S Corning St, Chicago, IL, 32533</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>983-723-3424</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>325  N Clark St, Chicago, IL, 32523</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>983-231-3225</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>Standard Overnight</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>325  N Clark St, Chicago, IL, 32523</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>983-231-3225</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>FedEx Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>352 E Mumu St, Los Angele, CA 83253</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>417-232-3426</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>FedEx Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>4312 NE 2nd, New York, NY, 89323</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>325-285-3925</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>Express Saver</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>789 N Crawford Lane, Los Angeles, CA 32523</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>206-549-2314</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>3-day Select</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>789 N Crawford Lane, Los Angeles, CA 32523</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>206-549-2314</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>Expedited Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>329 N Meister Lane, Chicago, IL, 32523</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>983-249-2144</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>2nd Day Air</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>325 E Lake St, Los Angeles, CA 89235</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>452-342-3952</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods> 2-day Priority</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>6434 S Court St, New York, NY 35252</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>325-932-3421</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>1-day Priority</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>3245 N Station St, Seattle, WA, 98205</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>206-328-9142</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>2-day Priority</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>3245 N Station St, Seattle, WA, 98205</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>206-328-9142</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>Economy</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>3245 N Station St, Seattle, WA, 98205</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>206-328-9142</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>Standard Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>4312 NE 2nd, New York, NY, 89323</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>325-285-3925</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>Standard Overnight</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>325 E Lake St, Los Angeles, CA 89235</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>452-342-3952</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>Economy</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>3242 SE Dover St, New York, NY 34523</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>325-352-3421</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>334 NW Simmons St, New York, NY 89352</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>325-352-2314</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>Next Day Air</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>USPS</CarrierName>
+        <LocalAddr>6434 S Court St, New York, NY 35252</LocalAddr>
+        <Url>http://www.usps.com</Url>
+        <TelephoneNo>325-932-3421</TelephoneNo>
+        <PickUpTime>2:00 PM</PickUpTime>
+        <Methods>Standard Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>789 N Crawford Lane, Los Angeles, CA 32523</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>206-549-2314</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>UPS Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>352 E Mumu St, Los Angele, CA 83253</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>417-232-3426</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>2day</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>932 SE Mann St, Seattle, WA 98306</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>206-753-3431</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>235 N Main St, Los Angeles, CA 53263</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>417-582-3624</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>International</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>UPS</CarrierName>
+        <LocalAddr>329 N Meister Lane, Chicago, IL, 32523</LocalAddr>
+        <Url>http://www.ups.com</Url>
+        <TelephoneNo>983-249-2144</TelephoneNo>
+        <PickUpTime>11:00 AM</PickUpTime>
+        <Methods>UPS Ground</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>FedEx</CarrierName>
+        <LocalAddr>325  N Clark St, Chicago, IL, 32523</LocalAddr>
+        <Url>http://www.fedex.com</Url>
+        <TelephoneNo>983-231-3225</TelephoneNo>
+        <PickUpTime>12:00 PM</PickUpTime>
+        <Methods>2day</Methods>
+      </tuple>
+
+      <tuple>
+        <CarrierName>DHL</CarrierName>
+        <LocalAddr>8312 S Corning St, Chicago, IL, 32533</LocalAddr>
+        <Url>http://www.dhl.com</Url>
+        <TelephoneNo>983-723-3424</TelephoneNo>
+        <PickUpTime>10:00 AM</PickUpTime>
+        <Methods>Next Day</Methods>
+      </tuple>
+
+    </Carriers>
+
+    <ShippingOptions>
+      <tuple>
+        <OptionName>Standard Overnight</OptionName>
+        <Carrier>FedEx</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>13.25</PricePerUnit>
+        <DeliveryTime>1</DeliveryTime>
+        <MaxWeight>150</MaxWeight>
+        <MaxLength>119</MaxLength>
+        <MaxWidth>165</MaxWidth>
+        <MaxHeight>165</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>FedEx Ground</OptionName>
+        <Carrier>FedEx</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>3.39</PricePerUnit>
+        <DeliveryTime>5</DeliveryTime>
+        <MaxWeight>150</MaxWeight>
+        <MaxLength>108</MaxLength>
+        <MaxWidth>108</MaxWidth>
+        <MaxHeight>84</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Express Saver</OptionName>
+        <Carrier>FedEx</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>7.7</PricePerUnit>
+        <DeliveryTime>3</DeliveryTime>
+        <MaxWeight>150</MaxWeight>
+        <MaxLength>119</MaxLength>
+        <MaxWidth>165</MaxWidth>
+        <MaxHeight>165</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>International Ground</OptionName>
+        <Carrier>FedEx</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>12.84</PricePerUnit>
+        <DeliveryTime>7</DeliveryTime>
+        <MaxWeight>150</MaxWeight>
+        <MaxLength>108</MaxLength>
+        <MaxWidth>130</MaxWidth>
+        <MaxHeight>130</MaxHeight>
+        <DestCities>Canada and Puerto Rico</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Next Day Air</OptionName>
+        <Carrier>UPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>12.17</PricePerUnit>
+        <DeliveryTime>1</DeliveryTime>
+        <MaxWeight>99</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US and Puerto Rico</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>1-day Priority</OptionName>
+        <Carrier>USPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>9.95</PricePerUnit>
+        <DeliveryTime>1</DeliveryTime>
+        <MaxWeight>50</MaxWeight>
+        <MaxLength>64</MaxLength>
+        <MaxWidth>64</MaxWidth>
+        <MaxHeight>64</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>UPS Ground</OptionName>
+        <Carrier>UPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>5.79</PricePerUnit>
+        <DeliveryTime>6</DeliveryTime>
+        <MaxWeight>79</MaxWeight>
+        <MaxLength>75</MaxLength>
+        <MaxWidth>65</MaxWidth>
+        <MaxHeight>65</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>2nd Day Air</OptionName>
+        <Carrier>UPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>8.65</PricePerUnit>
+        <DeliveryTime>2</DeliveryTime>
+        <MaxWeight>85</MaxWeight>
+        <MaxLength>90</MaxLength>
+        <MaxWidth>80</MaxWidth>
+        <MaxHeight>70</MaxHeight>
+        <DestCities>All US and Puerto Rico</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>2-day Priority</OptionName>
+        <Carrier>USPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>7.95</PricePerUnit>
+        <DeliveryTime>2</DeliveryTime>
+        <MaxWeight>165</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Next Day</OptionName>
+        <Carrier>DHL</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>11.12</PricePerUnit>
+        <DeliveryTime>1</DeliveryTime>
+        <MaxWeight>200</MaxWeight>
+        <MaxLength>75</MaxLength>
+        <MaxWidth>70</MaxWidth>
+        <MaxHeight>70</MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Standard Ground</OptionName>
+        <Carrier>USPS</Carrier>
+        <PricingMethod>number of items</PricingMethod>
+        <PricePerUnit>4.5</PricePerUnit>
+        <DeliveryTime>7</DeliveryTime>
+        <MaxWeight>200</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US, Canada, Mexico</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Economy</OptionName>
+        <Carrier>USPS</Carrier>
+        <PricingMethod>number of items</PricingMethod>
+        <PricePerUnit>3.35</PricePerUnit>
+        <DeliveryTime>10</DeliveryTime>
+        <MaxWeight>200</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US, Canada, Mexico</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>International</OptionName>
+        <Carrier>DHL</Carrier>
+        <PricingMethod>number of items</PricingMethod>
+        <PricePerUnit>8</PricePerUnit>
+        <DeliveryTime>20</DeliveryTime>
+        <MaxWeight></MaxWeight>
+        <MaxLength>84</MaxLength>
+        <MaxWidth>84</MaxWidth>
+        <MaxHeight>84</MaxHeight>
+        <DestCities>All International</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>International Express</OptionName>
+        <Carrier>DHL</Carrier>
+        <PricingMethod>number of items</PricingMethod>
+        <PricePerUnit>14.37</PricePerUnit>
+        <DeliveryTime>5</DeliveryTime>
+        <MaxWeight></MaxWeight>
+        <MaxLength>84</MaxLength>
+        <MaxWidth>84</MaxWidth>
+        <MaxHeight>84</MaxHeight>
+        <DestCities>All North America, South America, Europe, Asia, Australia</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>Expedited Ground</OptionName>
+        <Carrier>UPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>5.15</PricePerUnit>
+        <DeliveryTime>4</DeliveryTime>
+        <MaxWeight>200</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>3-day Select</OptionName>
+        <Carrier>UPS</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>6.75</PricePerUnit>
+        <DeliveryTime>3</DeliveryTime>
+        <MaxWeight>45</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US</DestCities>
+      </tuple>
+
+      <tuple>
+        <OptionName>2Day</OptionName>
+        <Carrier>FedEx</Carrier>
+        <PricingMethod>weight</PricingMethod>
+        <PricePerUnit>8</PricePerUnit>
+        <DeliveryTime>2</DeliveryTime>
+        <MaxWeight>150</MaxWeight>
+        <MaxLength></MaxLength>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <DestCities>All US, Canada</DestCities>
+      </tuple>
+
+    </ShippingOptions>
+
+  </Data>
+
+</database>

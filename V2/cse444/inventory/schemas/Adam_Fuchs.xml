@@ -1,0 +1,404 @@
+<database name="Inventory">
+    <createdby name="Adam Fuchs" sid="9931263" />
+    <Schema>
+        <table name="inventory">
+            <column name="warehouse" type="Integer" key="no">
+                <comment>The index of the warehouse where this group of items is housed.</comment>
+            </column>
+            <column name="item" type="String" key="no">
+                <comment>The ISBN or Unique identifier of the item.</comment>
+            </column>
+            <column name="type" type="String" key="no">
+                <comment>The type of item (music or book).</comment>
+            </column>
+            <column name="quantity" type="Integer" key="no">
+                <comment>The quantity of this item in this warehouse.</comment>
+            </column>
+        </table>
+        <table name="warehouses">
+            <column name="index" type="Integer" key="yes">
+                <comment>A unique identifyer for this warehouse.</comment>
+            </column>
+            <column name="addr_street" type="String" key="no">
+                <comment>The street address.</comment>
+            </column>
+            <column name="addr_city" type="String" key="no">
+                <comment>city</comment>
+            </column>
+            <column name="addr_state" type="String" key="no">
+                <comment>state</comment>
+            </column>
+            <column name="addr_zip" type="String" key="no">
+                <comment>zip code</comment>
+            </column>
+            <column name="phone" type="String" key="no">
+                <comment>phone number</comment>
+            </column>
+            <column name="fax" type="String" key="no">
+                <comment>fax machine number</comment>
+            </column>
+            <column name="employees" type="Integer" key="no">
+                <comment>the number of employees - used for estimating capacity</comment>
+            </column>
+            <column name="size" type="Integer" key="no">
+                <comment>the maximum storage size in m^3 - used for estimating capacity</comment>
+            </column>
+        </table>
+        <table name="books">
+            <column name="ISBN" type="String" key="yes">
+                <comment>The ISBN number of the book.</comment>
+            </column>
+            <column name="title" type="String" key="no">
+                <comment>The book's title</comment>
+            </column>
+            <column name="publisher" type="String" key="no">
+                <comment>The publisher's name.</comment>
+            </column>
+        </table>
+        <table name="book_authors">
+            <column name="ISBN" type="String" key="no">
+                <comment>the book</comment>
+            </column>
+            <column name="author" type="String" key="no">
+                <comment>the author</comment>
+            </column>
+        </table>
+        <table name="book_categories">
+            <column name="ISBN" type="String" key="no">
+                <comment>The ISBN number of the book.</comment>
+            </column>
+            <column name="category" type="String" key="no">
+                <comment>The name of the category</comment>
+            </column>
+            <comment>Books can have multiple categories.</comment>
+        </table>
+        <table name="book_keywords">
+            <column name="ISBN" type="String" key="no">
+                <comment>The ISBN number of the book.</comment>
+            </column>
+            <column name="keyword" type="String" key="no">
+                <comment>The word.</comment>
+            </column>
+        </table>
+        <table name="book_prices">
+            <column name="ISBN" type="String" key="no">
+                <comment>The ISBN number of the book.</comment>
+            </column>
+            <column name="discount" type="Integer" key="no">
+                <comment>a reference to the discount</comment>
+            </column>
+            <column name="price" type="Integer" key="no">
+                <comment>the price in US cents.</comment>
+            </column>
+        </table>
+        <table name="music">
+            <column name="index" type="String" key="yes">
+                <comment>A unique identifier for music cds.</comment>
+            </column>
+            <column name="title" type="String" key="no">
+                <comment>The album title.</comment>
+            </column>
+            <column name="company" type="String" key="no">
+                <comment>The record company.</comment>
+            </column>
+        </table>
+        <table name="music_artists">
+            <column name="index" type="String" key="no">
+                <comment>the cd</comment>
+            </column>
+            <column name="artist" type="String" key="no">
+                <comment>the author</comment>
+            </column>
+        </table>
+        <table name="music_genres">
+            <column name="index" type="String" key="no">
+                <comment>the cd</comment>
+            </column>
+            <column name="genre" type="String" key="no">
+                <comment>The name of the category</comment>
+            </column>
+            <comment>Books can have multiple categories.</comment>
+        </table>
+        <table name="music_types">
+            <column name="index" type="String" key="no">
+                <comment>the cd</comment>
+            </column>
+            <column name="type" type="String" key="no">
+                <comment>The type of the album.</comment>
+            </column>
+        </table>
+        <table name="music_prices">
+            <column name="index" type="String" key="no">
+                <comment>the cd</comment>
+            </column>
+            <column name="discount" type="Integer" key="no">
+                <comment>a reference to the discount</comment>
+            </column>
+            <column name="price" type="Integer" key="no">
+                <comment>the price in US cents.</comment>
+            </column>
+        </table>
+        <table name="discount">
+            <column name="index" type="Integer" key="yes" />
+            <column name="percent" type="Integer" key="no">
+                <comment>Percent off of regular (not discount) prices.</comment>
+            </column>
+            <column name="requirement" type="String" key="no">
+                <comment>Criteria for who gets the discount.</comment>
+            </column>
+            <column name="expires" type="Datetime" key="no">
+                <comment>when the discount expires</comment>
+            </column>
+        </table>
+        <foreignkeyconstraint>
+            <source table="warehouses">
+                <column name="index" />
+            </source>
+            <target table="inventory">
+                <column name="warehouse" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="books">
+                <column name="ISBN" />
+            </source>
+            <target table="book_authors">
+                <column name="ISBN" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="books">
+                <column name="ISBN" />
+            </source>
+            <target table="book_categories">
+                <column name="ISBN" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="books">
+                <column name="ISBN" />
+            </source>
+            <target table="book_keywords">
+                <column name="ISBN" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="books">
+                <column name="ISBN" />
+            </source>
+            <target table="book_prices">
+                <column name="ISBN" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="music">
+                <column name="index" />
+            </source>
+            <target table="music_artists">
+                <column name="index" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="music">
+                <column name="index" />
+            </source>
+            <target table="music_genres">
+                <column name="index" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="music">
+                <column name="index" />
+            </source>
+            <target table="music_types">
+                <column name="index" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="music">
+                <column name="index" />
+            </source>
+            <target table="music_prices">
+                <column name="index" />
+            </target>
+        </foreignkeyconstraint>
+    </Schema>
+    <Data>
+        <inventory>
+            <tuple>
+                <warehouse>0</warehouse>
+                <item>1-56592-585-8</item>
+                <type>book</type>
+                <quantity>15</quantity>
+            </tuple>
+            <tuple>
+                <warehouse>1</warehouse>
+                <item>1-56592-585-8</item>
+                <type>book</type>
+                <quantity>23</quantity>
+            </tuple>
+            <tuple>
+                <warehouse>0</warehouse>
+                <item>0-14-014419-6</item>
+                <type>book</type>
+                <quantity>4</quantity>
+            </tuple>
+            <tuple>
+                <warehouse>1</warehouse>
+                <item>2435-40504-2</item>
+                <type>music</type>
+                <quantity>73</quantity>
+            </tuple>
+        </inventory>
+        <warehouses>
+            <tuple>
+                <index>0</index>
+                <addr_street>123 456th Ave SE</addr_street>
+                <addr_city>Bellevue</addr_city>
+                <addr_state>WA</addr_state>
+                <addr_zip>98006</addr_zip>
+                <phone>206-555-9876</phone>
+                <fax>206-555-9877</fax>
+                <employees>23</employees>
+                <size>100000</size>
+            </tuple>
+            <tuple>
+                <index>1</index>
+                <addr_street>123 456th AVE NW</addr_street>
+                <addr_city>Seattle</addr_city>
+                <addr_state>WA</addr_state>
+                <addr_zip>98100</addr_zip>
+                <phone>206-555-1234</phone>
+                <fax>206-555-1235</fax>
+                <employees>19</employees>
+                <size>80000</size>
+            </tuple>
+        </warehouses>
+        <books>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <title>Linux in a Nutshell</title>
+                <publisher>O'Reilly</publisher>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <title>A Treasury of Yiddish Stories</title>
+                <publisher>Penguin Books</publisher>
+            </tuple>
+        </books>
+        <book_authors>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <author>Ellen Siever</author>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <author>Irving Howe</author>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <author>Eliezer Greenberg</author>
+            </tuple>
+        </book_authors>
+        <book_categories>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <category>Reference</category>
+            </tuple>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <category>Computers</category>
+            </tuple>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <category>Linux</category>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <category>Yiddish</category>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <category>Translation</category>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <category>Literature</category>
+            </tuple>
+        </book_categories>
+        <book_keywords>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <keyword>nutshell</keyword>
+            </tuple>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <keyword>linux</keyword>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <keyword>yiddish</keyword>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <keyword>zionism</keyword>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <keyword>folk</keyword>
+            </tuple>
+        </book_keywords>
+        <book_prices>
+            <tuple>
+                <ISBN>1-56592-585-8</ISBN>
+                <discount>0</discount>
+                <price>2495</price>
+            </tuple>
+            <tuple>
+                <ISBN>0-14-014419-6</ISBN>
+                <discount>0</discount>
+                <price>1695</price>
+            </tuple>
+        </book_prices>
+        <music>
+            <tuple>
+                <index>2435-40504-2</index>
+                <title>A RUSH OF BLOOD TO THE HEAD</title>
+                <company>Capitol Records, inc.</company>
+            </tuple>
+        </music>
+        <music_artists>
+            <tuple>
+                <index>2435-40504-2</index>
+                <artist>Coldplay</artist>
+            </tuple>
+        </music_artists>
+        <music_genres>
+            <tuple>
+                <index>2435-40504-2</index>
+                <genre>pop</genre>
+            </tuple>
+        </music_genres>
+        <music_types>
+            <tuple>
+                <index>2435-40504-2</index>
+                <type>Album</type>
+            </tuple>
+        </music_types>
+        <music_prices>
+            <tuple>
+                <index>2435-40504-2</index>
+                <discount>0</discount>
+                <price>1995</price>
+            </tuple>
+        </music_prices>
+        <discount>
+            <tuple>
+                <index>0</index>
+                <percent>0</percent>
+                <requirement>none</requirement>
+                <expires>NULL</expires>
+            </tuple>
+        </discount>
+    </Data>
+</database>

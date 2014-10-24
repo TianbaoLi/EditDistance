@@ -1,0 +1,14 @@
+1|2|703-233-2425|703-445-2343|Ralph Neglige|Manager
+2|1|703-222-3422|703-233-2313|Shirley P. Short|Assistant Manager
+3|4|403-556-5671|403-213-0999|Get P. Shorty|Supervisor
+4|5|212-456-7832|212-333-4328|Jefferson Darcey|Manager
+5|1|415-213-0077|415-167-2202|Marcey Darcey|PR Contact
+6|2|607-882-2313|607-243-5555|Al Bundy|Supervisor
+7|3|445-678-4471|445-677-2351|Alicia Silver|Assistant Manager
+8|4|213-443-5454|213-445-3455|Bud Rottenstern|Manager
+9|5|303-685-8977|303-233-6872|Rod Barash|Supervisor
+10|5|665-789-3535|665-789-0056|Alex P. Chernysh|Director
+11|5|210-345-4436|210-345-6671|BJ Gottfield|Manager
+12|2|909-334-4255|909-456-3433|Kitty Da Souza|Assistant Manager
+13|3|414-335-3434|414-455-3555|Golda J. Red|Manager
+14|1|333-456-3344|333-456-7866|Hilda W. Guuswordth|Manager

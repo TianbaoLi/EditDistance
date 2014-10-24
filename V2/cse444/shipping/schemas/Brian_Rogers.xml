@@ -1,0 +1,218 @@
+<database name="Shipping">
+  <createdby name="Brian Rogers" /> 
+<Schema>
+  <foreignkeyconstraint>
+    <source table="Method">
+      <column name="MethodName" />
+    </source>
+    <target table="Package">
+      <column name="ShippingMethod" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="ShippingVendor">
+      <column name="VendorName" />
+    </source>
+    <target table="Package">
+      <column name="ShippingCompany" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="Customer">
+      <column name="CustomerName" />
+    </source>
+    <target table="Package">
+      <column name="DeliveryName" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="Customer">
+      <column name="CustomerAddress" />
+    </source>
+    <target table="Package">
+      <column name="DeliveryAddress" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="Warehouse">
+      <column name="WarehouseName" />
+    </source>
+    <target table="Package">
+      <column name="SourceWarehouse" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="Warehouse">
+      <column name="WarehouseName" />
+    </source>
+    <target table="ShippingVendor">
+      <column name="VendorWarehouse" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="ShippingVendor">
+      <column name="VendorName" />
+    </source>
+    <target table="Method">
+      <column name="MethodVendor" /> 
+    </target>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="Warehouse">
+      <column name="WarehouseAddress" />
+    </source>
+    <target table="ShippingVendor">
+      <column name="VendorAddress" /> 
+    </target>
+  </foreignkeyconstraint>
+
+
+<table name="Package">
+  <column name="InvoiceNumber" type="Integer" key="yes" />
+  <column name="Weight" type="Float" key="no" />
+  <column name="NumberOfItems" type="Integer" key="no" />
+  <column name="TrackingNumber" type="Integer" key="no" />
+  <column name="DeliveryInstructions" type="String" key="no" />
+  <column name="ShippingMethod" type="String" key="no" />
+  <column name="ShippingCompany" type="String" key="no" />
+  <column name="DeliveryName" type="String" key="no" />
+  <column name="DeliveryAddress" type="String" key="no" />
+  <column name="DeliveryContact" type="String" key="no" />
+  <column name="SourceWarehouse" type="String" key="no" />
+  <column name="PickupTime" type="DateTime" key="no" />
+  <column name="DeliveryTime" type="DateTime" key="no" />
+  <column name="OrderStatus" type="String" key="no" />
+</table>
+<table name="ShippingVendor">
+  <column name="VendorName" type="String" key="yes" />
+  <column name="VendorWarehouse" type="String" key="yes" />
+  <column name="VendorAddress" type="String" key="no" />
+  <column name="VendorURL" type="String" key="no" />
+  <column name="VendorPickupTime" type="String" key="no" />
+  <column name="VendorPhoneNumber" type="String" key="no" />
+</table>
+<table name="Method">
+  <column name="MethodName" type="String" key="yes" />
+  <column name="MethodVendor" type="String" key="yes" />
+  <column name="MethodPrice" type="Float" key="no" />
+  <column name="UnitOfPricing" type="String" key="no" />
+  <column name="MaximumWeight" type="Float" key="no" />
+  <column name="GuaranteedTime" type="String" key="no" />
+</table>
+<table name="Warehouse">
+  <column name="WarehouseName" type="String" key="yes" />
+  <column name="WarehouseAddress" type="String" key="no" />
+  <column name="WarehouseContact" type="String" key="no" />
+  <column name="WarehousePhoneNumber" type="String" key="no" />
+</table>
+</Schema>
+<Data>
+<Package>
+  <tuple>
+    <InvoiceNumber>10304</InvoiceNumber>
+    <Weight>1.0</Weight>
+    <NumberOfItems>1</NumberOfItems>
+    <TrackingNumber>2526421</TrackingNumber>
+    <DeliveryInstructions></DeliveryInstructions>
+    <ShippingMethod>3 Day</ShippingMethod>
+    <ShippingCompany>UPS</ShippingCompany>
+    <DeliveryName>Steve Johnson</DeliveryName>
+    <DeliveryAddress>12345 Pine Ave, Federal Way, WA 98023</DeliveryAddress>
+    <DeliveryContact></DeliveryContact>
+    <SourceWarehouse>West Coast</SourceWarehouse>
+    <PickupTime>2003-01-17 05:40</PickupTime>
+    <DeliveryTime>2003-01-25 10:45</DeliveryTime>
+    <OrderStatus>Pending</OrderStatus>
+  </tuple>
+  <tuple>
+    <InvoiceNumber>10001</InvoiceNumber>
+    <Weight>5.2</Weight>
+    <NumberOfItems>3</NumberOfItems>
+    <TrackingNumber>1491625</TrackingNumber>
+    <DeliveryInstructions>bring package to back door</DeliveryInstructions>
+    <ShippingMethod>Ground</ShippingMethod>
+    <ShippingCompany>FedEx</ShippingCompany>
+    <DeliveryName>Bob Jones</DeliveryName>
+    <DeliveryAddress>1717 X Street, Seattle, WA 98101</DeliveryAddress>
+    <DeliveryContact>Bob Jones</DeliveryContact>
+    <SourceWarehouse>Texas Warehouse</SourceWarehouse>
+    <PickupTime>2003-01-30 07:30</PickupTime>
+    <DeliveryTime>2003-02-05 14:30</DeliveryTime>
+    <OrderStatus>Completed</OrderStatus>
+  </tuple>
+</Package>
+<ShippingVendor>
+  <tuple>
+    <VendorName>UPS</VendorName>
+    <VendorWarehouse>West Coast</VendorWarehouse>
+    <VendorAddress>10101 ABC St, Sacramento, CA 80000</VendorAddress>
+    <VendorURL>http://www.ups.com</VendorURL>
+    <VendorPickupTime>12:00</VendorPickupTime>
+    <VendorPhoneNumber>1-800-UPS-1234</VendorPhoneNumber>
+  </tuple>
+  <tuple>
+    <VendorName>UPS</VendorName>
+    <VendorWarehouse>East Coast</VendorWarehouse>
+    <VendorAddress>2345 E St, Trenton, NJ 10001</VendorAddress>
+    <VendorURL>http://www.ups.com</VendorURL>
+    <VendorPickupTime>13:00</VendorPickupTime>
+    <VendorPhoneNumber>1-800-UPS-1234</VendorPhoneNumber>
+  </tuple>
+  <tuple>
+    <VendorName>FedEx</VendorName>
+    <VendorWarehouse>Texas Warehouse</VendorWarehouse>
+    <VendorAddress>6756 Haw Ave, Austin, TX 30401</VendorAddress>
+    <VendorURL>http://www.fedex.com</VendorURL>
+    <VendorPickupTime>09:00</VendorPickupTime>
+    <VendorPhoneNumber>1-800-FEDEX-12</VendorPhoneNumber>
+  </tuple>
+</ShippingVendor>
+
+<Method>
+  <tuple>
+    <MethodName>Ground</MethodName>
+    <MethodVendor>FedEx</MethodVendor>
+    <MethodPrice>0.45</MethodPrice>
+    <UnitOfPricing>pounds</UnitOfPricing>
+    <MaximumWeight>200.0</MaximumWeight>
+    <GuaranteedTime>17:30</GuaranteedTime>
+  </tuple>
+  <tuple>
+    <MethodName>3 Day</MethodName>
+    <MethodVendor>UPS</MethodVendor>
+    <MethodPrice>2.25</MethodPrice>
+    <UnitOfPricing>pounds</UnitOfPricing>
+    <MaximumWeight>100.0</MaximumWeight>
+    <GuaranteedTime>16:00</GuaranteedTime>
+  </tuple>
+  <tuple>
+    <MethodName>Air</MethodName>
+    <MethodVendor>FedEx</MethodVendor>
+    <MethodPrice>4.50</MethodPrice>
+    <UnitOfPricing>pounds</UnitOfPricing>
+    <MaximumWeight>50.0</MaximumWeight>
+    <GuaranteedTime>14:30</GuaranteedTime>
+  </tuple>
+</Method>
+<Warehouse>
+  <tuple>
+    <WarehouseName>West Coast</WarehouseName>
+    <WarehouseAddress>10101 ABC St, Sacramento, CA 80000</WarehouseAddress>
+    <WarehouseContact>Harold Angell</WarehouseContact>
+    <WarehousePhoneNumber>456-001-1345</WarehousePhoneNumber>
+  </tuple>
+  <tuple>
+    <WarehouseName>East Coast</WarehouseName>
+    <WarehouseAddress>2345 E St, Trenton, NJ 10001</WarehouseAddress>
+    <WarehouseContact>Al Smith</WarehouseContact>
+    <WarehousePhoneNumber>123-456-7891</WarehousePhoneNumber>
+  </tuple>
+  <tuple>
+    <WarehouseName>Texas Warehouse</WarehouseName>
+    <WarehouseAddress>6756 Haw Ave, Austin, TX 30401</WarehouseAddress>
+    <WarehouseContact>Hank Hawk</WarehouseContact>
+    <WarehousePhoneNumber>891-285-3452</WarehousePhoneNumber>
+  </tuple>
+</Warehouse>
+</Data>
+</database>

@@ -1,0 +1,22 @@
+William Johnson|William Johnson|360.754.1356|3098624|6911 Fordham Ct., Tacoma, WA 97621|<NULL>|Signature Required
+Steve Jennings|Steve Jennings|206.253.8994|2917834|2344 64th Ave S, Seattle, WA 98115|<NULL>|Signature Required
+Katelyn Allen|Katelyn Allen|909.655.7821|5824512|34021 Brawney Ave, Lynnwood, WA 97653|<NULL>|<NULL>
+Bob Smith|Bob Smith|415.589.9222|4150880|111 Horsehead Rc, Billings, MT 84653|<NULL>|Leave with Mgr.
+Bradley Matthews|Marley Lemon|614.826.3664|4608000|23 Jester St., Winchester, RI 01256|PO Box 64388 St. Paul, MN 55164|<NULL>
+Sheri Cruzan|Sheri Cruzan|360.412.8697|6287960|8923 Ryan Albert Dr, Washtukna, WA 99337|<NULL>|<NULL>
+Gary Goldman|Gary Goldman|818.793.5504|2887387|5326 117th St, Portland, OR 97201|<NULL>|<NULL>
+John Stewert|John Stewert|509.523.3465|3335024|23334 Gummybear Dr, Salem, MO 56485|<NULL>|Signature Required
+Robert McDouglas|Robert McDouglas|909.655.2611|3565319|11 Karl Malone Lp, Salt Lake City, UT 76523|<NULL>|Signature Required
+Scott Murphy|Scott Murphy|253.472.8989|5322732|5593 Lazy St, Tumwater, WA 98513|<NULL>|<NULL>
+Dave Nowell|Dave Nowell|626.565.8332|3244032|756 Atlantic Ave, Richmond Hill, NY 11026|<NULL>|<NULL>
+Bob McKenna|Bob McKenna|425.438.2145|3983360|10316 Lake City Way NE, Seattle, WA 98125|<NULL>|Apartment Upstairs
+Shawn Byerly|Shawn Byerly|206.632.1246|5711872|2909 Pacific Ave, Lacey, WA 98503|<NULL>|<NULL>
+William Johnson|Jack Johnson|425.446.5632|2768401|38473 Carpenter Rd, Olympia, WA 98506|13 Creaky Door Ln, Tupulo, MS 50231|<NULL>
+Ronny Williams|Ronny Williams|909.655.4646|3102720|151 Bacardi Ct, Sacramento, CA 95623|<NULL>|<NULL>
+Boyd Frank|Boyd Frank|360.754.8459|3348294|1117 Tacoma Ave, Yelm, WA 98520|<NULL>|Leave on porch
+Bob Jennings|Bob Jennings|213.629.8484|2251928|1 Liberty Pl., Philadelphia, PN 02356|<NULL>|<NULL>
+Sarah Folsom|Sarah Folsom|253.626.7845|3451926|61 Pennsylvania Ave, Baltimore, MD 03564|<NULL>|<NULL>
+Bryan Raines|Dean Long|909.922.5216|5407346|87965 211th St, Seattle, WA 98032|635 Park Avenue, Boardwalk, CA 96235|Signature Required
+Kate Riley|Kate Riley|412.357.9348|6244032|555 55th Ave S, Pulman, WA 99652|<NULL>|<NULL>
+John Patrick|John Patrick|860.554.9233|4029574|8134 85th Dr SE, San Fransisco, CA 96503|<NULL>|<NULL>
+Kyle McDonald|E. A. Stirbunny|466.983.4162|2944492|3900 Cleveland Ave, Tulsa, OK 35642|9538 Cadbury Ln, Austin, TX 86503|<NULL>

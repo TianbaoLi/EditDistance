@@ -1,0 +1,887 @@
+<database name="Inventory">
+	<createdby name="Jacques Crocker" />
+	<Schema>
+
+		<!--
+		////////////////////////////
+		// PRODUCT/INVENTORY TABLES
+		////////////////////////////
+		-->
+		
+		<table name="Product">
+			<column name="ProductID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each product
+				</comment>
+			</column>
+			<column name="ISBN" type="String" key="no">
+				<comment> 
+					Foreign key that relates this product to a specific book
+					NULL if ALBUM
+				</comment>
+			</column>
+			<column name="AlbumID" type="String" key="no">
+				<comment> 
+					Foreign key that relates this product to a specific CD\
+					NULL IF BOOK
+				</comment>
+			</column>
+			<column name="RetailPrice" type="Decimal" key="no">
+				<comment> 
+					List price for this product
+				</comment>
+			</column>
+			<column name="SalePrice" type="String" key="no">
+				<comment> 
+					Current selling price those this product
+				</comment>
+			</column>		
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="Product">
+				<column name="ISBN" />
+			</source>
+			<target table="BookInfo">
+				<column name="ISBN" />
+			</target>
+			<comment>One(Zero) to one relationship. If this product is a book it will have this field pointing to a valid entry in the BookInfo table describing it
+			</comment>
+		</foreignkeyconstraint>
+
+		<foreignkeyconstraint>
+			<source table="Product">
+				<column name="AlbumID" />
+			</source>
+			<target table="AlbumInfo">
+				<column name="AlbumID" />
+			</target>
+			<comment>One(Zero) to one relationship. If this product is a CD it will have this field pointing to a valid entry in the AlbumInfo table describing it
+			</comment>
+		</foreignkeyconstraint>
+
+		<table name="Stock">
+			<column name="WherehouseID" type="Integer" key="no">
+				<comment> 
+					Foreign Key relating this stock data entry to the wherehouse it is describing.
+				</comment>
+			</column>
+			<column name="ProductID" type="Integer" key="no">
+				<comment> 
+					Foreign Key relating this stock data entry to the product it is describing the stock of
+				</comment>
+			</column>
+			
+			<!-- Note: Primary Key on this table would be WherehouseID combined with ProductID since each wherehouse should only have one stock entry for each product-->
+			
+			<column name="StockCount" type="Integer" key="no">
+				<comment> 
+					The actual stock count of this product
+				</comment>
+			</column>	
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="Stock">
+				<column name="WherehouseID" />
+			</source>
+			<target table="Wherehouse">
+				<column name="WherehouseID" />
+			</target>
+			<comment>
+				One to many relationship. Each wherehouse will have many(or zero) stock records describing its inventory and each stock is related to exactly one wherehouse
+			</comment>
+		</foreignkeyconstraint>
+
+		<foreignkeyconstraint>
+			<source table="Stock">
+				<column name="ProductID" />
+			</source>
+			<target table="Product">
+				<column name="ProductID" />
+			</target>
+			<comment>
+				One to many relationship. Each product will have many(or zero) stock records describing its inventory(for the different wherehouses) and each stock is related to exactly one Product
+			</comment>
+		</foreignkeyconstraint>
+		
+		<table name="IncomingShipment">
+			<column name="WherehouseID" type="Integer" key="no">
+				<comment> 
+					Foreign Key relating this shipment to the wherehouse it is destined to.
+				</comment>
+			</column>
+			<column name="ProductID" type="Integer" key="no">
+				<comment> 
+					Foreign Key relating this shipment to the product it is composed of
+				</comment>
+			</column>
+			<column name="InventoryCount" type="Integer" key="no">
+				<comment> 
+					# of items of specific product coming in this shipment
+				</comment>
+			</column>
+			<column name="ExpectedDate" type="Datetime" key="no">
+				<comment> 
+					Expected arrival date of shipment
+				</comment>
+			</column>	
+			<column name="ArrivalDate" type="Datetime" key="no">
+				<comment> 
+					Actual arrive date of shipment. NULL assumes it hasnt arrived yet
+				</comment>
+			</column>
+			<column name="ComingFrom" type="String" key="no">
+				<comment> 
+					Who is sending this shipment and what package it is in
+					(would be relevant to an expanded database of suppliers)
+				</comment>
+			</column>	
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="IncomingShipment">
+				<column name="WherehouseID" />
+			</source>
+			<target table="Wherehouse">
+				<column name="WherehouseID" />
+			</target>
+			<comment>
+				One to many relationship. Each wherehouse will have many(or zero) shipments describing its incoming inventory and each shipment is going to exactly one wherehouse
+			</comment>
+		</foreignkeyconstraint>
+
+		<foreignkeyconstraint>
+			<source table="IncomingShipment">
+				<column name="ProductID" />
+			</source>
+			<target table="Product">
+				<column name="ProductID" />
+			</target>
+			<comment>
+				One to many relationship. Each product will have many(or zero) shipments describing the incoming inventory (for the different wherehouses) and each shipment record is related to exactly one Product
+			</comment>
+		</foreignkeyconstraint>
+
+		<!--
+		//////////////////////////
+		// BOOK TABLES
+		//////////////////////////
+		-->	
+		<table name="BookInfo">
+			<column name="ISBN" type="String" key="yes">
+				<comment> 
+					Unique ISBN number for a book product
+				</comment>
+			</column>
+			<column name="ProductID" type="Integer" key="no">
+				<comment> 
+					Foreign Key relating item to a product in the Product table
+				</comment>
+			</column>
+			<column name="BookName" type="String" key="no">
+				<comment> 
+					Name of the book. Ex: XML for Dummies
+				</comment>
+			</column>	
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="BookInfo">
+				<column name="ProductID" />
+			</source>
+			<target table="Product">
+				<column name="ProductID" />
+			</target>
+			<comment>One to One relationship relating a product to a Book</comment>
+		</foreignkeyconstraint>
+
+		<table name="BookKeyword">
+			<column name="ISBN" type="String" key="no">
+				<comment> 
+					Foreign Key relating keyword to a book
+				</comment>
+			</column>
+			<column name="Keyword" type="String" key="no">
+				<comment> 
+					Keyword for a book. Ex: XML, Dummies, XSTL, DOM
+				</comment>
+			</column>	
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="BookKeyword">
+				<column name="ISBN" />
+			</source>
+			<target table="BookInfo">
+				<column name="ISBN" />
+			</target>
+			<comment>
+				One to many relationship. Each book can have many(or zero) keywords describing it and each keyword is related to exactly one book
+			</comment>
+		</foreignkeyconstraint>
+
+		<!--MANY TO MANY TABLES-->
+
+		<table name="Author">
+			<column name="AuthorID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each author
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					Author's Name. Ex: Earnest Hemmingway
+				</comment>
+			</column>	
+		</table>
+
+
+		<table name="BookCategory">
+			<column name="CategoryID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each category
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					Name of category
+				</comment>
+			</column>	
+		</table>
+
+		<!--This table interfaces Books with Categories. Each book can have many different Categories and each Category can have many differnet books-->
+		<table name="CategoryBookRelationship">
+			<column name="ISBN" type="Integer" key="no">
+				<comment> 
+					Foreign Key for ISBN
+				</comment>
+			</column>
+			<column name="CategoryID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for Category
+				</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="CategoryBookRelationship">
+				<column name="ISBN" />
+			</source>
+			<target table="BookInfo">
+				<column name="ISBN" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="CategoryBookRelationship">
+				<column name="CategoryID" />
+			</source>
+			<target table="BookCategory">
+				<column name="CategoryID" />
+			</target>
+		</foreignkeyconstraint>
+
+
+		<!--This table interfaces Books with Authors. Each book can have many different authors and each Author can have many different books-->
+		<table name="AuthorBookRelationship">
+			<column name="ISBN" type="Integer" key="no">
+				<comment> 
+					Foreign Key for ISBN
+				</comment>
+			</column>
+			<column name="AuthorID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for AuthorID
+				</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="AuthorBookRelationship">
+				<column name="ISBN" />
+			</source>
+			<target table="BookInfo">
+				<column name="ISBN" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="AuthorBookRelationship">
+				<column name="AuthorID" />
+			</source>
+			<target table="Author">
+				<column name="AuthorID" />
+			</target>
+		</foreignkeyconstraint>
+
+		<!--
+		//////////////////////////
+		// MUSIC/CD TABLES
+		//////////////////////////
+		-->
+		<table name="MusicInfo">
+			<column name="AlbumID" type="Integer" key="yes">
+				<comment>
+					Unique Key for each music title
+				</comment>
+			</column>
+			<column name="ProductID" type="Integer" key="no">
+				<comment> 
+					Foreign Key 1 relating item to a product in the Product table
+				</comment>
+			</column>
+			<column name="RecordCompanyID" type="Integer" key="no">
+				<comment> 
+					Foreign Key 2 relating item to a RecordCompany in the RecordCompany table
+				</comment>
+			</column>
+			<column name="RecordTypeID" type="Integer" key="no">
+				<comment> 
+					Foreign Key 3 relating item to a RecordType in the RecordType table
+				</comment>
+			</column>
+		</table>
+
+		<!-- MusicInfo Foreign Key 1 -->
+		<foreignkeyconstraint>
+			<source table="MusicInfo">
+				<column name="ProductID" />
+			</source>
+			<target table="Product">
+				<column name="ProductID" />
+			</target>
+			<comment>One to One relationship relating a product to a CD</comment>
+		</foreignkeyconstraint>
+
+		<!-- MusicInfo Foreign Key 2 -->
+		<foreignkeyconstraint>
+			<source table="MusicInfo">
+				<column name="RecordCompanyID" />
+			</source>
+			<target table="RecordCompany">
+				<column name="RecordCompanyID" />
+			</target>
+			<comment>
+				One to many relationship. Each RecordCompany can publish many (or zero) records and each record is published by exactly one Record Company
+			</comment>
+		</foreignkeyconstraint>
+
+		<!-- MusicInfo Foreign Key 3 -->
+		<foreignkeyconstraint>
+			<source table="MusicInfo">
+				<column name="RecordTypeID" />
+			</source>
+			<target table="RecordType">
+				<column name="RecordTypeID" />
+			</target>
+			<comment>
+				One to many relationship. Each CD Type can describe many(or zero) actual CD's and each CD is of exactly one type
+			</comment>
+		</foreignkeyconstraint>
+
+		<table name="RecordCompany">
+			<column name="RecordCompanyID" type="Integer" key="yes">
+				<comment>
+					Unique Key for each Record Company
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					The name of Record Company. Examples: Interscope, WB
+				</comment>
+			</column>
+		</table>
+
+		<table name="RecordType">
+			<column name="RecordTypeID" type="Integer" key="yes">
+				<comment>
+					Unique Key for each RecordType
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					The name of Record Type. Examples: Single, Album, Compilation
+				</comment>
+			</column>
+		</table>
+
+		<!--MANY TO MANY TABLES-->
+		<table name="MusicGenre">
+			<column name="GenreID" type="Integer" key="yes">
+				<comment>
+					Unique Key for each Genre Group
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					The name of the genre. Examples: Rock, Rap, Classical
+				</comment>
+			</column>
+		</table>
+
+		<table name="Artist">
+			<column name="ArtistID" type="Integer" key="yes">
+				<comment>
+					Unique Key for each Artist or Band
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					The name of the Band or Artist. Examples: Linkin Park, Nirvana
+				</comment>
+			</column>
+		</table>
+
+		<!--This table interfaces CD's with Genres. Each CD can have many different Genres and each Genres can have many differnet CDs-->
+		<table name="MusicGenreAlbumRelationship">
+			<column name="AlbumID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for AlbumID
+				</comment>
+			</column>
+			<column name="GenreID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for GenreID
+				</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="MusicGenreAlbumRelationship">
+				<column name="AlbumID" />
+			</source>
+			<target table="MusicInfo">
+				<column name="AlbumID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="MusicGenreAlbumRelationship">
+				<column name="GenreID" />
+			</source>
+			<target table="MusicGenre">
+				<column name="GenreID" />
+			</target>
+		</foreignkeyconstraint>
+
+		<!--This table interfaces CD's with Artists. Each CD can have many different Artists and each Artist can have many differnet CDs-->
+		<table name="ArtistAlbumRelationship">
+			<column name="AlbumID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for AlbumID
+				</comment>
+			</column>
+			<column name="ArtistID" type="Integer" key="no">
+				<comment> 
+					Foreign Key for ArtistID
+				</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="ArtistAlbumRelationship">
+				<column name="AlbumID" />
+			</source>
+			<target table="MusicInfo">
+				<column name="AlbumID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="ArtistAlbumRelationship">
+				<column name="ArtistID" />
+			</source>
+			<target table="Artist">
+				<column name="ArtistID" />
+			</target>
+		</foreignkeyconstraint>
+		
+		<!--
+		//////////////////////////
+		// WHEREHOUSE/MANAGER TABLES
+		//////////////////////////
+		-->
+		<table name="Wherehouse">
+			<column name="WherehouseID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each wherehouse
+				</comment>
+			</column>
+			<column name="Address1" type="String" key="no">
+				<comment> 
+					Street address of wherehouse
+				</comment>
+			</column>
+			<column name="Address2" type="String" key="no">
+				<comment> 
+					Additional address information
+				</comment>
+			</column>		
+			<column name="City" type="String" key="no"></column>
+			<column name="State" type="String" key="no"></column>
+			<column name="Zip" type="String" key="no"></column>
+			<column name="Country" type="String" key="no"></column>
+		</table>
+
+		<table name="Manager">
+			<column name="ManagerID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each Manager
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					Manager's Name
+				</comment>
+			</column>
+			<column name="WherehouseID" type="Integer" key="no">
+				<comment> 
+					Foreign key representing Wherehouse manager is associated with
+				</comment>
+			</column>
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="Manager">
+				<column name="WherehouseID" />
+			</source>
+			<target table="Wherehouse">
+				<column name="WherehouseID" />
+			</target>
+			<comment>
+				One to many relationship. Each wherehouse can have one or many Managers for contact though each manager is assigned to exactly one wherehouse
+			</comment>
+		</foreignkeyconstraint>
+
+		<table name="ManagerContact">
+			<column name="ManagerID" type="Integer" key="no">
+				<comment> 
+					Foreign Key representing which manager this contact info is for
+				</comment>
+			</column>
+			<column name="ContactTypeID" type="Integer" key="no">
+				<comment> 
+					Foreign Key representing the type of this contact record. Did it this way so each manager can have an extendible list of contact types
+				</comment>
+			</column>
+			<column name="Detail" type="String" key="no">
+				<comment> 
+					Represents the data for the contact. For example.. if its a phone number, this field would hold it. Would also hold stuff like email, instant messanger id, etc...
+				</comment>
+			</column>	
+		</table>
+
+		<foreignkeyconstraint>
+			<source table="ManagerContact">
+				<column name="ManagerID" />
+			</source>
+			<target table="Manager">
+				<column name="ManagerID" />
+			</target>
+			<comment>
+				One to many relationship. Each manager can have one or many contact records showing how to reach him and each Contact record refers to exactly one manager.
+			</comment>
+		</foreignkeyconstraint>
+
+		<foreignkeyconstraint>
+			<source table="ManagerContact">
+				<column name="ContactTypeID" />
+			</source>
+			<target table="ContactType">
+				<column name="ContactTypeID" />
+			</target>
+			<comment>
+				Category relationship. Each contact record can be of a specific type (category). Categories can have zero to many items in it.
+			</comment>
+		</foreignkeyconstraint>
+
+		<table name="ContactType">
+			<column name="ContactTypeID" type="Integer" key="yes">
+				<comment> 
+					Unique key for each contact type
+				</comment>
+			</column>
+			<column name="Name" type="String" key="no">
+				<comment> 
+					Contact Type Name. Examples: Work Telephone, Home Telephone, Fax, Email, AOL Screenname, etc...
+				</comment>
+			</column>	
+		</table>
+		
+	</Schema>
+	
+	<Data>
+		<Product>
+			<tuple>
+				<ProductID>1</ProductID>
+				<ISBN>0</ISBN>
+				<AlbumID>1</AlbumID>
+				<RetailPrice>18.95</RetailPrice>
+				<SalePrice>9.99</SalePrice>
+			</tuple>
+			<tuple>
+				<ProductID>2</ProductID>
+				<ISBN>0000000000</ISBN>
+				<AlbumID></AlbumID>
+				<RetailPrice>38.95</RetailPrice>
+				<SalePrice>38.95</SalePrice>
+			</tuple>
+			<tuple>
+				<ProductID>2</ProductID>
+				<ISBN>1111111111</ISBN>
+				<AlbumID></AlbumID>
+				<RetailPrice>20.95</RetailPrice>
+				<SalePrice>15.95</SalePrice>
+			</tuple>
+		</Product>
+		<MusicInfo>
+			<tuple>
+				<AlbumID>1</AlbumID>
+				<ProductID>1</ProductID>
+				<RecordCompanyID>1</RecordCompanyID>
+				<RecordTypeID>1</RecordTypeID>
+			</tuple>
+		</MusicInfo>
+		<RecordCompany>
+			<tuple>
+				<RecordCompanyID>1</RecordCompanyID>
+				<Name>Warner Brothers</Name>
+			</tuple>
+		</RecordCompany>
+		<RecordType>
+			<tuple>
+				<RecordTypeID>1</RecordTypeID>
+				<Name>Album</Name>
+			</tuple>
+		</RecordType>
+		<Artist>
+			<tuple>
+				<ArtistID>1</ArtistID>
+				<ArtistName>LinkinPark</ArtistName>
+			</tuple>
+			<tuple>
+				<ArtistID>2</ArtistID>
+				<ArtistName>Nirvana</ArtistName>
+			</tuple>
+			<tuple>
+				<ArtistID>3</ArtistID>
+				<ArtistName>Pink Floyd</ArtistName>
+			</tuple>
+		</Artist>
+		<MusicGenre>
+			<tuple>
+				<GenreID>1</GenreID>
+				<Name>Rock</Name>
+			</tuple>
+			<tuple>
+				<GenreID>2</GenreID>
+				<Name>Classic Rock</Name>
+			</tuple>
+			<tuple>
+				<GenreID>3</GenreID>
+				<Name>Rap</Name>
+			</tuple>
+			<tuple>
+				<GenreID>4</GenreID>
+				<Name>Metal</Name>
+			</tuple>
+		</MusicGenre>
+		<MusicGenreAlbumRelationship>
+			<tuple>
+				<AlbumID>1</AlbumID>
+				<GenreID>1</GenreID>
+			</tuple>
+		</MusicGenreAlbumRelationship>
+		<ArtistAlbumRelationship>
+			<tuple>
+				<AlbumID>1</AlbumID>
+				<ArtistID>1</ArtistID>
+			</tuple>
+		</ArtistAlbumRelationship>
+		<BookInfo>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<ProductID>2</ProductID>
+				<BookName>XML for Dummies</BookName>
+			</tuple>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<ProductID>3</ProductID>
+				<BookName>Evil Geniuses In a Nutshell</BookName>
+			</tuple>
+		</BookInfo>
+		<BookKeyword>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<Keyword>XML</Keyword>
+			</tuple>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<Keyword>Dummies</Keyword>
+			</tuple>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<Keyword>DOM</Keyword>
+			</tuple>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<Keyword>Evil</Keyword>
+			</tuple>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<Keyword>XML</Keyword>
+			</tuple>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<Keyword>Santa Clause</Keyword>
+			</tuple>
+		</BookKeyword>
+		<BookCategory>
+			<tuple>
+				<CategoryID>1</CategoryID>
+				<Name>Computers</Name>
+			</tuple>
+			<tuple>
+				<CategoryID>2</CategoryID>
+				<Name>Programming</Name>
+			</tuple>
+			<tuple>
+				<CategoryID>3</CategoryID>
+				<Name>Self Help</Name>
+			</tuple>
+		</BookCategory>
+		<CategoryBookRelationship>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<CategoryID>1</CategoryID>
+			</tuple>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<CategoryID>2</CategoryID>
+			</tuple>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<CategoryID>3</CategoryID>
+			</tuple>
+		</CategoryBookRelationship>
+		
+		<AuthorBookRelationship>
+			<tuple>
+				<ISBN>1111111111</ISBN>
+				<AuthorID>2</AuthorID>
+			</tuple>
+			<tuple>
+				<ISBN>0000000000</ISBN>
+				<AuthorID>1</AuthorID>
+			</tuple>
+		</AuthorBookRelationship>
+		
+		<Author>
+			<tuple>
+				<AuthorID>1</AuthorID>
+				<Name>Bill Gates</Name>
+			</tuple>
+			<tuple>
+				<AuthorID>2</AuthorID>
+				<Name>Dr. Evil</Name>
+			</tuple>
+		</Author>
+		
+		<Wherehouse>
+			<tuple>
+				<WherehouseID>1</WherehouseID>
+				<Address1>234 HWY 34</Address1>
+				<Address2>Apt 201</Address2>
+				<City>Orchard Park</City>
+				<State>NY</State>
+				<Zip>14127</Zip>
+				<Country>USA</Country>
+			</tuple>
+			<tuple>
+				<WherehouseID>2</WherehouseID>
+				<Address1>234 Lakeview Dr</Address1>
+				<Address2></Address2>
+				<City>Seattle</City>
+				<State>WA</State>
+				<Zip>98105</Zip>
+				<Country>USA</Country>
+			</tuple>
+		</Wherehouse>
+		
+		<Manager>
+			<tuple>
+				<ManagerID>1</ManagerID>
+				<WherehouseID>1</WherehouseID>
+				<Name>Joe Smith</Name>
+			</tuple>
+			<tuple>
+				<ManagerID>2</ManagerID>
+				<WherehouseID>1</WherehouseID>
+				<Name>Jack Doe</Name>
+			</tuple>
+			<tuple>
+				<ManagerID>3</ManagerID>
+				<WherehouseID>2</WherehouseID>
+				<Name>Jim Kelly</Name>
+			</tuple>
+		</Manager>
+		
+		<ManagerContact>
+			<tuple>
+				<ManagerID>1</ManagerID>
+				<TypeID>1</TypeID>
+				<Detail>324-342-3422</Detail>
+			</tuple>
+		</ManagerContact>
+		
+		<ContactType>
+			<tuple>
+				<TypeID>1</TypeID>
+				<Name>Phone</Name>
+			</tuple>
+			<tuple>
+				<TypeID>2</TypeID>
+				<Name>Fax</Name>
+			</tuple>
+			<tuple>
+				<TypeID>3</TypeID>
+				<Name>Email</Name>
+			</tuple>
+			<tuple>
+				<TypeID>4</TypeID>
+				<Name>AIM</Name>
+			</tuple>
+			<tuple>
+				<TypeID>5</TypeID>
+				<Name>ICQ</Name>
+			</tuple>
+		</ContactType>
+		
+		<Stock>
+			<tuple>
+				<WherehouseID>1</WherehouseID>
+				<ProductID>1</ProductID>
+				<Stock>32422</Stock>
+			</tuple>
+			<tuple>
+				<WherehouseID>2</WherehouseID>
+				<ProductID>1</ProductID>
+				<Stock>145234</Stock>
+			</tuple>
+			<tuple>
+				<WherehouseID>1</WherehouseID>
+				<ProductID>2</ProductID>
+				<Stock>1132</Stock>
+			</tuple>
+			<tuple>
+				<WherehouseID>2</WherehouseID>
+				<ProductID>2</ProductID>
+				<Stock>0</Stock>
+			</tuple>
+		</Stock>
+		
+		<IncomingShipment>
+			<tuple>
+				<ProductID>1</ProductID>
+				<WherehouseID>1</WherehouseID>
+				<InventoryCount>342</InventoryCount>
+				<ExpectedDate>2003-3-23 04:34:23</ExpectedDate>
+				<ActualDate></ActualDate>
+			</tuple>
+		</IncomingShipment>
+		
+	</Data>
+</database>

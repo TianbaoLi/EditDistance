@@ -1,0 +1,7 @@
+Ground|UPS|$1.00|per pound|5 days|3 days|
+Next Day Air|UPS|$2.50|per pound|1 day|1 day|Nothing over 15 pounds.
+Ground|Fed-Ex|$1.25|per pound|4 days||
+Express|Fed-Ex|$2.25|per pound|2 days|1 day|Nothing heavier than 10 pounds.
+Ground|DHL|$3.60|total|6 days|3 days|
+Ground|US Post Office|$1.24|per pound|10 days|3 days|Nothing Fragile
+Next Day Air|US Post Office|$4.12|per pound|2 days|1 day|Nothing fragile

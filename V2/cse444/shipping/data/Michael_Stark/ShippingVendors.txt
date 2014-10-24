@@ -1,0 +1,20 @@
+Airborne Express|Eugene|789 Duck Dinner Rd|Eugene|OR|32514|12:00pm PST
+Airborne Express|Pullman|1510 WSU Way|Pullman|WA|66666|12:00pm PST
+Airborne Express|SanDiego|1993 Northgate Way|SanDiego|CA|26241|12:00pm PST
+Airborne Express|Seattle|1993 3rd Ave|Seattle|WA|96241|12:00pm PST
+DHL|Eugene|2588 Dead Duck Rd|Eugene|OR|32514|01:00pm PST
+DHL|Pullman|666 Rocky Rd|Pullman|WA|66666|01:00pm PST
+DHL|SanDiego|14288 Orchid Ave|SanDiego|CA|23250|01:00pm PST
+DHL|Seattle|142 Pine Ave|Seattle|WA|96250|01:00pm PST
+FedEx|Eugene|3654 Dumb Duck Way|Eugene|OR|32514|01:00pm PST
+FedEx|Pullman|765 Hick Rd|Pullman|WA|66666|01:00pm PST
+FedEx|SanDiego|5142 Orilla Rd|SanDiego|CA|34251|01:00pm PST
+FedEx|Seattle|142 Olive Way|Seattle|WA|96251|01:00pm PST
+UPS|Eugene|420 Mary Jane Ave|Eugene|OR|32514|08:00pm PST
+UPS|Pullman|555 Dirt Rd|Pullman|WA|66666|08:00pm PST
+UPS|SanDiego|555 S 1488|SanDiego|CA|95128|08:00pm PST
+UPS|Seattle|555 S 1588|Seattle|WA|98168|08:00pm PST
+USPS|Eugene|789 Cannabis Ave|Eugene|OR|32514|12:00pm PST
+USPS|Pullman|8888 10th Rd SE|Pullman|WA|66666|12:00pm PST
+USPS|SanDiego|999 3rd Ave|SanDiego|CA|26251|12:00pm PST
+USPS|Seattle|149 Olive Way|Seattle|WA|96251|12:00pm PST

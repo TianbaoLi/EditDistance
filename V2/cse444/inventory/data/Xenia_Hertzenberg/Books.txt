@@ -1,0 +1,20 @@
+Arnold Robbins|Unix in a Nutshell|1-56592-427-4|O'Reilly|2|Paperback|Technical|nutshell, unix, reference|29.99|0.10|4
+W. Somerset Maugham|Of Human Bondage|4-663345-435-2345-4|Sun Dial Press|5|Hardcover|Novel|story, british, life|37.95|0.15|5
+Gerald J Alred, Charles T. Brusaw, Walter E. Oliu|Handbook of Technical Writing|0-312-19804-3|Bedford-St.Martin's|4|Spiral Bound paperback|manual|technical writing, reference, manual|19.99|0.00|3
+Michael L. Gazzaniga, Richard B. Ivry, George R. Mangun|Cognitive Neuroscience|0-393-97177-3|W.W.Norton|2|Hardcover|Textbook|Neuroscience, introduction, brain, cognitive|60.00|0.00|3
+Reay Tannahill|Sex in History|0-8128-2580-2|Stein and Day|5|Hardcover, Dust Jacket|History|History, Social, Culture, Sex|48.98|0.05|4
+Guy de Maupassant|The Works of Guy de Maupassant|0-244-15676-X|Black's Readers Service Company|3|Hardcover|French Literature|Frensh, Short Story, 19th centtury|18.99|0.10|5
+Stephen King|The Dead Zone|0-451-13972-9|The Viking Press|3||Horror|dead, Ghost|7.99|0.10|2
+Null|Crafty Cat Crimes: 100 Tiny Cat Tale Mysteries|0-7607-1582-3|Barnes and noble|4|Hardcover, Dust Jacket|Fiction|Cat, short stories, mystery|17.99|0.00|3
+Julia Child|From Julia Child's Kitchen|0-394-48071-6|Alfred A. Knopf|3|Hard Cover, Dust Jacket|Cookbook|French, Cookery|75.99|0.10|0.10
+Umberto Eco|The Name of The Rose|0-446-32218-0|Warner Books|2|Paperback|Fiction|Medieval, mystery, Italian|9.99|0.10|4
+Umberto Eco|Foucault's Pendulum|0-345-36875-4|Ballantine Books|2|Paperback|Fiction|Mystery, game, computer|8.95|0.15|4
+Michael Chichton|The Terminal Man|0-345-35462-1|Ballantine Books|1|Paperback|Fiction|Brain, mystery, murder, epilepsy|9.99|0.10|5
+Ayn Rand|Atlas Shrugged|0-223-34633-X|Random House|2|Paperback|Novel|philosophy|3.99|0.0|4
+Null|The Oxford Dictionary of Current English|0-19-281919-4|Oxford University Press|9|Paperback|Dictionary|dictionary, modern english|7.99|0.00|5
+Frederic M.Wheelock, R.A. LaFleur|Wheelock's Latin|0-06-46-7179-8|Harper Collins Publishers|3|Paperback|Textbook|latin, Rome|29.99|0.00|4
+Nathan Patwardhan, Ellen Siever, Steven Spainhour|Perl in a Nutshell|0-596-00241-6|O'Reilly|3|Paperback|Reference|Perl, programming, cgi, web|39.95|0.00|4
+Jaime Nino, Frederick A. Hosch|An Introduction to Programming and oObject Oriented Design Using Java|0-471-35489-9|John Wiley and Sons, Inc|3|Paperback|Textbook|Java, Programming, learning, introductory|32.99|0.10|3
+Merrie Bergmann, James Moor, Jack Nelson|The Logic Book|0-07-913083-6|McGraw Hill|3|Hardcover|Textbook|logic, instroductory, formal|52.99|0.10|3
+Barbara Ehrenreich|Nickel And Dimed, on (Not) Getting By in America|0-8050-6389-7|Henry Holt and Company, LLC|1|Paperback|NY Times Bestseller|poor in America, social life, culture, US|13.00|0.10|4
+Stuart Russel, Peter Norvig|Artificial Intelligence, a modern approach|0-13-103805-2|Prentice-Hall, Inc.|4|Hardback|Textbook|artificial intelligence, machine learning, computer science|65.99|0.00|4

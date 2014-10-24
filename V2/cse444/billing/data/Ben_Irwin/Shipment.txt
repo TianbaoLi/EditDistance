@@ -1,0 +1,29 @@
+2|Homer Simpson|Boigenville|1|2/4/2000 0:00:00
+1|Santa Claus|NorthPole|2|3/6/1990 0:00:00
+2|Homer Simpson|Joyland|3|2/5/2000 0:00:00
+3|Bart Simpson|Joyland|4|5/2/2010 0:00:00
+3|Bart Simpson|Joyland|5|5/3/2010 0:00:00
+4|Homer Simpson|Joyland|6|6/1/2010 0:00:00
+5|Bart Simpson|Quickie|7|2/5/1999 0:00:00
+5|Bart Simpson|Quickie|8|1/4/1999 0:00:00
+6|Karl Malone|Nike|9|3/6/1998 0:00:00
+6|Karl Malone|Wilson|10|3/7/1998 0:00:00
+7|George W. Bush|Top|11|4/14/1980 0:00:00
+7|George W. Bush|Wilson|12|4/16/2003 0:00:00
+8|Lars Ulrich|Crate|13|8/3/1983 0:00:00
+8|Lars ulrich|Stick|14|8/4/1983 0:00:00
+9|Layne Staley|Epiphone|15|9/19/1989 0:00:00
+10|George Bush|Chevron|16|4/23/1999 0:00:00
+11|Nick Robertson|Marvel|17|3/3/1994 0:00:00
+12|Nick Robertson|Marvel|18|3/5/1994 0:00:00
+12|Nick Robertson|Lucas Arts|19|3/6/2003 0:00:00
+13|Chris Marich|Atlantic|20|3/7/1994 0:00:00
+13|Chris Marich|American|21|3/7/1994 0:00:00
+14|Nick Robertson|Microsoft|22|4/12/1995 0:00:00
+15|Bart Simpson|Quary|23|4/8/1998 0:00:00
+16|Marge Simpson|Bay Jewlers|24|4/5/1989 0:00:00
+17|Jerry Cantrell|Boigenville|25|3/6/2012 0:00:00
+18|Karl Malone|Nike|26|9/3/2000 0:00:00
+18|Karl Malone|Woods|27|1/1/2001 0:00:00
+19|James Hetfield|Epiphone|28|3/8/2000 0:00:00
+20|Santa Claus|Wives|29|12/24/2001 0:00:00

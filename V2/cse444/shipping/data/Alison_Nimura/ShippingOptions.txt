@@ -1,0 +1,17 @@
+Standard Overnight|FedEx|weight|13.25|1|150|119|165|165|All US
+FedEx Ground|FedEx|weight|3.39|5|150|108|108|84|All US
+Express Saver|FedEx|weight|7.7|3|150|119|165|165|All US
+International Ground|FedEx|weight|12.84|7|150|108|130|130|Canada and Puerto Rico
+Next Day Air|UPS|weight|12.17|1|99||||All US and Puerto Rico
+1-day Priority|USPS|weight|9.95|1|50|64|64|64|All US
+UPS Ground|UPS|weight|5.79|6|79|75|65|65|All US
+2nd Day Air|UPS|weight|8.65|2|85|90|80|70|All US and Puerto Rico
+2-day Priority|USPS|weight|7.95|2|165||||All US
+Next Day|DHL|weight|11.12|1|200|75|70|70|All US
+Standard Ground|USPS|number of items|4.5|7|200||||All US, Canada, Mexico
+Economy|USPS|number of items|3.35|10|200||||All US, Canada, Mexico
+International|DHL|number of items|8|20||84|84|84|All International
+International Express|DHL|number of items|14.37|5||84|84|84|All North America, South America, Europe, Asia, Australia
+Expedited Ground|UPS|weight|5.15|4|200||||All US
+3-day Select|UPS|weight|6.75|3|45||||All US
+2Day|FedEx|weight|8|2|150||||All US, Canada

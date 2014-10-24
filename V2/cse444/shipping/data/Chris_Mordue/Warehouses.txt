@@ -1,0 +1,3 @@
+Central_Side|418552 418St SW Ketchem, ID 34241|FedExpress|12
+Nalley_Warehouse|1245 31st St Nalley Valley Way Tacoma, WA 98332|UPS|04
+Cycle_Plant|8524 85th St. NE Seattle WA 98102|Couriers|50

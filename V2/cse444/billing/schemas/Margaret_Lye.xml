@@ -1,0 +1,199 @@
+<database name="BillingInformation">
+	<createdby name="Margaret Lye" />
+	<Schema>
+		<table name="Invoice">
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="OrderDate" type="Date" key="no"/>
+			<column name="CustomerBuyer" type="Integer" key="no">
+				<comment>A Customer ID Number.</comment>
+			</column>
+			<column name="CustomerToShipTo" type="Integer" key="no">
+				<comment>A Customer ID Number.</comment>
+			</column>
+			<column name="ShippingMethod" type="Integer" key="no">
+				<comment>
+					A number representation resembling an enum.
+				</comment>
+			</column>
+			<column name="ExpectedArrival" type="Date" key="no"/>
+			<column name="ShippingCost" type="Real" key="no"/>
+			<column name="LocalTaxRate" type="Double" key="no"/>
+			<column name="PercentDiscount" type="Double" key="no"/>
+			<column name="PaymentMethod" type="Integer" key="no">
+				<comment>
+					A number representation resembling an enum.
+				</comment>
+			</column>
+		</table>
+		<table name="Discounts">
+			<column name="start" type="Date" key="no"/>
+			<column name="End" type="Date" key="no"/>
+			<column name="Discount" type="Money" key="no"/>
+		</table>
+		<table name="Item">
+			<column name="ItemNumber" type="Integer" key="no"/>
+			<column name="Name" type="Varchar(30)" key="no">
+				<comment>The name of product.</comment>
+			</column>
+			<column name="Quantity" type="Integer" key="no"/>
+			<column name="PricePerUnit" type="Double" key="no">
+				<comment>
+					Should include discounts for now
+				</comment>
+			</column>
+			<column name="WarehouseID" type="Integer" key="no"/>
+		</table>
+		<table name="InvoiceEntry">
+			<column name="InvoiceNumber" type="Integer" key="no"/>
+			<column name="ID" type="Integer" key="no"/>
+			<column name="Quantity" type="Integer" key="no"/>
+			<column name="PricePerUnit" type="Double" key="no"/>
+			<column name="WarehouseID" type="Integer" key="no"/>
+		</table>
+		<table name="Customer">
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="FirstName" type="Varchar(30)" key="no"/>
+			<column name="MiddleName" type="Varchar(30)" key="no"/>
+			<column name="LastName" type="Varchar(30)" key="no"/>
+			<comment>USA addresses only</comment>
+			<column name="StreedAddress" type="Varchar(100)" key="no"/>
+			<column name="City" type="Varchar(30)" key="no"/>
+			<column name="State" type="Varchar(2)" key="no"/>
+			<column name="ZipCode" type="Integer" key="no"/>
+			<column name="PhoneNumber" type="Bigint" key="no">
+				<comment>
+					Includes the area code
+				</comment>
+			</column>
+			<column name="EmailAddress" type="Varchar(50)" key="no"/>
+			<column name="Credit" type="float" key="no">
+				<comment>Store credit</comment>
+			</column>
+		</table>
+		<table name="CreditCard">
+			<column name="CustomerID" type="Integer" key="no"/>
+			<column name="AccountNumber" type="Varchar(16)" key="no"/>
+			<column name="ExpirationDate" type="Date" key="no"/>
+			<column name="Type" type="Integer" key="no"/>
+			<comment>I don't know how credit cards work, but the credit card type (
+				visa, discover, ...) and number should constitute a key
+			</comment>
+		</table>
+		<table name="GiftCertificate">
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="BuyerID" type="Integer" key="no"/>
+			<column name="Amount" type="Money" key="no"/>
+			<column name="RecipientEmail" type="Varchar(50)" key="no"/>
+		</table>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="ID"/>
+			</source>
+			<target table="Item">
+				<column name="InvoiceNumber"/>
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+	<Data>
+		<Invoice>
+			<tuple>
+				<ID>0</ID>
+				<OrderDate>2003-01-01</OrderDate>
+				<CustomerBuyer>23</CustomerBuyer>
+				<CustomerToShipTo>56</CustomerToShipTo>
+				<ShippingMethod>0</ShippingMethod>
+				<ExpectedArrival>2003-01-03</ExpectedArrival>
+				<ShippingCost>12.02</ShippingCost>
+				<LocalTaxRate>0.091</LocalTaxRate>
+				<PercentDiscount>0.0</PercentDiscount>
+				<PaymentMethod>0</PaymentMethod>
+				
+			</tuple>
+		</Invoice>
+				<Invoice>
+			<tuple>
+				<ID>1</ID>
+				<OrderDate>2003-01-01</OrderDate>
+				<CustomerBuyer>33</CustomerBuyer>
+				<CustomerToShipTo>33</CustomerToShipTo>
+				<ShippingMethod>0</ShippingMethod>
+				<ExpectedArrival>2003-01-03</ExpectedArrival>
+				<ShippingCost>15.55</ShippingCost>
+				<LocalTaxRate>0.065</LocalTaxRate>
+				<PercentDiscount>0.10</PercentDiscount>
+				<PaymentMethod>1</PaymentMethod>
+			</tuple>
+		</Invoice>
+		<InvoiceEntry>
+			<tuple>
+				<InvoiceNumber>0</InvoiceNumber>
+				<ID>9922045</ID>
+				<Quantity>15</Quantity>
+				<WarehouseID>254634</WarehouseID>
+			</tuple>
+		</InvoiceEntry>
+		<InvoiceEntry>
+			<tuple>
+				<InvoiceNumber>1</InvoiceNumber>
+				<ID>981502</ID>
+				<Quantity>3</Quantity>
+				<WarehouseID>5434534</WarehouseID>
+			</tuple>
+		</InvoiceEntry>
+		<Item>
+			<tuple>
+				<ItemNumber>9922045</ItemNumber>
+				<Name>Of Mice And Men</Name>
+				<Quantity>15632</Quantity>
+				<PricePerUnit>15.99</PricePerUnit>
+				<WarehouseID>254634</WarehouseID>
+			</tuple>
+			<tuple>
+				<ItemNumber>981502</ItemNumber>
+				<Name>Heat</Name>
+				<Quantity>15665</Quantity>
+				<PricePerUnit>19.99</PricePerUnit>
+				<WarehouseID>5434534</WarehouseID>
+			</tuple>
+		</Item>
+		<Customer>
+			<ID>33</ID>
+			<FirstName>Nobody</FirstName>
+			<MiddleName>Cares</MiddleName>
+			<LastName>Aboutme</LastName>
+			<StreetAddress>1446 Elm Pine</StreetAddress>
+			<City>Portland</City>
+			<State>OR</State>
+			<ZipCode>63245</ZipCode>
+			<PhoneNumber>4685463215</PhoneNumber>
+		</Customer>
+		<Customer>
+			<ID>23</ID>
+			<FirstName>Abigail</FirstName>
+			<MiddleName>P</MiddleName>
+			<LastName>Kumquat</LastName>
+			<StreetAddress>6532 Macho Nacho Street</StreetAddress>
+			<City>Nowhere</City>
+			<State>FL</State>
+			<ZipCode>36541</ZipCode>
+			<PhoneNumber>9624862762</PhoneNumber>
+		</Customer>
+		<Customer>
+			<ID>56</ID>
+			<FirstName>Pretty</FirstName>
+			<MiddleName>Kitty</MiddleName>
+			<LastName>Cat</LastName>
+			<StreetAddress>888 Tigger St.</StreetAddress>
+			<City>Meow</City>
+			<State>ND</State>
+			<ZipCode>16978</ZipCode>
+			<PhoneNumber>2684597130</PhoneNumber>
+		</Customer>
+		<CreditCard>
+			<CustomerID>33</CustomerID>
+			<AccountNumber>463495234562</AccountNumber>
+			<ExpirationDate>2003-05-31</ExpirationDate>
+			<Type>1</Type>
+		</CreditCard>
+	</Data>
+</database>

@@ -1,0 +1,94 @@
+<mapping>
+  <Aaron_Day>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <Publisher m="Books/Publisher"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/Price"/>
+      <DiscountPrice m="Books/Discount"/>
+      <Category m="Books/category"/>
+      <Keywords m="Books/Keywords"/>
+    </Books>
+    <Music m="CDs">
+      <AlbumName m="CDs/Title"/>
+      <Artist m="CDs/Artist"/>
+      <RecordingCompany m="CDs/R_Company"/>
+      <ID m="CDs/CD_ID"/>
+      <Price m="CDs/Price"/>
+      <DiscountPrice m="CDs/Discount"/>
+      <Genre m="CDs/Genre"/>
+      <Type m="CDs/Type"/>
+      <Rating m="CDs/Rating"/>
+    </Music>
+    <Availability m="Availability">
+      <Warehouse m="Availability/Warehouse_ID"/>
+      <Title/>
+      <ID m="Availability/Product_ID"/>
+      <Quantity m="Availability/Quantity"/>
+    </Availability>
+    <Warehouses m="Warehouse">
+      <Location m="Warehouse/Street"/>
+      <TelephoneNumber m="Contacts/phone_n"/>
+      <FaxNumber m="Contacts/fax_n"/>
+      <Manager m="Contacts/name"/>
+      <MaxNumEmployees/>
+      <CurrentNumEmployees m="Warehouse/NumEmployees"/>
+      <BookCapacity m="Warehouse/Capacity"/>
+      <CurrentNumBooks/>
+      <CDCapacity m="Warehouse/Capacity"/>
+      <CurrentNumCDs/>
+      <CurrentNumRats/>
+      <CurrentNumCats/>
+    </Warehouses>
+  </Aaron_Day>
+  <Xenia_Hertzenberg>
+    <Books m="Books">
+      <Author m="Books/Author"/>
+      <Title m="Books/Title"/>
+      <ISBN m="Books/ISBN"/>
+      <Publisher m="Books/Publisher"/>
+      <Edition/>
+      <Type/>
+      <category m="Books/Category"/>
+      <Keywords m="Books/Keywords"/>
+      <Price m="Books/Price"/>
+      <Discount m="Books/DiscountPrice"/>
+      <Rating/>
+    </Books>
+    <CDs m="Music">
+      <Artist m="Music/Artist"/>
+      <Title m="Music/AlbumName"/>
+      <CD_ID m="Music/ID"/>
+      <R_Company m="Music/RecordingCompany"/>
+      <Type m="Music/Type"/>
+      <Genre m="Music/Genre"/>
+      <Price m="Music/Price"/>
+      <Discount m="Music/DiscountPrice"/>
+      <Rating m="Music/Rating"/>
+    </CDs>
+    <Warehouse m="Warehouses">
+      <Warehouse_ID/>
+      <Street m="Warehouses/Location"/>
+      <City m="Warehouses/Location"/>
+      <State m="Warehouses/Location"/>
+      <Zip m="Warehouses/Location"/>
+      <Contact_ID/>
+      <NumEmployees m="Warehouses/CurrentNumEmployees"/>
+      <Capacity m="Warehouses/BookCapacity"/>
+    </Warehouse>
+    <Contacts m="Warehouses">
+      <Contact_ID/>
+      <Warehouse_ID/>
+      <phone_n m="Warehouses/TelephoneNumber"/>
+      <fax_n m="Warehouses/FaxNumber"/>
+      <name m="Warehouses/Manager"/>
+      <Title/>
+    </Contacts>
+    <Availability m="Availability">
+      <Product_ID m="Availability/ID"/>
+      <Warehouse_ID m="Availability/Warehouse"/>
+      <Quantity m="Availability/Quantity"/>
+    </Availability>
+  </Xenia_Hertzenberg>
+</mapping>

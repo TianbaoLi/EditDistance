@@ -1,0 +1,1437 @@
+<database name="Shipping">
+
+<createdby name="Michael Stark"/>
+
+<Schema>  
+  <table name="Package">
+	<column name="OrderNo" type="Integer" key="no">
+	  <comment>
+	    The invoice number which generated the package
+	  </comment>
+	</column>
+	
+	<column name="Weight" type="Float" key="no">
+	  <comment> 
+	    The weight of the package
+	  </comment>
+	</column>
+	
+	<column name="Width" type="Float" key="no">
+	   <comment>
+	   	 The width of the package in inches
+	   </comment>
+	 </column>
+	 
+	 <column name="Height" type="Float" key="no">
+	   <comment>
+	   	 The height of the package in inches
+	   </comment>
+	 </column>
+	 
+	 <column name="Depth" type="Float" key="no">
+	   <comment>
+	   	 The depth of the package in inches
+	   </comment>
+	 </column>
+	
+	<column name="NoItems" type="Integer" key="no">
+	  <comment> 
+	    The number of items in the package
+	  </comment>
+	</column>
+
+	<column name="TrackingNo" type="String" key="yes">
+	  <comment>
+	    The tracking number provided by the shipping agency - we are assumming that every company utilizes a differently formatted tracking number
+	  </comment>
+	</column>
+	
+	<column name="DeliveryInst" type="String" key="no">
+	  <comment>
+	    Any special instructions for delivery
+	  </comment>
+	</column>
+	
+	<column name="SrcWarehouse" type="String" key="no">
+	  <comment> 
+	    The warehouse where the package was shipped from
+	  </comment>
+	</column>
+	
+	<column name="PickupTime" type="DateTime" key="no">
+	  <comment> 
+	    The date and time the package was picked-up from warehouse
+	  </comment>
+	</column>
+	
+	<column name="DeliveryTime" type="DateTime" key="no">
+	  <comment> 
+	    The date and time the package was delivered on.
+	  </comment>
+	</column>
+	
+	<column name="DeliveryStatus" type="String" key="no">
+	  <comment> 
+	    The status of the package (pending, in progress, or completed)
+	  </comment>
+	</column>
+	<column name="ShippingCost" type="Money" key="no">
+	  <comment>
+	    The cost for shipping this package
+	  </comment>
+	</column>
+	<column name="ExpectedDelivery" type="DataTime" key="no">
+	  <comment>The expected date and time that delivery will be made </comment>
+	</column>
+  </table>
+  
+  
+  <table name="OrderInfo">
+    <column name="OrderNo" type="Integer" key="yes">
+	  <comment>
+	    The invoice number which generated the package
+	  </comment>
+	</column>
+		
+	<column name="ShipMethod" type="String" key="no">
+	  <comment> 
+	    The manner in which the package was shipped
+	  </comment>
+	</column>		
+		
+	<column name="ShipCo" type="String" key="no">
+	  <comment> 
+	    The name of the company shipping the package
+	  </comment>
+	</column>
+
+        <column name="DeliveryName" type="String" key="no">
+	  <comment>
+	    The name of the person/company that will be accepting the delivery
+	  </comment>
+	</column>
+
+	<column name="StreetAdd" type="String" key="no">
+	  <comment>
+	    The street address where the package will be delivered
+	  </comment>
+	</column>
+	
+	<column name="City" type="String" key="no">
+	  <comment> 
+	    The city the package will be delivered to
+	  </comment>
+	</column>
+	
+	<column name="State" type="String" key="no">
+	  <comment>
+	    The state the package will be delivered to
+	  </comment>
+	</column>
+	
+	<column name="Zip" type="Integer" key="no">
+	  <comment> 
+	    The zip code of the delivery address
+	  </comment>
+	</column>
+	
+	<column name="Contact" type="Float" key="no">
+	  <comment> 
+	    The contact person for the delivery (can be same as delivery name)
+	  </comment>
+	</column>
+	
+	<column name="OrderShippingCost" type="Money" key="no">
+	  <comment>
+	    The shipping cost for the entire order quoted to customer.
+	  </comment>
+	</column>
+  </table>
+  
+  <table name="ShippingVendors">
+    <column name="Name" type="String" key="no">
+	  <comment>
+	    The Name of the vendor  
+	  </comment>
+	</column>
+	
+	<column name="AssocWarehouse" type="String" key="yes">
+	  <comment>
+	    The Warehouse that is associated with a particular tuple
+	  </comment>
+	</column>
+	
+	<column name="StreetAddress" type="String" key="no">
+	  <comment>
+	     The street address of the local vendor
+	  </comment>
+	</column>
+	
+	<column name="City" type="String" key="no">
+	  <comment>
+	    The city that the vendor is located in
+	  </comment>
+	</column>
+	
+	<column name="State" type="String" key="no">
+	  <comment>
+	    The state that the venodor is located in 
+	  </comment>
+	</column>
+	
+	<column name="Zip" type="Integer" key="no">
+	  <comment>
+	    The Zip that the vendor is located in
+	  </comment>
+	</column>
+
+	<column name="SchedPickupTime" type="Time" key="no">
+	   <comment>
+	   	 The vendors pick-up time with their local warehouse
+	   </comment>
+	 </column>
+  </table>
+
+ <table name="VendorInfo">
+	<column name="Name" type="String" key="yes">
+	<comment> The name of the vendor </comment>
+	</column>	
+
+	<column name="PhoneNumber" type="Integer" key="no">
+	  <comment>
+	    The toll free number for the vendor
+	  </comment>
+	</column>
+	
+	<column name="URL" type="String" key="no">
+	  <comment>
+	    The web url for the vendor  
+	  </comment>
+	</column>
+
+</table>	
+	
+
+  <table name="ShippingMethods">
+     <column name="VendorName" type="String" key="yes">
+	   <comment>
+	   	 The name of the vendor 
+	   </comment>
+	 </column>
+	 
+	 <column name="Method" type="String" key="yes">
+	   <comment>
+	   	 The method that the vendor offers 
+	   </comment>
+	 </column>
+
+	<column name="UnitPriceDescriptor" type="String" key="no">
+	   <comment>
+	   	 The characteristic that determines the price for that particular item
+	   </comment>
+	 </column>
+	 
+	 <column name="PricePerUnit" type="Money" key="no">
+	   <comment>
+	   	 The price per unit that determines the final price (for fixed prices unit price will be final price)
+	   </comment>
+	 </column>
+	 
+	 <column name="GuaranteedShipDur" type="Int" key="no">
+	   <comment>
+	   	 The number of hours for the duration of the shipping
+	   </comment>
+	 </column>
+
+	 <column name="MaxWeight" type="Float" key="no">
+	   <comment>
+	   	 The maximum weight the package can be
+	   </comment>
+	 </column>
+	 
+	 <column name="MaxWidth" type="Float" key="no">
+	   <comment>
+	   	 Maximum width of the package in inches
+	   </comment>
+	 </column>
+	 
+	 <column name="MaxHeight" type="Float" key="no">
+	   <comment>
+	   	 The maxmimum heigth of the package in inches
+	   </comment>
+	 </column>
+	 
+	 <column name="MaxDepth" type="Float" key="no">
+	   <comment>
+	   	 The maximum depth of the package in inches
+	   </comment>
+	 </column>
+	 
+	 <column name="RestrictedCities" type="String" key="no">
+	   <comment>
+	   	 Comma delineated list of restricted cities with accompanied states
+	   </comment>
+	 </column>
+	 
+	 <column name="MinPrice" type="Money" key="no">
+	   <comment>
+		  The Minumum price for shipping this item
+	   </comment>
+	 </column>
+	 
+	 <column name="MaxPrice" type="Money" key="no">
+	   <comment>
+		 The Maximum price for shipping this item
+	   </comment>
+	 </column>
+  </table>
+
+  <foreignkeyconstraint>
+    <source table="Package">
+	  <column name="OrderNo"/>
+	</source>
+	<target table="OrderInfo">
+	  <column name="OrderNo"/>
+	</target>
+    <comment> 
+	  Every package shipped must have an order/purchasing number associated
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="OrderInfo">
+	  <column name="ShipMethod"/>
+	  <column name="ShipCo"/>
+	</source>
+	<target table="ShippingMethods">
+	  <column name="Method"/>
+	  <column name="VendorName"/>
+	</target>
+	<comment>
+	  Every order must have a valid shipping method offered by a real company
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <OrderNo>4</OrderNo>
+        <Weight>1</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>3</NoItems>
+        <TrackingNo>A000004</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>0.39</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>10</OrderNo>
+        <Weight>56</Weight>
+        <Width>7</Width>
+        <Height>8</Height>
+        <Depth>10</Depth>
+        <NoItems>2</NoItems>
+        <TrackingNo>A000010</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>280</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>11</OrderNo>
+        <Weight>10</Weight>
+        <Width>8</Width>
+        <Height>11</Height>
+        <Depth>10</Depth>
+        <NoItems>2</NoItems>
+        <TrackingNo>A000011</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime>2003-01-15 13:56:00</PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>In Progress</DeliveryStatus>
+        <ShippingCost>10</ShippingCost>
+        <ExpectedDelivery>2003-01-17 13:56:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>12</OrderNo>
+        <Weight>10</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>A000012</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>3.9</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>16</OrderNo>
+        <Weight>1</Weight>
+        <Width>15</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>5</NoItems>
+        <TrackingNo>A000016</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>1</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>17</OrderNo>
+        <Weight>2</Weight>
+        <Width>10</Width>
+        <Height>15</Height>
+        <Depth>15</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>A000017</TrackingNo>
+        <DeliveryInst>Leave In Front Of Door</DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime>2003-01-15 14:00:00</PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>In Progress</DeliveryStatus>
+        <ShippingCost>2</ShippingCost>
+        <ExpectedDelivery>2003-01-17 14:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>18</OrderNo>
+        <Weight>6</Weight>
+        <Width>2</Width>
+        <Height>5</Height>
+        <Depth>5</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>A000018</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime>2003-01-02 12:00:00</PickupTime>
+        <DeliveryTime>2003-01-04 11:00:00</DeliveryTime>
+        <DeliveryStatus>Complete</DeliveryStatus>
+        <ShippingCost>6</ShippingCost>
+        <ExpectedDelivery>2003-01-04 12:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>19</OrderNo>
+        <Weight>500</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>10</NoItems>
+        <TrackingNo>A000019</TrackingNo>
+        <DeliveryInst>Leave With Anyone At House</DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>2500</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>20</OrderNo>
+        <Weight>50</Weight>
+        <Width>20</Width>
+        <Height>20</Height>
+        <Depth>20</Depth>
+        <NoItems>10</NoItems>
+        <TrackingNo>B000020</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>150</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>3</OrderNo>
+        <Weight>50</Weight>
+        <Width>20</Width>
+        <Height>20</Height>
+        <Depth>20</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>B222222</TrackingNo>
+        <DeliveryInst>Signature Required</DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime>2003-01-02 13:00:00</PickupTime>
+        <DeliveryTime>2003-01-03 06:00:00</DeliveryTime>
+        <DeliveryStatus>Complete</DeliveryStatus>
+        <ShippingCost>40000</ShippingCost>
+        <ExpectedDelivery>2003-01-03 13:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>5</OrderNo>
+        <Weight>2</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>C000005</TrackingNo>
+        <DeliveryInst>Signature Required</DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime>2003-01-02 13:24:00</PickupTime>
+        <DeliveryTime>2003-01-09 15:00:00</DeliveryTime>
+        <DeliveryStatus>Complete</DeliveryStatus>
+        <ShippingCost>2</ShippingCost>
+        <ExpectedDelivery>2003-01-12 13:24:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>6</OrderNo>
+        <Weight>3.5</Weight>
+        <Width>20</Width>
+        <Height>10</Height>
+        <Depth>5</Depth>
+        <NoItems>3</NoItems>
+        <TrackingNo>C000006</TrackingNo>
+        <DeliveryInst>Leave Around Back</DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime>2003-01-15 15:00:00</PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>In Progress</DeliveryStatus>
+        <ShippingCost>3.5</ShippingCost>
+        <ExpectedDelivery>2003-01-25 15:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>7</OrderNo>
+        <Weight>4.5</Weight>
+        <Width>20</Width>
+        <Height>5</Height>
+        <Depth>10</Depth>
+        <NoItems>2</NoItems>
+        <TrackingNo>C000007</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime>2003-01-14 15:00:00</PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>In Progress</DeliveryStatus>
+        <ShippingCost>4.5</ShippingCost>
+        <ExpectedDelivery>2003-01-24 15:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>1</OrderNo>
+        <Weight>1.5</Weight>
+        <Width>10</Width>
+        <Height>5</Height>
+        <Depth>10</Depth>
+        <NoItems>2</NoItems>
+        <TrackingNo>C123456</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Seattle</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>1.5</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>1</OrderNo>
+        <Weight>2</Weight>
+        <Width>5</Width>
+        <Height>5</Height>
+        <Depth>5</Depth>
+        <NoItems>1</NoItems>
+        <TrackingNo>C125877</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime>2002-12-10 13:54:00</PickupTime>
+        <DeliveryTime>2002-12-12 20:25:00</DeliveryTime>
+        <DeliveryStatus>Complete</DeliveryStatus>
+        <ShippingCost>2</ShippingCost>
+        <ExpectedDelivery>2002-12-20 13:54:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>13</OrderNo>
+        <Weight>14</Weight>
+        <Width>15</Width>
+        <Height>15</Height>
+        <Depth>15</Depth>
+        <NoItems>3</NoItems>
+        <TrackingNo>D000013</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime>2003-01-15 16:00:00</PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>In Progress</DeliveryStatus>
+        <ShippingCost>140</ShippingCost>
+        <ExpectedDelivery>2003-01-17 04:00:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>15</OrderNo>
+        <Weight>10</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>5</NoItems>
+        <TrackingNo>D000015</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>15</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>2</OrderNo>
+        <Weight>2.8999999999999999</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>5</NoItems>
+        <TrackingNo>D111111</TrackingNo>
+        <DeliveryInst>Leave On Porch</DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>25.65</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>8</OrderNo>
+        <Weight>20</Weight>
+        <Width>5</Width>
+        <Height>5</Height>
+        <Depth>5</Depth>
+        <NoItems>3</NoItems>
+        <TrackingNo>E000008</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime>2003-01-02 13:56:00</PickupTime>
+        <DeliveryTime>2003-01-03 09:00:00</DeliveryTime>
+        <DeliveryStatus>Complete</DeliveryStatus>
+        <ShippingCost>2500</ShippingCost>
+        <ExpectedDelivery>2003-01-03 09:56:00</ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>9</OrderNo>
+        <Weight>10</Weight>
+        <Width>10</Width>
+        <Height>10</Height>
+        <Depth>10</Depth>
+        <NoItems>5</NoItems>
+        <TrackingNo>E000009</TrackingNo>
+        <DeliveryInst>Will Pick Up</DeliveryInst>
+        <SrcWarehouse>Pullman</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>10000</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+      <tuple>
+        <OrderNo>14</OrderNo>
+        <Weight>15</Weight>
+        <Width>15</Width>
+        <Height>15</Height>
+        <Depth>15</Depth>
+        <NoItems>2</NoItems>
+        <TrackingNo>E000014</TrackingNo>
+        <DeliveryInst></DeliveryInst>
+        <SrcWarehouse>SanDiego</SrcWarehouse>
+        <PickupTime></PickupTime>
+        <DeliveryTime></DeliveryTime>
+        <DeliveryStatus>Pending</DeliveryStatus>
+        <ShippingCost>75</ShippingCost>
+        <ExpectedDelivery></ExpectedDelivery>
+      </tuple>
+
+    </Package>
+
+    <OrderInfo>
+      <tuple>
+        <OrderNo>1</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>UPS</ShipCo>
+        <DeliveryName>Wells Fargo Bank</DeliveryName>
+        <StreetAdd>4011 S 164th St</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Raylene Diaz</Contact>
+        <OrderShippingCost>10</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>2</OrderNo>
+        <ShipMethod>Next Day</ShipMethod>
+        <ShipCo>FedEx</ShipCo>
+        <DeliveryName>Amy Stark</DeliveryName>
+        <StreetAdd>18124 51st Ave S</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Amy Stark</Contact>
+        <OrderShippingCost>25.65</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>3</OrderNo>
+        <ShipMethod>Overnight</ShipMethod>
+        <ShipCo>DHL</ShipCo>
+        <DeliveryName>University Of Washington</DeliveryName>
+        <StreetAdd>152 45th Ave NE</StreetAdd>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98168</Zip>
+        <Contact>Henry Lui</Contact>
+        <OrderShippingCost>85</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>4</OrderNo>
+        <ShipMethod>1st Class</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Michael Stark</DeliveryName>
+        <StreetAdd>18124 51st Ave S</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Michael Stark</Contact>
+        <OrderShippingCost>10</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>5</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>UPS</ShipCo>
+        <DeliveryName>Wesley Moore</DeliveryName>
+        <StreetAdd>555 10th Pl</StreetAdd>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98168</Zip>
+        <Contact>Wesley Moore</Contact>
+        <OrderShippingCost>25</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>6</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>UPS</ShipCo>
+        <DeliveryName>Diana Lui</DeliveryName>
+        <StreetAdd>897 152nd St</StreetAdd>
+        <City>Burien</City>
+        <State>WA</State>
+        <Zip>98108</Zip>
+        <Contact>Diana Lui</Contact>
+        <OrderShippingCost>15</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>7</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>UPS</ShipCo>
+        <DeliveryName>Microsoft</DeliveryName>
+        <StreetAdd>1111 Windows Way</StreetAdd>
+        <City>Redmond</City>
+        <State>WA</State>
+        <Zip>98555</Zip>
+        <Contact>William Gates III</Contact>
+        <OrderShippingCost>600</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>8</OrderNo>
+        <ShipMethod>Express</ShipMethod>
+        <ShipCo>Airborne Express</ShipCo>
+        <DeliveryName>David Stark</DeliveryName>
+        <StreetAdd>18124 51st Ave S</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>David Stark</Contact>
+        <OrderShippingCost>10</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>9</OrderNo>
+        <ShipMethod>Next Afternoon</ShipMethod>
+        <ShipCo>Airborne Express</ShipCo>
+        <DeliveryName>Lisa Parvu</DeliveryName>
+        <StreetAdd>4011 S 165th</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Lisa Parvu</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>10</OrderNo>
+        <ShipMethod>Priority</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Eva Kuhnhenn</DeliveryName>
+        <StreetAdd>1511 S 2nd Ave</StreetAdd>
+        <City>Burien</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Eva Kuhnhenn</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>11</OrderNo>
+        <ShipMethod>Express</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Cary Hutchinson</DeliveryName>
+        <StreetAdd>232 2nd Ave Unit 2</StreetAdd>
+        <City>Kent</City>
+        <State>WA</State>
+        <Zip>97188</Zip>
+        <Contact>Cary Hutchinson</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>12</OrderNo>
+        <ShipMethod>1st Class</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Janelle Kitson</DeliveryName>
+        <StreetAdd>15899 S 160th</StreetAdd>
+        <City>Burien</City>
+        <State>WA</State>
+        <Zip>98168</Zip>
+        <Contact>Janelle Kitson</Contact>
+        <OrderShippingCost>100</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>13</OrderNo>
+        <ShipMethod>Next Day</ShipMethod>
+        <ShipCo>FedEx</ShipCo>
+        <DeliveryName>Joe Smith</DeliveryName>
+        <StreetAdd>999 Oak Rd</StreetAdd>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>91100</Zip>
+        <Contact>Joe Smith</Contact>
+        <OrderShippingCost>15</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>14</OrderNo>
+        <ShipMethod>Second Day</ShipMethod>
+        <ShipCo>Airborne Express</ShipCo>
+        <DeliveryName>Bhupinder Singh</DeliveryName>
+        <StreetAdd>456 N 123st</StreetAdd>
+        <City>Walla Walla</City>
+        <State>WA</State>
+        <Zip>15699</Zip>
+        <Contact>Bhupinder Singh</Contact>
+        <OrderShippingCost>20</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>15</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>FedEx</ShipCo>
+        <DeliveryName>A Pizza Mart</DeliveryName>
+        <StreetAdd>16122 Pacific Hwy S</StreetAdd>
+        <City>SeaTac</City>
+        <State>WA</State>
+        <Zip>98188</Zip>
+        <Contact>Sukjinder Singh</Contact>
+        <OrderShippingCost>25</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>16</OrderNo>
+        <ShipMethod>Express</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Ellen Peterson</DeliveryName>
+        <StreetAdd>15888 S 67th St</StreetAdd>
+        <City>Redmond</City>
+        <State>WA</State>
+        <Zip>88112</Zip>
+        <Contact>Ellen Peterson</Contact>
+        <OrderShippingCost>30</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>17</OrderNo>
+        <ShipMethod>Express</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Greg Sandall</DeliveryName>
+        <StreetAdd>1122 S Duck Way</StreetAdd>
+        <City>Eugene</City>
+        <State>WA</State>
+        <Zip>88188</Zip>
+        <Contact>Greg Sandall</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>18</OrderNo>
+        <ShipMethod>Express</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Faith Salde</DeliveryName>
+        <StreetAdd>1522 S 176th</StreetAdd>
+        <City>Burien</City>
+        <State>WA</State>
+        <Zip>98168</Zip>
+        <Contact>Faith Salde</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>19</OrderNo>
+        <ShipMethod>Priority</ShipMethod>
+        <ShipCo>USPS</ShipCo>
+        <DeliveryName>Danielle Payton</DeliveryName>
+        <StreetAdd>1225 University Way</StreetAdd>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98155</Zip>
+        <Contact>Danielle payton</Contact>
+        <OrderShippingCost>0</OrderShippingCost>
+      </tuple>
+
+      <tuple>
+        <OrderNo>20</OrderNo>
+        <ShipMethod>Ground</ShipMethod>
+        <ShipCo>DHL</ShipCo>
+        <DeliveryName>OUGL</DeliveryName>
+        <StreetAdd>4555 University Way</StreetAdd>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98011</Zip>
+        <Contact>Damien Koemans</Contact>
+        <OrderShippingCost>500</OrderShippingCost>
+      </tuple>
+
+    </OrderInfo>
+
+    <ShippingVendors>
+      <tuple>
+        <Name>Airborne Express</Name>
+        <AssocWarehouse>Eugene</AssocWarehouse>
+        <StreetAddress>789 Duck Dinner Rd</StreetAddress>
+        <City>Eugene</City>
+        <State>OR</State>
+        <Zip>32514</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>Airborne Express</Name>
+        <AssocWarehouse>Pullman</AssocWarehouse>
+        <StreetAddress>1510 WSU Way</StreetAddress>
+        <City>Pullman</City>
+        <State>WA</State>
+        <Zip>66666</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>Airborne Express</Name>
+        <AssocWarehouse>SanDiego</AssocWarehouse>
+        <StreetAddress>1993 Northgate Way</StreetAddress>
+        <City>SanDiego</City>
+        <State>CA</State>
+        <Zip>26241</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>Airborne Express</Name>
+        <AssocWarehouse>Seattle</AssocWarehouse>
+        <StreetAddress>1993 3rd Ave</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>96241</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <AssocWarehouse>Eugene</AssocWarehouse>
+        <StreetAddress>2588 Dead Duck Rd</StreetAddress>
+        <City>Eugene</City>
+        <State>OR</State>
+        <Zip>32514</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <AssocWarehouse>Pullman</AssocWarehouse>
+        <StreetAddress>666 Rocky Rd</StreetAddress>
+        <City>Pullman</City>
+        <State>WA</State>
+        <Zip>66666</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <AssocWarehouse>SanDiego</AssocWarehouse>
+        <StreetAddress>14288 Orchid Ave</StreetAddress>
+        <City>SanDiego</City>
+        <State>CA</State>
+        <Zip>23250</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <AssocWarehouse>Seattle</AssocWarehouse>
+        <StreetAddress>142 Pine Ave</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>96250</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <AssocWarehouse>Eugene</AssocWarehouse>
+        <StreetAddress>3654 Dumb Duck Way</StreetAddress>
+        <City>Eugene</City>
+        <State>OR</State>
+        <Zip>32514</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <AssocWarehouse>Pullman</AssocWarehouse>
+        <StreetAddress>765 Hick Rd</StreetAddress>
+        <City>Pullman</City>
+        <State>WA</State>
+        <Zip>66666</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <AssocWarehouse>SanDiego</AssocWarehouse>
+        <StreetAddress>5142 Orilla Rd</StreetAddress>
+        <City>SanDiego</City>
+        <State>CA</State>
+        <Zip>34251</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <AssocWarehouse>Seattle</AssocWarehouse>
+        <StreetAddress>142 Olive Way</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>96251</Zip>
+        <SchedPickupTime>01:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <AssocWarehouse>Eugene</AssocWarehouse>
+        <StreetAddress>420 Mary Jane Ave</StreetAddress>
+        <City>Eugene</City>
+        <State>OR</State>
+        <Zip>32514</Zip>
+        <SchedPickupTime>08:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <AssocWarehouse>Pullman</AssocWarehouse>
+        <StreetAddress>555 Dirt Rd</StreetAddress>
+        <City>Pullman</City>
+        <State>WA</State>
+        <Zip>66666</Zip>
+        <SchedPickupTime>08:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <AssocWarehouse>SanDiego</AssocWarehouse>
+        <StreetAddress>555 S 1488</StreetAddress>
+        <City>SanDiego</City>
+        <State>CA</State>
+        <Zip>95128</Zip>
+        <SchedPickupTime>08:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <AssocWarehouse>Seattle</AssocWarehouse>
+        <StreetAddress>555 S 1588</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98168</Zip>
+        <SchedPickupTime>08:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>USPS</Name>
+        <AssocWarehouse>Eugene</AssocWarehouse>
+        <StreetAddress>789 Cannabis Ave</StreetAddress>
+        <City>Eugene</City>
+        <State>OR</State>
+        <Zip>32514</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>USPS</Name>
+        <AssocWarehouse>Pullman</AssocWarehouse>
+        <StreetAddress>8888 10th Rd SE</StreetAddress>
+        <City>Pullman</City>
+        <State>WA</State>
+        <Zip>66666</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>USPS</Name>
+        <AssocWarehouse>SanDiego</AssocWarehouse>
+        <StreetAddress>999 3rd Ave</StreetAddress>
+        <City>SanDiego</City>
+        <State>CA</State>
+        <Zip>26251</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>USPS</Name>
+        <AssocWarehouse>Seattle</AssocWarehouse>
+        <StreetAddress>149 Olive Way</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>96251</Zip>
+        <SchedPickupTime>12:00pm PST</SchedPickupTime>
+      </tuple>
+
+    </ShippingVendors>
+
+    <VendorInfo>
+      <tuple>
+        <Name>Airborne Express</Name>
+        <PhoneNumber>8881212222</PhoneNumber>
+        <URL>http://www.airborne.com</URL>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <PhoneNumber>8881251111</PhoneNumber>
+        <URL>http://www.dhl.com</URL>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <PhoneNumber>8882145689</PhoneNumber>
+        <URL>http://www.fedex.com</URL>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <PhoneNumber>8885551212</PhoneNumber>
+        <URL>http://www.ups.com</URL>
+      </tuple>
+
+      <tuple>
+        <Name>USPS</Name>
+        <PhoneNumber>8881111212</PhoneNumber>
+        <URL>http://www.usps.com</URL>
+      </tuple>
+
+    </VendorInfo>
+
+    <ShippingMethods>
+      <tuple>
+        <VendorName>Airborne Express</VendorName>
+        <Method>Express</Method>
+        <UnitPriceDescriptor>Volume</UnitPriceDescriptor>
+        <PricePerUnit>20</PricePerUnit>
+        <GuaranteedShipDur>20</GuaranteedShipDur>
+        <MaxWeight>100</MaxWeight>
+        <MaxWidth>25</MaxWidth>
+        <MaxHeight>25</MaxHeight>
+        <MaxDepth>25</MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>20</MinPrice>
+        <MaxPrice>312500</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>Airborne Express</VendorName>
+        <Method>Ground</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>1</PricePerUnit>
+        <GuaranteedShipDur>264</GuaranteedShipDur>
+        <MaxWeight></MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice></MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>Airborne Express</VendorName>
+        <Method>Next Afternoon</Method>
+        <UnitPriceDescriptor>Volume</UnitPriceDescriptor>
+        <PricePerUnit>10</PricePerUnit>
+        <GuaranteedShipDur>36</GuaranteedShipDur>
+        <MaxWeight>200</MaxWeight>
+        <MaxWidth>50</MaxWidth>
+        <MaxHeight>50</MaxHeight>
+        <MaxDepth>50</MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>15</MinPrice>
+        <MaxPrice>1250000</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>Airborne Express</VendorName>
+        <Method>Second Day</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>5</PricePerUnit>
+        <GuaranteedShipDur>48</GuaranteedShipDur>
+        <MaxWeight>500</MaxWeight>
+        <MaxWidth>50</MaxWidth>
+        <MaxHeight>50</MaxHeight>
+        <MaxDepth>50</MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>10</MinPrice>
+        <MaxPrice>2500</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>DHL</VendorName>
+        <Method>Express</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>8</PricePerUnit>
+        <GuaranteedShipDur>36</GuaranteedShipDur>
+        <MaxWeight>150</MaxWeight>
+        <MaxWidth>25</MaxWidth>
+        <MaxHeight>25</MaxHeight>
+        <MaxDepth>25</MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>10</MinPrice>
+        <MaxPrice>1200</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>DHL</VendorName>
+        <Method>Ground</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>3</PricePerUnit>
+        <GuaranteedShipDur>96</GuaranteedShipDur>
+        <MaxWeight>1500</MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice>4500</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>DHL</VendorName>
+        <Method>Overnight</Method>
+        <UnitPriceDescriptor>Volume</UnitPriceDescriptor>
+        <PricePerUnit>5</PricePerUnit>
+        <GuaranteedShipDur>24</GuaranteedShipDur>
+        <MaxWeight>200</MaxWeight>
+        <MaxWidth>50</MaxWidth>
+        <MaxHeight>50</MaxHeight>
+        <MaxDepth>50</MaxDepth>
+        <RestrictedCities>Moscow ID,</RestrictedCities>
+        <MinPrice>15</MinPrice>
+        <MaxPrice>125000</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>FedEx</VendorName>
+        <Method>Express</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>10</PricePerUnit>
+        <GuaranteedShipDur>96</GuaranteedShipDur>
+        <MaxWeight>1000</MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>15</MinPrice>
+        <MaxPrice>10000</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>FedEx</VendorName>
+        <Method>Ground</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>1.5</PricePerUnit>
+        <GuaranteedShipDur>216</GuaranteedShipDur>
+        <MaxWeight>2000</MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice>3000</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>FedEx</VendorName>
+        <Method>Next Day</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>10</PricePerUnit>
+        <GuaranteedShipDur>36</GuaranteedShipDur>
+        <MaxWeight>250</MaxWeight>
+        <MaxWidth>100</MaxWidth>
+        <MaxHeight>100</MaxHeight>
+        <MaxDepth>100</MaxDepth>
+        <RestrictedCities>New York NY,</RestrictedCities>
+        <MinPrice>10</MinPrice>
+        <MaxPrice>2500</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>UPS</VendorName>
+        <Method>2nd Day Air</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>2.5</PricePerUnit>
+        <GuaranteedShipDur>60</GuaranteedShipDur>
+        <MaxWeight>300</MaxWeight>
+        <MaxWidth>100</MaxWidth>
+        <MaxHeight>100</MaxHeight>
+        <MaxDepth>100</MaxDepth>
+        <RestrictedCities>Pullman WA, Moscow ID,</RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice>750</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>UPS</VendorName>
+        <Method>Ground</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>1</PricePerUnit>
+        <GuaranteedShipDur>240</GuaranteedShipDur>
+        <MaxWeight>500</MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice>600</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>UPS</VendorName>
+        <Method>Next Day Air</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>7.5</PricePerUnit>
+        <GuaranteedShipDur>36</GuaranteedShipDur>
+        <MaxWeight>300</MaxWeight>
+        <MaxWidth>100</MaxWidth>
+        <MaxHeight>100</MaxHeight>
+        <MaxDepth>100</MaxDepth>
+        <RestrictedCities>Pullman WA, Moscow ID,</RestrictedCities>
+        <MinPrice>10</MinPrice>
+        <MaxPrice>2250</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>UPS</VendorName>
+        <Method>Same Day Air</Method>
+        <UnitPriceDescriptor>Volume</UnitPriceDescriptor>
+        <PricePerUnit>15</PricePerUnit>
+        <GuaranteedShipDur>20</GuaranteedShipDur>
+        <MaxWeight>100</MaxWeight>
+        <MaxWidth>75</MaxWidth>
+        <MaxHeight>75</MaxHeight>
+        <MaxDepth>75</MaxDepth>
+        <RestrictedCities>Pullman WA, Moscow ID, Concrete WA, Spokane WA,</RestrictedCities>
+        <MinPrice>20</MinPrice>
+        <MaxPrice>6328125</MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>USPS</VendorName>
+        <Method>1st Class</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>0.39</PricePerUnit>
+        <GuaranteedShipDur>240</GuaranteedShipDur>
+        <MaxWeight></MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>0.39</MinPrice>
+        <MaxPrice></MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>USPS</VendorName>
+        <Method>Express</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>1</PricePerUnit>
+        <GuaranteedShipDur>48</GuaranteedShipDur>
+        <MaxWeight></MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>2</MinPrice>
+        <MaxPrice></MaxPrice>
+      </tuple>
+
+      <tuple>
+        <VendorName>USPS</VendorName>
+        <Method>Priority</Method>
+        <UnitPriceDescriptor>Weight (lbs)</UnitPriceDescriptor>
+        <PricePerUnit>5</PricePerUnit>
+        <GuaranteedShipDur>24</GuaranteedShipDur>
+        <MaxWeight></MaxWeight>
+        <MaxWidth></MaxWidth>
+        <MaxHeight></MaxHeight>
+        <MaxDepth></MaxDepth>
+        <RestrictedCities></RestrictedCities>
+        <MinPrice>5</MinPrice>
+        <MaxPrice></MaxPrice>
+      </tuple>
+
+    </ShippingMethods>
+
+  </Data>
+
+</database>

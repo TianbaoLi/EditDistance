@@ -1,0 +1,5 @@
+10000|5|8|2|Ground|Fed-Ex|1|
+12250|2|1|5|Next Day Air|UPS|2|Neighbor can sign.
+15234|15|7|1|Ground|DHL|3|Fragile: Handle with care
+11254|0|5|1|Express|Fed-Ex|4|
+52319|5|2||Express|US Post Office|5|Throw around a lot.

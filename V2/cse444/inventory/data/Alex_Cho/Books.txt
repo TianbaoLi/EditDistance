@@ -1,0 +1,10 @@
+Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design|0201694719|39.950000000000003|27.969999999999999|Paperback|1996|Addison-Wesley Pub Co|Straightforward, platform-independent tutorial on the basic principles of relational database design.
+The Gurus Guide to SQL Server Stored Procedures, XML, and HTML (With CD-ROM)|0201700468|49.990000000000002|34.990000000000002|Paperback|2001|Addison Wesley Professional|Explores the nuances and quirks in SQL Server's stored procedure programming language, Transact-SQL.
+Web Database Applications with PHP & MySQL|0596000413|44.950000000000003|31.469999999999999|Paperback|2002|O'Reilly & Associates|Introduces techniques for building applications that integrate large databases with web interfaces.
+Programming ASP.NET|0596001711|49.990000000000002|34.969999999999999|Paperback|2002|O'Reilly & Associates|ASP programming in .NET framework
+Database Systems: Design, Implementation, and Management, Fifth Edition|061906269X|77.950000000000003|77.950000000000003|Hardcover|2001|Course Technology|Database Systems: Design, Implementation, and Management, Fifth Edition takes you clearly and effectively through the entire process of database development and implementation.
+Inside Microsoft SQL Server 2000|0735609985|59.990000000000002|41.990000000000002|Hardcover|2000|Microsoft Press|SQL Server 2000 manual
+Microsoft SQL Server 2000 Resource Kit|0735612668|69.989999999999995|48.990000000000002|Paperback|2001|Microsoft Press|SQL Server 2000 help
+PHP Bible, 2nd Edition|0764549553|49.990000000000002|34.990000000000002|Paperback|2002|John Wiley & Sons|This updated, comprehensive tutorial covers all the basics of PHP 4.2 and how to use PHP to connect HTML- and XML-based Web pages to database.
+Beginning Visual C#|1861007582|39.990000000000002|27.989999999999998|Paperback|2002|Wrox Press Inc|C# Programming
+C# and the .NET Platform|1893115593|59.990000000000002|41.969999999999999|Hardcover|2001|A Press|C# Programming Tips & Techniques

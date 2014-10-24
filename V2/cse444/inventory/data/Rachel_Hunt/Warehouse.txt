@@ -1,0 +1,3 @@
+University Bookstore | 4326 University Way NE | Seattle | WA | 98105 | 1-800-335-7323 | | Tim Morrison | 28 | |
+Elliott Bay Book Company | 101 S Main St | Seattle | WA | 98104 | 206-624-6600 | 206-903-1601 | James Cleat | | |
+Barnes & Noble Booksellers | 600 Pine St, Suite 107 | Seattle | WA | 98101 | 206-264-0156 | | Jennifer Chan | | |

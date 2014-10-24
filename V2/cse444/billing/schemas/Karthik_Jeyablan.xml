@@ -1,0 +1,190 @@
+<database name="Billing and Invoice">
+	<createdby name="Karthik Jeyablan" />
+	<Schema>
+		<table name="Invoice">
+			<column name="ID" type="Integer" key="yes">
+				<comment>
+				The InvoiceID is the key to reference all information during this purchase.
+				</comment>
+			</column>
+			<column name="OrderDate" type="DATE" key="no"></column>
+			<column name="TotalNumProduct" type="Integer" key="no"></column>
+			<column name="BuyerID" type="Integer" key="no"></column>
+			<comment>
+				Identifies the Person Who Paid the money to Buy the Products
+				</comment>
+			<column name="ReceiverID" type="Integer" key="no">
+				<comment>
+				Idetifies the Person Who will Receive the Products
+				</comment>
+			</column>
+			<column name="ShippingMethod" type="String" key="no"></column>
+			<column name="TotalPrice" type="Double" key="no"></column>
+			<column name="CreditCardNumber" type="Integer" key="no"></column>
+		</table>
+		<table name="PriceTotal">
+			<column name="InvoiceID" type="Integer" key="yes"></column>
+			<column name="Total" type="Double" key="no">
+				<comment>
+				Total cost without any tax, discount, etc
+				</comment>
+			</column>
+			<column name="ShippingCost" type="Double" key="no"></column>
+			<column name="Discount" type="Double" key="no"></column>
+			<column name="Tax" type="Double" key="no"></column>
+			<column name="GrandTotal" type="Double" key="no"></column>
+		</table>
+		<table name="Items">
+			<column name="ID" type="Integer" key="no">
+				<comment>This identifies the product</comment>
+			</column>
+			<column name="Name" type="String" key="no"></column>
+			<column name="InvoiceID" type="Integer" key="no"></column>
+			<column name="Quantity" type="Integer" key="no"></column>
+			<column name="PricePerItem" type="Double" key="no"></column>
+			<column name="WareHouse" type="String" key="no">
+				<comment>
+				Name of the WareHouse Where this Item is located
+				</comment>
+			</column>
+			<column name="ExpectedShippingDate" type="DATE" key="no"></column>
+			<column name="ExpectedDeliveryDate" type="DATE" key="no"></column>
+			<column name="Shipped" type="Boolean" key="no"></column>
+		</table>
+		<table name="Customer">
+			<column name="ID" type="Integer" key="yes">
+				<comment>CustomerID used to identify an idividual customer</comment>
+			</column>
+			<column name="Name" type="String" key="no"></column>
+			<column name="StreetAddress" type="String" key="no"></column>
+			<column name="City" type="String" key="no"></column>
+			<column name="State" type="String" key="no"></column>
+			<column name="Zip" type="Integer" key="no"></column>
+			<column name="PhoneNum" type="Integer" key="no"></column>
+			<column name="E-Mail" type="String" key="no"></column>
+			<column name="FaxNum" type="Integer" key="no"></column>
+		</table>
+		<table name="CreditCard">
+			<column name="Number" type="Integer" key="yes"></column>
+			<column name="CustomerID" type="Integer" key="no"></column>
+			<column name="Type" type="String" key="no">
+				<comment>Visa, Master card, etc.</comment>
+			</column>
+			<column name="ExpirationDate" type="DATE" key="no"></column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="PriceTotal">
+				<column name="InvoiceID" />
+			</source>
+			<target table="Invoice">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="InvoiceID" />
+			</source>
+			<target table="Invoice">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="TotalPrice" />
+			</source>
+			<target table="PriceTotal">
+				<column name="GrandTotal" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="CreditCardNumber" />
+			</source>
+			<target table="CreditCard">
+				<column name="Number" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="BuyerID" />
+			</source>
+			<target table="Customer">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="ReceiverID" />
+			</source>
+			<target table="Customer">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="CreditCard">
+				<column name="CustomerID" />
+			</source>
+			<target table="Customer">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+	<Data>
+		<Invoice>
+			<tuple>
+				<ID> 0235903 </ID>
+				<OrderDate>2002/10/13</OrderDate>
+				<TotalNumProduct>3</TotalNumProduct>
+				<BuyerID>45</BuyerID>
+				<ReceiverID>45</ReceiverID>
+				<ShippingMethod>Media-Mail</ShippingMethod>
+				<TotalPrice>78.56</TotalPrice>
+				<CreditCardNumber>444</CreditCardNumber>
+			</tuple>
+		</Invoice>
+		<PriceTotal>
+			<tuple>
+				<InvoiceID> 0235903 </InvoiceID>
+				<Total>75.00</Total>
+				<ShippingCost>3.56</ShippingCost>
+				<Discount>0.00</Discount>
+				<Tax>0.00</Tax>
+				<GrandTotal>78.56</GrandTotal>
+			</tuple>
+		</PriceTotal>
+		<Items>
+			<tuple>
+				<ID>99</ID>
+				<Name>Camera</Name>
+				<InvoiceID>0235903</InvoiceID>
+				<Quantity>3</Quantity>
+				<PricePerItem>25.00</PricePerItem>
+				<WareHouse>SeattleHouse</WareHouse>
+				<ExpectedShippingDate>2002/11/14</ExpectedShippingDate>
+				<ExpectedDeliveryDate>2002/12/15</ExpectedDeliveryDate>
+				<Shipped>false</Shipped>
+			</tuple>
+		</Items>
+		<Customer>
+			<tuple>
+				<ID>45</ID>
+				<Name>J.K</Name>
+				<StreetAddress>341 E 234TH CT</StreetAddress>
+				<City>Seattle</City>
+				<State>Washington</State>
+				<Zip>89342</Zip>
+				<PhoneNum>2343431569</PhoneNum>
+				<E-Mail>ielr@hotmail.com</E-Mail>
+				<FaxNum>3242323424</FaxNum>
+			</tuple>
+		</Customer>
+		<CreditCard>
+			<tuple>
+				<Number>444</Number>
+				<CustomerID>45</CustomerID>
+				<Type>Visa</Type>
+				<ExpirationDate>2005/10/2</ExpirationDate>
+			</tuple>
+		</CreditCard>
+	</Data>
+</database>

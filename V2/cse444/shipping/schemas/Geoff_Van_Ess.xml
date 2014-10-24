@@ -1,0 +1,659 @@
+<!-- Geoff Van Ess 
+0041486
+CSE 444
+Shipping Schema -->
+
+<database name = "Shipping">
+
+<createdby name="Geoff Van Ess"/>
+
+<Schema>
+	<table name = "ShippingMethods">
+		<column name = "Method" type = "string" key = "yes">
+			<comment>
+				Method of Delivery. Next Day Air, Ground, etc
+			</comment>
+		</column>
+
+		<column name = "Company" type = "string" key = "yes">
+			<comment>
+				Vendor that provides the shipping. UPS, Fed-Ex, etc.
+				Together with Method, this makes up the key for this table.
+			</comment>
+		</column>
+
+		<column name = "Price" type = "money" key = "no">
+			<comment>
+				Price of shipping. Will likely make little sense without the unit,
+				which is the follwing column.
+			</comment>
+		</column>
+
+		<column name = "UnitOfPrice" type = "string" key = "no">
+			<comment>
+				Just the unit. per pound, per item, or total.
+			</comment>
+		</column>
+
+		<column name = "GaurenteedDeliveryTime" type = "time" key = "no">
+			<comment>
+				A maximum time to complete delivery
+			</comment>
+		</column>
+
+		<column name = "AverageTimeToDeliver" type = "time" key = "no">
+			<comment>
+				The average time deliveries take. (Can be used to give more realistic estiamtes.
+			</comment>
+		</column>
+
+		<column name = "Restrictions" type = "string" key = "no">
+			<comment>
+				Just a long text to fill in with restrictions, package size, etc.
+			</comment>
+		</column>
+
+	</table>
+
+	<table name = "ShippingVendors">
+		<column name = "Vendor" type = "string" key = "yes">
+			<comment>
+				Vendor that provides shipping.
+			</comment>
+		</column>
+
+		<column name = "HQAddress" type = "string" key = "no">
+			<comment>
+				Street address for Vendor Head Quarters
+			</comment>
+		</column>
+
+		<column name = "HQCity" type = "string" key = "no">
+			<comment>
+				City for vendor Head quarters
+			</comment>
+		</column>
+
+		<column name = "HQState" type = "string" key = "no">
+			<comment>
+				State for vendor headquarters
+			</comment>
+		</column>
+
+		<column name = "HQZipCode" type = "int" key = "no">
+			<comment>
+				Umm, guess.
+			</comment>
+		</column>
+
+		<column name = "Url" type = "string" key = "no">
+			<comment>
+				Url for vendor.
+			</comment>
+		</column>
+
+		<column name = "PhoneNumber" type = "int" key = "no">
+			<comment>
+				Toll free phone nubmer for vendor.
+			</comment>
+		</column>
+
+	</table>
+
+	<table name = "Packages">
+		<column name = "InvoiceNumber" type = "int" key = "yes">
+			<comment>
+				Unique number assigned by this company
+			</comment>
+		</column>
+
+		<column name = "WeightPounds" type = "int" key = "no">
+			<comment>
+				packages total weight, pounds.
+			</comment>
+		</column>
+
+		<column name = "WeightOunces" type = "int" key = "no">
+			<comment>
+				packages total weight, ounces.
+			</comment>
+		</column>
+
+		<column name = "ItemCount" type = "int" key = "no">
+			<comment>
+				Number of items in package.
+			</comment>
+		</column>
+
+		<column name = "Method" type = "string" key = "no">
+			<comment>
+				How package is being shipped.
+			</comment>
+		</column>
+
+		<column name = "Company" type = "string" key = "no">
+			<comment>
+				Which company is shipping package.
+			</comment>
+		</column>
+
+		<column name = "TrackingNumber" type = "int" key = "no">
+			<comment>
+				Shipping tracking number, assigned at beginning of shipping stage.
+				Used to track progress.
+			</comment>
+		</column>
+
+		<column name = "SpecialInstructions" type = "string" key = "no">
+			<comment>
+				Special instructions in delivering package. Neighbor signing for it, etc.
+			</comment>
+		</column>
+
+	</table>
+
+	<table name = "LocalAgents">
+		<column name = "Warehouse" type = "string" key = "yes">
+			<comment>
+				Warehouse indentifier. (Name? or number?)
+				If more than one vendor can use a warehouse, we should make Company
+				part of the key as well.
+			</comment>
+		</column>
+
+		<column name = "Company" type = "string" key = "no">
+			<comment>
+				Vendor using warehouse
+			</comment>
+		</column>
+
+		<column name = "DailyPickUpTime" type = "time" key = "no">
+			<comment>
+				Time pick ups occur.
+			</comment>
+		</column>
+
+		<column name = "LocalAddress" type = "string" key = "no">
+			<comment>
+				Local Street address
+			</comment>
+		</column>
+
+		<column name = "LocalCity" type = "string" key = "no">
+			<comment>
+				City that local agent is in.
+			</comment>
+		</column>
+
+		<column name = "LocalState" type = "string" key = "no">
+			<comment>
+				State of local agent.
+			</comment>
+		</column>
+
+		<column name = "LocalZipCode" type = "int" key = "no">
+			<comment>
+				Zip Code for local agent.
+			</comment>
+		</column>
+
+		<column name = "LocalPhoneNumber" type = "int" key = "no">
+			<comment>
+				Local phone number for agents.
+			</comment>
+		</column>
+	</table>
+
+	<table name = "DeliveryStatus">
+		<column name = "TrackingNumber" type = "int" key = "yes">
+			<comment>
+				Shipping tracking number.
+			</comment>
+		</column>
+
+		<column name = "Warehouse" type = "string" key = "no">
+			<comment>
+				Warehouse order is being shipped from
+			</comment>
+		</column>
+
+		<column name = "DeliveryName" type = "string" key = "no">
+			<comment>
+				Who the deilvery is addressed to
+			</comment>
+		</column>
+
+		<column name = "DeliveryAddress" type = "string" key = "no">
+			<comment>
+				Street address delivery is going to.
+			</comment>
+		</column>
+
+		<column name = "DeliveryCity" type = "string" key = "no">
+			<comment>
+				City delivery is going to.
+			</comment>
+		</column>
+
+		<column name = "DeliveryState" type = "string" key = "no">
+			<comment>
+				State delivery is going to.
+			</comment>
+		</column>
+
+		<column name = "DeliveryZipCode" type = "int" key = "no">
+			<comment>
+				Zip Code Delivery is going to.
+			</comment>
+		</column>
+
+		<column name = "DeliveryContact" type = "string" key = "no">
+			<comment>
+				Contact delivery is going to? Not sure what this is.
+			</comment>
+		</column>
+
+		<column name = "PickUpTime" type = "time" key = "no">
+			<comment>
+				Time order left the warehouse.
+			</comment>
+		</column>
+
+		<column name = "DeliveryTime" type = "time" key = "no">
+			<comment>
+				Time delivery arrived at reciepiants door.
+			</comment>
+		</column>
+
+		<column name = "Status" type = "string" key = "no">
+			<comment>
+				Pending, in progress or completed.
+			</comment>
+		</column>
+
+	</table>
+
+	<foreignkeyconstraint>
+		<source table ="Methods">
+			<column name = "Company"/>
+		</source>
+
+		<target table = "Vendors">
+			<column name = "Vendor"/>
+		</target>
+
+		<comment>
+			Each company should exsist in the list of vendors.
+		</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table ="Packages">
+			<column name = "Method"/>
+			<column name = "Company"/>
+		</source>
+
+		<target table = "ShippingMethods">
+			<column name = "Method"/>
+			<column name = "Company"/>
+		</target>
+
+		<comment>
+			A double key, method and company need to exist.
+		</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table ="Packages">
+			<column name = "TrackingNumber"/>
+		</source>
+
+		<target table = "DeliveryStatus">
+			<column name = "TrackingNumber"/>
+		</target>
+
+		<comment>
+			Each Tracking Number needs to have an entry in the Delivery Status.
+		</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table ="DeliveryStatus">
+			<column name = "Warehouse"/>
+		</source>
+
+		<target table = "LocalAgents">
+			<column name = "Warehouse"/>
+		</target>
+
+		<comment>
+			Each warehouse will be listed in the table of warehouses.
+		</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table ="LocalAgents">
+			<column name = "Company"/>
+		</source>
+
+		<target table = "ShippingVendors">
+			<column name = "Vendor"/>
+		</target>
+
+		<comment>
+			Again, every vendor will be listed in teh table of vendors.
+		</comment>
+	</foreignkeyconstraint>
+
+</Schema>
+
+
+  <Data>
+    <ShippingMethods>
+      <tuple>
+        <Method>Ground</Method>
+        <Company>UPS</Company>
+        <Price>$1.00</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>5 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>3 days</AverageTimeToDeliver>
+        <Restrictions></Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Next Day Air</Method>
+        <Company>UPS</Company>
+        <Price>$2.50</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>1 day</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>1 day</AverageTimeToDeliver>
+        <Restrictions>Nothing over 15 pounds.</Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Ground</Method>
+        <Company>Fed-Ex</Company>
+        <Price>$1.25</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>4 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver></AverageTimeToDeliver>
+        <Restrictions></Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Express</Method>
+        <Company>Fed-Ex</Company>
+        <Price>$2.25</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>2 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>1 day</AverageTimeToDeliver>
+        <Restrictions>Nothing heavier than 10 pounds.</Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Ground</Method>
+        <Company>DHL</Company>
+        <Price>$3.60</Price>
+        <UnitOfPrice>total</UnitOfPrice>
+        <GaurenteedDeliveryTime>6 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>3 days</AverageTimeToDeliver>
+        <Restrictions></Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Ground</Method>
+        <Company>US Post Office</Company>
+        <Price>$1.24</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>10 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>3 days</AverageTimeToDeliver>
+        <Restrictions>Nothing Fragile</Restrictions>
+      </tuple>
+
+      <tuple>
+        <Method>Next Day Air</Method>
+        <Company>US Post Office</Company>
+        <Price>$4.12</Price>
+        <UnitOfPrice>per pound</UnitOfPrice>
+        <GaurenteedDeliveryTime>2 days</GaurenteedDeliveryTime>
+        <AverageTimeToDeliver>1 day</AverageTimeToDeliver>
+        <Restrictions>Nothing fragile</Restrictions>
+      </tuple>
+
+    </ShippingMethods>
+
+    <ShippingVendors>
+      <tuple>
+        <Vendor>UPS</Vendor>
+        <HQAddress>130 135th Street</HQAddress>
+        <HQCity>Dallas</HQCity>
+        <HQState>Texas</HQState>
+        <HQZipCode>34752</HQZipCode>
+        <Url>http://www.ups.com</Url>
+        <PhoneNumber>5556789123</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Vendor>Fed-Ex</Vendor>
+        <HQAddress>6 Main Drive</HQAddress>
+        <HQCity>Charlotte</HQCity>
+        <HQState>South Carolina</HQState>
+        <HQZipCode>13410</HQZipCode>
+        <Url>http://www.fed-ex.com</Url>
+        <PhoneNumber>5556789812</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Vendor>DHL</Vendor>
+        <HQAddress>15267 Hentuk Way</HQAddress>
+        <HQCity>Oblong</HQCity>
+        <HQState>Maine</HQState>
+        <HQZipCode>25672</HQZipCode>
+        <Url>http://www.dhl.com</Url>
+        <PhoneNumber>7895551423</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Vendor>US Post Office</Vendor>
+        <HQAddress>1</HQAddress>
+        <HQCity>Washington DC</HQCity>
+        <HQState>District of Columbia</HQState>
+        <HQZipCode>12345</HQZipCode>
+        <Url>http://www.postoffice.gov</Url>
+        <PhoneNumber>1235554567</PhoneNumber>
+      </tuple>
+
+    </ShippingVendors>
+
+    <Packages>
+      <tuple>
+        <InvoiceNumber>10000</InvoiceNumber>
+        <WeightPounds>5</WeightPounds>
+        <WeightOunces>8</WeightOunces>
+        <ItemCount>2</ItemCount>
+        <Method>Ground</Method>
+        <Company>Fed-Ex</Company>
+        <TrackingNumber>1</TrackingNumber>
+        <SpecialInstructions></SpecialInstructions>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>12250</InvoiceNumber>
+        <WeightPounds>2</WeightPounds>
+        <WeightOunces>1</WeightOunces>
+        <ItemCount>5</ItemCount>
+        <Method>Next Day Air</Method>
+        <Company>UPS</Company>
+        <TrackingNumber>2</TrackingNumber>
+        <SpecialInstructions>Neighbor can sign.</SpecialInstructions>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>15234</InvoiceNumber>
+        <WeightPounds>15</WeightPounds>
+        <WeightOunces>7</WeightOunces>
+        <ItemCount>1</ItemCount>
+        <Method>Ground</Method>
+        <Company>DHL</Company>
+        <TrackingNumber>3</TrackingNumber>
+        <SpecialInstructions>Fragile: Handle with care</SpecialInstructions>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>11254</InvoiceNumber>
+        <WeightPounds>0</WeightPounds>
+        <WeightOunces>5</WeightOunces>
+        <ItemCount>1</ItemCount>
+        <Method>Express</Method>
+        <Company>Fed-Ex</Company>
+        <TrackingNumber>4</TrackingNumber>
+        <SpecialInstructions></SpecialInstructions>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>52319</InvoiceNumber>
+        <WeightPounds>5</WeightPounds>
+        <WeightOunces>2</WeightOunces>
+        <ItemCount></ItemCount>
+        <Method>Express</Method>
+        <Company>US Post Office</Company>
+        <TrackingNumber>5</TrackingNumber>
+        <SpecialInstructions>Throw around a lot.</SpecialInstructions>
+      </tuple>
+
+    </Packages>
+
+    <LocalAgents>
+      <tuple>
+        <Warehouse>Peir 32</Warehouse>
+        <Company>UPS</Company>
+        <DailyPickUpTime>12:00</DailyPickUpTime>
+        <LocalAddress>123 Peanut Brittle Way</LocalAddress>
+        <LocalCity>San Jose</LocalCity>
+        <LocalState>California</LocalState>
+        <LocalZipCode>12345</LocalZipCode>
+        <LocalPhoneNumber>3095556793</LocalPhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Warehouse>Suite 16</Warehouse>
+        <Company>US Post Office</Company>
+        <DailyPickUpTime>10:00</DailyPickUpTime>
+        <LocalAddress>987 1st Street</LocalAddress>
+        <LocalCity>Belleveue</LocalCity>
+        <LocalState>Washington</LocalState>
+        <LocalZipCode>98203</LocalZipCode>
+        <LocalPhoneNumber>2065556782</LocalPhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Warehouse>Shackland</Warehouse>
+        <Company>DHL</Company>
+        <DailyPickUpTime>14:00</DailyPickUpTime>
+        <LocalAddress>12 Kansas Road</LocalAddress>
+        <LocalCity>Smallville</LocalCity>
+        <LocalState>Kansas</LocalState>
+        <LocalZipCode>12543</LocalZipCode>
+        <LocalPhoneNumber>4565558169</LocalPhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Warehouse>The Den</Warehouse>
+        <Company>Fed-Ex</Company>
+        <DailyPickUpTime>13:00</DailyPickUpTime>
+        <LocalAddress>6454 New Street</LocalAddress>
+        <LocalCity>Here</LocalCity>
+        <LocalState>Florida</LocalState>
+        <LocalZipCode>42357</LocalZipCode>
+        <LocalPhoneNumber>8005557689</LocalPhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Warehouse>Housey</Warehouse>
+        <Company>Fed-Ex</Company>
+        <DailyPickUpTime>11:00</DailyPickUpTime>
+        <LocalAddress>99 Another Way</LocalAddress>
+        <LocalCity>There</LocalCity>
+        <LocalState>Texas</LocalState>
+        <LocalZipCode>18883</LocalZipCode>
+        <LocalPhoneNumber>2535559221</LocalPhoneNumber>
+      </tuple>
+
+    </LocalAgents>
+
+    <DeliveryStatus>
+      <tuple>
+        <TrackingNumber>1</TrackingNumber>
+        <Warehouse>Suite 16</Warehouse>
+        <DeliveryName>Tom Harding</DeliveryName>
+        <DeliveryAddress>11111 23rd Street</DeliveryAddress>
+        <DeliveryCity>New York</DeliveryCity>
+        <DeliveryState>New York</DeliveryState>
+        <DeliveryZipCode>12352</DeliveryZipCode>
+        <DeliveryContact></DeliveryContact>
+        <PickUpTime></PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <TrackingNumber>2</TrackingNumber>
+        <Warehouse>Shackland</Warehouse>
+        <DeliveryName>Gregory Peck</DeliveryName>
+        <DeliveryAddress>64 Hatter Lane</DeliveryAddress>
+        <DeliveryCity>Chicago</DeliveryCity>
+        <DeliveryState>Illinois</DeliveryState>
+        <DeliveryZipCode>11111</DeliveryZipCode>
+        <DeliveryContact></DeliveryContact>
+        <PickUpTime>13:41 01/10/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <Status>In Progress</Status>
+      </tuple>
+
+      <tuple>
+        <TrackingNumber>3</TrackingNumber>
+        <Warehouse>Peir 32</Warehouse>
+        <DeliveryName>Linda Blair</DeliveryName>
+        <DeliveryAddress>65 45th Street</DeliveryAddress>
+        <DeliveryCity>Seattle</DeliveryCity>
+        <DeliveryState>Washington</DeliveryState>
+        <DeliveryZipCode>98102</DeliveryZipCode>
+        <DeliveryContact></DeliveryContact>
+        <PickUpTime>12:05 01/05/03</PickUpTime>
+        <DeliveryTime>17:43 01/08/03</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <TrackingNumber>4</TrackingNumber>
+        <Warehouse>The Den</Warehouse>
+        <DeliveryName>Scott Carter</DeliveryName>
+        <DeliveryAddress>1212 Overthere Lane</DeliveryAddress>
+        <DeliveryCity>Boise</DeliveryCity>
+        <DeliveryState>Idaho</DeliveryState>
+        <DeliveryZipCode>12438</DeliveryZipCode>
+        <DeliveryContact></DeliveryContact>
+        <PickUpTime>17:08 01/11/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <Status>In Progress</Status>
+      </tuple>
+
+      <tuple>
+        <TrackingNumber>5</TrackingNumber>
+        <Warehouse>Housey</Warehouse>
+        <DeliveryName>Kevin Chan</DeliveryName>
+        <DeliveryAddress>55 55th</DeliveryAddress>
+        <DeliveryCity>San Jose</DeliveryCity>
+        <DeliveryState>California</DeliveryState>
+        <DeliveryZipCode>99992</DeliveryZipCode>
+        <DeliveryContact></DeliveryContact>
+        <PickUpTime></PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+    </DeliveryStatus>
+
+  </Data>
+
+</database>

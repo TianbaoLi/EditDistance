@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database name="product inventory">
+	<createdby name="rob hanson"/>
+	<Schema>
+		<table name="books">
+			<column name="id" type="integer" key ="yes">
+			</column>
+			<column name="ISBN" type="varchar" key ="yes">
+			</column>
+			<column name="Author" type="varchar" key ="no">
+			</column>
+			<column name="Title" type="varchar" key ="yes">
+			</column>
+			<column name="genreID" type="integer" key ="yes">
+			</column>
+   			<column name="keywords" type="varchar" key ="no">
+			</column>
+            <column name="wholesale_price" type="float" key ="no">
+			</column>
+            <column name="price" type="float" key ="no">
+			</column>
+		</table>
+		<table name="musics">
+			<column name="id" type="integer" key ="yes">
+			</column>
+			<column name="albumname" type="varchar" key ="yes">
+			</column>
+			<column name="artist" type="varchar" key ="yes">
+			</column>
+			<column name="recording_label" type="varchar" key ="no">
+			</column>
+			<column name="ISBN" type="varchar" key ="yes">
+			</column>
+			<column name="price" type="float" key ="no">
+			</column>
+			<column name="genreID" type="integer" key ="no">
+			</column>
+			<column name="type" type="bit(10)" key ="no">
+			</column>
+		</table>
+		<table name="contacts">
+			<column name="id" type="integer" key ="yes">
+			</column>
+			<column name="faxnumber" type="varchar" key ="no">
+			</column>
+			<column name="voicenumber" type="varchar" key ="no">
+			</column>
+			<column name="name" type="varchar" key ="no">
+			</column>
+			<column name="contact_email" type="varchar" key ="no">
+			</column>
+		</table>
+		<table name="genres">
+			<column name="id" type="integer" key ="yes">
+			</column>
+			<column name="name" type="varchar" key ="no">
+			</column>
+			<column name="description" type="varchar" key ="no">
+			</column>
+		</table>
+
+		<table name="availabilities">
+			<column name="id" type="integer" key ="yes">
+			</column>
+			<column name="ISBN" type="varchar" key ="yes">
+			</column>
+			<column name="stocked" type="bit" key ="no">
+			</column>
+			<column name="quantity" type="integer" key ="no">
+			</column>
+			<column name="warehouseid" type="integer" key ="no">
+			</column>
+			<column name="notes" type="varchar" key ="no">
+			</column>
+		</table>
+		<table name="warehouses">
+			<column name="id" type="integer" key ="yes">
+				<comment> location key.
+				</comment>
+			</column>
+			<column name="name" type="varchar" key ="no">
+				<comment> reference name of inventory building.
+				</comment>
+			</column>
+            <column name="contactID" type="integer" key ="no">
+			</column>
+			<column name="addressID" type="integer" key ="no">
+				<comment> address id number.
+				</comment>
+			</column>
+			<column name="capacity" type="varchar" key ="no">
+			</column>
+			<column name="employees" type="varchar" key ="no">
+			</column>
+
+		</table>
+		<table name="addresses">
+			<column name="id" type="integer" key ="yes">
+				<comment> address key.
+				</comment>
+			</column>
+			<column name="city" type="varchar" key ="no">
+			</column>
+			<column name="state" type="varchar" key ="no">
+			</column>
+			<column name="address1" type="varchar" key ="no">
+				<comment> address line 1
+				</comment>
+			</column>
+			<column name="address2" type="varchar" key ="no">
+				<comment> address line 2
+				</comment>
+			</column>
+			<column name="country" type="varchar" key ="no">
+			</column>
+			<column name="postalcode" type="varchar" key ="no">
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="books">
+				<column name="ISBN" />
+			</source>
+			<target table="availabilities">
+				<column name="ISBN" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="cds">
+				<column name="ISBN" />
+			</source>
+			<target table="availabilities">
+				<column name="ISBN" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="availabilities">
+				<column name="warehouseid" />
+			</source>
+			<target table="warehouses">
+				<column name="id" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="warehouses">
+				<column name="addressID" />
+			</source>
+			<target table="addresses">
+				<column name="id" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="warehouses">
+				<column name="locationID" />
+			</source>
+			<target table="contactID">
+				<column name="contacts" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="musics">
+				<column name="genreID" />
+			</source>
+			<target table="genres">
+				<column name="id" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="books">
+				<column name="genreID" />
+			</source>
+			<target table="genres">
+				<column name="id" />
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+	<Data>
+		<books>
+			<tuple>
+				<id>1</id>
+				<title>Computer Networking: A systems Approach</title>
+				<ISBN>1-55860-514-2</ISBN>
+				<author>Peterson and Davie</author>
+				<genreID>1</genreID>
+				<keywords>boring, slow, networking, computers, computing, network</keywords>
+				<wholesale_price>3.23</wholesale_price>
+				<price>87.25</price>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<title>Learning Wireless Java</title>
+				<ISBN>0-596-00243-2</ISBN>
+				<author>O'Reily</author>
+				<genreID>1</genreID>
+				<keywords>computer, java, wireless, cellphone, j2me</keywords>
+				<wholesale_price>2.45</wholesale_price>
+				<price>34.95</price>
+			</tuple>
+			<tuple>
+				<id>3</id>
+				<title>Harry Potter: The Sorcerors Stone</title>
+				<ISBN>1-578180-155-6</ISBN>
+				<author>J.K. Rowling</author>
+				<genreID>2</genreID>
+				<keywords>harry, potter, magic, spells, entertainment</keywords>
+				<wholesale_price>6.95</wholesale_price>
+				<price>21.95</price>
+			</tuple>
+			<tuple>
+				<id>4</id>
+				<title>Monkey Business</title>
+				<ISBN>1-5578784-199-0</ISBN>
+				<author>A. Monkey</author>
+				<genreID>2</genreID>
+				<keywords>monkey, dancing, sick monkey</keywords>
+				<wholesale_price>6.95</wholesale_price>
+				<price>87.88</price>
+			</tuple>
+			<tuple>
+				<id>5</id>
+				<title>Fishing for Fools</title>
+				<ISBN>155-181-188898-1</ISBN>
+				<author>B. Crazy</author>
+				<genreID>3</genreID>
+				<keywords>stupid, fools, fishing, fish, fool, funny</keywords>
+				<wholesale_price>1.95</wholesale_price>
+				<price>1.99</price>
+			</tuple>
+		</books>
+		<musics>
+			<tuple>
+				<id>1</id>
+				<albumname>Paint by Numbers</albumname>
+				<artist>Omni</artist>
+				<recording_label>Faux Pas</recording_label>
+				<ISBN>1-5778-8484-1</ISBN>
+				<price>10.99</price>
+				<genreID>10</genreID>
+				<type>101001010</type>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<albumname>Fishing for Fools the CD</albumname>
+				<artist>B. Crazy</artist>
+				<recording_label>Foolish People</recording_label>
+				<ISBN>2-5787-510510-0</ISBN>
+				<price>1.99</price>
+				<genreID>13</genreID>
+				<type>101010101</type>
+			</tuple>
+			<tuple>
+				<id>3</id>
+				<albumname>Monkey Business the Audio CD</albumname>
+				<artist>A. Monkey</artist>
+				<recording_label>Monkee Recordings</recording_label>
+				<ISBN>1-181-181818-0</ISBN>
+				<price>15.55</price>
+				<genreID>13</genreID>
+				<type>101010110</type>
+			</tuple>
+		</musics>
+		<availabilities>
+			<tuple>
+				<id>1</id>
+				<ISBN>1-55860-514-2</ISBN>
+				<stocked>0</stocked>
+				<quantity>0</quantity>
+				<warehouseid>1</warehouseid>
+				<notes>No longer selling at any location :(</notes>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<ISBN>0-596-00243-2</ISBN>
+				<stocked>1</stocked>
+				<quantity>159</quantity>
+				<warehouseid>1</warehouseid>
+				<notes></notes>
+			</tuple>
+			<tuple>
+				<id>3</id>
+				<ISBN>1-578180-155-6</ISBN>
+				<stocked>1</stocked>
+				<quantity>19885</quantity>
+				<warehouseid>2</warehouseid>
+				<notes>plenty around</notes>
+			</tuple>
+			<tuple>
+				<id>9</id>
+				<ISBN>1-578180-155-6</ISBN>
+				<stocked>1</stocked>
+				<quantity>1551</quantity>
+				<warehouseid>1</warehouseid>
+				<notes>plenty around</notes>
+			</tuple>
+			<tuple>
+				<id>4</id>
+				<ISBN>1-5578784-199-0</ISBN>
+				<stocked>1</stocked>
+				<quantity>14</quantity>
+				<warehouseid>1</warehouseid>
+				<notes></notes>
+			</tuple>
+			<tuple>
+				<id>5</id>
+				<ISBN>155-181-188898-1</ISBN>
+				<stocked>1</stocked>
+				<quantity>3</quantity>
+				<warehouseid>1</warehouseid>
+				<notes></notes>
+			</tuple>
+			<tuple>
+				<id>6</id>
+				<ISBN>1-5778-8484-1</ISBN>
+				<stocked>1</stocked>
+				<quantity>34</quantity>
+				<warehouseid>1</warehouseid>
+				<notes></notes>
+			</tuple>
+			<tuple>
+				<id>7</id>
+				<ISBN>2-5787-510510-0</ISBN>
+				<stocked>1</stocked>
+				<quantity>9</quantity>
+				<warehouseid>1</warehouseid>
+				<notes></notes>
+			</tuple>
+			<tuple>
+				<id>8</id>
+				<ISBN>1-181-181818-0</ISBN>
+				<stocked>1</stocked>
+				<quantity>13</quantity>
+				<warehouseid>2</warehouseid>
+				<notes></notes>
+			</tuple>
+		</availabilities>
+		<warehouses>
+			<tuple>
+				<id>1</id>
+				<name>my House</name>
+				<contactID>1</contactID>
+				<addressID>1</addressID>
+				<capacity>one book shelf</capacity>
+				<employees>48,488</employees>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<name>neighbors house</name>
+				<contactID>2</contactID>
+				<addressID>2</addressID>
+				<capacity>200 acres</capacity>
+				<employees>155</employees>
+			</tuple>
+		</warehouses>
+		<genres>
+			<tuple>
+				<id>1</id>
+				<name>computer books</name>
+				<description>this stuff is boring as xml</description>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<name>silly books</name>
+				<description>entertainment</description>
+			</tuple>
+			<tuple>
+				<id>3</id>
+				<name>fishing books</name>
+				<description>fishing only please</description>
+			</tuple>
+			<tuple>
+				<id>10</id>
+				<name>Progressive Rock</name>
+				<description>sometimes goofy</description>
+			</tuple>
+			<tuple>
+				<id>13</id>
+				<name>Audio Books on CD</name>
+				<description>i like to read</description>
+			</tuple>
+		</genres>
+		<contacts>
+			<tuple>
+				<id>1</id>
+				<faxnumber>206-848-4848</faxnumber>
+				<voicenumber>0.10.244.255.3433</voicenumber>
+				<name>Shigetoshi Hasegawa</name>
+				<contact_email>shigetoshi@mariners.org</contact_email>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<faxnumber>206-8080-800</faxnumber>
+				<voicenumber>206-155-8787</voicenumber>
+				<name>FishBreath</name>
+				<contact_email>shigetoshi@mariners.org</contact_email>
+			</tuple>
+		</contacts>
+		<addresses>
+			<tuple>
+				<id>1</id>
+				<city>Oohta</city>
+				<state>Honshu</state>
+				<address1>243 W wind road</address1>
+				<address2></address2>
+				<country>Japan</country>
+				<postalcode>7X45VW</postalcode>
+			</tuple>
+			<tuple>
+				<id>2</id>
+				<city>Seattle</city>
+				<state>WA</state>
+				<address1>5626 NE Univeristy Way</address1>
+				<address2>Apartment B</address2>
+				<country>USA</country>
+				<postalcode>98105</postalcode>
+			</tuple>
+		</addresses>
+	</Data>
+</database>

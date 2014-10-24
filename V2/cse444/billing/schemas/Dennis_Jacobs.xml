@@ -1,0 +1,1210 @@
+<database name="Billing Information">
+
+<createdby name="Dennis Jacobs"/>
+
+<Schema>
+  
+  <table name="Customers">
+	<column name="ID" type="Integer" key="yes">
+	  <comment>
+	    The customer ID is the key for all customers.
+	  </comment>
+	</column>
+
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    The name of the customer.
+	  </comment>
+	</column>
+
+	<column name="Street" type="String" key="no">
+	  <comment>
+	    The customer's street address.
+          </comment>
+        </column>
+
+	<column name="City" type="String" key="no">
+	  <comment>
+	    The customer's city.
+          </comment>
+        </column>
+
+	<column name="State" type="String" key="no">
+	  <comment>
+	    The customer's state (eg. WA).
+          </comment>
+        </column>
+
+	<column name="Zip" type="Integer" key="no">
+	  <comment>
+	    The customer's zip code.
+          </comment>
+        </column>
+        
+	<column name="Phone" type="String" key="no">
+	  <comment>
+	    The customer's phone number ( 999-999-9999 ).
+          </comment>
+        </column>
+        
+	<column name="Email" type="String" key="no">
+	  <comment>
+	    The customer's e-mail address.
+          </comment>
+        </column>
+  </table>
+  
+  <table name="Items">
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    A name for the item.
+          </comment>
+        </column>
+
+        <column name="Type" type="String" key="yes">
+	  <comment>
+	    A type, unique when paired with the 'ID' (eg. book).
+          </comment>
+        </column>
+
+	<column name="ID" type="String" key="yes">
+	  <comment>
+	    An ID, unique when paired with the 'Type' (eg. ISBN).
+          </comment>
+        </column>
+
+        <column name="Price" type="Real" key="no">
+	  <comment>
+	    The unit price of the item.
+          </comment>
+        </column>
+        
+        <column name="Weight" type="Real" key="no">
+	  <comment>
+	    The unit weight of the item, in lbs.
+          </comment>
+        </column>
+  </table>
+  
+  <table name="Invoices">
+        <column name="ID" type="Integer" key="yes">
+	  <comment>
+            A unique ID for the invoice.
+          </comment>
+        </column>
+
+        <column name="Buyer" type="Integer" key="no">
+	  <comment>
+            A Customers.ID for the person who will be billed.
+          </comment>
+        </column>
+
+        <column name="Shipping_Method" type="String" key="no">
+	  <comment>
+            The method used to ship the purchase(s).
+          </comment>
+        </column>
+
+        <column name="Delivery_Date" type="Date" key="no">
+	  <comment>
+            The date to deliver the order.
+          </comment>
+        </column>
+
+        <column name="Discount" type="ShortInt" key="no">
+	  <comment>
+            The discount for the invoice, if any, as a percentage.
+          </comment>
+        </column>
+
+        <column name="Taxes" type="Real" key="no">
+	  <comment>
+            The sales tax per invoice, in dollars.
+          </comment>
+        </column>
+
+        <column name="Shipping" type="Real" key="no">
+	  <comment>
+            The cost per invoice of shipping, in dollars.
+          </comment>
+        </column>
+
+        <column name="Total" type="Real" key="no">
+	  <comment>
+            The total price of the invoice, in dollars.
+          </comment>
+        </column>
+        
+        <column name="Payment_Form" type="String" key="no">
+	  <comment>
+            The form of payment (eg. cash, check, charge).
+          </comment>
+        </column>
+
+        <column name="Payment_Details" type="String" key="no">
+	  <comment>
+            Any necessary payment details (eg. bank number, credit card number).
+          </comment>
+        </column>
+  </table>
+  
+  <table name="Purchases">
+        <column name="Invoice_ID" type="Integer" key="no">
+	  <comment>
+            The Invoices.ID this purchase belongs to.
+          </comment>
+        </column>
+
+        <column name="Item_Type" type="String" key="no">
+	  <comment>
+            The Items.Type of this purchase.
+          </comment>
+        </column>
+        
+        <column name="Item_ID" type="Integer" key="no">
+	  <comment>
+            The Items.ID of this purchase.
+          </comment>
+        </column>
+
+        <column name="Recipient" type="Integer" key="no">
+	  <comment>
+            The Customers.ID of the person to deliver the purchase to.
+          </comment>
+        </column>
+        
+        <column name="Quantity" type="Integer" key="no">
+	  <comment>
+            The number of items in this purchase.
+          </comment>
+        </column>
+
+        <column name="Price" type="Real" key="no">
+	  <comment>
+            The unit price for each item in this purchase, before discounts.
+          </comment>
+        </column>
+        
+        <column name="Warehouse" type="String" key="no">
+	  <comment>
+            The warehouse this purchase will ship from.
+          </comment>
+        </column>
+  </table>
+  
+  <foreignkeyconstraint>
+    <source table="Invoices">
+	  <column name="Buyer"/>
+    </source>
+    <target table="Customers">
+	  <column name="ID"/>
+    </target>
+    <comment>
+	  Every Buyer must be listed in the Customers table with an ID.
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Purchases">
+	  <column name="Invoice_ID"/>
+    </source>
+    <target table="Invoices">
+	  <column name="ID"/>
+    </target>
+    <comment>
+	  Every purchase must belong to an invoice in Invoices.
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Purchases">
+	  <column name="Item_Type"/>
+	  <column name="Item_ID"/>
+    </source>
+    <target table="Items">
+	  <column name="Type"/>
+	  <column name="ID"/>
+    </target>
+    <comment>
+	  Every purchase must have a matching Type/ID pair in Items.
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="Purchases">
+	  <column name="Recipient"/>
+    </source>
+    <target table="Customers">
+	  <column name="ID"/>
+    </target>
+    <comment>
+	  Every recipient must be listed in Customers
+    </comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Customers>
+      <tuple>
+        <ID>ID</ID>
+        <Name>Name</Name>
+        <Street>Street</Street>
+        <City>City</City>
+        <State>State</State>
+        <Zip>Zip</Zip>
+        <Phone>Phone</Phone>
+        <Email>Email|login</Email>
+      </tuple>
+
+      <tuple>
+        <ID>1</ID>
+        <Name>John Doe</Name>
+        <Street>2123 Pine St.</Street>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98084</Zip>
+        <Phone>206-555-1212</Phone>
+        <Email>JohnD@doe.com|john</Email>
+      </tuple>
+
+      <tuple>
+        <ID>2</ID>
+        <Name>Jane Doe</Name>
+        <Street>2123 Pine St.</Street>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98084</Zip>
+        <Phone>206-555-1212</Phone>
+        <Email>Tigress75@doe.com|doe</Email>
+      </tuple>
+
+      <tuple>
+        <ID>3</ID>
+        <Name>Dick Tracey</Name>
+        <Street>12345 Mob Ave.</Street>
+        <City>Las Vegas</City>
+        <State>NV</State>
+        <Zip>34567</Zip>
+        <Phone>303-111-1111</Phone>
+        <Email>PI4hire@yahoo.com|dick</Email>
+      </tuple>
+
+      <tuple>
+        <ID>4</ID>
+        <Name>Cristopher Columbus</Name>
+        <Street>1492 Explorer Ln.</Street>
+        <City>Boston</City>
+        <State>MA</State>
+        <Zip>82847</Zip>
+        <Phone>909-343-9797</Phone>
+        <Email>columbus02@msn.com|chris</Email>
+      </tuple>
+
+      <tuple>
+        <ID>5</ID>
+        <Name>Will Smith</Name>
+        <Street>23423 Fresh St.</Street>
+        <City>Beverly Hills</City>
+        <State>CA</State>
+        <Zip>90210</Zip>
+        <Phone>543-892-3232</Phone>
+        <Email>wsmith@yahoo.com|will</Email>
+      </tuple>
+
+      <tuple>
+        <ID>6</ID>
+        <Name>Bruce Wayne</Name>
+        <Street>1200 Manor Dr.</Street>
+        <City>Gotham City</City>
+        <State>NY</State>
+        <Zip>45643</Zip>
+        <Phone>212-300-9999</Phone>
+        <Email>batman@hotmail.com|bruce</Email>
+      </tuple>
+
+      <tuple>
+        <ID>7</ID>
+        <Name>Matt Stone</Name>
+        <Street>23423 Oak St.</Street>
+        <City>Boise</City>
+        <State>ID</State>
+        <Zip>73232</Zip>
+        <Phone>316-707-7777</Phone>
+        <Email>|matt</Email>
+      </tuple>
+
+      <tuple>
+        <ID>8</ID>
+        <Name>Trey Parker</Name>
+        <Street>4236 Maple St.</Street>
+        <City>Boise</City>
+        <State>ID</State>
+        <Zip>73232</Zip>
+        <Phone>316-735-2342</Phone>
+        <Email>trey232@parker.com|trey</Email>
+      </tuple>
+
+      <tuple>
+        <ID>9</ID>
+        <Name>Kenny McKormick</Name>
+        <Street>2342 Industry Dr.</Street>
+        <City>South Park</City>
+        <State>CO</State>
+        <Zip>54321</Zip>
+        <Phone>555-202-2222</Phone>
+        <Email>|kenny</Email>
+      </tuple>
+
+      <tuple>
+        <ID>10</ID>
+        <Name>Kyle Brovlofski</Name>
+        <Street>23825 Main St.</Street>
+        <City>South Park</City>
+        <State>CO</State>
+        <Zip>54321</Zip>
+        <Phone>555-202-6789</Phone>
+        <Email>|kyle</Email>
+      </tuple>
+
+      <tuple>
+        <ID>11</ID>
+        <Name>Adam Corolla</Name>
+        <Street>2872 Alder Ave.</Street>
+        <City>Culver City</City>
+        <State>CA</State>
+        <Zip>90890</Zip>
+        <Phone>543-789-8989</Phone>
+        <Email>AceRockola@radio.com|adam</Email>
+      </tuple>
+
+      <tuple>
+        <ID>12</ID>
+        <Name>Col. Sanders</Name>
+        <Street>9853 Extra Crispy Ave.</Street>
+        <City>Arlington</City>
+        <State>VA</State>
+        <Zip>52343</Zip>
+        <Phone></Phone>
+        <Email>chickenman@kfc.com|chicken</Email>
+      </tuple>
+
+      <tuple>
+        <ID>13</ID>
+        <Name>Joe Bob</Name>
+        <Street>3249 Trailer Ct.</Street>
+        <City>Marion</City>
+        <State>AR</State>
+        <Zip>42245</Zip>
+        <Phone>987-333-3333</Phone>
+        <Email>joebob@hick.net|joe</Email>
+      </tuple>
+
+      <tuple>
+        <ID>14</ID>
+        <Name>Kate Brovlofski</Name>
+        <Street>34524 Interrurban Ave.</Street>
+        <City>Salem</City>
+        <State>OR</State>
+        <Zip>96078</Zip>
+        <Phone></Phone>
+        <Email>angelkate@msn.com|kate</Email>
+      </tuple>
+
+      <tuple>
+        <ID>15</ID>
+        <Name>Satan</Name>
+        <Street>666 Brimstone Pit</Street>
+        <City>Hell</City>
+        <State>TX</State>
+        <Zip>66666</Zip>
+        <Phone>666-666-6666</Phone>
+        <Email>princeofdarkness@hell.net|sata</Email>
+      </tuple>
+
+      <tuple>
+        <ID>16</ID>
+        <Name>Santa Claus</Name>
+        <Street>4141 Candy Cane Ln.</Street>
+        <City>Orlando</City>
+        <State>FL</State>
+        <Zip>78979</Zip>
+        <Phone></Phone>
+        <Email>Santa123@home.com|santa</Email>
+      </tuple>
+
+      <tuple>
+        <ID>17</ID>
+        <Name>Peter Cottontail</Name>
+        <Street>9877 Bunny Trail</Street>
+        <City>Cleveland</City>
+        <State>OH</State>
+        <Zip>98765</Zip>
+        <Phone></Phone>
+        <Email>|peter</Email>
+      </tuple>
+
+      <tuple>
+        <ID>18</ID>
+        <Name>Easter Bunny</Name>
+        <Street>3116 Main St.</Street>
+        <City>Athens</City>
+        <State>OH</State>
+        <Zip>98740</Zip>
+        <Phone>323-999-1800</Phone>
+        <Email>eggbringer@msn.com|bunny</Email>
+      </tuple>
+
+      <tuple>
+        <ID>19</ID>
+        <Name>George W. Bush</Name>
+        <Street>1600 Pennsylvania Ave. NW</Street>
+        <City>Washington</City>
+        <State>DC</State>
+        <Zip>20500</Zip>
+        <Phone></Phone>
+        <Email>|w</Email>
+      </tuple>
+
+      <tuple>
+        <ID>20</ID>
+        <Name>William Doe</Name>
+        <Street>36302 Walnut Dr.</Street>
+        <City>Detriot</City>
+        <State>MI</State>
+        <Zip>37898</Zip>
+        <Phone>509-345-2000</Phone>
+        <Email>billy@doe.com|william</Email>
+      </tuple>
+
+    </Customers>
+
+    <Items>
+      <tuple>
+        <Name>Name</Name>
+        <Type>Type</Type>
+        <ID>ID</ID>
+        <Price>Price</Price>
+        <Weight>Weight</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Tom Sawyer</Name>
+        <Type>Book</Type>
+        <ID>232345</ID>
+        <Price>12.99</Price>
+        <Weight>0.80000000000000004</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Catcher In The Rye</Name>
+        <Type>Book</Type>
+        <ID>333498</ID>
+        <Price>14.949999999999999</Price>
+        <Weight>1.3999999999999999</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>The Thousand Orcs</Name>
+        <Type>Book</Type>
+        <ID>897687</ID>
+        <Price>21.949999999999999</Price>
+        <Weight>1.3</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Night Masks</Name>
+        <Type>Book</Type>
+        <ID>986324</ID>
+        <Price>6.9900000000000002</Price>
+        <Weight>0.59999999999999998</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Mer De Noms</Name>
+        <Type>CD</Type>
+        <ID>29655</ID>
+        <Price>14.99</Price>
+        <Weight>0.69999999999999996</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Hybrid Theory</Name>
+        <Type>CD</Type>
+        <ID>46512</ID>
+        <Price>12.949999999999999</Price>
+        <Weight>0.59999999999999998</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>The Lonely Position Of Neutral</Name>
+        <Type>CD</Type>
+        <ID>86876</ID>
+        <Price>13.99</Price>
+        <Weight>0.59999999999999998</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Wonder What's Next</Name>
+        <Type>CD</Type>
+        <ID>89735</ID>
+        <Price>12.949999999999999</Price>
+        <Weight>0.69999999999999996</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Pioneer CD-rx134</Name>
+        <Type>CD Player</Type>
+        <ID>245</ID>
+        <Price>99.989999999999995</Price>
+        <Weight>25.399999999999999</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Sony CD-mx1417</Name>
+        <Type>CD Player</Type>
+        <ID>1454</ID>
+        <Price>59.990000000000002</Price>
+        <Weight>15</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Memorex 25 ct.</Name>
+        <Type>CD-R</Type>
+        <ID>3425</ID>
+        <Price>14.99</Price>
+        <Weight>3.7000000000000002</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Memorex 50 ct.</Name>
+        <Type>CD-R</Type>
+        <ID>3450</ID>
+        <Price>21.989999999999998</Price>
+        <Weight>5.2000000000000002</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Shanghai Noon</Name>
+        <Type>DVD</Type>
+        <ID>435</ID>
+        <Price>21.949999999999999</Price>
+        <Weight>0.75</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Tomb Raider</Name>
+        <Type>DVD</Type>
+        <ID>23456</ID>
+        <Price>21.949999999999999</Price>
+        <Weight>0.75</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Swordfish</Name>
+        <Type>DVD</Type>
+        <ID>92870</ID>
+        <Price>23.949999999999999</Price>
+        <Weight>0.75</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Panasonic DVD-m35</Name>
+        <Type>DVD Player</Type>
+        <ID>2523</ID>
+        <Price>129.99000000000001</Price>
+        <Weight>17.300000000000001</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Toshiba DVD-z987</Name>
+        <Type>DVD Player</Type>
+        <ID>8977</ID>
+        <Price>149.99000000000001</Price>
+        <Weight>16.699999999999999</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>17" CTL CRT</Name>
+        <Type>Monitor</Type>
+        <ID>435</ID>
+        <Price>150.99000000000001</Price>
+        <Weight>24.600000000000001</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>19" Sony Flatscreen</Name>
+        <Type>Monitor</Type>
+        <ID>1234</ID>
+        <Price>799.95000000000005</Price>
+        <Weight>8.3000000000000007</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>21" Dell Flatscreen</Name>
+        <Type>Monitor</Type>
+        <ID>9785</ID>
+        <Price>1299.99</Price>
+        <Weight>10.6</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Diablo 2</Name>
+        <Type>Video Game</Type>
+        <ID>1234</ID>
+        <Price>34.990000000000002</Price>
+        <Weight>2.3999999999999999</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Half-Life Platinum ed.</Name>
+        <Type>Video Game</Type>
+        <ID>5698</ID>
+        <Price>44.990000000000002</Price>
+        <Weight>4.7999999999999998</Weight>
+      </tuple>
+
+      <tuple>
+        <Name>Neverwinter Nights</Name>
+        <Type>Video Game</Type>
+        <ID>9349</ID>
+        <Price>39.990000000000002</Price>
+        <Weight>2.2000000000000002</Weight>
+      </tuple>
+
+    </Items>
+
+    <Invoices>
+      <tuple>
+        <ID>ID</ID>
+        <Buyer>Buyer</Buyer>
+        <Shipping_Method>Shipping_Method</Shipping_Method>
+        <Delivery_Date>Delivery_Date</Delivery_Date>
+        <Discount>Discount</Discount>
+        <Taxes>Taxes</Taxes>
+        <Shipping>Shipping</Shipping>
+        <Total>Total</Total>
+        <Payment_Form>Payment_Form</Payment_Form>
+        <Payment_Details>Payment_Details</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>1</ID>
+        <Buyer>2</Buyer>
+        <Shipping_Method>2 Day Air</Shipping_Method>
+        <Delivery_Date>2003-01-26 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>2.63</Taxes>
+        <Shipping>7.5</Shipping>
+        <Total>40.03</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>1111-1111-1111-1111</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>2</ID>
+        <Buyer>20</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-01-30 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>7.12</Taxes>
+        <Shipping>5</Shipping>
+        <Total>93.05</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>4444-4444-4444-4444</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>3</ID>
+        <Buyer>15</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-01-31 00:00:00</Delivery_Date>
+        <Discount>10</Discount>
+        <Taxes>22.65</Taxes>
+        <Shipping>5</Shipping>
+        <Total>285.02</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>In House</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>4</ID>
+        <Buyer>17</Buyer>
+        <Shipping_Method>Express</Shipping_Method>
+        <Delivery_Date>2003-01-30 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>71.54</Taxes>
+        <Shipping>3</Shipping>
+        <Total>888.44</Total>
+        <Payment_Form>Cash</Payment_Form>
+        <Payment_Details></Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>5</ID>
+        <Buyer>6</Buyer>
+        <Shipping_Method>2 Day Air</Shipping_Method>
+        <Delivery_Date>2003-01-28 00:00:00</Delivery_Date>
+        <Discount>5</Discount>
+        <Taxes>563.89</Taxes>
+        <Shipping>30</Shipping>
+        <Total>7001.62</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>1111-2222-2222-2222</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>6</ID>
+        <Buyer>19</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-02-07 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>9.32</Taxes>
+        <Shipping>5</Shipping>
+        <Total>120.16</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>U.S. Government</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>7</ID>
+        <Buyer>1</Buyer>
+        <Shipping_Method>Express</Shipping_Method>
+        <Delivery_Date>2003-02-01 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>13.2</Taxes>
+        <Shipping>5.5</Shipping>
+        <Total>168.69</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>1111-1111-1111-1111</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>8</ID>
+        <Buyer>11</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-02-03 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>1.94</Taxes>
+        <Shipping>3</Shipping>
+        <Total>26.89</Total>
+        <Payment_Form>Cash</Payment_Form>
+        <Payment_Details></Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>9</ID>
+        <Buyer>14</Buyer>
+        <Shipping_Method>None</Shipping_Method>
+        <Delivery_Date></Delivery_Date>
+        <Discount>10</Discount>
+        <Taxes>1.03</Taxes>
+        <Shipping>0</Shipping>
+        <Total>12.69</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>2222-0000-0000-0000</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>10</ID>
+        <Buyer>13</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-02-02 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>0.62</Taxes>
+        <Shipping>2</Shipping>
+        <Total>9.61</Total>
+        <Payment_Form>Check</Payment_Form>
+        <Payment_Details>Bank no. 54-23/9887</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>11</ID>
+        <Buyer>12</Buyer>
+        <Shipping_Method>First Class</Shipping_Method>
+        <Delivery_Date>2003-02-11 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>5.27</Taxes>
+        <Shipping>4</Shipping>
+        <Total>69.15</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>9999-9999-9999-9999</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>12</ID>
+        <Buyer>5</Buyer>
+        <Shipping_Method>2 Day Air</Shipping_Method>
+        <Delivery_Date>2003-01-25 00:00:00</Delivery_Date>
+        <Discount>7</Discount>
+        <Taxes>10.64</Taxes>
+        <Shipping>6.5</Shipping>
+        <Total>138.01</Total>
+        <Payment_Form>Credit</Payment_Form>
+        <Payment_Details>8888-8888-8888-8888</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>13</ID>
+        <Buyer>4</Buyer>
+        <Shipping_Method>Express</Shipping_Method>
+        <Delivery_Date>2003-01-29 00:00:00</Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>17.07</Taxes>
+        <Shipping>5.5</Shipping>
+        <Total>216.45</Total>
+        <Payment_Form>Check</Payment_Form>
+        <Payment_Details>Bank no. 39-74/7358</Payment_Details>
+      </tuple>
+
+      <tuple>
+        <ID>14</ID>
+        <Buyer>9</Buyer>
+        <Shipping_Method>None</Shipping_Method>
+        <Delivery_Date></Delivery_Date>
+        <Discount>0</Discount>
+        <Taxes>10.56</Taxes>
+        <Shipping>0</Shipping>
+        <Total>130.53</Total>
+        <Payment_Form>Check</Payment_Form>
+        <Payment_Details>Bank no. 40-12/4755</Payment_Details>
+      </tuple>
+
+    </Invoices>
+
+    <Purchases>
+      <tuple>
+        <Invoice_ID>Invoice_ID</Invoice_ID>
+        <Item_Type>Item_Type</Item_Type>
+        <Item_ID>Item_ID</Item_ID>
+        <Recipient>Recipient</Recipient>
+        <Quantity>Quantity</Quantity>
+        <Price>Price</Price>
+        <Warehouse>Warehouse</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>1</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>333498</Item_ID>
+        <Recipient>1</Recipient>
+        <Quantity>1</Quantity>
+        <Price>14.95</Price>
+        <Warehouse>Seattle</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>1</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>333498</Item_ID>
+        <Recipient>20</Recipient>
+        <Quantity>1</Quantity>
+        <Price>14.95</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>2</Invoice_ID>
+        <Item_Type>CD-R</Item_Type>
+        <Item_ID>3450</Item_ID>
+        <Recipient>20</Recipient>
+        <Quantity>1</Quantity>
+        <Price>21.99</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>2</Invoice_ID>
+        <Item_Type>DVD</Item_Type>
+        <Item_ID>92870</Item_ID>
+        <Recipient>20</Recipient>
+        <Quantity>1</Quantity>
+        <Price>23.95</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>2</Invoice_ID>
+        <Item_Type>Video Game</Item_Type>
+        <Item_ID>1234</Item_ID>
+        <Recipient>20</Recipient>
+        <Quantity>1</Quantity>
+        <Price>34.99</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>3</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>232345</Item_ID>
+        <Recipient>7</Recipient>
+        <Quantity>1</Quantity>
+        <Price>12.99</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>3</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>232345</Item_ID>
+        <Recipient>8</Recipient>
+        <Quantity>1</Quantity>
+        <Price>12.99</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>3</Invoice_ID>
+        <Item_Type>DVD Player</Item_Type>
+        <Item_ID>2523</Item_ID>
+        <Recipient>11</Recipient>
+        <Quantity>1</Quantity>
+        <Price>129.99</Price>
+        <Warehouse>Sacramento</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>3</Invoice_ID>
+        <Item_Type>DVD Player</Item_Type>
+        <Item_ID>2523</Item_ID>
+        <Recipient>19</Recipient>
+        <Quantity>1</Quantity>
+        <Price>129.99</Price>
+        <Warehouse>Phillidelphia</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>4</Invoice_ID>
+        <Item_Type>CD</Item_Type>
+        <Item_ID>89735</Item_ID>
+        <Recipient>18</Recipient>
+        <Quantity>1</Quantity>
+        <Price>12.95</Price>
+        <Warehouse>Seattle</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>4</Invoice_ID>
+        <Item_Type>Monitor</Item_Type>
+        <Item_ID>1234</Item_ID>
+        <Recipient>17</Recipient>
+        <Quantity>1</Quantity>
+        <Price>799.95</Price>
+        <Warehouse>Seattle</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>5</Invoice_ID>
+        <Item_Type>CD Player</Item_Type>
+        <Item_ID>245</Item_ID>
+        <Recipient>6</Recipient>
+        <Quantity>1</Quantity>
+        <Price>99.99</Price>
+        <Warehouse>New York</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>5</Invoice_ID>
+        <Item_Type>DVD Player</Item_Type>
+        <Item_ID>8977</Item_ID>
+        <Recipient>6</Recipient>
+        <Quantity>1</Quantity>
+        <Price>149.99</Price>
+        <Warehouse>Phillidelphia</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>5</Invoice_ID>
+        <Item_Type>Monitor</Item_Type>
+        <Item_ID>9785</Item_ID>
+        <Recipient>6</Recipient>
+        <Quantity>5</Quantity>
+        <Price>1299.99</Price>
+        <Warehouse>New York</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>6</Invoice_ID>
+        <Item_Type>DVD</Item_Type>
+        <Item_ID>435</Item_ID>
+        <Recipient>6</Recipient>
+        <Quantity>1</Quantity>
+        <Price>21.95</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>6</Invoice_ID>
+        <Item_Type>DVD</Item_Type>
+        <Item_ID>23456</Item_ID>
+        <Recipient>15</Recipient>
+        <Quantity>1</Quantity>
+        <Price>21.95</Price>
+        <Warehouse>Houston</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>6</Invoice_ID>
+        <Item_Type>DVD</Item_Type>
+        <Item_ID>23456</Item_ID>
+        <Recipient>16</Recipient>
+        <Quantity>1</Quantity>
+        <Price>21.95</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>6</Invoice_ID>
+        <Item_Type>Video Game</Item_Type>
+        <Item_ID>9349</Item_ID>
+        <Recipient>19</Recipient>
+        <Quantity>1</Quantity>
+        <Price>39.99</Price>
+        <Warehouse>Phillidelphia</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>7</Invoice_ID>
+        <Item_Type>DVD Player</Item_Type>
+        <Item_ID>8977</Item_ID>
+        <Recipient>1</Recipient>
+        <Quantity>1</Quantity>
+        <Price>149.99</Price>
+        <Warehouse>Seattle</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>8</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>897687</Item_ID>
+        <Recipient>11</Recipient>
+        <Quantity>1</Quantity>
+        <Price>21.95</Price>
+        <Warehouse>Sacramento</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>9</Invoice_ID>
+        <Item_Type>CD</Item_Type>
+        <Item_ID>46512</Item_ID>
+        <Recipient>10</Recipient>
+        <Quantity>1</Quantity>
+        <Price>12.95</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>10</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>986324</Item_ID>
+        <Recipient>13</Recipient>
+        <Quantity>1</Quantity>
+        <Price>6.99</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>11</Invoice_ID>
+        <Item_Type>Book</Item_Type>
+        <Item_ID>333498</Item_ID>
+        <Recipient>15</Recipient>
+        <Quantity>2</Quantity>
+        <Price>14.95</Price>
+        <Warehouse>Houston</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>11</Invoice_ID>
+        <Item_Type>CD-R</Item_Type>
+        <Item_ID>3425</Item_ID>
+        <Recipient>12</Recipient>
+        <Quantity>2</Quantity>
+        <Price>14.99</Price>
+        <Warehouse>Houston</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>12</Invoice_ID>
+        <Item_Type>CD</Item_Type>
+        <Item_ID>29655</Item_ID>
+        <Recipient>11</Recipient>
+        <Quantity>1</Quantity>
+        <Price>14.99</Price>
+        <Warehouse>Seattle</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>12</Invoice_ID>
+        <Item_Type>CD Player</Item_Type>
+        <Item_ID>245</Item_ID>
+        <Recipient>5</Recipient>
+        <Quantity>1</Quantity>
+        <Price>99.99</Price>
+        <Warehouse>Sacramento</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>12</Invoice_ID>
+        <Item_Type>CD-R</Item_Type>
+        <Item_ID>3425</Item_ID>
+        <Recipient>5</Recipient>
+        <Quantity>1</Quantity>
+        <Price>14.99</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>13</Invoice_ID>
+        <Item_Type>DVD</Item_Type>
+        <Item_ID>435</Item_ID>
+        <Recipient>4</Recipient>
+        <Quantity>2</Quantity>
+        <Price>21.95</Price>
+        <Warehouse>Phillidelphia</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>13</Invoice_ID>
+        <Item_Type>DVD Player</Item_Type>
+        <Item_ID>8977</Item_ID>
+        <Recipient>4</Recipient>
+        <Quantity>1</Quantity>
+        <Price>149.99</Price>
+        <Warehouse>Phillidelphia</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>14</Invoice_ID>
+        <Item_Type>Video Game</Item_Type>
+        <Item_ID>1234</Item_ID>
+        <Recipient>9</Recipient>
+        <Quantity>1</Quantity>
+        <Price>34.99</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>14</Invoice_ID>
+        <Item_Type>Video Game</Item_Type>
+        <Item_ID>5698</Item_ID>
+        <Recipient>9</Recipient>
+        <Quantity>1</Quantity>
+        <Price>44.99</Price>
+        <Warehouse>Ashland</Warehouse>
+      </tuple>
+
+      <tuple>
+        <Invoice_ID>14</Invoice_ID>
+        <Item_Type>Video Game</Item_Type>
+        <Item_ID>9349</Item_ID>
+        <Recipient>9</Recipient>
+        <Quantity>1</Quantity>
+        <Price>39.99</Price>
+        <Warehouse>Forks</Warehouse>
+      </tuple>
+
+    </Purchases>
+
+  </Data>
+ 
+ </database>

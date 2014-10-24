@@ -1,0 +1,297 @@
+<database name="BillingInformation">
+	<createdby name="Paul Larpenteur" />
+	<Schema>
+		<table name="Invoices">
+			<column name="ID" type="Integer" key="yes">
+				<comment>The Invoice ID Number.</comment>
+			</column>
+			<column name="Buyer" type="String" key="no">
+				<comment>The Name of the Buyer.</comment>
+			</column>
+			<column name="Recipient" type="String" key="no">
+				<comment>The Name of the person to ship to.</comment>
+			</column>
+			<column name="OrderDate" type="DateTime" key="no">
+				<comment>The date and time that the order was placed.</comment>
+			</column>
+			<column name="ShipDate" type="DateTime" key="no">
+				<comment>The date and time that the order was shipped.</comment>
+			</column>
+			<column name="ExpArrivalDate" type="Date" key="no">
+				<comment>The date and time that the order should arrive.</comment>
+			</column>
+			<column name="ShippingMethod" type="String" key="no">
+				<comment>The method of shipping. Up to the shipping people to decide.</comment>
+			</column>
+			<column name="PaymentMethod" type="String" key="no">
+				<comment>The method of payment; Credit, Check, or Cash.</comment>
+			</column>
+			<column name="OrderStatus" type="String" key="no">
+				<comment>The status of the order; Processing, In Transit, Complete.</comment>
+			</column>
+			<column name="SubTotal" type="Integer" key="no">
+				<comment>The total cost of all of the items before discount/taxes/shipping.</comment>
+			</column>
+			<column name="Discounts" type="Integer" key="no">
+				<comment>The discounts on this order.</comment>
+			</column>
+			<column name="ShippingCost" type="Integer" key="no">
+				<comment>The cost of shipping on this order.</comment>
+			</column>
+			<column name="Taxes" type="Integer" key="no">
+				<comment>The cost of taxes on this order.</comment>
+			</column>
+			<column name="Total" type="Integer" key="no">
+				<comment>The total cost of this invoice/order.</comment>
+			</column>
+		</table>
+		<table name="Customers">
+			<column name="Name" type="String" key="yes">
+				<comment>The Customer's Unique name</comment>
+			</column>
+			<column name="LoginName" type="String" key="yes">
+				<comment>The Customer's Unique login name; unless they are just a recipient, then NULL.</comment>
+			</column>
+			<column name="Password" type="String" key="no">
+				<comment>The cutomer's password, if applicable.</comment>
+			</column>
+			<column name="Country" type="String" key="no">
+				<comment>The name of the customer's country.</comment>
+			</column>
+			<column name="StreetAddress" type="String" key="no">
+				<comment>The street address of the customer.</comment>
+			</column>
+			<column name="City" type="String" key="no">
+				<comment>The city of the customer.</comment>
+			</column>
+			<column name="State" type="String" key="no">
+				<comment>The state of the customer.</comment>
+			</column>
+			<column name="ZipCode" type="String" key="no">
+				<comment>The zip code of the customer. As a string for less confusion.</comment>
+			</column>
+			<column name="PhoneNumber" type="String" key="no">
+				<comment>The phone number of the customer.</comment>
+			</column>
+			<column name="Email" type="String" key="no">
+				<comment>The email address of the customer.</comment>
+			</column>
+			<column name="PrivacyPolicy" type="String" key="no">
+				<comment>The customer's privacy policy. Do they want to be updated about products, or left alone.</comment>
+			</column>
+		</table>			
+		<table name="CreditCards">
+			<column name="CustomerName" type="String" key="yes">
+				<comment>The Unique name of the customer.</comment>
+			</column>
+			<column name="CustomerLoginName" type="String" key="yes">
+				<comment>Further identifying the customer by their login name.</comment>
+			</column>
+			<column name="NameOnCard" type="String" key="no">
+				<comment>The customer's actual name as it appears on the credit card.</comment>
+			</column>
+			<column name="CreditorName" type="String" key="no">
+				<comment>Brand of card; VISA, MasterCard, American Express, etc.</comment>
+			</column>
+			<column name="Number" type="String" key="no">
+				<comment>The credit card number.</comment>
+			</column>
+			<column name="ExpDate" type="Date" key="no">
+				<comment>The expiration date of the card.</comment>
+			</column>
+		</table>
+		<table name="Items">
+			<column name="ID" type="Integer" key="no">
+				<comment>The Invoice ID that this item belongs to.</comment>
+			</column>
+			<column name="ProductID" type="String" key="no">
+				<comment>The products ID. Can contain letters and numbers.</comment>
+			</column>
+			<column name="ProductName" type="String" key="no">
+				<comment>The name of the product.</comment>
+			</column>
+			<column name="UnitCount" type="Integer" key="no">
+				<comment>The number of this item ordered.</comment>
+			</column>
+			<column name="UnitCost" type="Integer" key="no">
+				<comment>The cost per one unit of this item.</comment>
+			</column>
+			<column name="Warehouse" type="String" key="no">
+				<comment>The warehouse where this item will be shipped from.</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Buyer" />
+			</source>
+			<target table="Customers">
+				<column name="Name" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Recipient" />
+			</source>
+			<target table="Customers">
+				<column name="Name" />
+			</target>
+		</foreignkeyconstraint>	
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Buyer" />
+			</source>
+			<target table="CreditCards">
+				<column name="CustomerName" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Customers">
+				<column name="Name" />
+			</source>
+			<target table="CreditCards">
+				<column name="CustomerName" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="ID" />
+			</source>
+			<target table="Invoices">
+				<column name="ID" />
+			</target>
+		</foreignkeyconstraint>	
+			
+	</Schema>
+	<Data>
+		<Invoices>
+			<tuple>
+				<ID>00573</ID>
+				<Buyer>Paul Larpenteur</Buyer>
+				<Recipient>Takako Uehara</Recipient>
+				<OrderDate>01/11/2003</OrderDate>
+				<ShipDate>01/12/2003</ShipDate>
+				<ExpArrivalDate>01/14/2003</ExpArrivalDate>
+				<ShippingMethod>FedEX</ShippingMethod>
+				<PaymentMethod>Credit</PaymentMethod>
+				<OrderStatus>Shipped</OrderStatus>
+				<SubTotal>10.00</SubTotal>
+				<Discounts>0.00</Discounts>
+				<ShippingCost>2.00</ShippingCost>
+				<Taxes>0.00</Taxes>
+				<Total>12.00</Total>
+			</tuple>
+			<tuple>
+				<ID>00574</ID>
+				<Buyer>Paul Larpenteur</Buyer>
+				<Recipient>Paul Larpenteur</Recipient>
+				<OrderDate>01/14/2003</OrderDate>
+				<ShipDate>01/14/2003</ShipDate>
+				<ExpArrivalDate>01/17/2003</ExpArrivalDate>
+				<ShippingMethod>USPS</ShippingMethod>
+				<PaymentMethod>Credit</PaymentMethod>
+				<OrderStatus>In Transit</OrderStatus>
+				<SubTotal>17.50</SubTotal>
+				<Discounts>0.00</Discounts>
+				<ShippingCost>2.49</ShippingCost>
+				<Taxes>0.00</Taxes>
+				<Total>19.99</Total>
+			</tuple>
+			<tuple>
+				<ID>00575</ID>
+				<Buyer>Takako Uehara</Buyer>
+				<Recipient>Paul Larpenteur</Recipient>
+				<OrderDate>02/09/2003</OrderDate>
+				<ShipDate>02/10/2003</ShipDate>
+				<ExpArrivalDate>02/14/2003</ExpArrivalDate>
+				<ShippingMethod>UPS</ShippingMethod>
+				<PaymentMethod>Credit</PaymentMethod>
+				<OrderStatus>Processing</OrderStatus>
+				<SubTotal>47.50</SubTotal>
+				<Discounts>5.00</Discounts>
+				<ShippingCost>8.50</ShippingCost>
+				<Taxes>1.00</Taxes>
+				<Total>52.00</Total>
+			</tuple>
+		</Invoices>
+		<Customers>
+			<tuple>
+				<Name>Paul Larpenteur</Name>
+				<LoginName>paullarp</LoginName>
+				<Password>takako</Password>
+				<Country>USA</Country>
+				<StreetAddress>4929 SW 327th PL</StreetAddress>
+				<City>Federal Way</City>
+				<State>WA</State>
+				<ZipCode>98023</ZipCode>
+				<PhoneNumber>206-934-3861</PhoneNumber>
+				<Email>paullarp@u.washington.edu</Email>
+				<PrivacyPolicy>private</PrivacyPolicy>
+			</tuple>	
+			<tuple>
+				<Name>Takako Uehara</Name>
+				<LoginName>takaSweetie</LoginName>
+				<Password>parusan</Password>
+				<Country>Japan</Country>
+				<StreetAddress>323rd Ave NE</StreetAddress>
+				<City>Tokyo</City>
+				<State>Tokyo Prefecture</State>
+				<ZipCode>85-542</ZipCode>
+				<PhoneNumber>9-245-845-6548</PhoneNumber>
+				<Email>takakoSweetie@tokyo.jp</Email>
+				<PrivacyPolicy>private</PrivacyPolicy>
+			</tuple>	
+		</Customers>
+		<CreditCards>
+			<tuple>
+				<CustomerName>Paul Larpenteur</CustomerName>
+				<CustomerLoginName>paullarp</CustomerLoginName>
+				<NameOnCard>Paul A. Larpenteur</NameOnCard>
+				<CreditorName>MasterCard</CreditorName>
+				<Number>5424-5424-6546-4253</Number>
+				<ExpDate>10/2005</ExpDate>
+			</tuple>
+			<tuple>
+				<CustomerName>Takako Uehara</CustomerName>
+				<CustomerLoginName>takaSweetie</CustomerLoginName>
+				<NameOnCard>Takako Uehara</NameOnCard>
+				<CreditorName>VISA</CreditorName>
+				<Number>7858-5462-5468-9872</Number>
+				<ExpDate>02/2004</ExpDate>
+			</tuple>
+		</CreditCards>
+		<Items>
+			<tuple>
+				<ID>00574</ID>
+				<ProductID>4112</ProductID>
+				<ProductName>Glory ~kimiga iru: Takako Uehara : CD</ProductName>
+				<UnitCount>1</UnitCount>
+				<UnitCost>17.50</UnitCost>
+				<Warehouse>Nagasaki</Warehouse>
+			</tuple>
+			<tuple>
+				<ID>00575</ID>
+				<ProductID>1111</ProductID>
+				<ProductName>BeanBag Frog</ProductName>
+				<UnitCount>1</UnitCount>
+				<UnitCost>10.00</UnitCost>
+				<Warehouse>San Francisco</Warehouse>
+			</tuple>
+			<tuple>
+				<ID>00573</ID>
+				<ProductID>1111</ProductID>
+				<ProductName>BeanBag Frog</ProductName>
+				<UnitCount>1</UnitCount>
+				<UnitCost>10.00</UnitCost>
+				<Warehouse>San Francisco</Warehouse>
+			</tuple>
+			<tuple>
+				<ID>00575</ID>
+				<ProductID>7896</ProductID>
+				<ProductName>LifeSaver's Candies</ProductName>
+				<UnitCount>15</UnitCount>
+				<UnitCost>2.50</UnitCost>
+				<Warehouse>Seattle</Warehouse>
+			</tuple>
+		</Items>
+	</Data>
+</database>

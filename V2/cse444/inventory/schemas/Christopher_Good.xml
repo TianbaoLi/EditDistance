@@ -1,0 +1,357 @@
+<database name="Inventory">
+
+<createdby name="Christopher Good"/>
+
+<Schema>
+  
+  <table name="BookInventory">
+	<column name="ISDN" type="String" key="yes">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Count" type="Integer" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>	
+	<column name="Warehouse" type="String" key="yes">
+	  <comment> 
+	    Maps to City name
+	  </comment>
+	</column>
+  </table>
+
+  <table name="MusicInventory">
+	<column name="ID" type="String" key="yes">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Count" type="Integer" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	
+	<column name="Warehouse" type="String" key="yes">
+	  <comment> 
+	   
+	  </comment>
+	</column>
+  </table>
+
+  <table name="Books">
+	<column name="Title" type="String" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Authors" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="ISDN" type="String" key="yes">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Price" type="Integer" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Discount" type="Integer" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Discount_Price" type="Integer" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Category" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Keywords" type="String" key="no">
+	  <comment> 
+	    
+	  </comment>
+	</column>
+  </table>
+
+  <table name="Music">
+	<column name="Title" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Artist" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="ID" type="String" key="yes">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Recording_Company" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Price" type="Integer" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Discount" type="Integer" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Discount_Price" type="Integer" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Category" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Keywords" type="String" key="no">
+	  <comment> 
+	   
+	  </comment>
+	</column>
+  </table>
+
+  <table name="Warehouses">
+	<column name="Address" type="String" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="City" type="String" key="yes">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="State" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Zip" type="String" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Phone" type="String" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Fax" type="String" key="no">
+	  <comment>
+
+	  </comment>
+	</column>
+	<column name="Manager" type="String" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Employee_Count" type="Integer" key="no">
+	  <comment>
+	    
+	  </comment>
+	</column>
+	<column name="Total_Units" type="Integer" key="no">
+	  <comment> 
+	    
+	  </comment>
+	</column>
+	<column name="Unit_Capacity" type="Integer" key="no">
+	  <comment> 
+	    
+	  </comment>
+	</column>
+
+  </table>
+
+  <foreignkeyconstraint>
+    <source table="BookInventory">
+	  <column name="ISDN"/>
+	</source>
+	<target table="Books">
+	  <column name="ISDN"/>
+	</target>
+    <comment> 
+	  
+	</comment>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="BookInventory">
+	  <column name="Warehouse"/>
+	</source>
+	<target table="Warehouses">
+	  <column name="City"/>
+	</target>
+    <comment> 
+	Warehouses are identified by City
+	</comment>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="MusicInventory">
+	  <column name="ID"/>
+	</source>
+	<target table="Music">
+	  <column name="ID"/>
+	</target>
+    <comment> 
+
+	</comment>
+  </foreignkeyconstraint>
+  <foreignkeyconstraint>
+    <source table="MusicInventory">
+	  <column name="Warehouse"/>
+	</source>
+	<target table="Warehouses">
+	  <column name="City"/>
+	</target>
+    <comment> 
+	Warehouses are identified by City
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+  <BookInventory>
+    
+	<tuple>
+	  <ISDN> 5555555555 </ISDN>
+	  <Count> 5 </Count>
+	  <Warehouse> Denver </Warehouse>
+	</tuple>
+	<tuple>
+	  <ISDN> 6666666666 </ISDN>
+	  <Count> 90 </Count>
+	  <Warehouse> Seattle </Warehouse>
+	</tuple>
+
+
+  </BookInventory>
+
+  <MusicInventory>
+
+    <tuple>
+	  <ID> 1111111111 </ID>
+	  <Count> 9 </Count>
+	  <Warehouse> Seattle </Warehouse>
+	</tuple>
+    <tuple>
+	  <ID> 2222222222 </ID>
+	  <Count> 37 </Count>
+	  <Warehouse> Denver </Warehouse>
+	</tuple>
+
+
+  </MusicInventory>
+
+  <Books>
+  
+    <tuple>
+	  <Title> Big Red Book </Title>
+	  <Authors> Bob Jones </Authors>
+	  <ISDN> 5555555555 </ISDN>
+	  <Price> 40 </Price>
+	  <Discount> 0 </Discount>
+	  <Discount_Price> 35 </Discount_Price>
+	  <Category> Fantasy </Category>
+	  <Keywords> Big Red Book </Keywords>
+	</tuple>
+    <tuple>
+	  <Title> Green Book </Title>
+	  <Authors> John Stewart</Authors>
+	  <ISDN> 6666666666 </ISDN>
+	  <Price> 37 </Price>
+	  <Discount> 1 </Discount>
+	  <Discount_Price> 32 </Discount_Price>
+	  <Category> Non-Fiction </Category>
+	  <Keywords> Green Book </Keywords>
+	</tuple>
+
+
+
+  </Books>
+
+  <Music>
+
+    <tuple>
+	  <Title> The Album </Title>
+	  <Artist> Big Red Rock Band </Artist>
+	  <ID> 1111111111 </ID>
+	  <Recording_Company> Epic </Recording_Company>
+	  <Price> 20 </Price>
+	  <Discount> 1 </Discount>
+	  <Discount_Price> 15 </Discount_Price>
+	  <Category> Rock </Category>
+	  <Keywords> Big Red Rock Band </Keywords>
+	</tuple>
+    <tuple>
+	  <Title> Second Album </Title>
+	  <Artist> Tool Band</Artist>
+	  <ID> 2222222222 </ID>
+	  <Recording_Company> Sony </Recording_Company>
+	  <Price> 5 </Price>
+	  <Discount> 0 </Discount>
+	  <Discount_Price> 4 </Discount_Price>
+	  <Category> Country </Category>
+	  <Keywords> Second Album</Keywords>
+	</tuple>
+
+
+  </Music>
+
+  <Warehouses>
+
+    <tuple>
+	  <Address> 2345 Stuff Rd </Address>
+	  <City> Seattle </City>
+	  <State> WA </State>
+	  <Zip> 76543 </Zip>
+	  <Phone> 4443212 </Phone>
+	  <Fax> 4442345 </Fax>
+	  <Manager> Henry Manager </Manager>
+	  <Employee_Count> 4 </Employee_Count>
+	  <Total_Units> 300 </Total_Units>
+	  <Unit_Capacity> 1000000 </Unit_Capacity>
+	</tuple>
+    <tuple>
+	  <Address> 2345 Things Rd </Address>
+	  <City> Denver </City>
+	  <State> CO </State>
+	  <Zip> 76456 </Zip>
+	  <Phone> 4443212 </Phone>
+	  <Fax> 4442345 </Fax>
+	  <Manager> Bob Manager </Manager>
+	  <Employee_Count> 10 </Employee_Count>
+	  <Total_Units> 200 </Total_Units>
+	  <Unit_Capacity> 10000 </Unit_Capacity>
+	</tuple>
+
+
+  </Warehouses>
+
+</Data>
+
+</database>

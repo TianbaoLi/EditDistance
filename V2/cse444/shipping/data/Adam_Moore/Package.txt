@@ -1,0 +1,12 @@
+0001|32|1|Ground|9819283|UPS|Leave package at door.|Seattle|John's Books|1432 Aimes St. #3 Key West, Florida|John Smith|1400 on 8/11/02|800 on 8/14/02|Completed
+0002|15|3|Standard|849583|USPS|Beware of dog.|Spokane|Seneca Wallace|66 Sax Ave. NE Boston, MA|Seneca Wallace|1200 on 8/21/02|1000 on 8/14/02|Completed
+0003|2|1|OverNight|46004989|FedEx|Handle with care.|Puyallup|Clinton Portis|9089 Walton Way #13 Green Bay, WI|Clinton Portis|1200 on 8/21/02|1000 on 8/22/02|Completed
+0004|55|11|2-day|9930904|UPS|The key is under the mat.|Eugene|Gregory Peck|73485 Universe Way, New York, NY|Janet Evans|1300 on 8/23/02|1000 on 8/25/02|Completed
+0005|13|1|NextDay|9930299|UPS||Walla Walla|Joe Buck|4545 Royal Braughm Way Seattle, WA|Jack|1400 on 8/29/02|1000 on 8/30/02|Completed
+0006|5|1|Ground|9495059|UPS|Might contain hazardous material.|Ballard|John Elway Company|6989 26th Ave. #34 Kansas City, MI|Johnny|1200 on 12/20/02|1500 on 12/29/02|Completed
+0007|5|1|OverNight|4688590|FedEx|In the alleyway.|Seattle|Elton Brand|6906 Eastbay Way Los Angeles, CA|Elton|800 on 1/10/03|800 1/11/03|Pending
+0008|69|12|Regular|4677098|FedEx|Null|Ballard|Gary Payton|2020 Payton Way Seattle, WA|Nate McMillan|1200 on 1/13/02|Null|Pending
+0009|34|5|2-day|99005050|UPS|Leave outside the front door.|Spokane|Big Johnson's Johnson|420 Smokey Rd. Eugene, OR|Cheech|Null|Null|Pending
+0010|9|2|NextDay|9989898|UPS|Can park in the back.|Walla Walla|Adidas|1787 Lala Way New Orleans, LA|Mia Hamm|Null|Null|Pending
+0011|61|6|Regular|4677099|FedEx|Please do not smoke near this package.|Ballard|M.A.D.D.|4545 Bear Street Anchorage, AK|Jimmy Kennedy|Null|Null|Pending
+0012|45|4|Standard|847758|USPS|Mahalo.|Seattle|Jim's Surf Shop|0999 Wahala Way Waikiki, HI|Jimbo|Null|Null|Pending

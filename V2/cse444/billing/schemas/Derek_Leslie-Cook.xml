@@ -1,0 +1,360 @@
+<database name="BillingInvoiceDomain">
+
+<createdby name="Derek Leslie-Cook"/>
+
+<Schema>
+  
+  <table name="Customers">
+	<column name="CustomerName" type="String" key="no">
+	  <comment>
+	   The name of our customer, perhaps more than one with
+	   the same name.
+	  </comment>
+	</column>
+	<column name="CustomerID" type="Integer" key="yes">
+	  <comment> 
+	    Unique identifier for each customer.
+	  </comment>
+	</column>
+	<column name="StreetAddress" type="String" key="no">
+	</column>
+	<column name="City" type="String" key="no">
+	</column>
+	<column name="State" type="String" key="no">
+	</column>
+	<column name="Zip" type="Integer" key="no">
+	</column>
+	<column name="Phone" type="Integer" key="no">
+	</column>
+	<column name="Email" type="String" key="no">
+	</column>
+  </table>
+
+  <table name="Items">
+    <column name="ProductID" type="Integer" key="yes">
+	  <comment>
+	  Each Item has a unique product identifier ID.
+	  </comment> 	
+	</column>
+	<column name="ProductName" type="String" key="no">
+	  <comment>
+	  Each item has a name, such as a title
+	  </comment> 	
+	</column>
+	<column name="Price" type="Integer" key="no"> 	
+	</column>
+  </table>
+
+  <table name="InvoiceItems">
+     <column name="InvoiceNumber" type="Integer" key="no">
+	  <comment>
+	  There can be the same invoice number if there is more than
+	  one product type.
+	  </comment> 	
+	</column>
+	<column name="ProductID" type="Integer" key="no">
+	  <comment>
+	  Likewise, you can have the same ProductID more than once
+	  if multiple invoices use it.  However, the ProductID and 
+	  the InvoiceNumber make up a unique key.
+	  </comment> 	
+	</column>
+	<column name="Quantity" type="Integer" key="no">
+	  <comment>
+	  The amount of this distict product for this particular
+	  invoice.
+	  </comment> 	
+	</column>
+  </table>
+  
+  <table name="InvoiceShipping">
+     <column name="InvoiceNumber" type="Integer" key="yes">
+	  <comment>
+	  There is only one shipping plan for each invoice number.
+	  </comment> 	
+	</column>
+	<column name="OrderDate" type="Date" key="no">
+	  <comment>
+	  When the invoice was ordered.
+	  </comment> 	
+	</column>
+	<column name="ExpectedDeliveryDate" type="Date" key="no">
+	</column>
+	<column name="Wharehouse" type="String" key="no">
+	  <comment>
+	  Where the order is shipped from.
+	  </comment> 	
+	</column>
+	<column name="CustomerID" type="Integer" key="no">
+	  <comment>
+	  The customerID of the customer it should be shipped to.
+	  </comment> 	
+	</column>
+	<column name="ShippingMethod" type="String" key="no">
+	  <comment>
+	  How the order should be shipped.
+	  </comment> 	
+	</column>
+  </table>
+  
+  <table name="InvoiceBilling">
+     <column name="InvoiceNumber" type="Integer" key="yes">
+	  <comment>
+	  There is only one billing list for each invoice number.
+	  </comment> 	
+	</column>
+	<column name="CustomerID" type="Integer" key="no">
+	  <comment>
+	  Who is paying for the order.
+	  </comment> 	
+	</column>
+	<column name="ProductSales" type="Integer" key="no">
+	<comment>
+	  Total cost of just the Items being ordered.
+	  </comment>
+	</column>
+	<column name="Taxes" type="Integer" key="no">
+	  <comment>
+	  Total taxes on the order
+	  </comment> 	
+	</column>
+	<column name="ShippingCost" type="Integer" key="no">
+	  <comment>
+	  Shipping cost with each order.
+	  </comment> 	
+	</column>
+	<column name="PaymentMethod" type="String" key="no">
+	  <comment>
+	  How the order was paid for.
+	  </comment> 	
+	</column>
+	<column name="CreditCardNum" type="Integer" key="no">
+	  <comment>
+	  If it was paid for credit card, then this is the card number.
+	  </comment> 	
+	</column>
+	<column name="ExpirationDate" type="Date" key="no">
+	  <comment>
+	  If it was paid for credit card, then this is the expiration date.
+	  </comment> 	
+	</column>
+  </table>
+
+  <foreignkeyconstraint>
+    <source table="InvoiceBilling">
+	  <column name="InvoiceNumber"/>
+	</source>
+	<target table="InvoiceShipping">
+	  <column name="InvoiceNumber"/>
+	</target>
+	<target table="InvoiceItems">
+	  <column name="InvoiceNumber"/>
+	</target>
+    <comment> 
+	  Every invoice in billing, must have a corresponding (unique) 
+	  tuple in shipping, and (perhaps multiple) invoice number 
+	  in Items.
+	</comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="InvoiceShipping">
+	  <column name="InvoiceNumber" />
+	</source>
+	<target table="InvoiceBilling">
+	  <column name="InvoiceNumber"/>
+	</target>
+	<target table="InvoiceItems">
+	  <column name="InvoiceNumber"/>
+	</target>
+    <comment> 
+	  Every invoice in shipping, must have a corresponding (unique) 
+	  tuple in billing, and (perhaps multiple) invoice number 
+	  in Items.
+	</comment>
+  </foreignkeyconstraint>
+
+<foreignkeyconstraint>
+    <source table="InvoiceShipping">
+	  <column name="CustomerID" />
+	</source>
+	<target table="Customers">
+	  <column name="CustomerID"/>
+	</target>
+    <comment> 
+	  Every customer that we ship to must
+	  be in the customers database with an address.
+	</comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="InvoiceItems">
+	  <column name="ProductID"/>
+	</source>
+	<target table="Items">
+	  <column name="ProductID"/>
+	</target>
+	<comment> 
+	 Every ProductID in the Invoice Items
+	 must be in the Items table with a price and name.
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+  <Customers>
+    
+	<tuple>
+	  <CustomerName> Derek Cook </CustomerName>
+	  <CustomerID> 0035677 </CustomerID>
+	  <StreetAddress> 5215 15th Ave Ne #19</StreetAddress>
+	  <City>Seattle</City>
+	  <State>Washington</State>
+	  <Zip>98105</Zip>
+	  <Phone>2067297259</Phone>
+	  <Email>dlescook@cs.washington.edu</Email>
+	</tuple>
+	
+	<tuple>
+	  <CustomerName> Big Bob </CustomerName>
+	  <CustomerID> 0035675 </CustomerID>
+	  <StreetAddress> 5000 10th Ave Ne #10</StreetAddress>
+	  <City>Tulsa</City>
+	  <State>Oklahoma</State>
+	  <Zip>59807</Zip>
+	  <Phone>5057299259</Phone>
+	  <Email>BigBob@yahoo.com</Email>
+	</tuple>
+	
+	<tuple>
+	  <CustomerName> Jobby Blow </CustomerName>
+	  <CustomerID> 0041277 </CustomerID>
+	  <StreetAddress> 2222 22th Ave Ne #22</StreetAddress>
+	  <City>Seattle</City>
+	  <State>Washington</State>
+	  <Zip>98105</Zip>
+	  <Phone>2067497259</Phone>
+	  <Email>jobbyblow@hotmail.com</Email>
+	</tuple>
+
+	
+  </Customers>
+
+  <Items>
+
+    <tuple>
+	  <ProductID> 5555 </ProductID>
+	  <ProductName> Led Zeppelin The Early Years </ProductName>
+	  <Price>12.99</Price>
+	</tuple>
+	
+	<tuple>
+	  <ProductID> 4444 </ProductID>
+	  <ProductName> The Talisman </ProductName>
+	  <Price>5.99</Price>
+	</tuple>
+	
+	<tuple>
+	  <ProductID> 6666 </ProductID>
+	  <ProductName> Black Sabbath:  Masters of Reality </ProductName>
+	  <Price>15.99</Price>
+	</tuple>
+
+  </Items>
+
+  <InvoiceShipping>
+  
+    <tuple>
+	  <InvoiceNumber> 11111 </InvoiceNumber>
+	  <OrderDate> 2003-01-12 </OrderDate>
+	  <ExpectedDeliveryDate> 2003-01-15</ExpectedDeliveryDate>
+	  <Wharehouse>Seattle</Wharehouse>
+	  <CustomerID>0035677</CustomerID>
+	  <ShippingMethod>Overnight</ShippingMethod>
+	</tuple>
+	
+	<tuple>
+	  <InvoiceNumber> 00000 </InvoiceNumber>
+	  <OrderDate> 2002-02-12 </OrderDate>
+	  <ExpectedDeliveryDate> 2002-02-15</ExpectedDeliveryDate>
+	  <Wharehouse>Tulsa</Wharehouse>
+	  <CustomerID>0035675</CustomerID>
+	  <ShippingMethod>Priority</ShippingMethod>
+	</tuple>
+	
+	<tuple>
+	  <InvoiceNumber> 22222 </InvoiceNumber>
+	  <OrderDate> 2001-02-12 </OrderDate>
+	  <ExpectedDeliveryDate> 2001-02-15</ExpectedDeliveryDate>
+	  <Wharehouse>Dallas</Wharehouse>
+	  <CustomerID>0041277 </CustomerID>
+	  <ShippingMethod>Priority</ShippingMethod>
+	</tuple>
+
+  </InvoiceShipping>
+  
+  <InvoiceBilling>
+  
+    <tuple>
+	  <InvoiceNumber> 11111 </InvoiceNumber>
+	  <CustomerID>0035677</CustomerID>
+	  <ProductSales>15.99</ProductSales>
+	  <Taxes>1.50</Taxes>
+	  <ShippingCost>2.00</ShippingCost>
+	  <PaymentMethod>CreditCard</PaymentMethod>
+	  <CreditCardNum>00001111222233334444</CreditCardNum>
+	  <ExpirationDate>2003-02-01</ExpirationDate>
+	</tuple>
+	
+	<tuple>
+	  <InvoiceNumber> 00000 </InvoiceNumber>
+	  <CustomerID>0035675</CustomerID>
+	  <ProductSales>5.99</ProductSales>
+	  <Taxes>.50</Taxes>
+	  <ShippingCost>1.00</ShippingCost>
+	  <PaymentMethod>CreditCard</PaymentMethod>
+	  <CreditCardNum>00001311222233334444</CreditCardNum>
+	  <ExpirationDate>2003-02-01</ExpirationDate>
+	</tuple>
+	
+	<tuple>
+	  <InvoiceNumber> 22222 </InvoiceNumber>
+	  <CustomerID>0041277 </CustomerID>
+	  <ProductSales>12.99</ProductSales>
+	  <Taxes>1.20</Taxes>
+	  <ShippingCost>2.00</ShippingCost>
+	  <PaymentMethod>CreditCard</PaymentMethod>
+	  <CreditCardNum>10001311222233334444</CreditCardNum>
+	  <ExpirationDate>2003-02-01</ExpirationDate>
+		
+	</tuple>
+
+  </InvoiceBilling>
+  
+   <InvoiceItems>
+  
+    <tuple>
+	  <InvoiceNumber> 11111 </InvoiceNumber>
+	  <ProductID>6666</ProductID>
+	  <Quantity>1</Quantity>
+	</tuple>
+	
+	 <tuple>
+	  <InvoiceNumber> 00000 </InvoiceNumber>
+	  <ProductID>4444</ProductID>
+	  <Quantity>1</Quantity>
+	</tuple>
+	
+	 <tuple>
+	  <InvoiceNumber> 22222 </InvoiceNumber>
+	  <ProductID>5555</ProductID>
+	  <Quantity>1</Quantity>
+	</tuple>
+
+  </InvoiceItems>
+
+</Data>
+
+</database>

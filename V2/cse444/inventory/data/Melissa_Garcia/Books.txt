@@ -1,0 +1,15 @@
+Programming Perl | Larry Wall, Tom Christiansen | 1-56592-149-6 | $51.00 | $41.95 | O'Reilly | 1996 | 8.2 | computer programming | perl
+Interaction Design: Beyond Human-Computer Interaction | Yvonne Rogers, Helen Sharp, Jenny Preece | 0-471-49278-7 | $56.00 | $40.00 | John Wiley | 2002 | 9.6 | human computer interaction | interface design
+Classic Data Sructures in C++ | Timothy A.Budd | 0-201-50889-3 | $40.00 | $36.00 | Addison-Wesley | 1994 | 6.5 | computer programming | data structures
+Database Management Systems | Raghu Ramakrishnana, Johannes Gehrke | 0-07-232206-3 | $70.00 | $56.00 | McGraw-Hill | 2000 | 8.5 | computer science | databases
+XML Programming: Web Applications | Alex Nakhimovsky, Tom Myers | 1-59059-003-1 | $45.00 | $26.00 | Apress | 2002 | 8.5 | computer programming | xml
+Principles of Transaction Processing | Philip Bernstien | 1-55860-415-4 | $50.00 | $40.00 | Morgan Kauffmann | 1999 | 5.5 | system design | transaction processing
+Construction Contracting | Richard Clough, Glenn Sears  | 0-471-30968-0 | $76.00 | $76.00 | John Wiley | 1994 | 8.5 | construction engineering | project control
+The Design of Everyday Things | Donald A. Norman | 0-385-26774-6 | $15.95 | $21.95 | Bantam Doubleday | 1988 | 9.9 | design enginnering | design,engineering, psychology
+Java Examples in a Nutshell | David Flanagan | 0-596-00039-1 | $43.95 | $29.95 | O'Reilly | 2000 | 8.9 | computer programming | java
+Unix for the Impatient | Tom Abrahams, John Larson | 0-201-82376-4 | $25.95 | $19.95 | Addison-Wesley | 1995 | 9.9 | operating system | unix
+Beginning Java 2: jdk1.4.1 | Ivor Horton | 1-861003-66-8 | $55.95 | $41.95 | Wrox | 1996 | 9.9 | computer programming | java
+How People Learn | John Bransford, Ann Brown, R.Cocking | 0-309-06557-7 | $65.95 | $59.95 | National Academy Press | 1999 | 8.9 | education | education, psychology
+A Treatise on Sustainable Systems | I. M. Agod | 1-456890-77-9 | $47.98 | $37.99 | Bantam Doubleday | 1999 | 10.0 | environmental science | environment, earth
+Martial Arts | Whu R.Yeu | 1-567890-99-9 | $37.98 | $27.99 | Addison-Wesley | 1999 | 10.0 | martial arts | karate, martial arts, kung fu
+To Be or Not to Be | B.Good | 1-445578-77-8 | $27.98 | $17.99 | National Academy Press | 1995 | 5.5 | philosophy | art of living, philosophy, self-help

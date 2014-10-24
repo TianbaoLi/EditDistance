@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<database name="Shipping">
+  <createdby name="Chris Mordue" />
+  <Schema>
+    <table name="Packages">  
+      <column name="Invoice" type="Integer" key="yes">
+        <comment>The invoice number is and ID for all packages</comment>
+      </column>
+      <column name="Weight" type="Double" key="no">
+        <comment>The weight of the package in kilograms</comment>
+      </column>
+      <column name="Item_count" type="Integer" key="no">
+        <comment>Number of items in the package</comment>
+      </column>
+      <column name="Date" type="Date" key="no">
+        <comment>Date package was ordered</comment>
+      </column>
+      <column name="Buyer" type="String" key="no">
+        <comment>Name of the buyer</comment>
+      </column>
+      <column name="Gift_wrapped" type="Boolean" key="no">
+        <comment>y or t if gift wrapped</comment>
+      </column>
+    </table>
+    <table name="Shipping">
+      <column name="Invoice" type="Integer" key="yes">
+      </column>
+      <column name="Method" type="String" key="no">
+        <comment>How the package is being shipped (ex: air, ground)</comment>
+      </column>
+      <column name="Tracking" type="Integer" key="yes">
+        <comment>The tracking number</comment>
+      </column>
+      <column name="Company" type="String" key="no">
+        <comment>Company package is being shipped through</comment>
+      </column>
+      <column name="Destination" type="String" key="no">
+        <comment>City package is to be delivered to</comment>
+      </column>
+    </table>
+    <table name="Transit">
+      <column name="Tracking" type="Integer" key="yes">
+      </column>
+      <column name="Delivery_instr" type="String" key="no">
+        <comment>Instructions for delivery</comment>
+      </column>
+      <column name="Warehouse_from" type="String" key="no">
+        <comment>Where the item is being shipped from</comment>
+      </column>
+      <column name="Status" type="String" key="no">
+        <comment>How far along on its journey to the customer the package is</comment>
+      </column>
+      <column name="Delivery_time" type="Datetime" key="no">
+        <comment>Estimated time and day delivery should be made</comment>
+      </column>
+      <column name="Pick_up_time" type="Time" key="no">
+      </column>
+      <column name="Name" type="String" key="no">
+        <comment>Name of person to deliver to</comment>
+      </column>
+      <column name="Address" type="String" key="no">
+        <comment>Address of where to deliver</comment>
+      </column>
+    </table>
+    <table name="Vendors">
+      <column name="Name" type="String" key="no">
+        <comment>Name of the shipping vendors</comment>
+      </column>
+      <column name="Address" type="String" key="no">
+        <comment>Local address of company</comment>
+      </column>
+      <column name="URL" type="String" key="no">
+        <comment>web page of vendor</comment>
+      </column>
+      <column name="Phone" type="Integer" key="no">
+      </column>
+      <column name="Warehouse" type="String" key="no">
+        <comment>Warehouses vendors opperate out of</comment>
+      </column>
+      <column name="Pick_up" type="Time" key="no">
+        <comment>Time vendor picks up from warehouse</comment>
+      </column>
+      <column name="Rating" type="Char" key="no">
+        <comment>Rating given to the vendor</comment>
+      </column>
+    </table>
+    <table name="Methods">
+      <column name="Shipping_co" type="String" key="no">
+        <comment>Shipping companies buyer can use to ship goods</comment>
+      </column>
+      <column name="Options" type="String" key="no">
+        <comment>ways to have package shipped (ex: ground, air, express...)</comment>
+      </column>
+      <column name="Price" type="Money" key="no">
+        <comment>Price to have shipped</comment>
+      </column>
+      <column name="Weight" type="Double" key="no">
+        <comment>Max Weight of package (in kilograms)</comment>
+      </column>
+      <column name="Delivery_time" type="Integer" key="no">
+        <comment>number of days at most package will take to be delivered</comment>
+      </column>
+    </table>
+    <table name="Warehouses">
+      <column name="Warehouse" type="String" key="no">
+        <comment>Name of various warehouses</comment>
+      </column>
+      <column name="Address" type="String" key="no">
+        <comment>Address of warehouse</comment>
+      </column>
+      <column name="Shipping_co" type="String" key="no">
+        <comment>Shipping companies that work out of the warehouse</comment>
+      </column>
+      <column name="Capacity" type="Percent" key="no">
+        <comment>Percentage of how full the warehouse is</comment>
+      </column>
+    </table>
+    <foreignkeyconstraint>
+      <source table="Packages">
+        <column name="Invoice" />
+      </source>
+      <target table="Shipping">
+        <column name="Invoice" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Packages">
+        <column name="Buyer" />
+      </source>
+      <target table="Transit">
+        <column name="Name" />
+      </target>
+      <comment>put the buyers name as who to send to</comment>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Shipping">
+        <column name="Tracking" />
+      </source>
+      <target table="Transit">
+        <column name="Tracking" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Shipping">
+        <column name="Method" />
+      </source>
+      <target table="Methods">
+        <column name="Options" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Shipping">
+        <column name="Company" />
+      </source>
+      <target table="Vendors">
+        <column name="Name" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Shipping">
+        <column name="Company" />
+      </source>
+      <target table="Methods">
+        <column name="Shipping_co" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Shipping">
+        <column name="Company" />
+      </source>
+      <target table="Warehouses">
+        <column name="Shipping_co" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Transit">
+        <column name="Warehouse_from" />
+      </source>
+      <target table="Warehouses">
+        <column name="Warehouse" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Vendors">
+        <column name="Name" />
+      </source>
+      <target table="Methods">
+        <column name="Shipping_co" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Vendors">
+        <column name="Name" />
+      </source>
+      <target table="Warehouses">
+        <column name="Shipping_co" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Vendors">
+        <column name="Warehouse" />
+      </source>
+      <target table="Warehouses">
+        <column name="Warehouse" />
+      </target>
+    </foreignkeyconstraint>
+    <foreignkeyconstraint>
+      <source table="Methods">
+        <column name="Shipping_co" />
+      </source>
+      <target table="Warehouses">
+        <column name="Shipping_co" />
+      </target>
+    </foreignkeyconstraint>
+  </Schema>
+  <Data>
+    <Packages>
+      <tuple>
+        <Invoice>01238591</Invoice>
+        <Weight>452</Weight>
+        <Item_count>2</Item_count>
+        <Date>011102</Date>
+        <Buyer>Tony Gwen</Buyer>
+        <Gift_wrapped>y</Gift_wrapped>
+      </tuple>
+
+      <tuple>
+        <Invoice>04538756</Invoice>
+        <Weight>1552</Weight>
+        <Item_count>2</Item_count>
+        <Date>010902</Date>
+        <Buyer>Sam Thrall</Buyer>
+        <Gift_wrapped>y</Gift_wrapped>
+      </tuple>
+
+      <tuple>
+        <Invoice>07853251</Invoice>
+        <Weight>53</Weight>
+        <Item_count>1</Item_count>
+        <Date>011102</Date>
+        <Buyer>George Bush</Buyer>
+        <Gift_wrapped>y</Gift_wrapped>
+      </tuple>
+
+      <tuple>
+        <Invoice>08856214</Invoice>
+        <Weight>8006</Weight>
+        <Item_count>4</Item_count>
+        <Date>011202</Date>
+        <Buyer>Lance Armstrong</Buyer>
+        <Gift_wrapped>y</Gift_wrapped>
+      </tuple>
+
+    </Packages>
+
+    <Shipping>
+      <tuple>
+        <Invoice>01238591</Invoice>
+        <Method>Air_2day</Method>
+        <Tracking>145285852</Tracking>
+        <Company>FedExpress</Company>
+        <Destination>San Jose</Destination>
+      </tuple>
+
+      <tuple>
+        <Invoice>04538756</Invoice>
+        <Method>Ground</Method>
+        <Tracking>477456528</Tracking>
+        <Company>UPS</Company>
+        <Destination>Gig Harbor</Destination>
+      </tuple>
+
+      <tuple>
+        <Invoice>07853251</Invoice>
+        <Method>Air_1day</Method>
+        <Tracking>855256325</Tracking>
+        <Company>UPS</Company>
+        <Destination>Washington D.C.</Destination>
+      </tuple>
+
+      <tuple>
+        <Invoice>08856214</Invoice>
+        <Method>Bicyle</Method>
+        <Tracking>874451426</Tracking>
+        <Company>Couriers</Company>
+        <Destination>Austin</Destination>
+      </tuple>
+
+    </Shipping>
+
+    <Transit>
+      <tuple>
+        <Tracking>145285852</Tracking>
+        <Delivery_instr>Signature required</Delivery_instr>
+        <Warehouse_from>Central_Side</Warehouse_from>
+        <Status>Delivered</Status>
+        <Delivery_time>011302</Delivery_time>
+        <Pick_up_time>5:00</Pick_up_time>
+        <Name>Tony Gwen</Name>
+        <Address>4258 45th AVE CT SE San Jose, CA 75852</Address>
+      </tuple>
+
+      <tuple>
+        <Tracking>477456528</Tracking>
+        <Delivery_instr>Watch this end up!</Delivery_instr>
+        <Warehouse_from>Nalley_Warehouse</Warehouse_from>
+        <Status>Transit</Status>
+        <Delivery_time>011502</Delivery_time>
+        <Pick_up_time>2:00</Pick_up_time>
+        <Name>Sam Thrall</Name>
+        <Address>7841 32nd AVE CT NW Gig Harbor WA 98335</Address>
+      </tuple>
+
+      <tuple>
+        <Tracking>855256325</Tracking>
+        <Delivery_instr>Knock three times, then ring bell twice</Delivery_instr>
+        <Warehouse_from>Nalley_Warehouse</Warehouse_from>
+        <Status>Delivered</Status>
+        <Delivery_time>011202</Delivery_time>
+        <Pick_up_time>12:00</Pick_up_time>
+        <Name>George Bush</Name>
+        <Address>101 White House Dr NE APT #L Washington D.C. 35201</Address>
+      </tuple>
+
+      <tuple>
+        <Tracking>874451426</Tracking>
+        <Delivery_instr>Check ID</Delivery_instr>
+        <Warehouse_from>Cycle_Plant</Warehouse_from>
+        <Status>Transit</Status>
+        <Delivery_time>012802</Delivery_time>
+        <Pick_up_time>3:00</Pick_up_time>
+        <Name>Lance Armstrong</Name>
+        <Address>721 LaChampion DR Austin, TX 65252</Address>
+      </tuple>
+
+    </Transit>
+
+    <Vendors>
+      <tuple>
+        <Name>FedExpress</Name>
+        <Address>52121 Main St Boonsville, SD 42587</Address>
+        <URL>http://www.FedExpress.com</URL>
+        <Phone>5327425212</Phone>
+        <Warehouse>Central_Side</Warehouse>
+        <Pick_up></Pick_up>
+        <Rating>D</Rating>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <Address>112 S Tacoma Way Tacoma, WA 98332</Address>
+        <URL>http://UPS.com</URL>
+        <Phone>2538574214</Phone>
+        <Warehouse>Nalley_Warehouse</Warehouse>
+        <Pick_up></Pick_up>
+        <Rating>B</Rating>
+      </tuple>
+
+      <tuple>
+        <Name>Couriers</Name>
+        <Address>8524 85th St. NE Seattle WA 98102</Address>
+        <URL>http://CouriersBikeForU.com</URL>
+        <Phone>2065237463</Phone>
+        <Warehouse>Cycle_Plant</Warehouse>
+        <Pick_up></Pick_up>
+        <Rating>A</Rating>
+      </tuple>
+
+    </Vendors>
+
+    <Methods>
+      <tuple>
+        <Shipping_co>FedExpress</Shipping_co>
+        <Options>Air_2day</Options>
+        <Price>47.00</Price>
+        <Weight>2000</Weight>
+        <Delivery_time>2</Delivery_time>
+      </tuple>
+
+      <tuple>
+        <Shipping_co>UPS</Shipping_co>
+        <Options>Ground</Options>
+        <Price>12.00</Price>
+        <Weight>5300</Weight>
+        <Delivery_time>6</Delivery_time>
+      </tuple>
+
+      <tuple>
+        <Shipping_co>UPS</Shipping_co>
+        <Options>Air_1day</Options>
+        <Price>29.00</Price>
+        <Weight>200</Weight>
+        <Delivery_time>1</Delivery_time>
+      </tuple>
+
+      <tuple>
+        <Shipping_co>Couriers</Shipping_co>
+        <Options>Bicycle</Options>
+        <Price>35.00</Price>
+        <Weight>9850</Weight>
+        <Delivery_time>20</Delivery_time>
+      </tuple>
+
+    </Methods>
+
+    <Warehouses>
+      <tuple>
+        <Warehouse>Central_Side</Warehouse>
+        <Address>418552 418St SW Ketchem, ID 34241</Address>
+        <Shipping_co>FedExpress</Shipping_co>
+        <Capacity>12</Capacity>
+      </tuple>
+
+      <tuple>
+        <Warehouse>Nalley_Warehouse</Warehouse>
+        <Address>1245 31st St Nalley Valley Way Tacoma, WA 98332</Address>
+        <Shipping_co>UPS</Shipping_co>
+        <Capacity>04</Capacity>
+      </tuple>
+
+      <tuple>
+        <Warehouse>Cycle_Plant</Warehouse>
+        <Address>8524 85th St. NE Seattle WA 98102</Address>
+        <Shipping_co>Couriers</Shipping_co>
+        <Capacity>50</Capacity>
+      </tuple>
+
+    </Warehouses>
+
+  </Data>
+</database>

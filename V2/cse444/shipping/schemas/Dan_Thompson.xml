@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<database name="ShippingDB">
+    <createdby name="Dan Thompson" />
+    <Schema>
+        <table name="ShippedPackage">
+            <column name="InvoiceNum" type="Integer" key="yes" />
+            <column name="Weight" type="Real" key="no" />
+            <column name="ItemCount" type="Integer" key="no" />
+            <column name="UseMethod" type="String" key="no" />
+            <column name="TrackingNumber" type="Integer" key="no" />
+            <column name="UseVendor" type="String" key="no" />
+            <column name="Comments" type="String" key="no" />
+            <column name="SourceWarehouse" type="Integer" key="no" />
+            <column name="DeliverToName" type="String" key="no" />
+            <column name="DeliverToAddress" type="String" key="no" />
+            <column name="DeliverToContact" type="String" key="no" />
+            <column name="PickUpTime" type="Time" key="no" />
+            <column name="DeliveryTime" type="Time" key="no" />
+            <column name="Status" type="String" key="no" />
+        </table>
+        <table name="ShippingVendor">
+            <column name="Name" type="String" key="yes" />
+            <column name="LocalAddress" type="String" key="yes">
+                <comment>This is paired with Name for a key</comment>
+            </column>
+            <column name="URL" type="String" key="no" />
+            <column name="PhoneNumber" type="String" key="no" />
+            <column name="LocalPickupTime" type="Time" key="no" />
+        </table>
+        <table name="ShippingMethod">
+            <column name="Type" type="String" key="yes" />
+            <column name="Vendor" type="String" key="yes">
+                <comment>This is paired with Type for a key</comment>
+            </column>
+            <column name="TimeLimit" type="Time" key="no" />
+            <column name="PricingUnit" type="String" key="no" />
+            <column name="PricePerUnit" type="Real" key="no" />
+            <column name="MaxWeight" type="Real" key="no" />
+            <column name="MaxDimensions" type="Integer" key="no">
+                <comment>This is the max sum of the inches for each dimension</comment>
+            </column>
+        </table>
+        <foreignkeyconstraint>
+            <source table="ShippedPackage">
+                <column name="UseMethod" />
+            </source>
+            <target table="ShippingMethod">
+                <column name="Type" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="ShippedPackage">
+                <column name="UseVendor" />
+            </source>
+            <target table="ShippingVendor">
+                <column name="Name" />
+            </target>
+        </foreignkeyconstraint>
+        <foreignkeyconstraint>
+            <source table="ShippingMethod">
+                <column name="Vendor" />
+            </source>
+            <target table="ShippingVendor">
+                <column name="Name" />
+            </target>
+        </foreignkeyconstraint>
+    </Schema>
+    <Data>
+        <ShippedPackage>
+            <tuple>
+                <InvoiceNum>174629</InvoiceNum>
+                <Weight>16.5</Weight>
+                <ItemCount>2</ItemCount>
+                <UseMethod>Ground</UseMethod>
+                <TrackingNumber>14728849993764</TrackingNumber>
+                <UseVendor>UPS</UseVendor>
+                <Comments>Nothing</Comments>
+                <SourceWarehouse>1</SourceWarehouse>
+                <DeliverToName>Johnny</DeliverToName>
+                <DeliverToAddress>1234 Nowhere, New York, NY</DeliverToAddress>
+                <DeliverToContact>Johnny</DeliverToContact>
+                <PickUpTime>1 pm</PickUpTime>
+                <DeliveryTime> 8 am</DeliveryTime>
+                <Status>En Route</Status>
+            </tuple>
+            <tuple>
+                <InvoiceNum>92753</InvoiceNum>
+                <Weight>13.1</Weight>
+                <ItemCount>1</ItemCount>
+                <UseMethod>NextDay</UseMethod>
+                <TrackingNumber>0235098750</TrackingNumber>
+                <UseVendor>UPS</UseVendor>
+                <Comments>Nothing</Comments>
+                <SourceWarehouse>2</SourceWarehouse>
+                <DeliverToName>Bob</DeliverToName>
+                <DeliverToAddress>1234 134rd, Austin, TX</DeliverToAddress>
+                <DeliverToContact>Bob</DeliverToContact>
+                <PickUpTime>4 pm</PickUpTime>
+                <DeliveryTime>11 am</DeliveryTime>
+                <Status>Delivered</Status>
+            </tuple>
+            <tuple>
+                <InvoiceNum>1324</InvoiceNum>
+                <Weight>5</Weight>
+                <ItemCount>1</ItemCount>
+                <UseMethod>Ground</UseMethod>
+                <TrackingNumber>03218882828</TrackingNumber>
+                <UseVendor>UPS</UseVendor>
+                <Comments>Nothing</Comments>
+                <SourceWarehouse>1</SourceWarehouse>
+                <DeliverToName>Simon</DeliverToName>
+                <DeliverToAddress>1111 Chamfers Court St Louis, MO</DeliverToAddress>
+                <DeliverToContact>Simon</DeliverToContact>
+                <PickUpTime>12 pm</PickUpTime>
+                <DeliveryTime> 7 am</DeliveryTime>
+                <Status>En Route</Status>
+            </tuple>
+            <tuple>
+                <InvoiceNum>1515363</InvoiceNum>
+                <Weight>25</Weight>
+                <ItemCount>4</ItemCount>
+                <UseMethod>Second Day</UseMethod>
+                <TrackingNumber>82847476</TrackingNumber>
+                <UseVendor>UPS</UseVendor>
+                <Comments>Nothing</Comments>
+                <SourceWarehouse>4</SourceWarehouse>
+                <DeliverToName>Adam</DeliverToName>
+                <DeliverToAddress>4231 44th, Los Angeles, CA</DeliverToAddress>
+                <DeliverToContact>Adam</DeliverToContact>
+                <PickUpTime>1 pm</PickUpTime>
+                <DeliveryTime> 8 am</DeliveryTime>
+                <Status>En Route</Status>
+            </tuple>
+        </ShippedPackage>
+    </Data>
+</database>

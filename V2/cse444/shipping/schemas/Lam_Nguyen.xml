@@ -1,0 +1,285 @@
+<database name="Shipping">
+
+<createdby name="Lam Nguyen"/>
+
+<Schema>
+  
+  <table name="Package">
+        <column name="InvoiceID" type="String" key="yes">
+	  <comment>
+            Invoice number of the package
+	  </comment>
+	</column>
+	
+        <column name="Vendor_Name" type="String" key="no">
+          <comment>Foreign key of Shipping_Method</comment>
+        </column>
+        <column name="Method_Name" type="String" key="no">
+          <comment>Shipping method of the package, foreign key of Shipping_Method</comment>
+        </column>
+        <column name="WarehouseID" type="Integer" key="no">
+          <comment>Warehouse of origin foreign key of Warehouse</comment>
+        </column>
+        <column name="Number_Items" type="Integer" key="no">
+          <comment>Number of items in the package</comment>
+        </column>
+        <column name="Weight" type="Integer" key="no">
+          <comment>Weight of the package</comment>
+        </column>
+        <column name="Special_Instructions" type="String" key="no">
+          <comment>Instructions to the shipping vendor</comment>
+        </column>
+
+        <column name="Name" type="String" key="no" />
+        <column name="Address" type="String" key="no" />
+        <column name="City" type="String" key="no" />
+        <column name="State" type="String" key="no"/>
+        <column name="Zip" type="Integer" key="no"/>
+
+        <column name="Status" type="String" key="no">
+          <comment>Status of package, either PENDING, IN PROGRESS, or COMPLETED</comment>
+        </column>
+        <column name="Tracking_Number" type="String" key="no" />
+        <column name="Pick_Up_Time" type="DateTime" key="no" />
+        <column name="Delivery_Time" type="DateTime" key="no" />
+
+  </table>
+
+  <table name="Vendor">
+    <column name="Vendor_Name" type="String" key="yes"></column>
+    <column name="Address" type="String" key="no" />
+    <column name="City" type="String" key="no" />
+    <column name="State" type="String" key="no" />
+    <column name="Zip" type="Integer" key="no" />
+    <column name="Url" type="String" key="no" />
+    <column name="Phone" type="String" key="no" />
+    <column name="Tracking_Url" type="String" key="no" />
+    <column name="Order" type="Integer" key="no">
+      <comment>Order that the Vendor is listed, 1 being the beginning; can also be used as vendor preferences</comment>
+    </column>
+  </table>
+
+  <table name="Shipping_Method">
+    <column name="Vendor_Name" type="String" key="yes" />
+    <column name="Method_Name" type="String" key="yes" />
+    <column name="Base_Price" type="Currency" key="no">
+      <comment>The base price of the shipping method</comment>
+    </column>
+    <column name="Price_Per_Item" type="Currency" key="no">
+      <comment>Price per item in addition to the base price</comment>
+    </column>
+    <column name="Price_Per_Weight" type="Currency" key="no" />
+    <column name="Delivery_Days" type="Integer" key="no">
+      <comment>The number of days that delivery is expected</comment>
+    </column>
+    <column name="Max_Weight" type="Integer" key="no" />
+    <column name="Max_Dimension" type="String" key="no">
+      <comment>Maximum dimension of the package in the for 12x4x8</comment>
+    </column>
+    <column name="Active" type="Boolean" key="no">
+      <comment>0 if inactive, 1 if active;used to enable and disable shipping methods</comment>
+    </column>
+  </table>
+
+
+  <table name="Warehouse">
+     <column name="WarehouseID" type="Integer" key="yes">
+        <comment>ID of the warehouse</comment>
+     </column>
+     <column name="Address" type="String" key="no" />
+     <column name="City" type="String" key="no" />
+     <column name="State" type="String" key="no" />
+     <column name="Zip" type="Integer" key="no" />
+  </table>
+
+  <table name="Vendor_Warehouse">
+    <column name="Vendor_Name" type="String" key="no" />
+    <column name="WarehouseID" type="Integer" key="no" />
+    <column name="Daily_Pickup_Time" type="DateTime" key="no" />
+  </table>
+
+  <foreignkeyconstraint>
+    <source table="Package">
+      <column name="Vendor_Name"/>
+    </source>
+    <target table="Shipping_Method">
+      <column name="Vendor_Name"/>
+    </target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Package">
+      <column name="Method_Name"/>
+    </source>
+    <target table="Shipping_Method">
+      <column name="Method_Name"/>
+    </target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Package">
+      <column name="WarehouseID"/>
+    </source>
+    <target table="Warehouse">
+      <column name="WarehouseID"/>
+    </target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Vendor_Warehouse">
+      <column name="Vendor_Name"/>
+    </source>
+    <target table="Vendor">
+      <column name="Vendor_Name"/>
+    </target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Vendor_Warehouse">
+      <column name="WarehouseID" />
+    </source>
+    <target table="Warehouse">
+      <column name="WarehouseID"/>
+    </target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Shipping_Method">
+      <column name="Vendor_Name"/>
+    </source>
+    <target table="Vendor">
+      <column name="Vendor_Name"/>
+    </target>
+  </foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+  <Vendor>
+    <tuple>
+      <Vendor_Name>LSC</Vendor_Name>
+      <Address>123 4th Lane</Address>
+      <City>Seattle</City>
+      <State>WA</State>
+      <Zip>98195</Zip>
+      <Url>http://www.lsc.com</Url>
+      <Phone>1-800-555-5555</Phone>
+      <Tracking_Url>http://www.lsc.com/tracking?</Tracking_Url>
+      <Order>1</Order>
+    </tuple>
+
+    <tuple>
+      <Vendor_Name>Courier 4U</Vendor_Name>
+      <Address>4 United Way</Address>
+      <City>Sacramento</City>
+      <State>CA</State>
+      <Zip>96530</Zip>
+      <Url>http://www.Couriers.com</Url>
+      <Phone>1-800-656-5656</Phone>
+      <Tracking_Url>http://tracking.Couriers.com/?number:</Tracking_Url>
+      <Order>2</Order>
+    </tuple>
+  </Vendor>
+
+  <Shipping_Method>
+    <tuple>
+      <Vendor_Name>LSC</Vendor_Name>
+      <Method_Name>Standard</Method_Name>
+      <Base_Price>5.00</Base_Price>
+      <Price_Per_Item>0</Price_Per_Item>
+      <Price_Per_Weight>0</Price_Per_Weight>
+      <Delivery_Days>5</Delivery_Days>
+      <Max_Weight>15</Max_Weight>
+      <Max_Dimension>4x4x10</Max_Dimension>
+      <Active>1</Active>
+    </tuple>
+
+    <tuple>
+      <Vendor_Name>LSC</Vendor_Name>
+      <Method_Name>Free Shipping</Method_Name>
+      <Base_Price>0</Base_Price>
+      <Price_Per_Item>0</Price_Per_Item>
+      <Price_Per_Weight>0</Price_Per_Weight>
+      <Delivery_Days>5</Delivery_Days>
+      <Max_Weight>15</Max_Weight>
+      <Max_Dimension>4x4x10</Max_Dimension>
+      <Active>0</Active>
+    </tuple>
+
+    <tuple>
+      <Vendor_Name>Courier 4U</Vendor_Name>
+      <Method_Name>Next Day</Method_Name>
+      <Base_Price>6.50</Base_Price>
+      <Price_Per_Item>1</Price_Per_Item>
+      <Price_Per_Weight>0</Price_Per_Weight>
+      <Delivery_Days>1</Delivery_Days>
+      <Max_Weight>30</Max_Weight>
+      <Max_Dimension>6x6x12</Max_Dimension>
+      <Active>1</Active>
+    </tuple>
+  </Shipping_Method>
+
+  <Warehouse>
+    <tuple>
+      <WarehouseID>1</WarehouseID>
+      <Address>826 Warehouse Rd</Address>
+      <City>Warehouse City</City>
+      <State>PA</State>
+      <Zip>95128</Zip>
+    </tuple>
+
+    <tuple>
+      <WarehouseID>2</WarehouseID>
+      <Address>8725 Spoon Ave</Address>
+      <City>Spoonville</City>
+      <State>MA</State>
+      <Zip>97524</Zip>
+    </tuple>
+  </Warehouse>
+
+  <Vendor_Warehouse>
+    <tuple>
+      <Vendor_Name>LSC</Vendor_Name>
+      <WarehouseID>1</WarehouseID>
+      <Daily_Pickup_Time>8:00</Daily_Pickup_Time>
+    </tuple>
+
+    <tuple>
+      <Vendor_Name>LSC</Vendor_Name>
+      <WarehouseID>2</WarehouseID>
+      <Daily_Pickup_Time>9:30</Daily_Pickup_Time>
+    </tuple>
+
+    <tuple>
+      <Vendor_Name>Courier 4U</Vendor_Name>
+      <WarehouseID>1</WarehouseID>
+      <Daily_Pickup_Time>8:45</Daily_Pickup_Time>
+    </tuple>
+  </Vendor_Warehouse>
+
+  <Package>
+    <tuple>
+
+      <InvoiceID>12r3t1t</InvoiceID>
+      <Vendor_Name>LSC</Vendor_Name>
+      <Method_Name>Standard</Method_Name>
+      <WarehouseID>1</WarehouseID>
+      <Number_Items>1</Number_Items>
+      <Weight>4</Weight>
+      <Special_Instructions></Special_Instructions>
+
+      <Name>Luke</Name>
+      <Address>742 58th Ave</Address>
+      <City>Seattle</City>
+      <State>WA</State>
+      <Zip>98195</Zip>
+      <Status>COMPLETE</Status>
+      <Tracking_Number>a102847</Tracking_Number>
+      <Pick_Up_Time>2002-01-15 08:00</Pick_Up_Time>
+      <Delivery_Time>2002-01-18 16:30</Delivery_Time>
+    </tuple>
+  </Package>
+</Data>
+
+</database>

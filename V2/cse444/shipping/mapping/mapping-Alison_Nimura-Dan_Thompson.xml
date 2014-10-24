@@ -1,0 +1,75 @@
+<mapping>
+  <Alison_Nimura correct="yes-ken">
+    <Package m="ShippedPackage">
+      <TrackingNo m="ShippedPackage/TrackingNumber"/>
+      <Carrier m="ShippedPackage/UseVendor"/>
+      <InvoiceNo m="ShippedPackage/InvoiceNum"/>
+      <Weight m="ShippedPackage/Weight"/>
+      <ItemAmount m="ShippedPackage/ItemCount"/>
+      <ShippingMethod m="ShippingMethod"/>
+      <HandlingNotes m="ShippedPackage/Comments"/>
+      <Warehouse m="ShippedPackage/SourceWarehouse"/>
+      <RecipientName m="ShippedPackage/DeliverToName"/>
+      <RecipientAddr m="ShippedPackage/DeliveryToAddress"/>
+      <ContactNo m="ShippedPackage/DeliverToContact"/>
+      <PickUpDate m="ShippedPackage/PickUpTime"/>
+      <EstDeliveryDate m="ShippedPackage/DeliveryTime"/>
+      <DeliveryDate m="ShippedPackage/DeliveryTime"/>
+      <OrderStatus m="ShippedPackage/Status"/>
+    </Package>
+    <Carriers m="ShippingVendor">
+      <CarrierName m="ShippingVendor/Name"/>
+      <LocalAddr m="ShippingVendor/LocalAddress"/>
+      <Url m="ShippingVendor/URL"/>
+      <TelephoneNo m="ShippingVendor/PhoneNumber"/>
+      <PickUpTime m="ShippedPackage/PickUpTime"/>
+      <Methods m="ShippingMethod/Type"/>
+    </Carriers>
+    <ShippingOptions m="ShippingMethod">
+      <OptionName m="ShippingMethod/Type"/>
+      <Carrier m="ShippingMethod/Vendor"/>
+      <PricingMethod/>
+      <PricePerUnit m="ShippingMethod/PricePerUnit"/>
+      <DeliveryTime m="ShippedPackage/DeliveryTime"/>
+      <MaxWeight m="ShippingMethod/MaxWeight"/>
+      <MaxLength m="ShippingMethod/MaxDimensions"/>
+      <MaxWidth/>
+      <MaxHeight/>
+      <DestCities/>
+    </ShippingOptions>
+  </Alison_Nimura>
+  <Dan_Thompson correct="yes-ken">
+    <ShippedPackage m="Package">
+      <InvoiceNum m="Package/InvoiceNo"/>
+      <Weight m="Package/Weight"/>
+      <ItemCount m="Package/ItemAmount"/>
+      <UseMethod m="Package/ShippingMethod"/>
+      <TrackingNumber m="Package/TrackingNo"/>
+      <UseVendor m="Package/Carrier"/>
+      <Comments m="Package/HandlingNotes"/>
+      <SourceWarehouse m="Package/Warehouse"/>
+      <DeliverToName m="Package/RecipientName"/>
+      <DeliverToAddress m="Package/RecipientAddr"/>
+      <DeliverToContact m="Package/ContactNo"/>
+      <PickUpTime m="Package/PickUpDate"/>
+      <DeliveryTime m="Package/DeliveryDate" c="Package/EstDeliveryDate Package/DeliveryDate"/>
+      <Status m="Package/OrderStatus"/>
+    </ShippedPackage>
+    <ShippingVendor m="Carriers">
+      <Name m="Carriers/CarrierName"/>
+      <LocalAddress m="Carriers/LocalAddr"/>
+      <URL m="Carriers/Url"/>
+      <PhoneNumber m="Carriers/TelephoneNo"/>
+      <LocalPickupTime m="Carriers/PickUpTime"/>
+    </ShippingVendor>
+    <ShippingMethod m="ShippingOptions">
+      <Type m="ShippingOptions/OptionName"/>
+      <Vendor m="ShippingOptions/Carrrier"/>
+      <TimeLimit m="ShippingOptions/DeliveryTime"/>
+      <PricingUnit/>
+      <PricePerUnit m="ShippingOptions/PricePerUnit"/>
+      <MaxWeight m="ShippingOptions/MaxWeight"/>
+      <MaxDimensions m="ShippingOptions/MaxLength" c="ShippingOptions/MaxLength ShippingOptions/MaxWidth ShippingOptions/MaxHeight"/>
+    </ShippingMethod>
+  </Dan_Thompson>
+</mapping>

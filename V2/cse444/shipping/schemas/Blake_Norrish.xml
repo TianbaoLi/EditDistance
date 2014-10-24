@@ -1,0 +1,253 @@
+﻿<Database name="Shipping">
+	<createdby name="Blake Norrish"/>
+	<Schema>
+		<table name="PackageInfo">
+			<column name="Invoice" type="Integer" key="Yes">
+				<comment>The invoice number</comment>
+			</column>
+			<column name="Weight" type="Integer" key="No">
+				<comment>The weight of the package in Lbs</comment>
+			</column>
+			<column name="NumItems" type="Integer" key="No">
+				<comment>The number of items in the package</comment>
+			</column>
+			<column name="ShipMethod" type="String" key="No">
+				<comment>Hot the package will be shipped</comment>
+			</column>
+			<column name="TrackingNumber" type="Integer" key="No">
+				<comment>Number used to track the package with the vendor</comment>
+			</column>
+			<column name="SpecialInst" type="String" key="No">
+				<comment>Any special instructions to ship the package</comment>
+			</column>
+			<column name="sourceWH" type="String" key="No">
+				<comment>Where the package is being shipped from</comment>
+			</column>
+			<column name="Destname" type="String" key="No">
+				<comment>The name of the person who the package is being shipped to</comment>
+			</column>
+			<column name="DestAddress" type="String" key="No">
+				<comment>The address the package is being sent to</comment>
+			</column>
+			<column name="DestPhone" type="String" key="No">
+				<comment>The phone number of the person who is getting the package</comment>
+			</column>
+			<column name="GiftWrap" type="Boolean" key="No">
+				<comment>True if the package should be gift wrapped</comment>
+			</column>
+			<column name="Fragile" type="Boolean" key="No">
+				<comment>True if the package is fragile</comment>
+			</column>
+		</table>
+		<table name="PackageStatus">
+			<column name="Invoice" type="Integer" key="No">
+				<comment>The package invoice number</comment>
+			</column>
+			<column name="StatusID" type="Integer" key="No">
+				<comment>What the current status of the package is</comment>
+			</column>
+			<column name="OrderDate" type="Date" key="No">
+				<comment>The date the package was ordered</comment>
+			</column>
+			<column name="ShipDate" type="Date" key="No">
+				<comment>The date the package was shipped</comment>
+			</column>
+			<column name="ArrivalDate" type="Date" key="No">
+				<comment>When the package arrived</comment>
+			</column>
+			<column name="Paid" type="Boolean" key="No">
+				<comment>If the package has been paid for(like for COD's)</comment>
+			</column>
+		</table>
+		<table name="StatusDesc">
+			<column name="StatusID" type="Integer" key="Yes">
+				<comment>The status ID</comment>
+			</column>
+			<column name="StatusDesc" type="String" key="No">
+				<comment>A description of what the status ID means</comment>
+			</column>
+		</table>
+		<table name="ShippingVendor">
+			<column name="name" type="String" key="Yes">
+				<comment>The name of the shipping company</comment>
+			</column>
+			<column name="URL" type="String" key="No">
+				<comment>The web site of the shipping company</comment>
+			</column>
+			<column name="Phone" type="String" key="No">
+				<comment>The phone number of the shipping company</comment>
+			</column>
+			<column name="LocalAddress" type="String" key="No">
+				<comment>The local address of the shipping company</comment> 
+			</column>
+		</table>
+		<table name="ShippingMethods" >
+			<column name="Vendor" type="String" key="No">
+				<comment>The shipping vendor</comment>
+			</column>
+			<column name="ShippingMethod" type="String" key="No">
+				<comment>The name of the shipping method</comment>
+			</column>
+			<column name="MaxWeight" type="Integer" key="No">
+				<comment>The max weight of the package for this method</comment>
+			</column>
+			<column name="MaxItems" type="Integer" key="No">
+				<comment>The max items for this shipping method</comment>
+			</column>
+			<column name="BasePrice" type="Money" key="No">
+				<comment>The base cost of this shipping method</comment>
+			</column>
+			<column name="PricePerLb" type="Money" key="No">
+				<comment>Additional price per pount</comment>
+			</column>
+			<column name="PricePerItem" type="Money" key="No">
+				<comment>Additional price per item</comment>
+			</column>
+			<column name="MaxTime" type="Integer" key="No">
+				<comment>Largest amount of time in days to ship</comment>
+			</column>
+		</table>
+		<table name="VendorLocations">
+			<column name="Location" type="String" key="No">
+				<comment>A location</comment>
+			</column>
+			<column name="Vendor" type="String" key="No">
+				<comment>The vendor name</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="PackageStatus">
+				<column name="Invoice"/>
+			</source>
+			<target table="PackageInfo">
+				<column name="Invoice"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="PackageStatus">
+				<column name="Status"/>
+			</source>
+			<target table="StatusDesc">
+				<column name="StatusID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="PackageInfo">
+				<column name="sourceWH"/>
+			</source>
+			<target table="VendorLocations">
+				<column name="Location"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="ShippingMethods">
+				<column name="Vendor"/>
+			</source>
+			<target table="ShippingVendor">
+				<column name="name"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="ShippingMethods">
+				<column name="Methodname"/>
+			</source>
+			<target table="PackageInfo">
+				<column name="ShipMethod"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="VendorLocations">
+				<column name="Vendor"/>
+			</source>
+			<target table="ShippingVendor">
+				<column name="name"/>
+			</target>
+		</foreignkeyconstraint>
+	
+	</Schema>
+	<Data>
+		<PackageInfo>
+			<tuple>
+				<Invoice>1</Invoice>
+				<Weight>16</Weight>
+				<NumItems>2</NumItems>
+				<ShipMethod>Ground</ShipMethod>
+				<TrackingNo>23423</TrackingNo>
+				<SpecialInst>None</SpecialInst>
+				<sourceWH>Seattle WA</sourceWH>
+				<Destname>Blake Norrish</Destname>
+				<DestAddress>Redmond WA</DestAddress>
+				<DestPhone>234 234-2342</DestPhone>
+				<Gift>Yes</Gift>
+			</tuple>
+		</PackageInfo>
+		<PackageStatus>
+			<tuple>
+				<Invoice>1</Invoice>
+				<StatusID>1</StatusID>
+				<OrderDate>1/15/03</OrderDate>
+				<ShipDate>1/16/03</ShipDate>
+				<ArrivalDate>1/18/03</ArrivalDate>
+				<Paid>Yes</Paid>
+			</tuple>
+		</PackageStatus>
+		<ShippingVendor>
+			<tuple>
+				<name>UPS</name>
+				<URL>www.ups.com</URL>
+				<Phone>522 234-6232</Phone>
+				<LocalAddress>2342 Seattle WA</LocalAddress>
+			</tuple>
+			<tuple>
+				<name>FedEx</name>
+				<URL>www.fe.com</URL>
+				<Phone>122 224-6232</Phone>
+				<LocalAddress>2222 Seattle WA</LocalAddress>
+			</tuple>
+		</ShippingVendor>
+		<ShippingMethods>
+			<tuple>
+				<Vendor>UPS</Vendor>
+				<Methodname>Ground</Methodname>
+				<MaxWeight>9999</MaxWeight>
+				<MaxItems>10</MaxItems>
+				<BasePrice>9.90</BasePrice>
+				<PricePerLb>1.00</PricePerLb>
+				<PricePerItem>0.00</PricePerItem>
+				<MaxTime>5</MaxTime>
+			</tuple>
+		</ShippingMethods>
+		<VendorLocations>
+			<tuple>
+				<Location>Seattle</Location>
+				<Vendor>FedEx</Vendor>
+			</tuple>
+			<tuple>
+				<Location>Seattle</Location>
+				<Vendor>FedEx</Vendor>
+			</tuple>
+		</VendorLocations>
+		<StatusDesc>
+			<Tuple>
+				<StatusID>1</StatusID>
+				<StatusDesc>Processing</StatusDesc>
+			</Tuple>
+			<Tuple>
+				<StatusID>2</StatusID>
+				<StatusDesc>Shipped</StatusDesc>
+			</Tuple>
+			<Tuple>
+				<StatusID>3</StatusID>
+				<StatusDesc>Delivered</StatusDesc>
+			</Tuple>
+			<Tuple>
+				<StatusID>4</StatusID>
+				<StatusDesc>Lost</StatusDesc>
+			</Tuple>
+			<Tuple>
+				<StatusID>5</StatusID>
+				<StatusDesc>On Fire</StatusDesc>
+			</Tuple>
+		</StatusDesc>
+	</Data>
+</Database>

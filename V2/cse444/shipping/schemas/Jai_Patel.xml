@@ -1,0 +1,359 @@
+<database name="Shipping">
+
+<createdby name="Jai Patel"/>
+
+<Schema>
+  
+  <table name="Package">
+	<column name="InvoiceNo" type="Integer" key="no">
+	  <comment>
+	    The invoice number of the package.
+	  </comment>
+	</column>
+	
+	<column name="Weight" type="Integer" key="no">
+	  <comment> 
+	    The weight of the package.
+	  </comment>
+	</column>
+
+	<column name="NoItems" type="Integer" key="no">
+	  <comment>
+	    The number of items in the package.
+	  </comment>
+	</column>
+
+	<column name="ShippingID" type="String" key="no">
+	  <comment>
+	    The method of shipping the package, relates to method table.
+	  </comment>
+	</column>
+
+	<column name="Shipper" type="String" key="no">
+	  <comment>
+	    The carrier shipping the package.
+	  </comment>
+	</column>
+
+	<column name="Method" type="String" key="no">
+	  <comment>
+	    The method of shipping the package.
+	  </comment>
+	</column>
+
+	<column name="TrackingNo" type="String" key="no">
+	  <comment>
+	    The tracking number of the package.
+	  </comment>
+	</column>
+
+	<column name="Instructions" type="String" key="no">
+	  <comment>
+	    Special delivery instructions of the package.
+	  </comment>
+	</column>
+
+	<column name="Warehouse" type="String" key="no">
+	  <comment>
+	    Source warehouse of the package.
+	  </comment>
+	</column>
+
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    Name of the receiver of the package.
+	  </comment>
+	</column>
+
+	<column name="Address" type="String" key="no">
+	  <comment>
+	    Address of the receiver of the package.
+	  </comment>
+	</column>
+
+	<column name="Contact" type="String" key="no">
+	  <comment>
+	    Contact of the receiver of the package.
+	  </comment>
+	</column>
+
+	<column name="Pickup" type="Time" key="no">
+	  <comment>
+	   Pick-up time of the package.
+	  </comment>
+	</column>
+
+	<column name="Deliver" type="Time" key="no">
+	  <comment>
+	    Deliver time of the package.
+	  </comment>
+	</column>
+
+	<column name="Status" type="Integer" key="no">
+	  <comment>
+	    Status of the package. 1 = pending; 2 = in progress; 3 = completed.
+	  </comment>
+	</column>
+  </table>
+
+  <table name="Vendor">
+	<column name="Name" type="String" key="yes">
+	  <comment>
+	    Name of the vendor.
+	  </comment>
+	</column>
+
+	<column name="Address" type="String" key="no">
+	  <comment>
+	    Local address of the vendor.
+	  </comment>
+	</column>
+
+	<column name="URL" type="String" key="no">
+	  <comment>
+	    URL of the vendor.
+	  </comment>
+	</column>
+
+	<column name="Number" type="String" key="no">
+	  <comment>
+	    Toll-free telephone number of the vendor.
+	  </comment>
+	</column>
+
+	<column name="Pickup" type="Time" key="no">
+	  <comment>
+	    Scheduled pickup time of the vendor for this warehouse.
+	  </comment>
+	</column>
+  </table>
+
+  <table name="Method">
+	<column name="MethodID" type="Integer" key="yes">
+	  <comment>
+	    MethodID.
+	  </comment>
+	</column>
+
+	<column name="Type" type="String" key="no">
+	  <comment>
+	    Shipping method.
+	  </comment>
+	</column>
+
+	<column name="Name" type="String" key="no">
+	  <comment>
+	    Vendor name.
+	  </comment>
+	</column>
+
+	<column name="PriceByWeight" type="Money" key="no">
+	  <comment>
+	    Cost per pound to ship.
+	  </comment>
+	</column>
+
+	<column name="PriceByNumber" type="Money" key="no">
+	  <comment>
+	    Cost per number of packages.
+	  </comment>
+	</column>
+
+	<column name="PriceFixed" type="Money" key="no">
+	  <comment>
+	    Fixed cost per shipment.
+	  </comment>
+	</column>
+
+	<column name="Deliver" type="Time" key="no">
+	  <comment>
+	    Guaranteed Delivery Time.
+	  </comment>
+	</column>
+
+	<column name="MaxWeight" type="Integer" key="no">
+	  <comment>
+	    Maximum package weight. -1 = no limit
+	  </comment>
+	</column>
+
+	<column name="MaxLength" type="Integer" key="no">
+	  <comment>
+	    Maximum length of the package. -1 = no limit
+	  </comment>
+	</column>
+
+	<column name="MaxWidth" type="Integer" key="no">
+	  <comment>
+	    Maximum width of the package. -1 = no limit
+	  </comment>
+	</column>
+
+	<column name="MaxHeight" type="Integer" key="no">
+	  <comment>
+	    Maximum height of the package. -1 = no limit
+	  </comment>
+	</column>
+
+	<column name="Cities" type="String" key="no">
+	  <comment>
+	    Comma separated list of cities restricted. blank = no restrictions
+	  </comment>
+	</column>
+  </table>
+
+  <foreignkeyconstraint>
+	<source table="Package">
+	  <column name="ShippingID"/>
+	</source>
+	<target table="Method">
+	  <column name="MethodID"/>
+	</target>
+    <comment> 
+	  Every package must be associated with a shipping ID.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+	<source table="Package">
+	  <column name="Shipper"/>
+	</source>
+	<target table="Vendor">
+	  <column name="Name"/>
+	</target>
+	<comment> 
+	  Every package must have an available shipping location.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+	<source table="Package">
+	  <column name="Method"/>
+	</source>
+	<target table="Method">
+	  <column name="Type"/>
+	</target>
+	<comment> 
+	  Every method must have an available method.
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+  <Package>
+    
+	<tuple>
+	  <InvoiceNo> 1111 </InvoiceNo>
+	  <Weight> 3 </Weight>
+	  <NoItems> 1 </NoItems>
+	  <ShippingID> 1 </ShippingID>
+	  <Shipper> UPS </Shipper>
+	  <Method> Ground </Method>
+	  <TrackingNo> 1Z1825770353032408 </TrackingNo>
+	  <Instructions> Deliver to back door. </Instructions>
+	  <Warehouse> Ontario, CA </Warehouse>
+	  <Name> Jai Patel </Name>
+	  <Address> McMahon Hall, Box 41266, Seattle, WA 98195-0041 </Address>
+	  <Contact> Johnson </Contact>
+	  <Pickup> 6:59:05 AM </Pickup>
+	  <Deliver> 5:36:00 PM </Deliver>
+	  <Status> 3 </Status>
+	</tuple>
+    
+	<tuple>
+	  <InvoiceNo> 1122 </InvoiceNo>
+	  <Weight> 144 </Weight>
+	  <NoItems> 1 </NoItems>
+	  <ShippingID> 3 </ShippingID>
+	  <Shipper> UPS </Shipper>
+	  <Method> Overnight </Method>
+	  <TrackingNo> 1Z1825770353032404 </TrackingNo>
+	  <Instructions> Deliver to back door. </Instructions>
+	  <Warehouse> Ontario, CA </Warehouse>
+	  <Name> Jai Patel </Name>
+	  <Address> McMahon Hall, Box 41266, Seattle, WA 98195-0041 </Address>
+	  <Contact> Johnson </Contact>
+	  <Pickup> 2:59:05 AM </Pickup>
+	  <Deliver> 3:36:00 PM </Deliver>
+	  <Status> 2 </Status>
+	</tuple>
+
+  </Package>
+
+  <Vendor>
+
+	<tuple>
+	  <Name> UPS </Name>
+	  <Address> 4603 NE University Village, Seattle, WA 98105 </Address>
+	  <URL> http://www.ups.com/ </URL>
+	  <Number> 206-524-2558 </Number>
+	  <Pickup> 5:00:00 PM </Pickup>
+	</tuple>
+
+  </Vendor>
+
+  <Method>
+  
+    <tuple>
+	  <MethodID> 1 </MethodID>
+	  <Type> Ground </Type>
+	  <Name> UPS </Name>
+	  <PriceByWeight> $0.25 </PriceByWeight>
+	  <PriceByNumber> $0.00 </PriceByNumber>
+	  <PriceFixed> $5.90 </PriceFixed>
+	  <MaxWeight> 150 </MaxWeight>
+	  <MaxLength> 35 </MaxLength>
+	  <MaxWidth> 35 </MaxWidth>
+	  <MaxHeight> 35 </MaxHeight>
+	  <Cities> ANY </Cities>
+	</tuple>
+  
+    <tuple>
+	  <MethodID> 2 </MethodID>
+	  <Type> 2nd Day </Type>
+	  <Name> UPS </Name>
+	  <PriceByWeight> $0.75 </PriceByWeight>
+	  <PriceByNumber> $0.00 </PriceByNumber>
+	  <PriceFixed> $8.00 </PriceFixed>
+	  <MaxWeight> 150 </MaxWeight>
+	  <MaxLength> 35 </MaxLength>
+	  <MaxWidth> 35 </MaxWidth>
+	  <MaxHeight> 35 </MaxHeight>
+	  <Cities> ANY </Cities>
+	</tuple>
+  
+    <tuple>
+	  <MethodID> 3 </MethodID>
+	  <Type> Overnight </Type>
+	  <Name> UPS </Name>
+	  <PriceByWeight> $1.25 </PriceByWeight>
+	  <PriceByNumber> $0.00 </PriceByNumber>
+	  <PriceFixed> $16.25 </PriceFixed>
+	  <MaxWeight> 150 </MaxWeight>
+	  <MaxLength> 35 </MaxLength>
+	  <MaxWidth> 35 </MaxWidth>
+	  <MaxHeight> 35 </MaxHeight>
+	  <Cities> ANY </Cities>
+	</tuple>
+  
+    <tuple>
+	  <MethodID> 4 </MethodID>
+	  <Type> Same Day </Type>
+	  <Name> UPS </Name>
+	  <PriceByWeight> $3.00 </PriceByWeight>
+	  <PriceByNumber> $0.00 </PriceByNumber>
+	  <PriceFixed> $169.00 </PriceFixed>
+	  <MaxWeight> -1 </MaxWeight>
+	  <MaxLength> -1 </MaxLength>
+	  <MaxWidth> -1 </MaxWidth>
+	  <MaxHeight> -1 </MaxHeight>
+	  <Cities> ANY </Cities>
+	</tuple>
+
+  </Method>
+
+</Data>
+
+</database>

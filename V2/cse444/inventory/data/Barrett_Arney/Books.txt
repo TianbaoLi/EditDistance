@@ -1,0 +1,20 @@
+01|Lord of the Rings: Fellowship of the Ring|J.R.R Tolkien|Fantasy|20|9|001
+02|Lord of the Rings: The Two Towers|J.R.R Tolkien|Fantasy|20|10|002
+03|Lord of the Rings: Return of the King|J.R.R Tolkien|Fantasy|20|9|003
+04|Harry Potter: Philosopher's Stone|J.R. Rowlings|Fantasy|20|9|004
+05|Harry Potter: Chamber of Secrets|J.R. Rowlings|Fantasy|20|10|005
+06|Harry Potter: Prisoner of Azkaban|J.R. Rowlings|Fantasy|20|8|006
+07|Harry Potter: Goblet of Fire|J.R. Rowlings|Fantasy|20|9|007
+08|Star Trek Movie #1|Jim Johnson|Science Fiction|20|5|008
+09|Star Trek Movie #2|Doug Micheals|Science Fiction|20|4|009
+10|Star Trek Movie #4|Bart Coppland|Science Fiction|10|7|010
+11|Star Trek Movie #5|Bart Coppland|Science Fiction|10|6|011
+12|Mallorean #1|David Eddings|Fantasy|10|9|012
+13|Mallorean #2|David Eddings|Fantasy|10|9|013
+14|Mallorean #3|David Eddings|Fantasy|10|10|014
+15|Mallorean #4|David Eddings|Fantasy|10|10|015
+16|Mallorean #5|David Eddings|Fantasy|10|9|016
+17|Mallorean #6|David Eddings|Fantasy|10|10|017
+18|Polgara|David Eddings|Fantasy|10|10|017
+19|Belgarath|David Eddings|Fantasy|10|10|019
+20|Riven Codex|David Eddings|Fantasy|20|10|020

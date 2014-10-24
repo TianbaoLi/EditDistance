@@ -1,0 +1,20 @@
+A594|UPS|Ground|Seattle|934344|Bob Smith|123 Maple|New York|NY|23462|Bob Smith|True|Delivered|5|2|75|True|5|8d44069z3|2003-01-22 00:00:00|2003-01-28 00:00:00|2003-01-29 00:00:00|
+A595|UPS|TwoDay|Kansas City|934547|John Elbow|321 Maple|Cincinnati|OH|74356|John Elbow|True|Delivered|2|3|20|False|0|8d44j5634|2003-01-22 00:00:00|2003-01-24 00:00:00|2003-01-24 00:00:00|
+A596|UPS|Ground|Seattle|934567|AAA Television Repair|222 Maple|Tulsa|OK|35765|Todd Dell|False|Delivered|6|1|60|False|0|5f8t5h548|2003-01-22 00:00:00|2003-01-28 00:00:00|2003-01-29 00:00:00|
+A597|FedEx|NextDay|Seattle|934235|Bill Snip|765 Maple|Los Angeles|CA|64567|Bill Snip|True|Transit|1|5|80|False|0|jf9855u68|2003-01-23 00:00:00|2003-01-23 00:00:00||Leave with neighbor
+A598|UPS|Ground|Boise|934987|City of Seattle|345 Maple|Seattle|WA|98465|Lori Knoss|False|Delivered|1|4|50|False|0|796kgf93|2003-01-23 00:00:00|2003-01-29 00:00:00|2003-01-29 00:00:00|
+A599|DHL|NextDay|Seattle|934674|Nick's Shoes|987 Maple|Portland|OR|78254|Kevin Vinh|False|Delivered|3|2|80|False|0|482j6k5fd|2003-01-23 00:00:00|2003-01-24 00:00:00|2003-01-24 00:00:00|
+A600|FedEx|Ground|Seattle|934264|Troy Smith|666 Maple|Wichita|KS|46845|Troy Smith|True|Transit|4|5|160|True|5|2515fg823|2003-01-23 00:00:00|2003-01-29 00:00:00||No signature necessary
+A601|UPS|TwoDay|Boise|934835|Windy City Toiletries|890 Maple|Chicago|IL|67894|Carol Ney|False|Delivered|2|2|45|False|0|1k2f33418|2003-01-23 00:00:00|2003-01-25 00:00:00|2003-01-24 00:00:00|
+A602|UPS|Ground|Kansas City|934065|Bob's BBQ Palace|147 Maple|Seattle|WA|38789|Alan Skone|False|Delivered|1|4|70|False|0|45n4f587|2003-01-26 00:00:00|2003-02-01 00:00:00|2003-01-29 00:00:00|
+A603|UPS|NextDay|Seattle|934479|Isotope Int'l|852 Maple|New York|NY|78925|Jim R Delray|False|Transit|3|3|100|True|5|67822hj47|2003-01-26 00:00:00|2003-01-27 00:00:00||
+A604|FedEx|NextDay|Seattle|934514|Bob Frellin|369 Oak|Minneapolis|MN|37896|Bob Frellin|True|Delivered|2|3|65|False|0|41445fh45|2003-01-26 00:00:00|2003-01-27 00:00:00|2003-01-27 00:00:00|
+A605|FedEx|Ground|Boise|934238|TBS Design|741 Maple|Atlanta|GA|15678|Joe Jones|False|Delivered|5|1|30|False|0|1k11g5817|2003-01-27 00:00:00|2003-02-02 00:00:00|2003-01-29 00:00:00|
+A606|UPS|Ground|Seattle|934411|Bob Smith|123 Maple|New York|NY|78955|Bob Smith|True|Transit|12|12|320|True|5|48d4845gf|2003-01-27 00:00:00|2003-02-02 00:00:00||
+A607|UPS|Ground|Kansas City|934233|Portland Landscaping|963 Maple|Portland|OR|95645|Will Bronk|False|Transit|3|1|90|False|0|45h454774|2003-01-27 00:00:00|2003-02-02 00:00:00||
+A608|FedEx|TwoDay|Seattle|934945|Tayla Lelly|357 Maple|Seattle|WA|56786|Tayla Lelly|True|Transit|2|1|20|False|0|77y1h7823|2003-01-27 00:00:00|2003-01-29 00:00:00||
+A609|UPS|Ground|Seattle|935051|Genco Imports|159 Maple|New York|NY|46588|Calvin Waters|False|Transit|8|5|140|False|0|45u7h4gf58|2003-01-28 00:00:00|2003-02-03 00:00:00||
+A610|UPS|Ground|Boise|935007|Betty's No Good Clothing Shop and Pancake House|462 Maple|Philadelphia|PA|87553|Anna Sinclair|False|Transit|10|18|530|True|10|7ty7h1482r|2003-01-28 00:00:00|2003-02-03 00:00:00||
+A611|FedEx|TwoDay|Kansas City|935013|Paul Mooret|987 Maple|Seattle|WA|38752|Paul Mooret|True|Transit|4|2|220|True|7|9715fh3822|2003-01-28 00:00:00|2003-01-30 00:00:00||
+A612|UPS|TwoDay|Kansas City|934558|The Bronze Pony|355 Maple|New York|NY|53421|Enid Smith|False|Transit|2|4|130|False|0|11li58ti45|2003-01-28 00:00:00|2003-01-30 00:00:00||Deliver to side door of house
+A613|FedEx|Ground|Seattle|934247|Bridges and Co|113 Maple|Chicago|IL|65433|Brian Lake|False|Transit|4|3|100|True|5|558yhe78|2003-01-28 00:00:00|2003-02-03 00:00:00||

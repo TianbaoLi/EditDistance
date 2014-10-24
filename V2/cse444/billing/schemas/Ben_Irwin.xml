@@ -1,0 +1,1232 @@
+<database name="Billing">
+	<createdby name="Ben Irwin" />
+	<Schema>
+		<table name="Invoice">
+			<column name="InvoiceNumber" type="INT" key="yes">
+				<comment>This is the unique identefier of a purchase</comment>
+			</column>
+			<column name="DateOfPurchase" type="DATETIME" key="no">
+				<comment>The date a purchase was made</comment>
+			</column>
+			<column name="Buyer" type="VARCHAR(30)" key="no">
+				<comment>The name of the person who made the purchase</comment>
+			</column>
+			<column name="Recipient" type="VARCHAR(30)" key="no">
+				<comment>The person receiving the order may differ from buyer
+				</comment>
+			</column>
+			<column name="Subtotal" type="MONEY" key="no">
+				<comment>The cost of the items ordered</comment>
+			</column>
+			<column name="Discount" type="MONEY" key="no">
+				<comment>Any discount given on this purchase.</comment>
+			</column>
+			<column name="ShippingCost" type="MONEY" key="no">
+				<comment>Cost of shipping to customer.</comment>
+			</column>
+			<column name="Taxes" type="MONEY" key="no">
+				<comment>Taxes on this sale.</comment>
+			</column>
+			<column name="TotalPrice" type="MONEY" key="no">
+				<comment>The price billed to the customer</comment>
+			</column>
+			<column name="PaymentType" type="CHAR(6)" key="no">
+				<comment>A 5- letter name for the payment type
+							ex. Credit, Check, Cash, MO
+				</comment>
+			</column>
+			<column name="AccountNumber" type="VARCHAR(20)" key="no">
+				<comment>The account number for purchases like the credit card
+							that have accounts.  Value is null for cash orders.
+				</comment>
+			</column>
+		</table>
+		<table name="Users">
+			<column name="Username" type="CHAR(20)" key="yes">
+				<comment>The user name of this user of our system</comment>
+			</column>
+			<column name="RealName" type="VARCHAR(30)" key="no">
+				<comment>The person real identity</comment>
+			</column>
+			<column name="BuyerRating" type="INT" key="no">
+				<comment>A numerical value used to decided if special offers
+							should be extended to this user.
+				</comment>
+			</column>
+			<column name="MoneySpent" type="MONEY" key="no">
+				<comment>The ammount of money this user has spent in all purchases
+							from our website.
+				</comment>
+			</column>
+			<column name="LastPurchase" type="DATETIME" key="no">
+				<comment>The last date this user made a purchase, used to judge
+							a users activity.
+				</comment>
+			</column>
+		</table>
+		<table name="Person">
+			<column name="Name" type="VARCHAR(30)" key="yes">
+				<comment>The name of this customer</comment>
+			</column>
+			<column name="StreetAddress" type="VARCHAR(40)" key="no">
+				<comment>The street address of this customer.</comment>
+			</column>
+			<column name="City" type="VARCHAR(20)" key="no">
+				<comment>Just the name of the city.</comment>
+			</column>
+			<column name="State" type="CHAR(2)" key="no">
+				<comment>The two letter abbreviation of a state.</comment>
+			</column>
+			<column name="ZipCode" type="CHAR(5)" key="no">
+				<comment>The 5 number zip code.</comment>
+			</column>
+			<column name="PhoneNumber" type="CHAR(10)" key="no">
+				<comment>Just the phone number of this person.</comment>
+			</column>
+			<column name="EmailAddr" type="VARCHAR(25)" key="no">
+				<comment>Optional field if the customer wishes to receive
+							additional information.
+				</comment>
+			</column>
+		</table>
+		<table name="Item">
+			<column name="ProductID" type="INT" key="yes">
+				<comment>The number of the specific product shipped</comment>
+			</column>
+			<column name="Invoice" type="INT" key="no">
+				<comment>The invoice number is a foreign key in invoice.</comment>
+			</column>
+			<column name="ProductName" type="VARCHAR(20)" key="no">
+				<comment>The name of this product.</comment>
+			</column>
+			<column name="Price" type="MONEY" key="no">
+				<comment>Price per item.</comment>
+			</column>
+			<column name="Quantity" type="INT" key="no">
+				<comment>Number of item purchased.</comment>
+			</column>
+			<column name="Classification" type="VARCHAR(10)" key="no">
+				<comment>May be used to suggest other purchases to a user.</comment>
+			</column>
+		</table>
+		<table name="Shipment">
+			<column name="Invoice" type="INT" key="no">
+				<comment>Links with the InvoiceNumber in Invoice.</comment>
+			</column>
+			<column name="Customer" type="VARCHAR(30)" key="no">
+				<comment>The customer receiving this shipment.</comment>
+			</column>
+			<column name="WarehouseID" type="INT" key="no">
+				<comment>The id number for the warehouse set to ship this
+							order.</comment>
+			</column>
+			<column name="Product" type="INT" key="no"/>
+			<column name="ShipmentDate" type="DATETIME" key="no"/>
+		</table>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="Buyer"/>
+			</source>
+			<target table="Users">
+				<column name="RealName"/>
+			</target>
+			<comment>A buyer must have a user account</comment>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="Recipient"/>
+			</source>
+			<target table="Person">
+				<column name="Name"/>
+			</target>
+			<comment>The recipient must be entered as an Person.</comment>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Users">
+				<column name="RealName"/>
+			</source>
+			<target table="Person">
+				<column name="Name"/>
+			</target>
+			<comment>Each user must be an Person as well.</comment>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Shipment">
+				<column name="Invoice"/>
+			</source>
+			<target table="Invoice">
+				<column name="InvoiceNumber"/>
+			</target>
+			<comment>The shipments must match an invoice.</comment>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Shipment">
+				<column name="Product"/>
+			</source>
+			<target table="Items">
+				<column name="ProductID"/>
+			</target>
+			<comment>The shipments must match an invoice.</comment>
+		</foreignkeyconstraint>
+	</Schema>
+  <Data>
+    <Invoice>
+      <tuple>
+        <InvoiceNumber>1</InvoiceNumber>
+        <DateOfPurchase>12/18/2000 0:00:00</DateOfPurchase>
+        <Buyer>Santa Claus</Buyer>
+        <Recipient>Layne Staley</Recipient>
+        <Subtotal>$199.99</Subtotal>
+        <Discount>$60.00</Discount>
+        <ShippingCost>$10.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$139.99</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>2</InvoiceNumber>
+        <DateOfPurchase>11/22/1998 0:00:00</DateOfPurchase>
+        <Buyer>Homer Simpson</Buyer>
+        <Recipient>Homer Simpson</Recipient>
+        <Subtotal>$1.77</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$0.06</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$1.83</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1234 4567 7890 HOMER</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3</InvoiceNumber>
+        <DateOfPurchase>1/4/1999 0:00:00</DateOfPurchase>
+        <Buyer>Homer Simpson</Buyer>
+        <Recipient>Bart Simpson</Recipient>
+        <Subtotal>$7.50</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$0.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$7.50</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1234 4567 7890 HOMER</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>4</InvoiceNumber>
+        <DateOfPurchase>11/10/2010 0:00:00</DateOfPurchase>
+        <Buyer>Marge Simpson</Buyer>
+        <Recipient>Homer Simpson</Recipient>
+        <Subtotal>$20.25</Subtotal>
+        <Discount>$5.00</Discount>
+        <ShippingCost>$0.00</ShippingCost>
+        <Taxes>$1.00</Taxes>
+        <TotalPrice>$16.25</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1234 4567 7891 MARGE</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>5</InvoiceNumber>
+        <DateOfPurchase>3/3/1998 0:00:00</DateOfPurchase>
+        <Buyer>Bart Simpson</Buyer>
+        <Recipient>Bart Simpson</Recipient>
+        <Subtotal>$5.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$1.24</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$6.24</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>6</InvoiceNumber>
+        <DateOfPurchase>5/1/1977 0:00:00</DateOfPurchase>
+        <Buyer>John Stockton</Buyer>
+        <Recipient>Karl Malone</Recipient>
+        <Subtotal>$210.00</Subtotal>
+        <Discount>$5.00</Discount>
+        <ShippingCost>$1.50</ShippingCost>
+        <Taxes>$2.50</Taxes>
+        <TotalPrice>$209.00</TotalPrice>
+        <PaymentType>CHECK</PaymentType>
+        <AccountNumber>213398723</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>7</InvoiceNumber>
+        <DateOfPurchase>4/11/1980 0:00:00</DateOfPurchase>
+        <Buyer>George Bush</Buyer>
+        <Recipient>George W. Bush</Recipient>
+        <Subtotal>$839.00</Subtotal>
+        <Discount>$23.00</Discount>
+        <ShippingCost>$48.00</ShippingCost>
+        <Taxes>$2.00</Taxes>
+        <TotalPrice>$866.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>3873 2663 2888</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>8</InvoiceNumber>
+        <DateOfPurchase>7/30/1983 0:00:00</DateOfPurchase>
+        <Buyer>James Hetfield</Buyer>
+        <Recipient>Lars Ulrich</Recipient>
+        <Subtotal>$2837.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$448.00</ShippingCost>
+        <Taxes>$77.00</Taxes>
+        <TotalPrice>$3362.00</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9</InvoiceNumber>
+        <DateOfPurchase>8/25/1988 0:00:00</DateOfPurchase>
+        <Buyer>Jerry Cantrell</Buyer>
+        <Recipient>Layne Staley</Recipient>
+        <Subtotal>$288.00</Subtotal>
+        <Discount>$2.00</Discount>
+        <ShippingCost>$4.00</ShippingCost>
+        <Taxes>$8.00</Taxes>
+        <TotalPrice>$298.00</TotalPrice>
+        <PaymentType>CHECK</PaymentType>
+        <AccountNumber>2387472990</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>10</InvoiceNumber>
+        <DateOfPurchase>7/4/1990 0:00:00</DateOfPurchase>
+        <Buyer>George W. Bush</Buyer>
+        <Recipient>George Bush</Recipient>
+        <Subtotal>$4344.00</Subtotal>
+        <Discount>$24.00</Discount>
+        <ShippingCost>$10.00</ShippingCost>
+        <Taxes>$14.00</Taxes>
+        <TotalPrice>$4344.00</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>11</InvoiceNumber>
+        <DateOfPurchase>1/28/1994 0:00:00</DateOfPurchase>
+        <Buyer>Nick Robertson</Buyer>
+        <Recipient>Nick Robertson</Recipient>
+        <Subtotal>$100.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$10.00</ShippingCost>
+        <Taxes>$10.00</Taxes>
+        <TotalPrice>$120.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1238 3838 4899 1283</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>12</InvoiceNumber>
+        <DateOfPurchase>1/30/1994 0:00:00</DateOfPurchase>
+        <Buyer>Nick Robertson</Buyer>
+        <Recipient>Nick Robertson</Recipient>
+        <Subtotal>$300.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$24.00</ShippingCost>
+        <Taxes>$26.00</Taxes>
+        <TotalPrice>$350.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1238 3838 4899 1283</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>13</InvoiceNumber>
+        <DateOfPurchase>2/2/1994 0:00:00</DateOfPurchase>
+        <Buyer>Nick Robertson</Buyer>
+        <Recipient>Chris Marich</Recipient>
+        <Subtotal>$50.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$15.00</ShippingCost>
+        <Taxes>$14.00</Taxes>
+        <TotalPrice>$79.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1238 3838 4899 1283</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>14</InvoiceNumber>
+        <DateOfPurchase>3/9/1999 0:00:00</DateOfPurchase>
+        <Buyer>Santa Claus</Buyer>
+        <Recipient>Nick Robertson</Recipient>
+        <Subtotal>$1000.00</Subtotal>
+        <Discount>$200.00</Discount>
+        <ShippingCost>$0.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$800.00</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>15</InvoiceNumber>
+        <DateOfPurchase>8/3/1998 0:00:00</DateOfPurchase>
+        <Buyer>Lisa Simpson</Buyer>
+        <Recipient>Bart Simpson</Recipient>
+        <Subtotal>$80.00</Subtotal>
+        <Discount>$8.00</Discount>
+        <ShippingCost>$3.00</ShippingCost>
+        <Taxes>$2.00</Taxes>
+        <TotalPrice>$77.00</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>16</InvoiceNumber>
+        <DateOfPurchase>7/4/1987 0:00:00</DateOfPurchase>
+        <Buyer>Homer Simpson</Buyer>
+        <Recipient>Marge Simpson</Recipient>
+        <Subtotal>$234.00</Subtotal>
+        <Discount>$32.00</Discount>
+        <ShippingCost>$2.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$204.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>1234 4567 7890 HOMER</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>17</InvoiceNumber>
+        <DateOfPurchase>8/2/1999 0:00:00</DateOfPurchase>
+        <Buyer>Layne Staley</Buyer>
+        <Recipient>Jerry Cantrell</Recipient>
+        <Subtotal>$15.00</Subtotal>
+        <Discount>$0.00</Discount>
+        <ShippingCost>$1.00</ShippingCost>
+        <Taxes>$1.00</Taxes>
+        <TotalPrice>$17.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>133213989233939</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>18</InvoiceNumber>
+        <DateOfPurchase>1/5/1998 0:00:00</DateOfPurchase>
+        <Buyer>Karl Malone</Buyer>
+        <Recipient>Karl Malone</Recipient>
+        <Subtotal>$982.00</Subtotal>
+        <Discount>$8.00</Discount>
+        <ShippingCost>$8.00</ShippingCost>
+        <Taxes>$8.00</Taxes>
+        <TotalPrice>$1006.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>38294890890898</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>19</InvoiceNumber>
+        <DateOfPurchase>9/8/1988 0:00:00</DateOfPurchase>
+        <Buyer>James Hetfield</Buyer>
+        <Recipient>James Hetfield</Recipient>
+        <Subtotal>$928.00</Subtotal>
+        <Discount>$99.00</Discount>
+        <ShippingCost>$1.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$1028.00</TotalPrice>
+        <PaymentType>CREDIT</PaymentType>
+        <AccountNumber>3847820u8u329849</AccountNumber>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>20</InvoiceNumber>
+        <DateOfPurchase>1/1/2003 0:00:00</DateOfPurchase>
+        <Buyer>Santa Claus</Buyer>
+        <Recipient>Santa Claus</Recipient>
+        <Subtotal>$10000.00</Subtotal>
+        <Discount>$100.00</Discount>
+        <ShippingCost>$0.00</ShippingCost>
+        <Taxes>$0.00</Taxes>
+        <TotalPrice>$9900.00</TotalPrice>
+        <PaymentType>CASH</PaymentType>
+        <AccountNumber></AccountNumber>
+      </tuple>
+
+    </Invoice>
+
+    <Users>
+      <tuple>
+        <Username>Bartman</Username>
+        <RealName>Bart Simpson</RealName>
+        <BuyerRating>1</BuyerRating>
+        <MoneySpent>$1.25</MoneySpent>
+        <LastPurchase>1/5/1990 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>BoggyDepot</Username>
+        <RealName>Jerry Cantrell</RealName>
+        <BuyerRating>245</BuyerRating>
+        <MoneySpent>$2344.12</MoneySpent>
+        <LastPurchase>4/5/2002 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Bush</Username>
+        <RealName>George Bush</RealName>
+        <BuyerRating>11239</BuyerRating>
+        <MoneySpent>$8383778.00</MoneySpent>
+        <LastPurchase>1/15/1992 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>DJ Wiz</Username>
+        <RealName>Chris Marich</RealName>
+        <BuyerRating>112</BuyerRating>
+        <MoneySpent>$883.00</MoneySpent>
+        <LastPurchase>2/8/2001 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>DubbaU</Username>
+        <RealName>George W. Bush</RealName>
+        <BuyerRating>1244</BuyerRating>
+        <MoneySpent>$383776.00</MoneySpent>
+        <LastPurchase>1/26/2003 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>HomerJ</Username>
+        <RealName>Homer Simpson</RealName>
+        <BuyerRating>3</BuyerRating>
+        <MoneySpent>$245.22</MoneySpent>
+        <LastPurchase>1/12/2003 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Maggie</Username>
+        <RealName>Marge Simpson</RealName>
+        <BuyerRating>15</BuyerRating>
+        <MoneySpent>$60.54</MoneySpent>
+        <LastPurchase>11/10/2010 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Mailman</Username>
+        <RealName>Karl Malone</RealName>
+        <BuyerRating>4422</BuyerRating>
+        <MoneySpent>$98437.00</MoneySpent>
+        <LastPurchase>9/23/2001 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>NapsterHater</Username>
+        <RealName>Lars Ulrich</RealName>
+        <BuyerRating>253</BuyerRating>
+        <MoneySpent>$3456.12</MoneySpent>
+        <LastPurchase>7/24/1999 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Robes</Username>
+        <RealName>Nick Robertson</RealName>
+        <BuyerRating>5133</BuyerRating>
+        <MoneySpent>$9288.00</MoneySpent>
+        <LastPurchase>4/30/2002 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Rooster</Username>
+        <RealName>Layne Staley</RealName>
+        <BuyerRating>2345</BuyerRating>
+        <MoneySpent>$23435.22</MoneySpent>
+        <LastPurchase>1/23/1999 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Sandman</Username>
+        <RealName>James Hetfield</RealName>
+        <BuyerRating>2873</BuyerRating>
+        <MoneySpent>$173889.98</MoneySpent>
+        <LastPurchase>6/18/2000 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>SantasHelper</Username>
+        <RealName>Santa Claus</RealName>
+        <BuyerRating>1336234</BuyerRating>
+        <MoneySpent>$2436434.24</MoneySpent>
+        <LastPurchase>12/24/2002 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Saxlady</Username>
+        <RealName>Lisa Simpson</RealName>
+        <BuyerRating>187</BuyerRating>
+        <MoneySpent>$784.00</MoneySpent>
+        <LastPurchase>4/17/1993 0:00:00</LastPurchase>
+      </tuple>
+
+      <tuple>
+        <Username>Stamp</Username>
+        <RealName>John Stockton</RealName>
+        <BuyerRating>123</BuyerRating>
+        <MoneySpent>$1134.00</MoneySpent>
+        <LastPurchase>8/31/2002 0:00:00</LastPurchase>
+      </tuple>
+
+    </Users>
+
+    <Person>
+      <tuple>
+        <Name>Bart Simpson</Name>
+        <StreetAddress>23346 Main St</StreetAddress>
+        <City>Springfield</City>
+        <State>IL</State>
+        <ZipCode>23764</ZipCode>
+        <PhoneNumber>2346434575</PhoneNumber>
+        <EmailAddr>doo@cartoons.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Chris Marich</Name>
+        <StreetAddress>2456 84th</StreetAddress>
+        <City>Olympia</City>
+        <State>WA</State>
+        <ZipCode>98734</ZipCode>
+        <PhoneNumber>3600929838</PhoneNumber>
+        <EmailAddr>chrismarich@hotmail.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>George Bush</Name>
+        <StreetAddress>43256 Partner</StreetAddress>
+        <City>Dallas</City>
+        <State>TX</State>
+        <ZipCode>98675</ZipCode>
+        <PhoneNumber>9299384848</PhoneNumber>
+        <EmailAddr>ex@pres.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>George W. Bush</Name>
+        <StreetAddress>24554 Whitehouse</StreetAddress>
+        <City>Washington DC</City>
+        <State>DC</State>
+        <ZipCode>84264</ZipCode>
+        <PhoneNumber>8372863637</PhoneNumber>
+        <EmailAddr>cur@pres.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Homer Simpson</Name>
+        <StreetAddress>23346 Main St</StreetAddress>
+        <City>Springfield</City>
+        <State>IL</State>
+        <ZipCode>23764</ZipCode>
+        <PhoneNumber>2346434575</PhoneNumber>
+        <EmailAddr>doo@cartoons.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>James Hetfield</Name>
+        <StreetAddress>2365 Metallica Rd</StreetAddress>
+        <City>Los Angeles</City>
+        <State>CA</State>
+        <ZipCode>34564</ZipCode>
+        <PhoneNumber>2325564432</PhoneNumber>
+        <EmailAddr>singer@band.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Jerry Cantrell</Name>
+        <StreetAddress>1335 Boggy Rd</StreetAddress>
+        <City>Helena</City>
+        <State>MT</State>
+        <ZipCode>12784</ZipCode>
+        <PhoneNumber>4873094792</PhoneNumber>
+        <EmailAddr>boggydepot@aic.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>John Stockton</Name>
+        <StreetAddress>23074 Lake st</StreetAddress>
+        <City>Salt Lake City</City>
+        <State>UT</State>
+        <ZipCode>28478</ZipCode>
+        <PhoneNumber>2346776543</PhoneNumber>
+        <EmailAddr>assist@jazz.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Karl Malone</Name>
+        <StreetAddress>58354 Utah Dr</StreetAddress>
+        <City>Salt Lake City</City>
+        <State>UT</State>
+        <ZipCode>82349</ZipCode>
+        <PhoneNumber>3490982787</PhoneNumber>
+        <EmailAddr>mailman@jazz.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Lars Ulrich</Name>
+        <StreetAddress>6527 Metal Ln</StreetAddress>
+        <City>Los Angeles</City>
+        <State>CA</State>
+        <ZipCode>27424</ZipCode>
+        <PhoneNumber>2432555468</PhoneNumber>
+        <EmailAddr>lars@drummer.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Layne Staley</Name>
+        <StreetAddress>123 15th Ave</StreetAddress>
+        <City>Seattle</City>
+        <State>WA</State>
+        <ZipCode>98073</ZipCode>
+        <PhoneNumber>3605552420</PhoneNumber>
+        <EmailAddr>staley@aic.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Lisa Simpson</Name>
+        <StreetAddress>23346 Main St</StreetAddress>
+        <City>Springfield</City>
+        <State>IL</State>
+        <ZipCode>23764</ZipCode>
+        <PhoneNumber>2346434575</PhoneNumber>
+        <EmailAddr>doo@cartoons.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Marge Simpson</Name>
+        <StreetAddress>23346 Main St</StreetAddress>
+        <City>Springfield</City>
+        <State>IL</State>
+        <ZipCode>23764</ZipCode>
+        <PhoneNumber>2346434575</PhoneNumber>
+        <EmailAddr>doo@cartoons.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Nick Robertson</Name>
+        <StreetAddress>23434 Slater st</StreetAddress>
+        <City>Rochester</City>
+        <State>WA</State>
+        <ZipCode>98579</ZipCode>
+        <PhoneNumber>3602735435</PhoneNumber>
+        <EmailAddr>bobarobe@hotmai.com</EmailAddr>
+      </tuple>
+
+      <tuple>
+        <Name>Santa Claus</Name>
+        <StreetAddress>25th South St</StreetAddress>
+        <City>Nome</City>
+        <State>AK</State>
+        <ZipCode>12250</ZipCode>
+        <PhoneNumber>8005552528</PhoneNumber>
+        <EmailAddr>satan@anagram.com</EmailAddr>
+      </tuple>
+
+    </Person>
+
+    <Item>
+      <tuple>
+        <ProductID>1</ProductID>
+        <Invoice>2</Invoice>
+        <ProductName>Jumbo Ham</ProductName>
+        <Price>$0.59</Price>
+        <Quantity>3</Quantity>
+        <Classification>FOOD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>2</ProductID>
+        <Invoice>1</Invoice>
+        <ProductName>Electric Guitar</ProductName>
+        <Price>$199.99</Price>
+        <Quantity>1</Quantity>
+        <Classification>MUSIC</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>3</ProductID>
+        <Invoice>2</Invoice>
+        <ProductName>Fun</ProductName>
+        <Price>$1.00</Price>
+        <Quantity>2</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>4</ProductID>
+        <Invoice>3</Invoice>
+        <ProductName>Slingshot</ProductName>
+        <Price>$5.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>5</ProductID>
+        <Invoice>3</Invoice>
+        <ProductName>Slingshot Pellets</ProductName>
+        <Price>$0.25</Price>
+        <Quantity>10</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>6</ProductID>
+        <Invoice>4</Invoice>
+        <ProductName>Slingshot Pellets</ProductName>
+        <Price>$0.25</Price>
+        <Quantity>20</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>7</ProductID>
+        <Invoice>5</Invoice>
+        <ProductName>Bubble Gum</ProductName>
+        <Price>$0.50</Price>
+        <Quantity>2</Quantity>
+        <Classification>FOOD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>8</ProductID>
+        <Invoice>5</Invoice>
+        <ProductName>Butterfingers</ProductName>
+        <Price>$0.50</Price>
+        <Quantity>8</Quantity>
+        <Classification>FOOD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>9</ProductID>
+        <Invoice>6</Invoice>
+        <ProductName>Sneakers</ProductName>
+        <Price>$170.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>CLOTHING</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>10</ProductID>
+        <Invoice>6</Invoice>
+        <ProductName>Basketball</ProductName>
+        <Price>$40.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>SPORTS</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>11</ProductID>
+        <Invoice>7</Invoice>
+        <ProductName>Baseball Cards</ProductName>
+        <Price>$2.00</Price>
+        <Quantity>400</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>12</ProductID>
+        <Invoice>7</Invoice>
+        <ProductName>Baseballs</ProductName>
+        <Price>$1.00</Price>
+        <Quantity>39</Quantity>
+        <Classification>SPROTS</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>13</ProductID>
+        <Invoice>8</Invoice>
+        <ProductName>Drum set</ProductName>
+        <Price>$2830.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>MUSIC</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>14</ProductID>
+        <Invoice>8</Invoice>
+        <ProductName>Drum sticks</ProductName>
+        <Price>$0.50</Price>
+        <Quantity>14</Quantity>
+        <Classification>MUSIC</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>15</ProductID>
+        <Invoice>9</Invoice>
+        <ProductName>Electric Guitar</ProductName>
+        <Price>$288.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>MUSIC</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>16</ProductID>
+        <Invoice>10</Invoice>
+        <ProductName>Oil</ProductName>
+        <Price>$1.50</Price>
+        <Quantity>2896</Quantity>
+        <Classification>BLACK GOLD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>17</ProductID>
+        <Invoice>11</Invoice>
+        <ProductName>Comic Books</ProductName>
+        <Price>$20.00</Price>
+        <Quantity>5</Quantity>
+        <Classification>BOOK</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>18</ProductID>
+        <Invoice>12</Invoice>
+        <ProductName>Comic Books</ProductName>
+        <Price>$20.00</Price>
+        <Quantity>5</Quantity>
+        <Classification>BOOK</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>19</ProductID>
+        <Invoice>12</Invoice>
+        <ProductName>Figurines</ProductName>
+        <Price>$10.00</Price>
+        <Quantity>20</Quantity>
+        <Classification>TOY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>20</ProductID>
+        <Invoice>13</Invoice>
+        <ProductName>Limp Bizkit</ProductName>
+        <Price>$20.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>CD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>21</ProductID>
+        <Invoice>13</Invoice>
+        <ProductName>Brittney Spears</ProductName>
+        <Price>$15.00</Price>
+        <Quantity>2</Quantity>
+        <Classification>CD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>22</ProductID>
+        <Invoice>14</Invoice>
+        <ProductName>Dell</ProductName>
+        <Price>$1000.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>COMPUTER</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>23</ProductID>
+        <Invoice>15</Invoice>
+        <ProductName>Rocks</ProductName>
+        <Price>$4.00</Price>
+        <Quantity>20</Quantity>
+        <Classification>OBJECT</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>24</ProductID>
+        <Invoice>16</Invoice>
+        <ProductName>Wedding Ring</ProductName>
+        <Price>$123.00</Price>
+        <Quantity>2</Quantity>
+        <Classification>JEWLERY</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>25</ProductID>
+        <Invoice>17</Invoice>
+        <ProductName>Roast Beef</ProductName>
+        <Price>$7.50</Price>
+        <Quantity>2</Quantity>
+        <Classification>FOOD</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>26</ProductID>
+        <Invoice>18</Invoice>
+        <ProductName>Basketball</ProductName>
+        <Price>$40.00</Price>
+        <Quantity>10</Quantity>
+        <Classification>SPORTS</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>27</ProductID>
+        <Invoice>18</Invoice>
+        <ProductName>1 Iron</ProductName>
+        <Price>$582.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>SPORTS</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>28</ProductID>
+        <Invoice>19</Invoice>
+        <ProductName>Electric Guitar</ProductName>
+        <Price>$928.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>MUSIC</Classification>
+      </tuple>
+
+      <tuple>
+        <ProductID>29</ProductID>
+        <Invoice>20</Invoice>
+        <ProductName>Mrs. Claus</ProductName>
+        <Price>$10000.00</Price>
+        <Quantity>1</Quantity>
+        <Classification>WIFE</Classification>
+      </tuple>
+
+    </Item>
+
+    <Shipment>
+      <tuple>
+        <Invoice>2</Invoice>
+        <Customer>Homer Simpson</Customer>
+        <WarehouseID>Boigenville</WarehouseID>
+        <Product>1</Product>
+        <ShipmentDate>2/4/2000 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>1</Invoice>
+        <Customer>Santa Claus</Customer>
+        <WarehouseID>NorthPole</WarehouseID>
+        <Product>2</Product>
+        <ShipmentDate>3/6/1990 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>2</Invoice>
+        <Customer>Homer Simpson</Customer>
+        <WarehouseID>Joyland</WarehouseID>
+        <Product>3</Product>
+        <ShipmentDate>2/5/2000 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>3</Invoice>
+        <Customer>Bart Simpson</Customer>
+        <WarehouseID>Joyland</WarehouseID>
+        <Product>4</Product>
+        <ShipmentDate>5/2/2010 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>3</Invoice>
+        <Customer>Bart Simpson</Customer>
+        <WarehouseID>Joyland</WarehouseID>
+        <Product>5</Product>
+        <ShipmentDate>5/3/2010 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>4</Invoice>
+        <Customer>Homer Simpson</Customer>
+        <WarehouseID>Joyland</WarehouseID>
+        <Product>6</Product>
+        <ShipmentDate>6/1/2010 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>5</Invoice>
+        <Customer>Bart Simpson</Customer>
+        <WarehouseID>Quickie</WarehouseID>
+        <Product>7</Product>
+        <ShipmentDate>2/5/1999 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>5</Invoice>
+        <Customer>Bart Simpson</Customer>
+        <WarehouseID>Quickie</WarehouseID>
+        <Product>8</Product>
+        <ShipmentDate>1/4/1999 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>6</Invoice>
+        <Customer>Karl Malone</Customer>
+        <WarehouseID>Nike</WarehouseID>
+        <Product>9</Product>
+        <ShipmentDate>3/6/1998 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>6</Invoice>
+        <Customer>Karl Malone</Customer>
+        <WarehouseID>Wilson</WarehouseID>
+        <Product>10</Product>
+        <ShipmentDate>3/7/1998 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>7</Invoice>
+        <Customer>George W. Bush</Customer>
+        <WarehouseID>Top</WarehouseID>
+        <Product>11</Product>
+        <ShipmentDate>4/14/1980 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>7</Invoice>
+        <Customer>George W. Bush</Customer>
+        <WarehouseID>Wilson</WarehouseID>
+        <Product>12</Product>
+        <ShipmentDate>4/16/2003 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>8</Invoice>
+        <Customer>Lars Ulrich</Customer>
+        <WarehouseID>Crate</WarehouseID>
+        <Product>13</Product>
+        <ShipmentDate>8/3/1983 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>8</Invoice>
+        <Customer>Lars ulrich</Customer>
+        <WarehouseID>Stick</WarehouseID>
+        <Product>14</Product>
+        <ShipmentDate>8/4/1983 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>9</Invoice>
+        <Customer>Layne Staley</Customer>
+        <WarehouseID>Epiphone</WarehouseID>
+        <Product>15</Product>
+        <ShipmentDate>9/19/1989 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>10</Invoice>
+        <Customer>George Bush</Customer>
+        <WarehouseID>Chevron</WarehouseID>
+        <Product>16</Product>
+        <ShipmentDate>4/23/1999 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>11</Invoice>
+        <Customer>Nick Robertson</Customer>
+        <WarehouseID>Marvel</WarehouseID>
+        <Product>17</Product>
+        <ShipmentDate>3/3/1994 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>12</Invoice>
+        <Customer>Nick Robertson</Customer>
+        <WarehouseID>Marvel</WarehouseID>
+        <Product>18</Product>
+        <ShipmentDate>3/5/1994 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>12</Invoice>
+        <Customer>Nick Robertson</Customer>
+        <WarehouseID>Lucas Arts</WarehouseID>
+        <Product>19</Product>
+        <ShipmentDate>3/6/2003 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>13</Invoice>
+        <Customer>Chris Marich</Customer>
+        <WarehouseID>Atlantic</WarehouseID>
+        <Product>20</Product>
+        <ShipmentDate>3/7/1994 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>13</Invoice>
+        <Customer>Chris Marich</Customer>
+        <WarehouseID>American</WarehouseID>
+        <Product>21</Product>
+        <ShipmentDate>3/7/1994 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>14</Invoice>
+        <Customer>Nick Robertson</Customer>
+        <WarehouseID>Microsoft</WarehouseID>
+        <Product>22</Product>
+        <ShipmentDate>4/12/1995 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>15</Invoice>
+        <Customer>Bart Simpson</Customer>
+        <WarehouseID>Quary</WarehouseID>
+        <Product>23</Product>
+        <ShipmentDate>4/8/1998 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>16</Invoice>
+        <Customer>Marge Simpson</Customer>
+        <WarehouseID>Bay Jewlers</WarehouseID>
+        <Product>24</Product>
+        <ShipmentDate>4/5/1989 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>17</Invoice>
+        <Customer>Jerry Cantrell</Customer>
+        <WarehouseID>Boigenville</WarehouseID>
+        <Product>25</Product>
+        <ShipmentDate>3/6/2012 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>18</Invoice>
+        <Customer>Karl Malone</Customer>
+        <WarehouseID>Nike</WarehouseID>
+        <Product>26</Product>
+        <ShipmentDate>9/3/2000 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>18</Invoice>
+        <Customer>Karl Malone</Customer>
+        <WarehouseID>Woods</WarehouseID>
+        <Product>27</Product>
+        <ShipmentDate>1/1/2001 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>19</Invoice>
+        <Customer>James Hetfield</Customer>
+        <WarehouseID>Epiphone</WarehouseID>
+        <Product>28</Product>
+        <ShipmentDate>3/8/2000 0:00:00</ShipmentDate>
+      </tuple>
+
+      <tuple>
+        <Invoice>20</Invoice>
+        <Customer>Santa Claus</Customer>
+        <WarehouseID>Wives</WarehouseID>
+        <Product>29</Product>
+        <ShipmentDate>12/24/2001 0:00:00</ShipmentDate>
+      </tuple>
+
+    </Shipment>
+
+  </Data>
+</database>

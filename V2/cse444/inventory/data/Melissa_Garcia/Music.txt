@@ -1,0 +1,15 @@
+Michael Learns to Rock | Michael Jones | MLTR | CD431 | $17.99 | $15.55 | 5 | pop | album
+Deep Blue | Frank Sinatra | DB | CMN45 | $15.99 | $10.55 | 5 | rock | single
+Amazing Skies | John Grisham | ASD | CMJ56 | $14.99 | $16.55 | 8 | jazz | collection
+Deep Green | Marla Perkins | DF | CDF67 | $16.99 | $10.55 | 4 | classical | single
+Mad | Ravioli Pasta | FGG | BGH56 | $14.99 | $14.56 | 7 | jazz | collection
+Royal Music | Steve Benjamin | XLS | FJK89 | $18.99 | $10.00 | 9 | rock | single
+Listen | Tom Jones | DOC | RTY67 | $19.99 | $12.99 | 5 | classical | single
+Shout a lot | Frank Laeve | LSP | BGH00 | $25.99 | $14.55 | 6 | pop | album
+Smoke | John Smith | CPP | XYC58 | $14.99 | $17.55 | 5 | rock | album
+Deep Purple | Carla Simpson | DWG | JKL50 | $17.99 | $18.55 | 4 | jazz | single
+Led Zep | Tamara Brown | JAV | CFN79 | $19.99 | $12.55 | 5 | pop | collection
+Pink Floyd | Holly Talbert | CPP | MJK79 | $15.99 | $15.55 | 2 | classical | single
+U2 | Rick Doyle | DOC | KLP90 | $18.99 | $16.55 | 3 | jazz | collection
+The Dark Side | Jayant Madhavan | LSP | FTY66 | $14.99 | $10.55 | 5 | rock | single
+Serenade | Purdy Shenoy | XLS | RST90 | $16.99 | $11.55 | 1 | jazz | album

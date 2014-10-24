@@ -1,0 +1,12 @@
+1565638824 | Available | 3| 02139
+1557483469 | Available | 2| 94301
+1590530637| Available | 5| 98195
+0736909133 | Available |4| 94618
+0310201063 | Available | 1| 20015
+C384123125 | Available | 3| 98195
+C123009832 | NotAvailable | |
+C927495032 | Available | 1| 98195
+C234847889 | Available | 3| 94618
+C238417848 | Available | 4| 02139
+C294883528 | Available |5| 95616
+C289450923 | Available | 10 | 90501

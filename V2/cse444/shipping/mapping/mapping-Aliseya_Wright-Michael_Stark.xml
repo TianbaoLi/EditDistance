@@ -1,0 +1,122 @@
+<mapping>
+  <Aliseya_Wright>
+    <Package m="Package">
+      <PackageID m="Package/TrackingNo"/>
+      <InvoiceNo m="Package/OrderNo"/>
+      <Weight m="Package/Weight"/>
+      <TotalItems m="Package/NoItems"/>
+      <OrderStatus m="Package/DeliveryStatus"/>
+      <StatusComment m="Package/DeliveryInst"/>
+    </Package>
+    <ShipingRecord m="Package" c="OrderInfo Package">
+      <Package m="Package/TrackingNo"/>
+      <Method m="OrderInfo/ShipMethod"/>
+      <CompanyID m="OrderInfo/ShipCo"/>
+      <SpecialInstructions m="Package/DeliveryInst"/>
+      <SourceWarehouse m="Package/SrcWarehouse"/>
+      <PickUpTime m="Package/PickupTime"/>
+    </ShipingRecord>
+    <DeliveryRecord m="OrderInfo" c="OrderInfo Package">
+      <Package m="Package/TrackingNo"/>
+      <Name m="OrderInfo/DeliveryName"/>
+      <Address m="OrderInfo/StreetAdd"/>
+      <City m="OrderInfo/City"/>
+      <State m="OrderInfo/State"/>
+      <ZipCode m="OrderInfo/Zip"/>
+      <ContactPhone m="OrderInfo/Contact"/>
+      <DeliveryTime m="Package/DeliveryTime"/>
+    </DeliveryRecord>
+    <ShippingVendors m="ShippingVendors">
+      <ID/>
+      <Name m="ShippingVendors/Name"/>
+      <Address m="ShippingVendors/StreetAddress"/>
+      <City m="ShippingVendors/City"/>
+      <State m="ShippingVendors/State"/>
+      <ZipCode m="ShippingVendors/Zip"/>
+      <Phone m="VendorInfo/PhoneNumber"/>
+      <URL m="VendorInfo/URL"/>
+      <PickUpTime m="ShippingVendors/SchedPickupTime"/>
+      <Warehouse m="ShippingVendors/AssocWarehouse"/>
+    </ShippingVendors>
+    <Warehouse>
+      <ID/>
+      <Address/>
+      <City/>
+      <State/>
+      <ZipCode/>
+      <Phone/>
+    </Warehouse>
+    <ShippingMethods m="ShippingMethods">
+      <ID/>
+      <VendorID m="ShippingMethods/VendorName"/>
+      <type m="ShippingMethods/Method"/>
+      <MaxWeight m="ShippingMethods/MaxWeight"/>
+      <PricePerUnit m="ShippingMethods/PricePerUnit"/>
+      <Unit m="ShippingMethods/UnitPriceDescriptor"/>
+      <BasePrice m="ShippingMethods/MinPrice"/>
+      <DeliveryTime m="ShippingMethods/GuaranteedShipDur"/>
+    </ShippingMethods>
+    <Invoice m="OrderInfo">
+      <InvoiceNo m="OrderInfo/OrderNo"/>
+      <NumShipments/>
+      <NumItems m="Package/NoItems"/>
+    </Invoice>
+  </Aliseya_Wright>
+  <Michael_Stark correct="yes-ken">
+    <Package m="Package">
+      <OrderNo m="Package/PackageID"/>
+      <Weight m="Package/Weight"/>
+      <Width/>
+      <Height/>
+      <Depth/>
+      <NoItems m="Package/TotalItems"/>
+      <TrackingNo m="Package/PackageID"/>
+      <DeliveryInst m="ShipingRecord/SpecialInstructions"/>
+      <SrcWarehouse m="ShippingVendors/Warehouse" g="1"/>
+      <PickupTime m="ShipingRecord/PickUpTime"/>
+      <DeliveryTime m="DeliveryRecord/DeliveryTime"/>
+      <DeliveryStatus m="Package/OrderStatus"/>
+      <ShippingCost/>
+    </Package>
+    <OrderInfo m="Package" c="Package Invoice">
+      <OrderNo m="Package/InvoiceNo"/>
+      <ShipMethod m="ShipingRecord/Method"/>
+      <ShipCo m="ShippingVendors/Name"/>
+      <DeliveryName m="DeliveryRecord/Name"/>
+      <StreetAdd m="DeliveryRecord/Address"/>
+      <City m="DeliveryRecord/City"/>
+      <State m="DeliveryRecord/State"/>
+      <Zip m="DeliveryRecord/ZipCode"/>
+      <Contact m="DeliveryRecord/Name"/>
+      <OrderShippingCost/>
+    </OrderInfo>
+    <ShippingVendors m="ShippingVendors">
+      <Name m="ShippingVendors/Name"/>
+      <AssocWarehouse m="ShippingVendors/Warehouse"/>
+      <StreetAddress m="ShippingVendors/Address"/>
+      <City m="ShippingVendors/City"/>
+      <State m="ShippingVendors/State"/>
+      <Zip m="ShippingVendors/ZipCode"/>
+      <SchedPickupTime m="ShippingVendors/PickUpTime"/>
+   </ShippingVendors> 
+  <VendorInfo m="ShippingVendors">
+      <Name m="ShippingVendors/Name"/>   
+	  <PhoneNumber m="ShippingVendors/Phone"/>
+      <URL m="ShippingVendors/URL"/>
+	</VendorInfo>
+    <ShippingMethods m="ShippingMethods">
+      <VendorName m="ShippingMethods/VendorID"/>
+      <Method m="ShippingMethods/type"/>
+      <UnitPriceDescriptor m="ShippingMethods/Unit"/>
+      <PricePerUnit m="ShippingMethods/PricePerUnit"/>
+      <GuaranteedShipDur/>
+      <MaxWeight m="ShippingMethods/MaxWeight"/>
+      <MaxWidth/>
+      <MaxHeight/>
+      <MaxDepth/>
+      <RestrictedCities/>
+      <MinPrice m="ShippingMethods/BasePrice"/>
+      <MaxPrice/>
+    </ShippingMethods>
+  </Michael_Stark>
+</mapping>

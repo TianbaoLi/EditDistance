@@ -1,0 +1,834 @@
+<database name="UWShipping">
+	<createdby name="Dave Sedlacek" />
+	<comment>This is based on the "original" perceived specs wrt tables</comment>
+	
+	<schema>
+		<table name="Packages">
+			<column name="ID" type="String" key="yes">
+				<comment>The unique package identifier</comment>
+			</column>
+			<column name="ShipAgent" type="String" key="no" />
+			<column name="ShipServiceType" type="String" key="no">
+				<comment>Delivery service level (NextDay, TwoDay, etc)</comment>
+			</column>
+			<column name="Warehouse" type="String" key="no">
+				<comment>Origin of shipment</comment>
+			</column>
+			<column name="InvoiceNo" type="Integer" key="no" />
+			<column name="DestName" type="String" key="no">
+				<comment>Ideally all destination addresses would be retrieved from a 
+					master customer table, keyed by a customer number, with an option to
+					manually enter the destination for special or new locations </comment>
+			</column>
+			<column name="DestAddr" type="String" key="no" />
+			<column name="DestCity" type="String" key="no">
+				<comment>City, Zip, and Phone should also be included here...</comment>
+			</column>
+			<column name="DestState" type="String" key="no"/>
+			<column name="DestZip" type="String" key="no"/>
+			<column name="DestContact" type="String" key="no" />
+			<column name="Residential" type="Boolean" key="no" />
+			<column name="Status" type="String" key="no" />
+			<column name="PkgWt" type="Integer" key="no">
+				<comment>Weight of package in lbs</comment>
+			</column>
+			<column name="NumItems" type="Integer" key="no" />
+			<column name="DeclaredValue" type="Integer" key="no" />
+			<column name="Insured" type="Boolean" key="no" />
+			<column name="InsuranceFee" type="Integer" key="no">
+				<comment>Insurance Fee is in US dollars</comment>
+			</column>
+			<column name="TrackingNo" type="String" key="no" />
+			<column name="ShipDate" type="Date" key="no" />
+			<column name="EstDeliveryDate" type="Date" key="no" />
+			<column name="ActualDeliveryDate" type="Date" key="no" />
+			<column name="SpecialInstr" type="String" key="no">
+				<comment>Special instructions (signature unnecessary, directions, etc)
+				</comment>
+			</column>
+		</table>
+		
+		<table name="ShippingProviders">
+			<column name="Name" type="String" key="yes" />
+			<column name="Addr" type="String" key="no" />
+			<column name="Phone" type="String" key="no" />
+			<column name="Url" type="String" key="no" />
+			<column name="Warehouse" type="String" key="yes" />
+			<column name="AcctNo" type="String" key="no" />
+			<column name="StdPickupTime" type="Time" key="no" />
+		</table>
+		
+		<table name="ShippingMethods">
+			<column name="Method" type="String" key="yes" />
+			<column name="Provider" type="String" key="yes" />
+			<column name="ShippingUnit" type="String" key="no" />
+			<column name="PricePerUnit" type="Float" key="no" />
+			<column name="MaxDays" type="Integer" key="no">
+				<comment>Guaranteed delivery by this number of days</comment>
+			</column>
+			<column name="MaxWt" type="Integer" key="no" />
+				<comment>Max allowed weight in lbs</comment>
+			<column name="MaxSize" type="Integer" key="no">
+				<comment>Largest accepted dimension (height, length or width)
+					in inches</comment>
+			</column>
+		</table>
+
+		<foreignkeyconstraint>
+			<comment>Each shipping method must be available from an accepted 
+				provider
+			</comment>
+			<source table="ShippingMethods">
+				<column name="Provider" />
+			</source>
+			<target table="ShippingProviders">
+				<column name="Name" />
+			</target>
+		</foreignkeyconstraint>	
+		
+		<foreignkeyconstraint>
+			<comment>Each package must be shipped by an accepted provider
+				using a method available from that provider</comment>
+			<source table="Packages">
+				<column name="ShipAgent" />
+				<column name="ShipServiceType" />
+			</source>
+			<target table="ShippingMethods">
+				<column name="Provider" />
+				<column name="Method" />
+			</target>
+		</foreignkeyconstraint>
+	</schema>
+  <Data>
+    <Packages>
+      <tuple>
+        <ID>A594</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934344</InvoiceNo>
+        <DestName>Bob Smith</DestName>
+        <DestAddr>123 Maple</DestAddr>
+        <DestCity>New York</DestCity>
+        <DestState>NY</DestState>
+        <DestZip>23462</DestZip>
+        <DestContact>Bob Smith</DestContact>
+        <Residential>True</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>5</PkgWt>
+        <NumItems>2</NumItems>
+        <DeclaredValue>75</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>5</InsuranceFee>
+        <TrackingNo>8d44069z3</TrackingNo>
+        <ShipDate>2003-01-22 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-28 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-29 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A595</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>TwoDay</ShipServiceType>
+        <Warehouse>Kansas City</Warehouse>
+        <InvoiceNo>934547</InvoiceNo>
+        <DestName>John Elbow</DestName>
+        <DestAddr>321 Maple</DestAddr>
+        <DestCity>Cincinnati</DestCity>
+        <DestState>OH</DestState>
+        <DestZip>74356</DestZip>
+        <DestContact>John Elbow</DestContact>
+        <Residential>True</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>2</PkgWt>
+        <NumItems>3</NumItems>
+        <DeclaredValue>20</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>8d44j5634</TrackingNo>
+        <ShipDate>2003-01-22 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-24 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-24 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A596</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934567</InvoiceNo>
+        <DestName>AAA Television Repair</DestName>
+        <DestAddr>222 Maple</DestAddr>
+        <DestCity>Tulsa</DestCity>
+        <DestState>OK</DestState>
+        <DestZip>35765</DestZip>
+        <DestContact>Todd Dell</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>6</PkgWt>
+        <NumItems>1</NumItems>
+        <DeclaredValue>60</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>5f8t5h548</TrackingNo>
+        <ShipDate>2003-01-22 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-28 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-29 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A597</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>NextDay</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934235</InvoiceNo>
+        <DestName>Bill Snip</DestName>
+        <DestAddr>765 Maple</DestAddr>
+        <DestCity>Los Angeles</DestCity>
+        <DestState>CA</DestState>
+        <DestZip>64567</DestZip>
+        <DestContact>Bill Snip</DestContact>
+        <Residential>True</Residential>
+        <Status>Transit</Status>
+        <PkgWt>1</PkgWt>
+        <NumItems>5</NumItems>
+        <DeclaredValue>80</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>jf9855u68</TrackingNo>
+        <ShipDate>2003-01-23 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-23 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr>Leave with neighbor</SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A598</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Boise</Warehouse>
+        <InvoiceNo>934987</InvoiceNo>
+        <DestName>City of Seattle</DestName>
+        <DestAddr>345 Maple</DestAddr>
+        <DestCity>Seattle</DestCity>
+        <DestState>WA</DestState>
+        <DestZip>98465</DestZip>
+        <DestContact>Lori Knoss</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>1</PkgWt>
+        <NumItems>4</NumItems>
+        <DeclaredValue>50</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>796kgf93</TrackingNo>
+        <ShipDate>2003-01-23 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-29 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A599</ID>
+        <ShipAgent>DHL</ShipAgent>
+        <ShipServiceType>NextDay</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934674</InvoiceNo>
+        <DestName>Nick's Shoes</DestName>
+        <DestAddr>987 Maple</DestAddr>
+        <DestCity>Portland</DestCity>
+        <DestState>OR</DestState>
+        <DestZip>78254</DestZip>
+        <DestContact>Kevin Vinh</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>3</PkgWt>
+        <NumItems>2</NumItems>
+        <DeclaredValue>80</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>482j6k5fd</TrackingNo>
+        <ShipDate>2003-01-23 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-24 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-24 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A600</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934264</InvoiceNo>
+        <DestName>Troy Smith</DestName>
+        <DestAddr>666 Maple</DestAddr>
+        <DestCity>Wichita</DestCity>
+        <DestState>KS</DestState>
+        <DestZip>46845</DestZip>
+        <DestContact>Troy Smith</DestContact>
+        <Residential>True</Residential>
+        <Status>Transit</Status>
+        <PkgWt>4</PkgWt>
+        <NumItems>5</NumItems>
+        <DeclaredValue>160</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>5</InsuranceFee>
+        <TrackingNo>2515fg823</TrackingNo>
+        <ShipDate>2003-01-23 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr>No signature necessary</SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A601</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>TwoDay</ShipServiceType>
+        <Warehouse>Boise</Warehouse>
+        <InvoiceNo>934835</InvoiceNo>
+        <DestName>Windy City Toiletries</DestName>
+        <DestAddr>890 Maple</DestAddr>
+        <DestCity>Chicago</DestCity>
+        <DestState>IL</DestState>
+        <DestZip>67894</DestZip>
+        <DestContact>Carol Ney</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>2</PkgWt>
+        <NumItems>2</NumItems>
+        <DeclaredValue>45</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>1k2f33418</TrackingNo>
+        <ShipDate>2003-01-23 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-25 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-24 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A602</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Kansas City</Warehouse>
+        <InvoiceNo>934065</InvoiceNo>
+        <DestName>Bob's BBQ Palace</DestName>
+        <DestAddr>147 Maple</DestAddr>
+        <DestCity>Seattle</DestCity>
+        <DestState>WA</DestState>
+        <DestZip>38789</DestZip>
+        <DestContact>Alan Skone</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>1</PkgWt>
+        <NumItems>4</NumItems>
+        <DeclaredValue>70</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>45n4f587</TrackingNo>
+        <ShipDate>2003-01-26 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-01 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-29 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A603</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>NextDay</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934479</InvoiceNo>
+        <DestName>Isotope Int'l</DestName>
+        <DestAddr>852 Maple</DestAddr>
+        <DestCity>New York</DestCity>
+        <DestState>NY</DestState>
+        <DestZip>78925</DestZip>
+        <DestContact>Jim R Delray</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>3</PkgWt>
+        <NumItems>3</NumItems>
+        <DeclaredValue>100</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>5</InsuranceFee>
+        <TrackingNo>67822hj47</TrackingNo>
+        <ShipDate>2003-01-26 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-27 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A604</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>NextDay</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934514</InvoiceNo>
+        <DestName>Bob Frellin</DestName>
+        <DestAddr>369 Oak</DestAddr>
+        <DestCity>Minneapolis</DestCity>
+        <DestState>MN</DestState>
+        <DestZip>37896</DestZip>
+        <DestContact>Bob Frellin</DestContact>
+        <Residential>True</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>2</PkgWt>
+        <NumItems>3</NumItems>
+        <DeclaredValue>65</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>41445fh45</TrackingNo>
+        <ShipDate>2003-01-26 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-27 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-27 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A605</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Boise</Warehouse>
+        <InvoiceNo>934238</InvoiceNo>
+        <DestName>TBS Design</DestName>
+        <DestAddr>741 Maple</DestAddr>
+        <DestCity>Atlanta</DestCity>
+        <DestState>GA</DestState>
+        <DestZip>15678</DestZip>
+        <DestContact>Joe Jones</DestContact>
+        <Residential>False</Residential>
+        <Status>Delivered</Status>
+        <PkgWt>5</PkgWt>
+        <NumItems>1</NumItems>
+        <DeclaredValue>30</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>1k11g5817</TrackingNo>
+        <ShipDate>2003-01-27 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-02 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate>2003-01-29 00:00:00</ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A606</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934411</InvoiceNo>
+        <DestName>Bob Smith</DestName>
+        <DestAddr>123 Maple</DestAddr>
+        <DestCity>New York</DestCity>
+        <DestState>NY</DestState>
+        <DestZip>78955</DestZip>
+        <DestContact>Bob Smith</DestContact>
+        <Residential>True</Residential>
+        <Status>Transit</Status>
+        <PkgWt>12</PkgWt>
+        <NumItems>12</NumItems>
+        <DeclaredValue>320</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>5</InsuranceFee>
+        <TrackingNo>48d4845gf</TrackingNo>
+        <ShipDate>2003-01-27 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-02 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A607</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Kansas City</Warehouse>
+        <InvoiceNo>934233</InvoiceNo>
+        <DestName>Portland Landscaping</DestName>
+        <DestAddr>963 Maple</DestAddr>
+        <DestCity>Portland</DestCity>
+        <DestState>OR</DestState>
+        <DestZip>95645</DestZip>
+        <DestContact>Will Bronk</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>3</PkgWt>
+        <NumItems>1</NumItems>
+        <DeclaredValue>90</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>45h454774</TrackingNo>
+        <ShipDate>2003-01-27 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-02 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A608</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>TwoDay</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934945</InvoiceNo>
+        <DestName>Tayla Lelly</DestName>
+        <DestAddr>357 Maple</DestAddr>
+        <DestCity>Seattle</DestCity>
+        <DestState>WA</DestState>
+        <DestZip>56786</DestZip>
+        <DestContact>Tayla Lelly</DestContact>
+        <Residential>True</Residential>
+        <Status>Transit</Status>
+        <PkgWt>2</PkgWt>
+        <NumItems>1</NumItems>
+        <DeclaredValue>20</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>77y1h7823</TrackingNo>
+        <ShipDate>2003-01-27 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-29 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A609</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>935051</InvoiceNo>
+        <DestName>Genco Imports</DestName>
+        <DestAddr>159 Maple</DestAddr>
+        <DestCity>New York</DestCity>
+        <DestState>NY</DestState>
+        <DestZip>46588</DestZip>
+        <DestContact>Calvin Waters</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>8</PkgWt>
+        <NumItems>5</NumItems>
+        <DeclaredValue>140</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>45u7h4gf58</TrackingNo>
+        <ShipDate>2003-01-28 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-03 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A610</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Boise</Warehouse>
+        <InvoiceNo>935007</InvoiceNo>
+        <DestName>Betty's No Good Clothing Shop and Pancake House</DestName>
+        <DestAddr>462 Maple</DestAddr>
+        <DestCity>Philadelphia</DestCity>
+        <DestState>PA</DestState>
+        <DestZip>87553</DestZip>
+        <DestContact>Anna Sinclair</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>10</PkgWt>
+        <NumItems>18</NumItems>
+        <DeclaredValue>530</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>10</InsuranceFee>
+        <TrackingNo>7ty7h1482r</TrackingNo>
+        <ShipDate>2003-01-28 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-03 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A611</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>TwoDay</ShipServiceType>
+        <Warehouse>Kansas City</Warehouse>
+        <InvoiceNo>935013</InvoiceNo>
+        <DestName>Paul Mooret</DestName>
+        <DestAddr>987 Maple</DestAddr>
+        <DestCity>Seattle</DestCity>
+        <DestState>WA</DestState>
+        <DestZip>38752</DestZip>
+        <DestContact>Paul Mooret</DestContact>
+        <Residential>True</Residential>
+        <Status>Transit</Status>
+        <PkgWt>4</PkgWt>
+        <NumItems>2</NumItems>
+        <DeclaredValue>220</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>7</InsuranceFee>
+        <TrackingNo>9715fh3822</TrackingNo>
+        <ShipDate>2003-01-28 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-30 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A612</ID>
+        <ShipAgent>UPS</ShipAgent>
+        <ShipServiceType>TwoDay</ShipServiceType>
+        <Warehouse>Kansas City</Warehouse>
+        <InvoiceNo>934558</InvoiceNo>
+        <DestName>The Bronze Pony</DestName>
+        <DestAddr>355 Maple</DestAddr>
+        <DestCity>New York</DestCity>
+        <DestState>NY</DestState>
+        <DestZip>53421</DestZip>
+        <DestContact>Enid Smith</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>2</PkgWt>
+        <NumItems>4</NumItems>
+        <DeclaredValue>130</DeclaredValue>
+        <Insured>False</Insured>
+        <InsuranceFee>0</InsuranceFee>
+        <TrackingNo>11li58ti45</TrackingNo>
+        <ShipDate>2003-01-28 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-01-30 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr>Deliver to side door of house</SpecialInstr>
+      </tuple>
+
+      <tuple>
+        <ID>A613</ID>
+        <ShipAgent>FedEx</ShipAgent>
+        <ShipServiceType>Ground</ShipServiceType>
+        <Warehouse>Seattle</Warehouse>
+        <InvoiceNo>934247</InvoiceNo>
+        <DestName>Bridges and Co</DestName>
+        <DestAddr>113 Maple</DestAddr>
+        <DestCity>Chicago</DestCity>
+        <DestState>IL</DestState>
+        <DestZip>65433</DestZip>
+        <DestContact>Brian Lake</DestContact>
+        <Residential>False</Residential>
+        <Status>Transit</Status>
+        <PkgWt>4</PkgWt>
+        <NumItems>3</NumItems>
+        <DeclaredValue>100</DeclaredValue>
+        <Insured>True</Insured>
+        <InsuranceFee>5</InsuranceFee>
+        <TrackingNo>558yhe78</TrackingNo>
+        <ShipDate>2003-01-28 00:00:00</ShipDate>
+        <EstDeliveryDate>2003-02-03 00:00:00</EstDeliveryDate>
+        <ActualDeliveryDate></ActualDeliveryDate>
+        <SpecialInstr></SpecialInstr>
+      </tuple>
+
+    </Packages>
+
+    <ShippingProviders>
+      <tuple>
+        <Name>UPS</Name>
+        <Addr>853 Main St</Addr>
+        <Phone>800-321-1234</Phone>
+        <Url>www.ups.com</Url>
+        <Warehouse>Seattle</Warehouse>
+        <AcctNo>93298632</AcctNo>
+        <StdPickupTime>1900-01-01 16:00:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <Addr>329 Main St</Addr>
+        <Phone>800-321-1234</Phone>
+        <Url>www.ups.com</Url>
+        <Warehouse>Kansas City</Warehouse>
+        <AcctNo>93298632</AcctNo>
+        <StdPickupTime>1900-01-01 15:30:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>UPS</Name>
+        <Addr>631 Main St</Addr>
+        <Phone>800-321-1234</Phone>
+        <Url>www.ups.com</Url>
+        <Warehouse>Boise</Warehouse>
+        <AcctNo>93298632</AcctNo>
+        <StdPickupTime>1900-01-01 15:30:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <Addr>958 Main St</Addr>
+        <Phone>800-753-2636</Phone>
+        <Url>www.fedex.com</Url>
+        <Warehouse>Seattle</Warehouse>
+        <AcctNo>3487515</AcctNo>
+        <StdPickupTime>1900-01-01 15:00:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <Addr>366 Main St</Addr>
+        <Phone>800-753-2636</Phone>
+        <Url>www.fedex.com</Url>
+        <Warehouse>Kansas City</Warehouse>
+        <AcctNo>3487515</AcctNo>
+        <StdPickupTime>1900-01-01 16:15:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>FedEx</Name>
+        <Addr>272 Main St</Addr>
+        <Phone>800-753-2636</Phone>
+        <Url>www.fedex.com</Url>
+        <Warehouse>Boise</Warehouse>
+        <AcctNo>3487515</AcctNo>
+        <StdPickupTime>1900-01-01 15:00:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <Addr>818 Main St</Addr>
+        <Phone>800-182-7553</Phone>
+        <Url>www.dhl.com</Url>
+        <Warehouse>Boise</Warehouse>
+        <AcctNo>3654981</AcctNo>
+        <StdPickupTime>1900-01-01 15:45:00</StdPickupTime>
+      </tuple>
+
+      <tuple>
+        <Name>DHL</Name>
+        <Addr>442 Main St</Addr>
+        <Phone>800-182-7553</Phone>
+        <Url>www.dhl.com</Url>
+        <Warehouse>Seattle</Warehouse>
+        <AcctNo>3654981</AcctNo>
+        <StdPickupTime>1900-01-01 15:45:00</StdPickupTime>
+      </tuple>
+
+    </ShippingProviders>
+
+    <ShippingMethods>
+      <tuple>
+        <Method>Ground</Method>
+        <Provider>UPS</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>3.13</PricePerUnit>
+        <MaxDays>7</MaxDays>
+        <MaxWt>70</MaxWt>
+        <MaxSize>84</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>TwoDay</Method>
+        <Provider>UPS</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>5.45</PricePerUnit>
+        <MaxDays>3</MaxDays>
+        <MaxWt>70</MaxWt>
+        <MaxSize>84</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>NextDay</Method>
+        <Provider>UPS</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>8.35</PricePerUnit>
+        <MaxDays>1</MaxDays>
+        <MaxWt>70</MaxWt>
+        <MaxSize>84</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>Ground</Method>
+        <Provider>FedEx</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>3.21</PricePerUnit>
+        <MaxDays>10</MaxDays>
+        <MaxWt>70</MaxWt>
+        <MaxSize>72</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>TwoDay</Method>
+        <Provider>FedEx</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>6.76</PricePerUnit>
+        <MaxDays>2</MaxDays>
+        <MaxWt>70</MaxWt>
+        <MaxSize>72</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>NextDay</Method>
+        <Provider>FedEx</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>8.21</PricePerUnit>
+        <MaxDays>1</MaxDays>
+        <MaxWt>50</MaxWt>
+        <MaxSize>72</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>NextDay</Method>
+        <Provider>DHL</Provider>
+        <ShippingUnit>lbs</ShippingUnit>
+        <PricePerUnit>11.03</PricePerUnit>
+        <MaxDays>1</MaxDays>
+        <MaxWt>40</MaxWt>
+        <MaxSize>60</MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>NextDayLtr</Method>
+        <Provider>UPS</Provider>
+        <ShippingUnit>ea</ShippingUnit>
+        <PricePerUnit>10</PricePerUnit>
+        <MaxDays>1</MaxDays>
+        <MaxWt>1</MaxWt>
+        <MaxSize></MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>TwoDayLtr</Method>
+        <Provider>UPS</Provider>
+        <ShippingUnit>ea</ShippingUnit>
+        <PricePerUnit>7</PricePerUnit>
+        <MaxDays>3</MaxDays>
+        <MaxWt>1</MaxWt>
+        <MaxSize></MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>GroundLtr</Method>
+        <Provider>DHL</Provider>
+        <ShippingUnit>ea</ShippingUnit>
+        <PricePerUnit>4</PricePerUnit>
+        <MaxDays>8</MaxDays>
+        <MaxWt>1</MaxWt>
+        <MaxSize></MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>NextDayLtr</Method>
+        <Provider>FedEx</Provider>
+        <ShippingUnit>ea</ShippingUnit>
+        <PricePerUnit>12</PricePerUnit>
+        <MaxDays>1</MaxDays>
+        <MaxWt>1</MaxWt>
+        <MaxSize></MaxSize>
+      </tuple>
+
+      <tuple>
+        <Method>TwoDayLtr</Method>
+        <Provider>FedEx</Provider>
+        <ShippingUnit>ea</ShippingUnit>
+        <PricePerUnit>8</PricePerUnit>
+        <MaxDays>2</MaxDays>
+        <MaxWt>1</MaxWt>
+        <MaxSize></MaxSize>
+      </tuple>
+
+    </ShippingMethods>
+
+  </Data>
+
+</database>

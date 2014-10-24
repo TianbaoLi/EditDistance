@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database name="ShippingForSlizzaOnline">
+
+<createdby name="Aliseya Wright"/>
+
+<Schema>
+  
+  <table name="Package">
+	<column name="PackageID" type="Integer" key="yes"></column>
+	<column name="InvoiceNo" type="Integer" key="no"></column>
+	<column name="Weight" type="Integer" key="no"></column>
+	<column name="TotalItems" type="Integer" key="no"></column>
+	<column name="OrderStatus" type="String" key="no"></column>
+	<column name="StatusComment" type="String" key="no"></column>
+  </table>
+
+  <table name="ShipingRecord">
+	<column name="Package" type="Integer" key="yes">
+	<comment>The Package number can be used as a tracking number</comment></column>
+	<column name="Method" type="String" key="no"></column>
+	<column name="CompanyID" type="Integer" key="no"></column>
+	<column name="SpecialInstructions" type="String" key="no"></column>
+	<column name="SourceWarehouse" type="String" key="no"></column>
+	<column name="PickUpTime" type="Time" key="no"></column>
+  </table>
+
+  <table name="DeliveryRecord">
+	<column name="Package" type="Integer" key="yes"></column>
+	<column name="Name" type="String" key="no"></column>
+	<column name="Address" type="String" key="no"></column>
+	<column name="City" type="String" key="no"></column>
+	<column name="State" type="String" key="no"></column>
+	<column name="ZipCode" type="Integer" key="no"></column>
+	<column name="ContactPhone" type="Integer" key="no"></column>
+	<column name="DeliveryTime" type="Time" key="no"></column>
+  </table>
+
+  <table name="ShippingVendors">
+	<column name="ID" type="Integer" key="yes"></column>
+	<column name="Name" type="String" key="no"></column>
+	<column name="Address" type="String" key="no"></column>
+	<column name="City" type="String" key="no"></column>
+	<column name="State" type="String" key="no"></column>
+	<column name="ZipCode" type="Integer" key="no"></column>
+	<column name="Phone" type="Integer" key="no"></column>
+	<column name="URL" type="String" key="no"></column>
+	<column name="PickUpTime" type="Time" key="no"></column>
+	<column name="Warehouse" type="Integer" key="no"></column>
+	
+  </table>
+
+  <table name="Warehouse">
+	<column name="ID" type="Integer" key="yes"></column>
+	<column name="Address" type="String" key="no"></column>
+	<column name="City" type="String" key="no"></column>
+	<column name="State" type="String" key="no"></column>
+	<column name="ZipCode" type="Integer" key="no"></column>
+	<column name="Phone" type="Integer" key="no"></column>	
+  </table>
+
+
+  <table name="ShippingMethods">
+	<column name="ID" type="Integer" key="yes"></column>
+	<column name="VendorID" type="Integer" key="no"></column>
+	<column name="type" type="String" key="no"></column>
+	<column name="MaxWeight" type="Integer" key="no"></column>
+	<column name="PricePerUnit" type="Money" key="no"></column>
+	<column name="Unit" type="String" key="no"></column>
+	<column name="BasePrice" type="Money" key="no"></column>
+	<column name="DeliveryTime" type="Integer" key="no"></column>	
+  </table>
+
+  
+  <table name="Invoice">
+	<column name="InvoiceNo" type="Integer" key="yes"></column>
+	<column name="NumShipments" type="Integer" key="no"></column>
+	<column name="NumItems" type="Integer" key="no"></column>
+  </table>
+
+
+  <foreignkeyconstraint>
+    <source table="Package">
+	  <column name="InvoiceNo"/>
+	</source>
+	<target table="Invoice">
+	  <column name="InvoiceNo"/>
+	</target>
+    <comment> 
+	  Every invoice number on a package must have a corresponding record for an invoice.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="ShippingRecord">
+	  <column name="Package"/>
+	</source>
+	<target table="Package">
+	  <column name="PackageID"/>
+	</target>
+  </foreignkeyconstraint>
+
+
+  <foreignkeyconstraint>
+    <source table="ShippingRecord">
+	  <column name="CompanyID"/>
+	</source>
+	<target table="ShippingVendor">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="DeliveryRecord">
+	  <column name="Package"/>
+	</source>
+	<target table="Package">
+	  <column name="PackageID"/>
+	</target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="ShippingMethod">
+	  <column name="VendorID"/>
+	</source>
+	<target table="ShippingVendor">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="ShippingVendor">
+	  <column name="Warehouse"/>
+	</source>
+	<target table="Warehouse">
+	  <column name="ID"/>
+	</target>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <PackageID>000001</PackageID>
+        <InvoiceNo>000001</InvoiceNo>
+        <Weight>7</Weight>
+        <TotalItems>3</TotalItems>
+        <OrderStatus>Pending</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+      <tuple>
+        <PackageID>000002</PackageID>
+        <InvoiceNo>000002</InvoiceNo>
+        <Weight>17</Weight>
+        <TotalItems>2</TotalItems>
+        <OrderStatus>In Progress</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+      <tuple>
+        <PackageID>000003</PackageID>
+        <InvoiceNo>000003</InvoiceNo>
+        <Weight>3</Weight>
+        <TotalItems>1</TotalItems>
+        <OrderStatus>Delivered</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+      <tuple>
+        <PackageID>000004</PackageID>
+        <InvoiceNo>000004</InvoiceNo>
+        <Weight>2</Weight>
+        <TotalItems>2</TotalItems>
+        <OrderStatus>Pending</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+      <tuple>
+        <PackageID>000005</PackageID>
+        <InvoiceNo>000005</InvoiceNo>
+        <Weight>4</Weight>
+        <TotalItems>1</TotalItems>
+        <OrderStatus>Delivered</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+      <tuple>
+        <PackageID>000006</PackageID>
+        <InvoiceNo>000005</InvoiceNo>
+        <Weight>12</Weight>
+        <TotalItems>3</TotalItems>
+        <OrderStatus>Delivered</OrderStatus>
+        <StatusComment></StatusComment>
+      </tuple>
+
+    </Package>
+
+    <ShipingRecord>
+      <tuple>
+        <Package>000001</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0001</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Package>000002</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0002</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Package>000003</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0002</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Package>000004</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0003</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Package>000005</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0001</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Package>000006</Package>
+        <Method>Ground</Method>
+        <CompanyID>1234</CompanyID>
+        <SpecialInstructions>Gift Wrap</SpecialInstructions>
+        <SourceWarehouse>0001</SourceWarehouse>
+        <PickUpTime>12:00</PickUpTime>
+      </tuple>
+
+    </ShipingRecord>
+
+    <DeliveryRecord>
+      <tuple>
+        <Package>000001</Package>
+        <Name>Aliseya Wright</Name>
+        <Address>2526 E. Madison #1</Address>
+        <City>Seattle</City>
+        <State>WA</State>
+        <ZipCode>98112</ZipCode>
+        <ContactPhone>2062517633</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <Package>000002</Package>
+        <Name>Erma Holzer</Name>
+        <Address>2423 SW Myrtle St</Address>
+        <City>Seattle</City>
+        <State>WA</State>
+        <ZipCode>98106</ZipCode>
+        <ContactPhone>2067621378</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <Package>000003</Package>
+        <Name>Linda Wright</Name>
+        <Address>8156 32nd Ave SW</Address>
+        <City>Seattle</City>
+        <State>WA</State>
+        <ZipCode>98126</ZipCode>
+        <ContactPhone>2069320104</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <Package>000001</Package>
+        <Name>Tim Preston</Name>
+        <Address>1823 SW Elliot Ave</Address>
+        <City>Hillsboro</City>
+        <State>OR</State>
+        <ZipCode>97632</ZipCode>
+        <ContactPhone>5038715632</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <Package>000005</Package>
+        <Name>Mario Church</Name>
+        <Address>1 Beachfront Ave.</Address>
+        <City>San Diego</City>
+        <State>CA</State>
+        <ZipCode>92314</ZipCode>
+        <ContactPhone>9192874612</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <Package>000006</Package>
+        <Name>Mario Church</Name>
+        <Address>1 Beachfront Ave.</Address>
+        <City>San Diego</City>
+        <State>CA</State>
+        <ZipCode>92314</ZipCode>
+        <ContactPhone>9192874612</ContactPhone>
+        <DeliveryTime>12:00</DeliveryTime>
+      </tuple>
+
+    </DeliveryRecord>
+
+    <ShippingVendors>
+      <tuple>
+        <ID>1234</ID>
+        <Name>West Coast Shipping</Name>
+        <Address>1472 San Bernadino Blvd</Address>
+        <City>San Diego</City>
+        <State>CA</State>
+        <ZipCode>92817</ZipCode>
+        <Phone>18001283942</Phone>
+        <URL>http://www.westcoastshipping.com</URL>
+        <PickUpTime>12:00</PickUpTime>
+        <Warehouse>0001</Warehouse>
+      </tuple>
+
+      <tuple>
+        <ID>1908</ID>
+        <Name>Next Day Delivery</Name>
+        <Address>1 Next Day Parkway</Address>
+        <City>New York City</City>
+        <State>NY</State>
+        <ZipCode>21412</ZipCode>
+        <Phone>18008372616</Phone>
+        <URL>http://www.nextdaydelivery.com</URL>
+        <PickUpTime>12:00</PickUpTime>
+        <Warehouse>0002</Warehouse>
+      </tuple>
+
+      <tuple>
+        <ID>1906</ID>
+        <Name>East Side Packaging</Name>
+        <Address>12713 33rd Ave West</Address>
+        <City>New York City</City>
+        <State>NY</State>
+        <ZipCode>21416</ZipCode>
+        <Phone>18008372345</Phone>
+        <URL>http://www.esp.com</URL>
+        <PickUpTime>12:00</PickUpTime>
+        <Warehouse>0002</Warehouse>
+      </tuple>
+
+      <tuple>
+        <ID>1267</ID>
+        <Name>Corn Field Shiping</Name>
+        <Address>1897 East Kodak Street</Address>
+        <City>Kansas City</City>
+        <State>MO</State>
+        <ZipCode>73628</ZipCode>
+        <Phone>18009482719</Phone>
+        <URL>http://www.cornfieldshiping.com</URL>
+        <PickUpTime>12:00</PickUpTime>
+        <Warehouse>0003</Warehouse>
+      </tuple>
+
+    </ShippingVendors>
+
+    <Warehouse>
+      <tuple>
+        <ID>0001</ID>
+        <Address>9812 Mayfield Lane</Address>
+        <City>San Diego</City>
+        <State>CA</State>
+        <ZipCode>81921</ZipCode>
+        <Phone>18009372638</Phone>
+      </tuple>
+
+      <tuple>
+        <ID>0002</ID>
+        <Address>1876 Madison Ave</Address>
+        <City>New York City</City>
+        <State>NY</State>
+        <ZipCode>12739</ZipCode>
+        <Phone>18009283726</Phone>
+      </tuple>
+
+      <tuple>
+        <ID>0003</ID>
+        <Address>87742 Westchester Place</Address>
+        <City>Kansas City</City>
+        <State>MO</State>
+        <ZipCode>38382</ZipCode>
+        <Phone>18002937267</Phone>
+      </tuple>
+
+    </Warehouse>
+
+    <ShippingMethods>
+      <tuple>
+        <ID>0001</ID>
+        <VendorID>1234</VendorID>
+        <type>Standard</type>
+        <MaxWeight>100</MaxWeight>
+        <PricePerUnit>.30</PricePerUnit>
+        <Unit>Pound</Unit>
+        <BasePrice>3.00</BasePrice>
+        <DeliveryTime>5</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <ID>0002</ID>
+        <VendorID>1908</VendorID>
+        <type>Next day</type>
+        <MaxWeight>100</MaxWeight>
+        <PricePerUnit>.30</PricePerUnit>
+        <Unit>Pound</Unit>
+        <BasePrice>13.00</BasePrice>
+        <DeliveryTime>1</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <ID>0003</ID>
+        <VendorID>1906</VendorID>
+        <type>Standard</type>
+        <MaxWeight>100</MaxWeight>
+        <PricePerUnit>1.00</PricePerUnit>
+        <Unit>Item</Unit>
+        <BasePrice>5.00</BasePrice>
+        <DeliveryTime>5</DeliveryTime>
+      </tuple>
+
+      <tuple>
+        <ID>0004</ID>
+        <VendorID>1267</VendorID>
+        <type>3 Day</type>
+        <MaxWeight>100</MaxWeight>
+        <PricePerUnit>.50</PricePerUnit>
+        <Unit>Pound</Unit>
+        <BasePrice>3.00</BasePrice>
+        <DeliveryTime>3</DeliveryTime>
+      </tuple>
+
+    </ShippingMethods>
+
+    <Invoice>
+      <tuple>
+        <InvoiceNo>000001</InvoiceNo>
+        <NumShipments>1</NumShipments>
+        <NumItems>3</NumItems>
+      </tuple>
+
+      <tuple>
+        <InvoiceNo>000002</InvoiceNo>
+        <NumShipments>1</NumShipments>
+        <NumItems>2</NumItems>
+      </tuple>
+
+      <tuple>
+        <InvoiceNo>000003</InvoiceNo>
+        <NumShipments>1</NumShipments>
+        <NumItems>1</NumItems>
+      </tuple>
+
+      <tuple>
+        <InvoiceNo>000004</InvoiceNo>
+        <NumShipments>1</NumShipments>
+        <NumItems>2</NumItems>
+      </tuple>
+
+      <tuple>
+        <InvoiceNo>000005</InvoiceNo>
+        <NumShipments>2</NumShipments>
+        <NumItems>4</NumItems>
+      </tuple>
+
+    </Invoice>
+
+  </Data>
+
+</database>

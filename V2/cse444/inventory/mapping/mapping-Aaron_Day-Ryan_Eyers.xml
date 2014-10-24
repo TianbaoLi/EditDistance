@@ -1,0 +1,85 @@
+<mapping>
+  <Aaron_Day correct="yes">
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <Publisher m="Books/Publisher"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/Price"/>
+      <DiscountPrice m="Books/Price"/>
+      <Category m="Books/Category"/>
+      <Keywords m="Books/Keyword"/>
+    </Books>
+    <Music m="Music">
+      <AlbumName m="Music/Title"/>
+      <Artist m="Music/Artist"/>
+      <RecordingCompany m="Music/Record_Label"/>
+      <ID m="Music/Catalog_Number"/>
+      <Price m="Music/Price"/>
+      <DiscountPrice m="Music/Price"/>
+      <Genre m="Music/Genre"/>
+      <Type m="Music/Type"/>
+      <Rating/>
+    </Music>
+    <Availability m="Availability">
+      <Warehouse m="Availability/Warehouses_Located"/>
+      <Title/>
+      <ID m="Availability/ID"/>
+      <Quantity m="Availability/Amount_In_Stock"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <Location m="Warehouses/Address"/>
+      <TelephoneNumber m="Warehouses/Telephone_Number"/>
+      <FaxNumber m="Warehouses/Fax_Number"/>
+      <Manager m="Warehouses/Manager"/>
+      <MaxNumEmployees m="Warehouses/Number_Of_Employees"/>
+      <CurrentNumEmployees m="Warehouses/Number_Of_Employees"/>
+      <BookCapacity m="Warehouses/Volume_Of_Business"/>
+      <CurrentNumBooks/>
+      <CDCapacity m="Warehouses/Volume_Of_Business"/>
+      <CurrentNumCDs/>
+      <CurrentNumRats/>
+      <CurrentNumCats/>
+    </Warehouses>
+  </Aaron_Day>
+  <Ryan_Eyers correct="yes">
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/Price"/>
+      <Category m="Books/Category"/>
+      <Keyword m="Books/Keywords"/>
+      <Publisher m="Books/Publisher"/>
+    </Books>
+    <Music m="Music">
+      <Title m="Music/AlbumName"/>
+      <Artist m="Music/Artist"/>
+      <Record_Label m="Music/RecordingCompany"/>
+      <Catalog_Number m="Music/ID"/>
+      <Price m="Music/Price"/>
+      <Genre m="Music/Genre"/>
+      <Type m="Music/Type"/>
+      <Running_Time/>
+      <Number_Of_Discs/>
+      <Year_Released/>
+    </Music>
+    <Availability m="Availability">
+      <ID m="Availability/ID"/>
+      <Status/>
+      <Amount_In_Stock m="Availability/Quantity"/>
+      <Warehouses_Located m="Availability/Warehouse"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <Address m="Warehouses/Location"/>
+      <City m="Warehouses/Location"/>
+      <State m="Warehouses/Location"/>
+      <Zip_Code m="Warehouses/Location"/>
+      <Telephone_Number m="Warehouses/TelephoneNumber"/>
+      <Fax_Number m="Warehouses/FaxNumber"/>
+      <Manager m="Warehouses/Manager"/>
+      <Number_Of_Employees m="Warehouses/MaxNumEmployees"/>
+      <Volume_Of_Business m="Warehouses/BookCapacity" c="Warehouses/BookCapacity Warehouses/CDCapacity"/>
+    </Warehouses>
+  </Ryan_Eyers>
+</mapping>

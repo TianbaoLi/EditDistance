@@ -1,0 +1,1018 @@
+<database name="Shipping">
+
+<createdby name="Shiqing Yu"/>
+
+<Schema>
+  
+  <table name="Package">
+	<column name="Invoice" type="Integer" key="yes">
+	  <comment>
+	    The Invoice is key for all packages process to ship.
+	  </comment>
+	</column>
+	
+	<column name="Weight" type="Integer" key="no">
+	</column>
+	
+	<column name="TotalItems" type="Integer" key="no">
+	</column>
+
+	<column name="ShippingMethod" type="String" key="no">
+	</column>
+
+	<column name="TrackNumber" type="Integer" key="no">
+	</column>
+
+	<column name="ShippingAgent" type="String" key="no">
+	</column>
+	
+	<column name="WarehouseId" type="Integer" key="no">
+	</column>	
+	
+	<column name="DeliveryName" type="String" key="no">
+	</column>
+	<column name="DeliveryAddress" type="String" key="no">
+	</column>
+	
+	<column name="DeliveryContact" type="String" key="no">
+	  <comment>
+	    DeliveryContact is the phone number or other contact info of recipiant.
+	  </comment>
+	</column>
+	<column name="DeliveryInstruction" type="String" key="no">
+	</column>
+	<column name="PickupTime" type="String" key="no">
+	</column>
+	
+	<column name="DeliveryTime" type="String" key="no">
+	</column>
+	
+	<column name="OrderStatus" type="String" key="no">
+	</column>
+	
+	<column name="PromoteShipping" type="Integer" key="no">
+	  <comment>
+	    PromoteShippingCode indicate whether store promote with free shipping.
+	  </comment>
+	</column>
+  </table>
+
+  <table name="ShippingAgents">
+    <column name="AgentName" type="String" key="yes">
+	  <comment>
+	    ShippingAgents is distinct by their company name.
+	  </comment>
+	</column>
+	<column name="AgentURL" type="String" key="no">
+	</column>
+	<column name="AgentTollFreeNumber" type="Integer" key="no">
+	</column>
+	<column name="AgentTollFreeNumberTime" type="String" key="no">
+	</column>
+  </table>
+
+  <table name="ShippingAgentLocalOffice">
+     <column name="AgentName" type="String" key="no">
+	 </column>
+	 <column name="AgentLocalName" type="String" key="no">
+	 </column>
+	 <column name="AgentLocalAddress" type="String" key="no">
+	 </column>
+	 <column name="AgentDailyPickupTime" type="String" key="no">
+	 </column>	
+	 <column name="WarehouseId" type="String" key="no">
+	 </column> 
+  </table>
+
+  <table name="ShippingMethod">
+     <column name="ShippingMethodId" type="Integer" key="no">
+	 </column>
+	 <column name="ShippingOptionPrice" type="String" key="no">
+	  <comment>
+		shipping options are priced differently
+	  </comment>
+	 </column>
+	 <column name="UnitPriceOption" type="String" key="no">
+	  <comment>
+	    The unit of pricing can be by weight, by number of items or just fixed rate.
+	  </comment>
+	 </column>
+	 <column name="UnitPrice" type="Integer" key="no">
+	  <comment>
+	    The unit of pricing also vary substantially.
+	  </comment>
+	 </column>
+ 	<column name="SpecialHandling" type="Integer" key="no">
+	</column>
+  </table>
+
+  <table name="ShippingMethodInfo"> 
+    <column name="ShippingMethodId" type="Integer" key="yes">
+	</column>
+    <column name="AgentName" type="String" key="no">
+	</column>
+	<column name="ShippingOption" type="String" key="no">
+	  <comment>
+	    different shipping options such as Standard, Next Day, or Overnight
+	  </comment>
+	</column>
+	 <column name="GuranteedTime" type="String" key="no">
+	 </column>
+	 <column name="MaximumWeight" type="Integer" key="no">
+	 </column>	
+	 <column name="MaximumDimension" type="String" key="no">
+	 </column> 
+	 <column name="RestrictedCities" type="String" key="no">
+	 </column> 
+  </table>
+  
+  <foreignkeyconstraint>
+    <source table="ShippingAgentLocalOffice">
+	  <column name="AgentName"/>
+	</source>
+	<target table="ShippingAgent">
+	  <column name="AgentName"/>
+	</target>
+    <comment> 
+	  Every local office must have a record in the shippingagent table.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="ShippingAgentLocalOffice">
+	  <column name="WarehouseId"/>
+	</source>
+	<target table="Package">
+	  <column name="WarehouseId"/>
+	</target>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="ShippingMethod">
+	  <column name="ShippingMethodId"/>
+	</source>
+	<target table="ShippingMethodInfo">
+	  <column name="ShippingMethodId"/>
+	</target>
+	<comment> 
+	  Every shippingmethod must have a record in the shippingmethodinfo table.
+	</comment>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <Invoice>1234567890</Invoice>
+        <Weight>12</Weight>
+        <TotalItems>1</TotalItems>
+        <ShippingMethod>Standard</ShippingMethod>
+        <TrackNumber>9876543210</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>001</WarehouseId>
+        <DeliveryName>Kevin Spacey</DeliveryName>
+        <DeliveryAddress>my address</DeliveryAddress>
+        <DeliveryContact>206-123-4567</DeliveryContact>
+        <DeliveryInstruction>none</DeliveryInstruction>
+        <PickupTime>1/14/2003</PickupTime>
+        <DeliveryTime>1/20/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>0</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567891</Invoice>
+        <Weight>19</Weight>
+        <TotalItems>11</TotalItems>
+        <ShippingMethod>Standard</ShippingMethod>
+        <TrackNumber>9876543211</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Mary jones</DeliveryName>
+        <DeliveryAddress>Mary's address</DeliveryAddress>
+        <DeliveryContact>206-111-4567</DeliveryContact>
+        <DeliveryInstruction>none</DeliveryInstruction>
+        <PickupTime>1/11/2003</PickupTime>
+        <DeliveryTime>1/3/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567892</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>3</TotalItems>
+        <ShippingMethod>Overnight</ShippingMethod>
+        <TrackNumber>9876543212</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>001</WarehouseId>
+        <DeliveryName>Kevin Moore</DeliveryName>
+        <DeliveryAddress>Kevin's address</DeliveryAddress>
+        <DeliveryContact>206-123-6767</DeliveryContact>
+        <DeliveryInstruction>none</DeliveryInstruction>
+        <PickupTime>1/16/2003</PickupTime>
+        <DeliveryTime>1/20/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567893</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543213</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>James Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567894</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543214</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Moore</DeliveryName>
+        <DeliveryAddress>mes's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/4/2003</PickupTime>
+        <DeliveryTime>1/14/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567895</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>standard</ShippingMethod>
+        <TrackNumber>9876543215</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>001</WarehouseId>
+        <DeliveryName>Jades ore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567896</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543216</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>J Moo</DeliveryName>
+        <DeliveryAddress>J's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567897</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543217</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Joos Moore</DeliveryName>
+        <DeliveryAddress>J's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567898</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>standard</ShippingMethod>
+        <TrackNumber>9876543218</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Jams oore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/9/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567899</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>standard</ShippingMethod>
+        <TrackNumber>9876543219</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>d Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567810</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543220</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>s Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567811</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543221</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>e</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567822</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543222</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>re</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567823</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543223</TrackNumber>
+        <ShippingAgent>ups</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>55 Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567824</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543224</TrackNumber>
+        <ShippingAgent>dhl</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Mary Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567825</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543225</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Ja</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567826</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543225</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>James Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567826</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543226</TrackNumber>
+        <ShippingAgent>uss</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>Jamoore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567827</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543227</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>ames Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+      <tuple>
+        <Invoice>1234567828</Invoice>
+        <Weight>4</Weight>
+        <TotalItems>9</TotalItems>
+        <ShippingMethod>secondday</ShippingMethod>
+        <TrackNumber>9876543228</TrackNumber>
+        <ShippingAgent>usps</ShippingAgent>
+        <WarehouseId>002</WarehouseId>
+        <DeliveryName>444James Moore</DeliveryName>
+        <DeliveryAddress>James's address</DeliveryAddress>
+        <DeliveryContact>204-123-6767</DeliveryContact>
+        <DeliveryInstruction>special care(glasses)</DeliveryInstruction>
+        <PickupTime>1/3/2003</PickupTime>
+        <DeliveryTime>1/4/2003</DeliveryTime>
+        <OrderStatus></OrderStatus>
+        <PromoteShipping>1</PromoteShipping>
+      </tuple>
+
+    </Package>
+
+    <ShippingAgents>
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentURL>www.ups.com</AgentURL>
+        <AgentTollFreeNumber>1-800-232-2222</AgentTollFreeNumber>
+        <AgentTollFreeNumberTime>M-F 8:00-5:00</AgentTollFreeNumberTime>
+      </tuple>
+
+      <tuple>
+        <AgentName>usps</AgentName>
+        <AgentURL>www.usps.com</AgentURL>
+        <AgentTollFreeNumber>1-800-230-2222</AgentTollFreeNumber>
+        <AgentTollFreeNumberTime>M-F 8:00-5:00</AgentTollFreeNumberTime>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentURL>www.fedex.com</AgentURL>
+        <AgentTollFreeNumber>1-800-230-3333</AgentTollFreeNumber>
+        <AgentTollFreeNumberTime>M-F 8:00-5:00</AgentTollFreeNumberTime>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentURL>www.dhl.com</AgentURL>
+        <AgentTollFreeNumber>1-800-234-2222</AgentTollFreeNumber>
+        <AgentTollFreeNumberTime>M-F 8:00-5:00</AgentTollFreeNumberTime>
+      </tuple>
+
+    </ShippingAgents>
+
+    <ShippingAgentLocalOffice>
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>sea's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>dhl's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>9am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>usps</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>sea's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>dhl's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>9am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>usps</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>sea's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>dhl's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>ups</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>9am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>sea's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>dhl's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>9am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>fedex</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>sea's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>seattle</AgentLocalName>
+        <AgentLocalAddress>dhl's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>002</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>9am, 11am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+      <tuple>
+        <AgentName>dhl</AgentName>
+        <AgentLocalName>boston</AgentLocalName>
+        <AgentLocalAddress>bos's address</AgentLocalAddress>
+        <AgentDailyPickupTime>8am, 3pm</AgentDailyPickupTime>
+        <WarehouseId>001</WarehouseId>
+      </tuple>
+
+    </ShippingAgentLocalOffice>
+
+    <ShippingMethod>
+      <tuple>
+        <ShippingMethodId>1</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>1</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>1</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>byitems</UnitPriceOption>
+        <UnitPrice>1.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>3</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byitem</UnitPriceOption>
+        <UnitPrice>2.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>3</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>4</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>6.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>4</ShippingMethodId>
+        <ShippingOptionPrice>12.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.5</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>9</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>4</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>4</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>byitems</UnitPriceOption>
+        <UnitPrice>1.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>5</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byitem</UnitPriceOption>
+        <UnitPrice>2.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>5</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>5</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>6.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>6</ShippingMethodId>
+        <ShippingOptionPrice>12.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.5</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>6</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>7</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>7</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>byitems</UnitPriceOption>
+        <UnitPrice>1.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>8</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>byitem</UnitPriceOption>
+        <UnitPrice>2.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>8</ShippingMethodId>
+        <ShippingOptionPrice>5.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>3.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>8</ShippingMethodId>
+        <ShippingOptionPrice>8.5</ShippingOptionPrice>
+        <UnitPriceOption>fixed</UnitPriceOption>
+        <UnitPrice>6.2</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>8</ShippingMethodId>
+        <ShippingOptionPrice>12.5</ShippingOptionPrice>
+        <UnitPriceOption>byweight</UnitPriceOption>
+        <UnitPrice>0.5</UnitPrice>
+        <SpecialHandling>0</SpecialHandling>
+      </tuple>
+
+    </ShippingMethod>
+
+    <ShippingMethodInfo>
+      <tuple>
+        <ShippingMethodId>1</ShippingMethodId>
+        <AgentName>ups</AgentName>
+        <ShippingOption>standard</ShippingOption>
+        <GuranteedTime>7 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>2</ShippingMethodId>
+        <AgentName>ups</AgentName>
+        <ShippingOption>overnight</ShippingOption>
+        <GuranteedTime>1 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>3</ShippingMethodId>
+        <AgentName>ups</AgentName>
+        <ShippingOption>secondday</ShippingOption>
+        <GuranteedTime>2 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>4</ShippingMethodId>
+        <AgentName>usps</AgentName>
+        <ShippingOption>standard</ShippingOption>
+        <GuranteedTime>7 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>5</ShippingMethodId>
+        <AgentName>usps</AgentName>
+        <ShippingOption>overnight</ShippingOption>
+        <GuranteedTime>1 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>6</ShippingMethodId>
+        <AgentName>usps</AgentName>
+        <ShippingOption>secondday</ShippingOption>
+        <GuranteedTime>2 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>7</ShippingMethodId>
+        <AgentName>dhl</AgentName>
+        <ShippingOption>standard</ShippingOption>
+        <GuranteedTime>7 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>8</ShippingMethodId>
+        <AgentName>dhl</AgentName>
+        <ShippingOption>overnight</ShippingOption>
+        <GuranteedTime>1 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>9</ShippingMethodId>
+        <AgentName>dhl</AgentName>
+        <ShippingOption>secondday</ShippingOption>
+        <GuranteedTime>2 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>10</ShippingMethodId>
+        <AgentName>fedex</AgentName>
+        <ShippingOption>standard</ShippingOption>
+        <GuranteedTime>7 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>11</ShippingMethodId>
+        <AgentName>fedex</AgentName>
+        <ShippingOption>overnight</ShippingOption>
+        <GuranteedTime>1 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+      <tuple>
+        <ShippingMethodId>12</ShippingMethodId>
+        <AgentName>fedex</AgentName>
+        <ShippingOption>secondday</ShippingOption>
+        <GuranteedTime>2 days</GuranteedTime>
+        <MaximumWeight>100</MaximumWeight>
+        <MaximumDimension>200*200</MaximumDimension>
+        <RestrictedCities>none</RestrictedCities>
+      </tuple>
+
+    </ShippingMethodInfo>
+
+  </Data>
+
+</database>

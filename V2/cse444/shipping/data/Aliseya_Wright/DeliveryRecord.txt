@@ -1,0 +1,6 @@
+000001|Aliseya Wright|2526 E. Madison #1|Seattle|WA|98112|2062517633|12:00
+000002|Erma Holzer|2423 SW Myrtle St|Seattle|WA|98106|2067621378|12:00
+000003|Linda Wright|8156 32nd Ave SW|Seattle|WA|98126|2069320104|12:00
+000001|Tim Preston|1823 SW Elliot Ave|Hillsboro|OR|97632|5038715632|12:00
+000005|Mario Church|1 Beachfront Ave.|San Diego|CA|92314|9192874612|12:00
+000006|Mario Church|1 Beachfront Ave.|San Diego|CA|92314|9192874612|12:00

@@ -1,0 +1,500 @@
+ <database name="Shipping">
+  <createdby name="JungJoon Park" /> 
+
+ <Schema>
+ <table name="Package">
+ <column name="InvoiceNumber" type="Integer" key="No">
+  <comment> The number of invoice that initiated the order </comment> 
+  </column>
+ <column name="Weight" type="Float" key="No">
+  </column>
+<column name="Length" type="Float" key="No">
+  </column>
+<column name="Width" type="Float" key="No">
+  </column>
+<column name="Height" type="Float" key="No">
+  </column>
+ <column name="NumberOfItems" type=" Integer " key="No">
+  </column>
+ <column name="ShippingMethod" type="String" key="No">
+  <comment> such as Standard, Next Day, or Overnight</comment> 
+  </column>
+ <column name="TrackingNumber" type=" Integer " key="Yes">
+  <comment> The number assigned by shipping companies to track packages</comment> 
+  </column>
+ <column name="ShippingCompany" type=" String " key="No">
+  <comment> like UPS, FedEX, or DHL </comment> 
+  </column>
+ <column name="SignatureWaived" type="Boolean" key="No">
+  </column>
+ <column name="DirectionsToTheHouse" type=" String " key="No">
+  </column>
+ <column name="SourceWarehouse" type="String" key="No">
+  <comment> Assume there is no more than 10 warehouses </comment> 
+  </column>
+ <column name="DeliveryName" type=" String " key="Yes">
+  <comment> The unique name assigned to each package</comment> 
+  </column>
+ <column name="Address_Street" type=" String " key="No">
+  <comment> The street address of the destination</comment>
+  </column>
+ <column name="Address_State" type=" String " key="No">
+  </column>
+<column name="Address_City" type=" String " key="No">
+  </column>
+<column name="Address_Country" type=" String " key="No">
+  </column>
+ <column name="Address_Zipcode" type="Interger" key="No">
+  </column>
+ <column name="PickUpTime" type="Date" key="No">
+  </column>
+ <column name="DeliveryTime" type="Date" key="No">
+  </column>
+ <column name="OrderStatus" type=" String " key="No">
+  <comment> i.e., either pending, in progress, or completed</comment> 
+  </column>
+ <column name="HomePhoneNumber" type=" String " key="No">
+  </column>
+ <column name="WorkPhoneNumber" type=" String " key="No">
+  </column>
+ <column name="Email" type=" String " key="No">
+  </column> 
+ <column name="PackingMethod" type=" String " key="No">
+  <comment> materials used in packing and the way the package is packed </comment> 
+  </column>
+ <column name="Insurance" type="Boolean" key="No">
+  </column>
+  </table>
+
+
+ <table name="ShippingVendors">
+  <column name="VendorName" type=" String " key="Yes">
+  </column>
+ <column name="LocalAddress" type=" String " key="Yes">
+  </column>
+ <column name="URL" type=" String " key="Yes">
+  </column>
+ <column name="TollFreeNumber" type=" String " key="Yes">
+  </column>
+ <column name="DailyPickUpTime_WarehouseA" type="String" key="No">
+  <comment> Assume there are at most 10 warehouses. The pick up time is null in case the agent does not have a scheduled daily pickup time associated with the warehouse</comment> 
+  </column> 
+ <column name="DailyPickUpTime_WarehouseB" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseC" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseD" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseE" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseF" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseG" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseH" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseI" type="String" key="No">
+  </column>
+ <column name="DailyPickUpTime_WarehouseJ" type="Date" key="No">
+  </column>
+  </table>
+
+
+ <table name="ShippingMethods">
+ <column name="ShippingOptions" type=" String " key="Yes">
+  <comment> such as Standard, Next Day, Overnight</comment> 
+  </column>
+ <column name="UnitOfPricing" type=" String " key="No">
+  <comment> can be by weight, by number of items or just fixed rate</comment> 
+  </column>
+ <column name="PricePerUnit" type="Money" key="No">
+  </column>
+ <column name="GuaranteedTimeToDelivery" type="String" key="No">
+  </column>
+ <column name="MaximumWeight" type="Float" key="No">
+  </column>
+ <column name="MaximumSize" type="Float" key="No">
+	<comment> length + girth, where girth is 2 x width plus 2 x height </comment>
+  </column>
+ <column name="SelectedCitiesOfDestination" type=" String " key="No">
+  </column>
+  </table>
+
+
+ <foreignkeyconstraint>
+ <source table="Package">
+  <column name="ShippingCompany" /> 
+  </source>
+ <target table="ShippingVendors">
+  <column name="VendorName" /> 
+  </target>
+  <comment>Every shipping company in the Package table must have a record in the ShippingVendors table.</comment> 
+  </foreignkeyconstraint>
+ <foreignkeyconstraint>
+ <source table="Package">
+  <column name="ShippingMethods" /> 
+  </source>
+ <target table="ShippingMethods">
+  <column name="ShippingOptions" /> 
+  </target>
+  </foreignkeyconstraint>
+  </Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <InvoiceNumber>00000001</InvoiceNumber>
+        <Weight>56.45</Weight>
+        <Length>21</Length>
+        <Width>21</Width>
+        <Height>20</Height>
+        <NumberOfItems>50</NumberOfItems>
+        <ShippingMethod>UPS 2nd Day Air</ShippingMethod>
+        <TrackingNumber>1Z4919040344099462</TrackingNumber>
+        <ShippingCompany>UPS</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseA</SourceWarehouse>
+        <DeliveryName>A-J0001</DeliveryName>
+        <Address_Street>1655 N. Fort Myer Drive, Suite920</Address_Street>
+        <Address_State>VA</Address_State>
+        <Address_City>Arlington</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>22209</Address_Zipcode>
+        <PickUpTime>9:30, 01/09/03</PickUpTime>
+        <DeliveryTime>15:42, 01/11/03</DeliveryTime>
+        <OrderStatus>Completed</OrderStatus>
+        <HomePhoneNumber>703)524-6575</HomePhoneNumber>
+        <WorkPhoneNumber>703)524-7898</WorkPhoneNumber>
+        <Email>dlee@hotmail.com</Email>
+        <PackingMethod>Regular</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000001</InvoiceNumber>
+        <Weight>36.67</Weight>
+        <Length>21</Length>
+        <Width>21</Width>
+        <Height>20</Height>
+        <NumberOfItems>30</NumberOfItems>
+        <ShippingMethod>UPS Next Day Air</ShippingMethod>
+        <TrackingNumber>1Z4919040344099463</TrackingNumber>
+        <ShippingCompany>UPS</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseA</SourceWarehouse>
+        <DeliveryName>A-J0000002</DeliveryName>
+        <Address_Street>1655 N. Fort Myer Drive, Suite920</Address_Street>
+        <Address_State>VA</Address_State>
+        <Address_City>Arlington</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>22209</Address_Zipcode>
+        <PickUpTime>9:30, 01/10/03</PickUpTime>
+        <DeliveryTime>9:28, 01/11/03</DeliveryTime>
+        <OrderStatus>Completed</OrderStatus>
+        <HomePhoneNumber>703)524-6575</HomePhoneNumber>
+        <WorkPhoneNumber>703)524-7898</WorkPhoneNumber>
+        <Email>dlee@hotmail.com</Email>
+        <PackingMethod>Regular</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000002</InvoiceNumber>
+        <Weight>57.64</Weight>
+        <Length>21</Length>
+        <Width>21</Width>
+        <Height>20</Height>
+        <NumberOfItems>50</NumberOfItems>
+        <ShippingMethod>FedEX Ground</ShippingMethod>
+        <TrackingNumber>830271123988</TrackingNumber>
+        <ShippingCompany>FedEX</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseB</SourceWarehouse>
+        <DeliveryName>B-J0000001</DeliveryName>
+        <Address_Street>90 Brainerd Road</Address_Street>
+        <Address_State>MA</Address_State>
+        <Address_City>Boston</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>02134</Address_Zipcode>
+        <PickUpTime>10:30, 01/12/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>In Progess</OrderStatus>
+        <HomePhoneNumber>617)734-9673</HomePhoneNumber>
+        <WorkPhoneNumber>617)745-8745</WorkPhoneNumber>
+        <Email>madden@yahoo.com</Email>
+        <PackingMethod>Bulks boxes and Cell kits</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000002</InvoiceNumber>
+        <Weight>56.44</Weight>
+        <Length>21</Length>
+        <Width>21</Width>
+        <Height>20</Height>
+        <NumberOfItems>50</NumberOfItems>
+        <ShippingMethod>FedEX Ground</ShippingMethod>
+        <TrackingNumber>830271123988</TrackingNumber>
+        <ShippingCompany>FedEX</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseB</SourceWarehouse>
+        <DeliveryName>B-J0000002</DeliveryName>
+        <Address_Street>90 Brainerd Road</Address_Street>
+        <Address_State>MA</Address_State>
+        <Address_City>Boston</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>02134</Address_Zipcode>
+        <PickUpTime>10:30, 01/12/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>In Progress</OrderStatus>
+        <HomePhoneNumber>617)734-9673</HomePhoneNumber>
+        <WorkPhoneNumber>617)745-8745</WorkPhoneNumber>
+        <Email>madden@yahoo.com</Email>
+        <PackingMethod>Bulks boxes and Cell kits</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000002</InvoiceNumber>
+        <Weight>55.04</Weight>
+        <Length>21</Length>
+        <Width>21</Width>
+        <Height>20</Height>
+        <NumberOfItems>50</NumberOfItems>
+        <ShippingMethod>FedEX 2Day</ShippingMethod>
+        <TrackingNumber>830271123989</TrackingNumber>
+        <ShippingCompany>FedEX</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseB</SourceWarehouse>
+        <DeliveryName>B-J0000003</DeliveryName>
+        <Address_Street>90 Brainerd Road</Address_Street>
+        <Address_State>MA</Address_State>
+        <Address_City>Boston</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>02134</Address_Zipcode>
+        <PickUpTime>10:30, 01/12/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>In Progress</OrderStatus>
+        <HomePhoneNumber>617)734-9673</HomePhoneNumber>
+        <WorkPhoneNumber>617)745-8745</WorkPhoneNumber>
+        <Email>madden@yahoo.com</Email>
+        <PackingMethod>Bulks boxes and Cell kits</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000003</InvoiceNumber>
+        <Weight>82.45</Weight>
+        <Length>28</Length>
+        <Width>20</Width>
+        <Height>18</Height>
+        <NumberOfItems>75</NumberOfItems>
+        <ShippingMethod>FedEX Overnight</ShippingMethod>
+        <TrackingNumber>830371124867</TrackingNumber>
+        <ShippingCompany>FedEX</ShippingCompany>
+        <SignatureWaived>No</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseB</SourceWarehouse>
+        <DeliveryName>B-J0000004</DeliveryName>
+        <Address_Street>1739 Westwood Ave.</Address_Street>
+        <Address_State>OH</Address_State>
+        <Address_City>Columbus</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>43212</Address_Zipcode>
+        <PickUpTime>10:30, 01/12/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>In Progess</OrderStatus>
+        <HomePhoneNumber>614)486-1423</HomePhoneNumber>
+        <WorkPhoneNumber>614)497-4685</WorkPhoneNumber>
+        <Email>sbaker@juno.com</Email>
+        <PackingMethod>Bulks boxes and Cell kits</PackingMethod>
+        <Insurance>No</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000004</InvoiceNumber>
+        <Weight>21.45</Weight>
+        <Length>16</Length>
+        <Width>14</Width>
+        <Height>10</Height>
+        <NumberOfItems>20</NumberOfItems>
+        <ShippingMethod>FedEX Overnight</ShippingMethod>
+        <TrackingNumber>830371125478</TrackingNumber>
+        <ShippingCompany>FedEX</ShippingCompany>
+        <SignatureWaived>Yes</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseB</SourceWarehouse>
+        <DeliveryName>B-J0000005</DeliveryName>
+        <Address_Street>35 Amos Street</Address_Street>
+        <Address_State>RI</Address_State>
+        <Address_City>Peace Dale</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>02879</Address_Zipcode>
+        <PickUpTime>09:30, 01/13/03</PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>In Progress</OrderStatus>
+        <HomePhoneNumber>401)782-3587</HomePhoneNumber>
+        <WorkPhoneNumber>401)782-6715</WorkPhoneNumber>
+        <Email>jeva5160@uriacc.uri.edu</Email>
+        <PackingMethod>Bulks boxes and Cell kits</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>00000005</InvoiceNumber>
+        <Weight>30.54</Weight>
+        <Length>18</Length>
+        <Width>14</Width>
+        <Height>12</Height>
+        <NumberOfItems>30</NumberOfItems>
+        <ShippingMethod>UPS 3 Day Select</ShippingMethod>
+        <TrackingNumber>1Z4919040344099463</TrackingNumber>
+        <ShippingCompany>UPS</ShippingCompany>
+        <SignatureWaived>No</SignatureWaived>
+        <DirectionsToTheHouse></DirectionsToTheHouse>
+        <SourceWarehouse>WarehouseA</SourceWarehouse>
+        <DeliveryName>A-J0000003</DeliveryName>
+        <Address_Street>301 Lancelot Drive</Address_Street>
+        <Address_State>SC</Address_State>
+        <Address_City>Clemson</Address_City>
+        <Address_Country>USA</Address_Country>
+        <Address_Zipcode>29631</Address_Zipcode>
+        <PickUpTime></PickUpTime>
+        <DeliveryTime></DeliveryTime>
+        <OrderStatus>Pending</OrderStatus>
+        <HomePhoneNumber>864)654-3048</HomePhoneNumber>
+        <WorkPhoneNumber>864)627-8467</WorkPhoneNumber>
+        <Email>anne_Horvath@yahoo.com</Email>
+        <PackingMethod>Bulks boxes and Air bubbles</PackingMethod>
+        <Insurance>Yes</Insurance>
+      </tuple>
+
+    </Package>
+
+    <ShippingVendors>
+      <tuple>
+        <VendorName>UPS</VendorName>
+        <LocalAddress>Corporate Office Mailing Address: 55 Glenlake Parkway, NE Atlanta, GA 30328</LocalAddress>
+        <URL>www.ups.com</URL>
+        <TollFreeNumber>1-800-742-5877</TollFreeNumber>
+        <DailyPickUpTime_WarehouseA>9:30</DailyPickUpTime_WarehouseA>
+        <DailyPickUpTime_WarehouseB></DailyPickUpTime_WarehouseB>
+        <DailyPickUpTime_WarehouseC></DailyPickUpTime_WarehouseC>
+        <DailyPickUpTime_WarehouseD></DailyPickUpTime_WarehouseD>
+        <DailyPickUpTime_WarehouseE></DailyPickUpTime_WarehouseE>
+        <DailyPickUpTime_WarehouseF></DailyPickUpTime_WarehouseF>
+        <DailyPickUpTime_WarehouseG></DailyPickUpTime_WarehouseG>
+        <DailyPickUpTime_WarehouseH></DailyPickUpTime_WarehouseH>
+        <DailyPickUpTime_WarehouseI></DailyPickUpTime_WarehouseI>
+        <DailyPickUpTime_WarehouseJ></DailyPickUpTime_WarehouseJ>
+      </tuple>
+
+      <tuple>
+        <VendorName>FedEX</VendorName>
+        <LocalAddress>FedEx Corporation 942 South Shady Grove Road Memphis, TN 38120 901-369-3600</LocalAddress>
+        <URL>http://www.fedex.com</URL>
+        <TollFreeNumber>1-800-463-3339</TollFreeNumber>
+        <DailyPickUpTime_WarehouseA></DailyPickUpTime_WarehouseA>
+        <DailyPickUpTime_WarehouseB>10:30</DailyPickUpTime_WarehouseB>
+        <DailyPickUpTime_WarehouseC></DailyPickUpTime_WarehouseC>
+        <DailyPickUpTime_WarehouseD></DailyPickUpTime_WarehouseD>
+        <DailyPickUpTime_WarehouseE></DailyPickUpTime_WarehouseE>
+        <DailyPickUpTime_WarehouseF></DailyPickUpTime_WarehouseF>
+        <DailyPickUpTime_WarehouseG></DailyPickUpTime_WarehouseG>
+        <DailyPickUpTime_WarehouseH></DailyPickUpTime_WarehouseH>
+        <DailyPickUpTime_WarehouseI></DailyPickUpTime_WarehouseI>
+        <DailyPickUpTime_WarehouseJ></DailyPickUpTime_WarehouseJ>
+      </tuple>
+
+    </ShippingVendors>
+
+    <ShippingMethods>
+      <tuple>
+        <ShippingOptions>FedEX Ground</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>2.056</PricePerUnit>
+        <GuaranteedTimeToDelivery>Delivery in  5 business days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination></SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>FedEX 2Day</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>8.971</PricePerUnit>
+        <GuaranteedTimeToDelivery>4:30pm in 2 business days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>FedEX 2Day</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>8.971</PricePerUnit>
+        <GuaranteedTimeToDelivery>4:30pm in 3 business days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>FedEX Overnight</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>11.56</PricePerUnit>
+        <GuaranteedTimeToDelivery>3:00pm the next business day</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>UPS Ground</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>2.88</PricePerUnit>
+        <GuaranteedTimeToDelivery>5 days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>UPS 3 Day Select</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>7.23</PricePerUnit>
+        <GuaranteedTimeToDelivery>Guaranteed by End of Day -- 3 Days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>UPS 2nd Day Air</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>9.42</PricePerUnit>
+        <GuaranteedTimeToDelivery>Guaranteed by End of Day -- 2 Days</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+      <tuple>
+        <ShippingOptions>UPS Next Day Air</ShippingOptions>
+        <UnitOfPricing>Pound</UnitOfPricing>
+        <PricePerUnit>13.3</PricePerUnit>
+        <GuaranteedTimeToDelivery>Guaranteed by 10:30 A.M. -- Next Day</GuaranteedTimeToDelivery>
+        <MaximumWeight>150</MaximumWeight>
+        <MaximumSize>130</MaximumSize>
+        <SelectedCitiesOfDestination>To most cities</SelectedCitiesOfDestination>
+      </tuple>
+
+    </ShippingMethods>
+
+  </Data>
+  </database>

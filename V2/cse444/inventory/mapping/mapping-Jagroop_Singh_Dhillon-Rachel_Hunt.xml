@@ -1,0 +1,101 @@
+<mapping>
+  <Jagroop_Singh_Dhillon>
+    <Books m="Book">
+      <Title m="Book/Title"/>
+      <Author m="Author/LastName" c="Author/LastName Author/FirstName"/>
+      <ISBN m="Book/ISBN"/>
+      <SalePrice m="Book/Price"/>
+      <Discount/>
+      <Category m="Book/Category"/>
+      <Keywords m="Keyword/Word"/>
+    </Books>
+    <CompactDiscs m="CD">
+      <AlbumName m="CD/Name"/>
+      <Artist m="Artist/Name"/>
+      <RecordCompany m="CD/Company"/>
+      <RecordNumber m="CD/ISBN"/>
+      <SalePrice m="CD/MSRP"/>
+      <Discount/>
+      <Genre m="CD/Category"/>
+      <Type m="Type/Kind"/>
+    </CompactDiscs>
+    <Warehouses m="Warehouse">
+      <Location m="Warehouse/Street" c="Warehouse/Street Warehouse/City Warehouse/State"/>
+      <ZipCode m="Warehouse/Zipcode"/>
+      <StoreNumber m="Warehouse/Name"/>
+      <Contact m="Warehouse/Telephone" c="Warehouse/Telephone Warehouse/Fax Warehouse/Manager"/>
+      <EmployeeNumber m="Warehouse/MaxEmployees"/>
+      <AnnualSale/>
+    </Warehouses>
+    <BookAvailability m="Availability">
+      <BookId m="Availability/ISBN"/>
+      <Units m="Availability/Quantity"/>
+      <WarehouseNumber m="Availability/Warehouse"/>
+    </BookAvailability>
+    <CdAvailability m="Availability">
+      <CompactDiscId m="Availability/ISBN"/>
+      <Units m="Availability/Quantity"/>
+      <WarehouseNumber m="Availability/Warehouse"/>
+    </CdAvailability>
+  </Jagroop_Singh_Dhillon>
+  <Rachel_Hunt>
+    <Book m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Title m="Books/Title"/>
+      <MSRP m="Books/SalePrice"/>
+      <Price m="Books/SalePrice"/>
+      <Category m="Books/Category"/>
+      <Rating/>
+      <Paperback/>
+      <Year/>
+      <Month/>
+    </Book>
+    <Author m="Books">
+      <ISBN m="Books/ISBN"/>
+      <FirstName m="Books/Author"/>
+      <LastName m="Books/Author"/>
+      <MiddleName m="Books/Author"/>
+    </Author>
+    <Keyword m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Word m="Books/Keywords"/>
+    </Keyword>
+    <CD m="CompactDiscs">
+      <ISBN m="CompactDiscs/RecordNumber"/>
+      <Name m="CompactDiscs/AlbumName"/>
+      <Company m="CompactDiscs/RecordCompany"/>
+      <MSRP m="CompactDiscs/SalePrice"/>
+      <Price/>
+      <Category m="CompactDiscs/Genre"/>
+      <Rating/>
+      <Year/>
+      <Month/>
+    </CD>
+    <Artist m="CompactDiscs/Artist">
+      <ISBN m="Books/ISBN"/>
+      <Name m="CompactDiscs/Artist"/>
+    </Artist>
+    <Type m="CompactDiscs/Type">
+      <ISBN m="Books/ISBN"/>
+      <Kind m="CompactDiscs/Type"/>
+    </Type>
+    <Availability m="BookAvailability" c="BookAvailability CdAvailability">
+      <ISBN m="BookAvailability/BookId" c="BookAvailability/BookId CdAvailability/CompactDiscId"/>
+      <Warehouse m="BookAvailability/WarehouseNumber" c="BookAvailability/WarehouseNumber CdAvailability/WarehouseNumber"/>
+      <Quantity m="BookAvailability/Units" c="BookAvailability/Units CdAvailability/Units"/>
+    </Availability>
+    <Warehouse m="Warehouses">
+      <Name m="Warehouses/StoreNumber"/>
+      <Street m="Warehouses/Location"/>
+      <City m="Warehouses/Location"/>
+      <State m="Warehouses/Location"/>
+      <Zipcode m="Warehouses/ZipCode"/>
+      <Telephone m="Warehouses/Contact"/>
+      <Fax m="Warehouses/Contact"/>
+      <Manager m="Warehouses/Contact"/>
+      <MaxEmployees m="Warehouses/EmployeeNumber"/>
+      <Volume/>
+      <Capacity/>
+    </Warehouse>
+  </Rachel_Hunt>
+</mapping>

@@ -1,0 +1,85 @@
+<mapping>
+  <Adam_Moore correct="doublechecked">
+    <Package m="Packages">
+      <InvoiceNum m="Packages/InvoiceNo"/>
+      <Weight m="Packages/PkgWt"/>
+      <NumofItems m="Packages/NumItems"/>
+      <Method m="Packages/ShipServiceType"/>
+      <TrackingNum m="Packages/TrackingNo"/>
+      <Agent m="Packages/ShipAgent"/>
+      <Miscellanous m="Packages/SpecialInstr"/>
+      <SourceWarehouse m="Packages/Warehouse"/>
+      <DeliveryName m="Packages/DestName"/>
+      <Address m="Packages/DestAddr"/>
+      <Contact m="Packages/DestContact"/>
+      <PickUpTime m="Packages/ShipDate"/>
+      <DeliveryTime m="Packages/ActualDeliveryDate"/>
+      <Status m="Packages/Status"/>
+    </Package>
+    <ShippingVendor m="ShippingProviders">
+      <Agent m="ShippingProviders/Name"/>
+      <LocalAddress m="ShippingProviders/Addr"/>
+      <URL m="ShippingProviders/Url"/>
+      <PhoneNum m="ShippingProviders/Phone"/>
+      <PickUpTime m="ShippingProviders/StdPickupTime"/>
+    </ShippingVendor>
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/Method"/>
+      <PriceMethod m="ShippingMethods/ShippingUnit"/>
+      <PriceRate m="ShippingMethods/PricePerUnit"/>
+      <Agent m="ShippingMethods/Provider"/>
+      <DeadLine m="ShippingMethods/MaxDays"/>
+      <MaxWeight m="ShippingMethods/MaxWt"/>
+      <MaxLength m="ShippingMethods/MaxSize"/>
+      <MaxHeight m="ShippingMethods/MaxSize"/>
+      <MaxWidth m="ShippingMethods/MaxSize"/>
+      <MaxDimensions m="ShippingMethods/MaxSize"/>
+      <DeliveryRange/>
+    </ShippingMethods>
+  </Adam_Moore>
+  <Dave_Sedlacek correct="doublechecked">
+    <Packages m="Package">
+      <ID m="Package/TrackingNum"/>
+      <ShipAgent m="Package/Agent"/>
+      <ShipServiceType m="Package/Method"/>
+      <Warehouse m="Package/SourceWarehouse"/>
+      <InvoiceNo m="Package/InvoiceNum"/>
+      <DestName m="Package/DeliveryName"/>
+      <DestAddr m="Package/Address"/>
+      <DestCity m="Package/Address"/>
+      <DestState m="Package/Address"/>
+      <DestZip m="Package/Address"/>
+      <DestContact m="Package/Contact"/>
+      <Residential/>
+      <Status m="Package/Status"/>
+      <PkgWt m="Package/Weight"/>
+      <NumItems m="Package/NumofItems"/>
+      <DeclaredValue/>
+      <Insured/>
+      <InsuranceFee/>
+      <TrackingNo m="Package/TrackingNum"/>
+      <ShipDate/>
+      <EstDeliveryDate/>
+      <ActualDeliveryDate m="Package/DeliveryTime"/>
+      <SpecialInstr m="Package/Miscellanous"/>
+    </Packages>
+    <ShippingProviders m="ShippingVendor">
+      <Name m="ShippingVendor/Agent"/>
+      <Addr m="ShippingVendor/LocalAddress"/>
+      <Phone m="ShippingVendor/PhoneNum"/>
+      <Url m="ShippingVendor/URL"/>
+      <Warehouse/>
+      <AcctNo/>
+      <StdPickupTime m="ShippingVendor/PickUpTime"/>
+    </ShippingProviders>
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/Method"/>
+      <Provider m="ShippingMethods/Agent"/>
+      <ShippingUnit m="ShippingMethods/PriceMethod"/>
+      <PricePerUnit m="ShippingMethods/PriceRate"/>
+      <MaxDays m="ShippingMethods/DeadLine"/>
+      <MaxWt m="ShippingMethods/MaxWeight"/>
+      <MaxSize m="ShippingMethods/MaxDimensions"/>
+    </ShippingMethods>
+  </Dave_Sedlacek>
+</mapping>

@@ -1,0 +1,389 @@
+<database name="Shipping">
+
+<createdby name="Sawssan Taha"/>
+
+<Schema>
+  
+  <table name="Package">
+	 
+	 <column name="Invoice" type="Integer" key="yes">
+	 </column>
+	
+	 <column name="Company" type="String" key="no">
+	 <comment> 
+	    The name of the shipping company.
+	 </comment>
+	 </column>
+
+	 <column name="method" type="String" key="no">
+	 <comment>
+	   Method of shipping
+	 </comment>
+	 </column>
+
+	 <column name="weight" type="Integer" key="no">
+	 </column>
+
+	 <comment> In Kilogramms </comment>	  
+	 
+	 <column name="warehouse" type="String" key="no">
+	 </column>
+
+	 <column name="pickuptime" type="Time" key="no">
+	 </column>
+
+	 <column name="deliverytime" type="Time" key="no">
+	 </column>
+
+	 <column name="status" type="String" key="no">
+	 </column>
+
+  </table>
+
+  <table name="Company">
+    	
+	<column name="Cname" type="String" key="yes">
+	</column>
+	
+	<column name="Warehouse" type="String" key="no">
+	</column>
+	
+	<column name="URL" type="String" key="no">
+	</column>
+
+	<column name="TollFreeNumber" type="Integer" key="no">
+	</column>
+
+  </table>
+
+  <table name="Warehouse">
+
+        <column name="Wname" type="String" key="yes">
+	</column>
+ 
+	<column name="Streetnum" type="Integer" key="no">
+	</column>
+
+	<column name="Streetname" type="String" key="no">
+	</column>
+
+	<column name="City" type="String" key="no">
+	</column>
+
+	<column name="ZipCode" type="Integer" key="no">
+	</column>
+
+	<column name="Timeopen" type="Time" key="no">
+	</column>
+
+	<column name="Timeclose" type="time" key="no">
+	</column>
+  
+ </table>
+
+
+ <table name="Method">
+
+        <column name="Mname" type="String" key="yes">
+	</column>
+ 
+	<column name="Mthdcost" type="Integer" key="no">
+	</column>
+
+	<column name="Gdeliverytime" type="Integer" key="no">
+	</column>
+
+	<comment> Gdeliverytime in minutes </comment>
+
+	<column name="Companyname" type="String" key="no">
+	</column>
+
+	<column name="Maxweight" type="Integer" key="no">
+	</column>
+	
+	<comment> again in kilogramms </comment>
+  
+ </table>
+
+ <table name="Customer">
+
+        <column name="Contact" type="Integer" key="yes">
+	</column>
+
+	<column name="Cstmrname" type="String" key="no">
+	</column>
+ 
+	<column name="Streetnumber" type="Integer" key="no">
+	</column>
+
+	<column name="Streetname" type="String" key="no">
+	</column>
+
+	<column name="City" type="String" key="no">
+	</column>
+
+	<column name="Sate" type="String" key="no">
+	</column>
+
+	<column name="Zipcode" type="Integer" key="no">
+	</column>
+
+	<column name="Packagenumber" type="Integer" key="no">
+	</column>
+
+ </table>
+
+
+  <foreignkeyconstraint>
+
+     <source table="Customer">
+
+      	<column name="Packagenumber"/>
+    
+     </source>
+
+     <target table="Package">
+	  
+ 	<column name="Invoice"/>
+     
+     </target>
+    
+ 	<comment> 
+	  Every package that has has been sent must have a record in the Customer table.
+	</comment>
+
+  </foreignkeyconstraint>
+
+
+
+  <foreignkeyconstraint>
+
+    <source table="Package">
+	  
+	<column name="Company"/>
+    
+    </source>
+
+    <target table="Company">
+	  
+	<column name="Cname"/>
+    
+    </target>
+
+  </foreignkeyconstraint>
+
+ 
+  <foreignkeyconstraint>
+
+    <source table="Package">
+	  
+	<column name="Method"/>
+    
+    </source>
+
+    <target table="Method">
+	  
+	<column name="Mname"/>
+    
+    </target>
+
+  </foreignkeyconstraint>
+
+
+  <foreignkeyconstraint>
+
+    <source table="Package">
+	  
+	<column name="Warehouse"/>
+    
+    </source>
+
+    <target table="Warehouse">
+	  
+	<column name="Wname"/>
+    
+    </target>
+
+  </foreignkeyconstraint>
+
+
+
+
+   <foreignkeyconstraint>
+
+    <source table="Company">
+	  
+	<column name="Warehouse"/>
+    
+    </source>
+
+    <target table="Warehouse">
+	  
+	<column name="Wname"/>
+    
+    </target>
+
+  </foreignkeyconstraint>
+
+ 
+  <foreignkeyconstraint>
+
+    <source table="Method">
+	  
+	<column name="Companyname"/>
+    
+    </source>
+
+    <target table="Company">
+	  
+	<column name="Cname"/>
+    
+    </target>
+
+  </foreignkeyconstraint>
+
+</Schema>
+
+
+<Data>
+
+  <Package>
+    
+	<tuple>
+	  <Invoice> 021256540269 </Invoice>
+	  <Company> FedEx </Company>
+ 	  <Method> Overnight</Method>
+	  <Weight> 30 </Weight>
+	  <Warehouse> WeirdOne </Warehouse>
+	  <Pickuptime> 13:30 </Pickuptime>
+	  <Deliverytime> 20:00 </Deliverytime>
+	  <Status> Blocked </Status>
+	</tuple>
+
+	<tuple>
+	  <Invoice> 011337895445 </Invoice>
+	  <Company> USPostal </Company>
+	  <Method> Standard </Method>
+	  <Weight> 10 </Weight>
+	  <Warehouse> SomeHouse </Warehouse>
+	  <Pickuptime> 10:20 </Pickuptime>
+	  <Deliverytime> 12:30 </Deliverytime>
+	  <Status> Processing </Status>
+	</tuple>
+	
+	
+
+  </Package>
+
+  <Company>
+
+    <tuple>
+	  <Cname> FedEx </Cname>
+	  <Warehouse> WeirdOne </Warehouse>
+	  <URL> www.fedex.com </URL>
+	  <TollFreeNumber> 18007569854 </TollFreeNumber>
+
+   </tuple>
+
+  <tuple>
+	  <Cname> USPostal </Cname>
+	  <Warehouse> SomeHouse </Warehouse>
+	  <URL> www.uspostal.com </URL>
+	  <TollFreeNumber> 18007452100 </TollFreeNumber>
+
+  </tuple>
+
+	
+
+  </Company>
+
+  <Warehouse>
+  
+    <tuple>
+	  <Wname> WeirdHouse </Wname>
+	  <Streetnum> 45 </Streetnum>
+	  <Streetname> Lincoln </Streetname>
+	  <City> Tampa </City>
+	  <Zipcode> 33601 </Zipcode>
+	  <Timeopen> 08:00  </Timeopen>
+	  <Timeclose> 17:00 </Timeclose>
+	  
+    </tuple>
+
+   <tuple>
+	  <Wname> SomeHouse </Wname>
+	  <Streetnum> 12 </Streetnum>
+	  <Streetname> Kenedy </Streetname>
+	  <City> Seattle </City>
+	  <Zipcode> 98101 </Zipcode>
+	  <Timeopen> 09:00  </Timeopen>
+	  <Timeclose> 20:00 </Timeclose>
+	  
+    </tuple>
+
+	
+
+  </Warehouse>
+
+
+ <Method>
+  
+    <tuple>
+	  <Mname> Overnight </Mname>
+	  <Mthdcost> 32 </Mthdcost>
+	  <Companyname> FedEx </Companyname>
+	  <Maxweight> 30 </Maxweight>
+	  	  
+    </tuple>
+
+   <tuple>
+	  <Mname> Standard </Mname>
+	  <Mthdcost> 10 </Mthdcost>
+	  <Companyname> USPostal </Companyname>
+	  <Maxweight> 50 </Maxweight>
+	  	  
+    </tuple>
+
+   
+ </Method>
+
+
+<Customer>
+  
+    <tuple>
+	  
+	  <Contact> 9046203435 </Contact>
+	  <Customername> Benjira yassine </Customername>
+	  <Streetnumber> 10 </Streetnumber>
+	  <StreetName> Tampabay </StreetName>
+	  <City> Jacksonville </City>
+	  <State> Florida </State>
+	  <Zip> 32099 </Zip>
+	  <Packagenumber> 011337895445 </Packagenumber> 
+			
+	  	  
+    </tuple>
+
+   <tuple>
+	  
+	  <Contact> 4809671260 </Contact>
+	  <Customername> David Meek </Customername>
+	  <Streetnumber> 5 </Streetnumber>
+	  <StreetName> Mainstreet </StreetName>
+	  <City> Tempe </City>
+	  <State> Arizona </State>
+	  <Zip> 85283 </Zip>
+	  <Packagenumber> 021256540269 </Packagenumber> 
+			
+	  	  
+    </tuple>
+
+   
+
+   
+ </Customer>
+
+
+</Data>
+
+</database>

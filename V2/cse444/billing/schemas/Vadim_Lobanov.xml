@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database name="The Billing and Invoice Domain">
+	<createdby name="Vadim Lobanov" />
+	<Schema>
+		<table name="ContactInfo">
+			<column name="CustomerID" type="Integer" key="yes">
+				<comment>Auto-generated ID for customers</comment>
+			</column>
+			<column name="Street_address" type="String" key="no" />
+			<column name="City" type="String" key="no" />
+			<column name="State" type="String" key="no" />
+			<column name="Zipcode" type="Integer" key="no" />
+			<column name="Phone_area_code" type="Integer" key="no" />
+			<column name="Phone_number" type="Integer" key="no" />
+			<column name="Email" type="String" key="no" />
+		</table>
+		<table name="CustomerInfo">
+			<column name="CustomerID" type="Integer" key="yes">
+				<comment>Auto-generated ID for customers</comment>
+			</column>
+			<column name="First_name" type="String" key="no" />
+			<column name="Last_name" type="String" key="no" />
+			<column name="Birthday" type="Date" key="no">
+				<comment>For demographics</comment>
+			</column>
+			<column name="Account_creation" type="Date" key="no">
+				<comment>How long this person has been a customer</comment>
+			</column>
+		</table>
+		<table name="Items">
+			<column name="ItemID" type="Integer" key="yes">
+				<comment>Auto-generated ID for item bundles</comment>
+			</column>
+			<column name="Invoice_num" type="Integer" key="no">
+				<comment>Which invoice this item bundle belongs to</comment>
+			</column>
+			<column name="ProductID" type="Integer" key="no" />
+			<column name="Item_name" type="String" key="no" />
+			<column name="Item_type" type="String" key="no">
+				<comment>Category of item</comment>
+			</column>
+			<column name="Quantity" type="Integer" key="no" />
+			<column name="Pricepunit" type="Money" key="no" />
+			<column name="SourceID" type="Integer" key="no">
+				<comment>Which warehouse it's shipped from</comment>
+			</column>
+		</table>
+		<table name="Invoices">
+			<column name="InvoiceID" type="Integer" key="yes" />
+			<column name="Date_start" type="Date" key="no">
+				<comment>Date of order</comment>
+			</column>
+			<column name="Date_finish" type="Date" key="no">
+				<comment>Date of expected delivery</comment>
+			</column>
+			<column name="Purchaser" type="Integer" key="no">
+				<comment>Is a customer</comment>
+			</column>
+			<column name="Receiver" type="Integer" key="no">
+				<comment>Is a customer</comment>
+			</column>
+			<column name="Shipping_method" type="String" key="no" />
+			<column name="Shipping_priority" type="Integer" key="no" />
+			<column name="Price_goods" type="Money" key="no" />
+			<column name="Price_discounts" type="Money" key="no" />
+			<column name="Price_shipping" type="Money" key="no" />
+			<column name="Price_taxrate" type="Integer" key="no" />
+			<column name="Payment_type" type="String" key="no" />
+			<column name="Ccard_num" type="String" key="no">
+				<comment>Optional</comment>
+			</column>
+			<column name="Ccard_expiration" type="Date" key="no">
+				<comment>Optional</comment>
+			</column>
+		</table>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="Invoice_num" />
+			</source>
+			<target table="Invoices">
+				<column name="InvoiceID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Purchaser" />
+			</source>
+			<target table="ContactInfo">
+				<column name="CustomerID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Purchaser" />
+			</source>
+			<target table="CustomerInfo">
+				<column name="CustomerID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Receiver" />
+			</source>
+			<target table="ContactInfo">
+				<column name="CustomerID" />
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoices">
+				<column name="Receiver" />
+			</source>
+			<target table="CustomerInfo">
+				<column name="CustomerID" />
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+	<Data>
+		<!-- Data not meant to be sensible -->
+		<ContactInfo>
+			<tuple>
+				<CustomerID>1</CustomerID>
+				<Street_address>1061 Capitol Drive</Street_address>
+				<City>San Francisco</City>
+				<State>CA</State>
+				<Zipcode>65566</Zipcode>
+				<Phone_area_code>596</Phone_area_code>
+				<Phone_number>3141592</Phone_number>
+				<Email>wow@somewhere.com</Email>
+			</tuple>
+			<tuple>
+				<CustomerID>2</CustomerID>
+				<Street_address>123 Fake Street</Street_address>
+				<City>Springfield</City>
+				<State>IL</State>
+				<Zipcode>99987</Zipcode>
+				<Phone_area_code>207</Phone_area_code>
+				<Phone_number>5555555</Phone_number>
+				<Email>fake@totalfake.com</Email>
+			</tuple>
+			<tuple>
+				<CustomerID>3</CustomerID>
+				<Street_address>23904 Green Rd.</Street_address>
+				<City>New York</City>
+				<State>NY</State>
+				<Zipcode>10134</Zipcode>
+				<Phone_area_code>208</Phone_area_code>
+				<Phone_number>8870102</Phone_number>
+				<Email>random@qwerty.com</Email>
+			</tuple>
+		</ContactInfo>
+		<CustomerInfo>
+			<tuple>
+				<CustomerID>1</CustomerID>
+				<First_name>John</First_name>
+				<Last_name>Doe</Last_name>
+				<Birthday>09/22/1967</Birthday>
+				<Account_creation>02/05/1999</Account_creation>
+			</tuple>
+			<tuple>
+				<CustomerID>2</CustomerID>
+				<First_name>Bob</First_name>
+				<Last_name>Bobson</Last_name>
+				<Birthday>01/02/1980</Birthday>
+				<Account_creation>10/13/1982</Account_creation>
+			</tuple>
+			<tuple>
+				<CustomerID>3</CustomerID>
+				<First_name>Jim</First_name>
+				<Last_name>Gates</Last_name>
+				<Birthday>08/28/1979</Birthday>
+				<Account_creation>04/11/1983</Account_creation>
+			</tuple>
+		</CustomerInfo>
+		<Items>
+			<tuple>
+				<ItemID>1</ItemID>
+				<Invoice_num>1</Invoice_num>
+				<ProductID>123</ProductID>
+				<Item_name>A Lesson in History</Item_name>
+				<Item_type>book</Item_type>
+				<Quantity>1</Quantity>
+				<Pricepunit>29.99</Pricepunit>
+				<SourceID>37</SourceID>
+			</tuple>
+			<tuple>
+				<ItemID>2</ItemID>
+				<Invoice_num>2</Invoice_num>
+				<ProductID>8765</ProductID>
+				<Item_name>Super Music</Item_name>
+				<Item_type>CD</Item_type>
+				<Quantity>8</Quantity>
+				<Pricepunit>1.99</Pricepunit>
+				<SourceID>37</SourceID>
+			</tuple>
+			<tuple>
+				<ItemID>3</ItemID>
+				<Invoice_num>2</Invoice_num>
+				<ProductID>997123</ProductID>
+				<Item_name>Writing About Writing</Item_name>
+				<Item_type>book</Item_type>
+				<Quantity>1000</Quantity>
+				<Pricepunit>8.99</Pricepunit>
+				<SourceID>22</SourceID>
+			</tuple>
+			<tuple>
+				<ItemID>4</ItemID>
+				<Invoice_num>3</Invoice_num>
+				<ProductID>8765</ProductID>
+				<Item_name>Super Music</Item_name>
+				<Item_type>CD</Item_type>
+				<Quantity>1</Quantity>
+				<Pricepunit>1.99</Pricepunit>
+				<SourceID>38</SourceID>
+			</tuple>
+			<tuple>
+				<ItemID>5</ItemID>
+				<Invoice_num>3</Invoice_num>
+				<ProductID>67</ProductID>
+				<Item_name>Rock'n'roll</Item_name>
+				<Item_type>CD</Item_type>
+				<Quantity>1</Quantity>
+				<Pricepunit>17.99</Pricepunit>
+				<SourceID>22</SourceID>
+			</tuple>
+		</Items>
+		<Invoices>
+			<tuple>
+				<InvoiceID>1</InvoiceID>
+				<Date_start>01/01/2000</Date_start>
+				<Date_finish>01/05/2000</Date_finish>
+				<Purchaser>2</Purchaser>
+				<Receiver>2</Receiver>
+				<Shipping_method>ground</Shipping_method>
+				<Shipping_priority>2</Shipping_priority>
+				<Price_goods>29.99</Price_goods>
+				<Price_discounts>0.00</Price_discounts>
+				<Price_shipping>3.00</Price_shipping>
+				<Price_taxrate>5</Price_taxrate>
+				<Payment_type>credit card</Payment_type>
+				<Ccard_num>1234567898765432</Ccard_num>
+				<Ccard_expiration>07/20/2008</Ccard_expiration>
+			</tuple>
+			<tuple>
+				<InvoiceID>2</InvoiceID>
+				<Date_start>01/15/2000</Date_start>
+				<Date_finish>01/16/2000</Date_finish>
+				<Purchaser>1</Purchaser>
+				<Receiver>1</Receiver>
+				<Shipping_method>air</Shipping_method>
+				<Shipping_priority>5</Shipping_priority>
+				<Price_goods>9005.92</Price_goods>
+				<Price_discounts>0.00</Price_discounts>
+				<Price_shipping>33.00</Price_shipping>
+				<Price_taxrate>7</Price_taxrate>
+				<Payment_type>credit card</Payment_type>
+				<Ccard_num>5555923140905511</Ccard_num>
+				<Ccard_expiration>01/01/2005</Ccard_expiration>
+			</tuple>
+			<tuple>
+				<InvoiceID>3</InvoiceID>
+				<Date_start>02/22/2000</Date_start>
+				<Date_finish>02/27/2000</Date_finish>
+				<Purchaser>3</Purchaser>
+				<Receiver>1</Receiver>
+				<Shipping_method>ground</Shipping_method>
+				<Shipping_priority>1</Shipping_priority>
+				<Price_goods>20.98</Price_goods>
+				<Price_discounts>5.00</Price_discounts>
+				<Price_shipping>3.00</Price_shipping>
+				<Price_taxrate>7</Price_taxrate>
+				<Payment_type>credit card</Payment_type>
+				<Ccard_num>5497221066643008</Ccard_num>
+				<Ccard_expiration>11/04/2004</Ccard_expiration>
+			</tuple>
+		</Invoices>
+	</Data>
+</database>

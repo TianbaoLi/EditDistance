@@ -1,0 +1,4 @@
+UPS|130 135th Street|Dallas|Texas|34752|http://www.ups.com|5556789123
+Fed-Ex|6 Main Drive|Charlotte|South Carolina|13410|http://www.fed-ex.com|5556789812
+DHL|15267 Hentuk Way|Oblong|Maine|25672|http://www.dhl.com|7895551423
+US Post Office|1|Washington DC|District of Columbia|12345|http://www.postoffice.gov|1235554567

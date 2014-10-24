@@ -1,0 +1,3 @@
+0001|9812 Mayfield Lane|San Diego|CA|81921|18009372638
+0002|1876 Madison Ave|New York City|NY|12739|18009283726
+0003|87742 Westchester Place|Kansas City|MO|38382|18002937267

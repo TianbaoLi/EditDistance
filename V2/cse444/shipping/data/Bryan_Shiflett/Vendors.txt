@@ -1,0 +1,3 @@
+ups|55 Glenlake Pkway NE|<NULL>|Atlanta|GA|30328|www.ups.com|800-PICK-UPS
+fedex|942 South Shady Grove Rd|<NULL>|Memphis|TN|38120|www.fedex.com|800-GO-FEDEX
+dhl|50 California St|<NULL>|San Fransisco|CA|94111|www.dhl.com|800-CALL-DHL

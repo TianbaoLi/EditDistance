@@ -1,0 +1,90 @@
+<mapping>
+  <Bryan_Shiflett correct="yes">
+    <Package m="Packages">
+      <TrackNumber m="Packages/TrackingNo"/>
+      <Insured m="Packages/Insured"/>
+      <DeclaredValue m="Packages/DeclaredValue"/>
+      <Weight m="Packages/PkgWt"/>
+      <ItemCount m="Packages/NumItems"/>
+      <InvoiceID m="Packages/InvoiceNo"/>
+      <ShipMethod m="Packages/ShipServiceType"/>
+      <ShipperID m="Packages/ShipAgent"/>
+      <PackageStatus m="Packages/Status"/>
+      <SourceWarehouse m="Packages/Warehouse"/>
+      <PickupDateTime/>
+      <DeliveryDateTime m="Packages/EstDeliveryDate" c="Packages/EstDeliveryDate Packages/ActualDeliveryDate"/>
+    </Package>
+    <Customer m="Packages">
+      <BillTo/>
+      <ShipTo m="Packages/DestName"/>
+      <Phone m="Packages/DestContact"/>
+      <OrderNumber m="Packages/ID"/>
+      <BillToAddress/>
+      <ShipToAddress m="Packages/DestAddr"/>
+      <Comments m="Packages/SpecialInstr"/>
+    </Customer>
+    <Methods m="ShippingMethods">
+      <ShipMethod m="ShippingMethods/Method"/>
+      <ShipperID m="ShippingMethods/Provider"/>
+      <PricePerPound/>
+      <PriceEach m="ShippingMethods/PricePerUnit"/>
+      <FixedFee/>
+      <MaxItems/>
+      <MaxWeight m="ShippingMethods/MaxWt"/>
+      <DeliveryGuarantee m="ShippingMethods/MaxDays"/>
+    </Methods>
+    <Vendors m="ShippingProviders">
+      <ShipperID m="ShippingProviders/Name"/>
+      <Address1 m="ShippingProviders/Addr"/>
+      <Address2 m="ShippingProviders/Addr"/>
+      <City/>
+      <State/>
+      <Zip/>
+      <URL m="ShippingProviders/Url"/>
+      <Phone m="ShippingProviders/Phone"/>
+    </Vendors>
+  </Bryan_Shiflett>
+  <Dave_Sedlacek correct="yes">
+    <Packages m="Package">
+      <ID m="Package/TrackNumber"/>
+      <ShipAgent m="Package/ShipperID"/>
+      <ShipServiceType m="Package/ShipMethod"/>
+      <Warehouse m="Package/SourceWarehouse"/>
+      <InvoiceNo m="Package/InvoiceID"/>
+      <DestName m="Customer/BillTo" c="ShipTo CustomerBillTo"/>
+      <DestAddr m="Customer/BillToAddress" c="Customer/ShipToAddress Customer/BillToAddress"/>
+      <DestCity/>
+      <DestContact m="Customer/Phone"/>
+      <Residential/>
+      <Status m="Package/PackageStatus"/>
+      <PkgWt m="Package/Weight"/>
+      <NumItems m="Package/ItemCount"/>
+      <DeclaredValue m="Package/DeclaredValue"/>
+      <Insured m="Package/Insured"/>
+      <InsuranceFee m="Package/DeclaredValue"/>
+      <TrackingNo m="Package/TrackNumber"/>
+      <ShipDate/>
+      <EstDeliveryDate m="Package/DeliveryDateTime"/>
+      <ActualDeliveryDate m="Package/DeliveryDateTime"/>
+      <SpecialInstr m="Customer/Comments"/>
+    </Packages>
+    <ShippingProviders m="Vendors">
+      <Name m="Vendors/ShipperID"/>
+      <Addr m="Vendors/Address1" c="Vendors/Address1 Vendors/Address2"/>
+      <Phone m="Vendors/Phone"/>
+      <Url m="Vendors/URL"/>
+      <Warehouse/>
+      <AcctNo/>
+      <StdPickupTime/>
+    </ShippingProviders>
+    <ShippingMethods m="Methods">
+      <Method m="Methods/ShipMethod"/>
+      <Provider m="Methods/ShipperID"/>
+      <ShippingUnit/>
+      <PricePerUnit m="Methods/PriceEach"/>
+      <MaxDays/>
+      <MaxWt m="Methods/MaxWeight"/>
+      <MaxSize m="Methods/MaxItems"/>
+    </ShippingMethods>
+  </Dave_Sedlacek>
+</mapping>

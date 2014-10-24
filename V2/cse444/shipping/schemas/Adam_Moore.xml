@@ -1,0 +1,544 @@
+<database name="Shipping">
+
+<createdby name="Adam Moore"/>
+
+<Schema>
+  
+  <table name="Package">
+	<column name="InvoiceNum" type="Integer" key="yes">
+	  <comment>
+	    The InvoiceNum is key for all packages we ship.
+	  </comment>
+	</column>
+	
+	<column name="Weight" type="Real" key="no">
+	  <comment> 
+	    The weight of the package.
+	  </comment>
+	</column>
+
+        <column name="NumofItems" type="Integer" key="no">
+	  <comment> 
+	    The number of items in the package.
+	  </comment>
+	</column>
+
+        <column name="Method" type="String" key="no">
+	  <comment> 
+	    The method of shipment of the package.
+	  </comment>
+	</column>
+
+        <column name="TrackingNum" type="Integer" key="yes">
+	  <comment> 
+	    The tracking number of the package.
+	  </comment>
+	</column>
+
+        <column name="Agent" type="String" key="no">
+	  <comment> 
+	    The company who will ship the package.
+	  </comment>
+	</column>
+
+        <column name="Miscellanous" type="String" key="no">
+	  <comment> 
+	    Special care for the package.
+	  </comment>
+	</column>
+
+        <column name="SourceWarehouse" type="String" key="no">
+	  <comment> 
+	    The Warehouse the package will come from.
+	  </comment>
+	</column>
+
+	<column name="DeliveryName" type="String" key="no">
+	  <comment> 
+	    The name of the receiver of the package.
+	  </comment>
+	</column>
+
+	<column name="Address" type="String" key="no">
+	  <comment> 
+	    The address of where to send the package.
+	  </comment>
+	</column>
+
+	<column name="Contact" type="String" key="no">
+	  <comment> 
+	    The person to contact (in case delivery name is a company).
+	  </comment>
+	</column>
+
+	<column name="PickUpTime" type="Integer" key="no">
+	  <comment> 
+	    The time that the package was picked up from the source warehouse.
+	  </comment>
+	</column>
+
+	<column name="DeliveryTime" type="Integer" key="no">
+	  <comment> 
+	    The time that the package was delivered to the receiver.
+	  </comment>
+	</column>
+
+	<column name="Status" type="String" key="no">
+	  <comment> 
+	    The current state of the package.
+	  </comment>
+	</column>
+
+  </table>
+
+  <table name="ShippingVendor">
+
+	<column name="Agent" type="String" key="yes">
+	  <comment> 
+	    The company who will ship the package.
+	  </comment>
+	</column>
+
+	<column name="LocalAddress" type="String" key="no">
+	  <comment> 
+	    The address of the warehouse from where to ship.
+	  </comment>
+	</column>
+
+	<column name="URL" type="String" key="no">
+	  <comment> 
+	    The online address of the agent.
+	  </comment>
+	</column>
+
+	<column name="PhoneNum" type="String" key="no">
+	  <comment> 
+	    The phone number of the agent.
+	  </comment>
+	</column>
+
+	<column name="PickUpTime" type="String" key="no">
+	  <comment> 
+	    The daily pick up time for this agent.
+	  </comment>
+	</column>
+  </table>
+
+  <table name="ShippingMethods">
+	
+	<column name="Method" type="String" key="no">
+	  <comment> 
+	    The method chosen to ship the package.
+	  </comment>
+	</column>
+
+	<column name="PriceMethod" type="String" key="no">
+	  <comment> 
+	    A price method can either be fixed, based on wieght, or Num of items.
+	  </comment>
+	</column>
+
+	<column name="PriceRate" type="String" key="no">
+	  <comment> 
+	    The cost to ship the package.
+	  </comment>
+	</column>
+
+	<column name="Agent" type="String" key="no">
+	  <comment> 
+	    The company who will ship the package.
+	  </comment>
+	</column>
+
+	<column name="DeadLine" type="String" key="no">
+	  <comment> 
+	    The date the package must be delivered by.
+	  </comment>
+	</column>
+
+	<column name="MaxWeight" type="Integer" key="no">
+	  <comment> 
+	    The maximum weight that the package is allowed to be.
+	  </comment>
+	</column>
+
+	<column name="MaxLength" type="Integer" key="no">
+	  <comment> 
+	    The maximum length of the package.
+	  </comment>
+	</column>
+
+	<column name="MaxHeight" type="Integer" key="no">
+	  <comment> 
+	    The maximum height of the package.
+	  </comment>
+	</column>
+
+	<column name="MaxWidth" type="Integer" key="no">
+	  <comment> 
+	    The maximum width of the package.
+	  </comment>
+	</column>
+
+	<column name="MaxDimensions" type="Integer" key="no">
+	  <comment> 
+	    The maximum dimensions of the package.
+	  </comment>
+	</column>
+
+	<column name="DeliveryRange" type="String" key="no">
+	  <comment> 
+	    The cities that can de delivered to.
+	  </comment>
+	</column>
+
+  </table>
+
+  <foreignkeyconstraint>
+    <source table="Package">
+	  <column name="Agent"/>
+	</source>
+	<target table="ShippingVendor">
+	  <column name="Agent"/>
+	</target>
+        <comment> 
+	  Every package that is sent must have an agent who has a record in the ShippingVendor table.
+	</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="ShippingMethod">
+	  <column name="Agent"/>
+	</source>
+	<target table="ShippingVendor">
+	  <column name="Agent"/>
+	</target>
+  </foreignkeyconstraint>
+
+</Schema>
+
+  <Data>
+    <Package>
+      <tuple>
+        <InvoiceNum>0001</InvoiceNum>
+        <Weight>32</Weight>
+        <NumofItems>1</NumofItems>
+        <Method>Ground</Method>
+        <TrackingNum>9819283</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous>Leave package at door.</Miscellanous>
+        <SourceWarehouse>Seattle</SourceWarehouse>
+        <DeliveryName>John's Books</DeliveryName>
+        <Address>1432 Aimes St. #3 Key West, Florida</Address>
+        <Contact>John Smith</Contact>
+        <PickUpTime>1400 on 8/11/02</PickUpTime>
+        <DeliveryTime>800 on 8/14/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0002</InvoiceNum>
+        <Weight>15</Weight>
+        <NumofItems>3</NumofItems>
+        <Method>Standard</Method>
+        <TrackingNum>849583</TrackingNum>
+        <Agent>USPS</Agent>
+        <Miscellanous>Beware of dog.</Miscellanous>
+        <SourceWarehouse>Spokane</SourceWarehouse>
+        <DeliveryName>Seneca Wallace</DeliveryName>
+        <Address>66 Sax Ave. NE Boston, MA</Address>
+        <Contact>Seneca Wallace</Contact>
+        <PickUpTime>1200 on 8/21/02</PickUpTime>
+        <DeliveryTime>1000 on 8/14/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0003</InvoiceNum>
+        <Weight>2</Weight>
+        <NumofItems>1</NumofItems>
+        <Method>OverNight</Method>
+        <TrackingNum>46004989</TrackingNum>
+        <Agent>FedEx</Agent>
+        <Miscellanous>Handle with care.</Miscellanous>
+        <SourceWarehouse>Puyallup</SourceWarehouse>
+        <DeliveryName>Clinton Portis</DeliveryName>
+        <Address>9089 Walton Way #13 Green Bay, WI</Address>
+        <Contact>Clinton Portis</Contact>
+        <PickUpTime>1200 on 8/21/02</PickUpTime>
+        <DeliveryTime>1000 on 8/22/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0004</InvoiceNum>
+        <Weight>55</Weight>
+        <NumofItems>11</NumofItems>
+        <Method>2-day</Method>
+        <TrackingNum>9930904</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous>The key is under the mat.</Miscellanous>
+        <SourceWarehouse>Eugene</SourceWarehouse>
+        <DeliveryName>Gregory Peck</DeliveryName>
+        <Address>73485 Universe Way, New York, NY</Address>
+        <Contact>Janet Evans</Contact>
+        <PickUpTime>1300 on 8/23/02</PickUpTime>
+        <DeliveryTime>1000 on 8/25/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0005</InvoiceNum>
+        <Weight>13</Weight>
+        <NumofItems>1</NumofItems>
+        <Method>NextDay</Method>
+        <TrackingNum>9930299</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous></Miscellanous>
+        <SourceWarehouse>Walla Walla</SourceWarehouse>
+        <DeliveryName>Joe Buck</DeliveryName>
+        <Address>4545 Royal Braughm Way Seattle, WA</Address>
+        <Contact>Jack</Contact>
+        <PickUpTime>1400 on 8/29/02</PickUpTime>
+        <DeliveryTime>1000 on 8/30/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0006</InvoiceNum>
+        <Weight>5</Weight>
+        <NumofItems>1</NumofItems>
+        <Method>Ground</Method>
+        <TrackingNum>9495059</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous>Might contain hazardous material.</Miscellanous>
+        <SourceWarehouse>Ballard</SourceWarehouse>
+        <DeliveryName>John Elway Company</DeliveryName>
+        <Address>6989 26th Ave. #34 Kansas City, MI</Address>
+        <Contact>Johnny</Contact>
+        <PickUpTime>1200 on 12/20/02</PickUpTime>
+        <DeliveryTime>1500 on 12/29/02</DeliveryTime>
+        <Status>Completed</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0007</InvoiceNum>
+        <Weight>5</Weight>
+        <NumofItems>1</NumofItems>
+        <Method>OverNight</Method>
+        <TrackingNum>4688590</TrackingNum>
+        <Agent>FedEx</Agent>
+        <Miscellanous>In the alleyway.</Miscellanous>
+        <SourceWarehouse>Seattle</SourceWarehouse>
+        <DeliveryName>Elton Brand</DeliveryName>
+        <Address>6906 Eastbay Way Los Angeles, CA</Address>
+        <Contact>Elton</Contact>
+        <PickUpTime>800 on 1/10/03</PickUpTime>
+        <DeliveryTime>800 1/11/03</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0008</InvoiceNum>
+        <Weight>69</Weight>
+        <NumofItems>12</NumofItems>
+        <Method>Regular</Method>
+        <TrackingNum>4677098</TrackingNum>
+        <Agent>FedEx</Agent>
+        <Miscellanous>Null</Miscellanous>
+        <SourceWarehouse>Ballard</SourceWarehouse>
+        <DeliveryName>Gary Payton</DeliveryName>
+        <Address>2020 Payton Way Seattle, WA</Address>
+        <Contact>Nate McMillan</Contact>
+        <PickUpTime>1200 on 1/13/02</PickUpTime>
+        <DeliveryTime>Null</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0009</InvoiceNum>
+        <Weight>34</Weight>
+        <NumofItems>5</NumofItems>
+        <Method>2-day</Method>
+        <TrackingNum>99005050</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous>Leave outside the front door.</Miscellanous>
+        <SourceWarehouse>Spokane</SourceWarehouse>
+        <DeliveryName>Big Johnson's Johnson</DeliveryName>
+        <Address>420 Smokey Rd. Eugene, OR</Address>
+        <Contact>Cheech</Contact>
+        <PickUpTime>Null</PickUpTime>
+        <DeliveryTime>Null</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0010</InvoiceNum>
+        <Weight>9</Weight>
+        <NumofItems>2</NumofItems>
+        <Method>NextDay</Method>
+        <TrackingNum>9989898</TrackingNum>
+        <Agent>UPS</Agent>
+        <Miscellanous>Can park in the back.</Miscellanous>
+        <SourceWarehouse>Walla Walla</SourceWarehouse>
+        <DeliveryName>Adidas</DeliveryName>
+        <Address>1787 Lala Way New Orleans, LA</Address>
+        <Contact>Mia Hamm</Contact>
+        <PickUpTime>Null</PickUpTime>
+        <DeliveryTime>Null</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0011</InvoiceNum>
+        <Weight>61</Weight>
+        <NumofItems>6</NumofItems>
+        <Method>Regular</Method>
+        <TrackingNum>4677099</TrackingNum>
+        <Agent>FedEx</Agent>
+        <Miscellanous>Please do not smoke near this package.</Miscellanous>
+        <SourceWarehouse>Ballard</SourceWarehouse>
+        <DeliveryName>M.A.D.D.</DeliveryName>
+        <Address>4545 Bear Street Anchorage, AK</Address>
+        <Contact>Jimmy Kennedy</Contact>
+        <PickUpTime>Null</PickUpTime>
+        <DeliveryTime>Null</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+      <tuple>
+        <InvoiceNum>0012</InvoiceNum>
+        <Weight>45</Weight>
+        <NumofItems>4</NumofItems>
+        <Method>Standard</Method>
+        <TrackingNum>847758</TrackingNum>
+        <Agent>USPS</Agent>
+        <Miscellanous>Mahalo.</Miscellanous>
+        <SourceWarehouse>Seattle</SourceWarehouse>
+        <DeliveryName>Jim's Surf Shop</DeliveryName>
+        <Address>0999 Wahala Way Waikiki, HI</Address>
+        <Contact>Jimbo</Contact>
+        <PickUpTime>Null</PickUpTime>
+        <DeliveryTime>Null</DeliveryTime>
+        <Status>Pending</Status>
+      </tuple>
+
+    </Package>
+
+    <ShippingVendor>
+      <tuple>
+        <Agent>UPS</Agent>
+        <LocalAddress>2345 4th Ave. Seattle, WA 98101</LocalAddress>
+        <URL>http://www.ups.com</URL>
+        <PhoneNum>1-800-WITHUPS</PhoneNum>
+        <PickUpTime>1600</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Agent>FedEx</Agent>
+        <LocalAddress>1827 185th Ave. Seattle, WA 98102</LocalAddress>
+        <URL>http://www.fedex.com</URL>
+        <PhoneNum>1-800-GOFEDEX</PhoneNum>
+        <PickUpTime>1300</PickUpTime>
+      </tuple>
+
+      <tuple>
+        <Agent>USPS</Agent>
+        <LocalAddress>4344 University Way Seattle, WA 98105</LocalAddress>
+        <URL>http://www.usps.com</URL>
+        <PhoneNum>1-800-547-8949</PhoneNum>
+        <PickUpTime>1400</PickUpTime>
+      </tuple>
+
+    </ShippingVendor>
+
+    <ShippingMethods>
+      <tuple>
+        <Method>Ground</Method>
+        <PriceMethod>Perlb</PriceMethod>
+        <PriceRate>3.00</PriceRate>
+        <Agent>UPS</Agent>
+        <DeadLine>5 days</DeadLine>
+        <MaxWeight>70 lbs.</MaxWeight>
+        <MaxLength>3 ft.</MaxLength>
+        <MaxHeight>3 ft.</MaxHeight>
+        <MaxWidth>3 ft.</MaxWidth>
+        <MaxDimensions>27 ft.</MaxDimensions>
+        <DeliveryRange>U.S.A</DeliveryRange>
+      </tuple>
+
+      <tuple>
+        <Method>2-Day</Method>
+        <PriceMethod>Perlb</PriceMethod>
+        <PriceRate>8.00</PriceRate>
+        <Agent>UPS</Agent>
+        <DeadLine>2 days</DeadLine>
+        <MaxWeight>70 lbs.</MaxWeight>
+        <MaxLength>3 ft.</MaxLength>
+        <MaxHeight>3 ft.</MaxHeight>
+        <MaxWidth>3 ft.</MaxWidth>
+        <MaxDimensions>27 ft.</MaxDimensions>
+        <DeliveryRange>U.S.A</DeliveryRange>
+      </tuple>
+
+      <tuple>
+        <Method>NextDay</Method>
+        <PriceMethod>NumofItems</PriceMethod>
+        <PriceRate>20.00</PriceRate>
+        <Agent>UPS</Agent>
+        <DeadLine>1 day</DeadLine>
+        <MaxWeight>10 lbs.</MaxWeight>
+        <MaxLength>2 ft.</MaxLength>
+        <MaxHeight>2 ft.</MaxHeight>
+        <MaxWidth>2 ft.</MaxWidth>
+        <MaxDimensions>8 ft.</MaxDimensions>
+        <DeliveryRange>Continental U.S.</DeliveryRange>
+      </tuple>
+
+      <tuple>
+        <Method>Standard</Method>
+        <PriceMethod>Perlb</PriceMethod>
+        <PriceRate>1.00</PriceRate>
+        <Agent>UsPS</Agent>
+        <DeadLine>10 days</DeadLine>
+        <MaxWeight>20 lbs.</MaxWeight>
+        <MaxLength>2 ft.</MaxLength>
+        <MaxHeight>2 ft.</MaxHeight>
+        <MaxWidth>2 ft.</MaxWidth>
+        <MaxDimensions>8 ft.</MaxDimensions>
+        <DeliveryRange>U.S.A</DeliveryRange>
+      </tuple>
+
+      <tuple>
+        <Method>OverNight</Method>
+        <PriceMethod>FixedRate</PriceMethod>
+        <PriceRate>50.00</PriceRate>
+        <Agent>FedEx</Agent>
+        <DeadLine>1 days</DeadLine>
+        <MaxWeight>25 lbs.</MaxWeight>
+        <MaxLength>3 ft.</MaxLength>
+        <MaxHeight>2 ft.</MaxHeight>
+        <MaxWidth>2 ft.</MaxWidth>
+        <MaxDimensions>12 ft.</MaxDimensions>
+        <DeliveryRange>Continental U.S.</DeliveryRange>
+      </tuple>
+
+      <tuple>
+        <Method>Regular</Method>
+        <PriceMethod>Perlb</PriceMethod>
+        <PriceRate>12.00</PriceRate>
+        <Agent>FedEx</Agent>
+        <DeadLine>4 days</DeadLine>
+        <MaxWeight>50 lbs.</MaxWeight>
+        <MaxLength>3 ft.</MaxLength>
+        <MaxHeight>2 ft.</MaxHeight>
+        <MaxWidth>3 ft.</MaxWidth>
+        <MaxDimensions>18 ft.</MaxDimensions>
+        <DeliveryRange>U.S.A</DeliveryRange>
+      </tuple>
+
+    </ShippingMethods>
+
+  </Data>
+
+</database>

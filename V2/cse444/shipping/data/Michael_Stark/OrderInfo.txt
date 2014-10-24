@@ -1,0 +1,20 @@
+1|Ground|UPS|Wells Fargo Bank|4011 S 164th St|SeaTac|WA|98188|Raylene Diaz|10
+2|Next Day|FedEx|Amy Stark|18124 51st Ave S|SeaTac|WA|98188|Amy Stark|25.65
+3|Overnight|DHL|University Of Washington|152 45th Ave NE|Seattle|WA|98168|Henry Lui|85
+4|1st Class|USPS|Michael Stark|18124 51st Ave S|SeaTac|WA|98188|Michael Stark|10
+5|Ground|UPS|Wesley Moore|555 10th Pl|Seattle|WA|98168|Wesley Moore|25
+6|Ground|UPS|Diana Lui|897 152nd St|Burien|WA|98108|Diana Lui|15
+7|Ground|UPS|Microsoft|1111 Windows Way|Redmond|WA|98555|William Gates III|600
+8|Express|Airborne Express|David Stark|18124 51st Ave S|SeaTac|WA|98188|David Stark|10
+9|Next Afternoon|Airborne Express|Lisa Parvu|4011 S 165th|SeaTac|WA|98188|Lisa Parvu|0
+10|Priority|USPS|Eva Kuhnhenn|1511 S 2nd Ave|Burien|WA|98188|Eva Kuhnhenn|0
+11|Express|USPS|Cary Hutchinson|232 2nd Ave Unit 2|Kent|WA|97188|Cary Hutchinson|0
+12|1st Class|USPS|Janelle Kitson|15899 S 160th|Burien|WA|98168|Janelle Kitson|100
+13|Next Day|FedEx|Joe Smith|999 Oak Rd|Seattle|WA|91100|Joe Smith|15
+14|Second Day|Airborne Express|Bhupinder Singh|456 N 123st|Walla Walla|WA|15699|Bhupinder Singh|20
+15|Ground|FedEx|A Pizza Mart|16122 Pacific Hwy S |SeaTac|WA|98188|Sukjinder Singh|25
+16|Express|USPS|Ellen Peterson|15888 S 67th St|Redmond|WA|88112|Ellen Peterson|30
+17|Express|USPS|Greg Sandall|1122 S Duck Way|Eugene|WA|88188|Greg Sandall|0
+18|Express|USPS|Faith Salde|1522 S 176th|Burien|WA|98168|Faith Salde|0
+19|Priority|USPS|Danielle Payton|1225 University Way|Seattle|WA|98155|Danielle payton|0
+20|Ground|DHL|OUGL|4555 University Way|Seattle|WA|98011|Damien Koemans|500

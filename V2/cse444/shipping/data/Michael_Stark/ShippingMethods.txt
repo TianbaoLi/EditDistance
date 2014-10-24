@@ -1,0 +1,17 @@
+Airborne Express|Express|Volume|20|20|100|25|25|25||20|312500
+Airborne Express|Ground|Weight (lbs)|1|264||||||5|
+Airborne Express|Next Afternoon|Volume|10|36|200|50|50|50||15|1250000
+Airborne Express|Second Day|Weight (lbs)|5|48|500|50|50|50||10|2500
+DHL|Express|Weight (lbs)|8|36|150|25|25|25|<NULL>|10|1200
+DHL|Ground|Weight (lbs)|3|96|1500|||||5|4500
+DHL|Overnight|Volume|5|24|200|50|50|50|Moscow ID,|15|125000
+FedEx|Express|Weight (lbs)|10|96|1000|||||15|10000
+FedEx|Ground|Weight (lbs)|1.5|216|2000|||||5|3000
+FedEx|Next Day|Weight (lbs)|10|36|250|100|100|100|New York NY,|10|2500
+UPS|2nd Day Air|Weight (lbs)|2.5|60|300|100|100|100|Pullman WA, Moscow ID,|5|750
+UPS|Ground|Weight (lbs)|1|240|500|||||5|600
+UPS|Next Day Air|Weight (lbs)|7.5|36|300|100|100|100|Pullman WA, Moscow ID,|10|2250
+UPS|Same Day Air|Volume|15|20|100|75|75|75|Pullman WA, Moscow ID, Concrete WA, Spokane WA,|20|6328125
+USPS|1st Class|Weight (lbs)|0.39|240||||||0.39|
+USPS|Express|Weight (lbs)|1|48||||||2|
+USPS|Priority|Weight (lbs)|5|24||||||5|

@@ -1,0 +1,403 @@
+<database name="BillingInfo">
+  <createdby name="Tessa MacDuff" />
+
+  <Schema>
+    <table name="Invoice">
+      <column name="ID" type="Integer" key="yes" />
+      <column name="OrderDate" type="Date" key="no">
+        <comment>Date that this order was placed</comment>
+      </column>
+      <column name="Buyer" type="String" key="no">
+        <comment>Full name of Person who made this purchase</comment>
+      </column>
+      <column name="Customer" type="String" key="no">
+        <comment>Full name of person this will be shipped to (may be the same as Buyer)</comment>
+      </column>
+      <column name="ShipMethod" type="String" key="no">
+        <comment>Method of Shipping</comment>
+      </column>
+      <column name="SubTotal" type="Float" key="no">
+        <comment>Total cost of all items ordered</comment>
+      </column>
+      <column name="Shipping" type="Float" key="no">
+         <comment>Shipping costs</comment>
+      </column>
+      <column name="Taxes" type="Float" key="no">
+        <comment>Depend on where this order originated</comment>
+      </column>
+      <column name="DiscountType" type="String" key="no">
+        <comment>Promotional, Employee, Credit...</comment>
+      </column>
+      <column name="Discounts" type="Float" key="no">
+        <comment>Monetary discount on this order</comment>
+      </column>
+      <column name="PayMethod" type="String" key="no">
+        <comment>Check, CreditCard, or Cash</comment>
+      </column>
+      <column name="DeliveryDate" type="Date" key="no">
+        <comment>Determined from OrderDate and Shipping Duration</comment>
+      </column>
+    </table>
+
+    <table name="Item">
+      <column name="ID" type="Integer" key="yes">
+        <comment>An identifying code number for this item. Such as ISBN, product key...</comment>
+      </column>
+      <column name="Invoice" type="Integer" key="no">
+        <comment>The Invoice that this purchased item belongs to</comment>
+      </column>
+      <column name="Name" type="String" key="no">
+        <comment>The name or title of this product</comment>
+      </column>
+      <column name="Quantity" type="Integer" key="no">
+        <comment>The number of this item ordered</comment>
+      </column>
+      <column name="UnitPrice" type="Float" key="no">
+        <comment>Price per Unit of this item</comment>
+      </column>
+    </table>
+
+    <table name="Person">
+      <column name="FullName" type="String" key="yes">
+        <comment>Full Name of this person</comment>
+      </column>
+      <column name="Street" type="String" key="no">
+        <comment>First line of the address</comment>
+      </column>
+      <column name="City" type="String" key="no">
+        <comment>Name of the Address's City</comment>
+      </column>
+      <column name="State" type="String" key="no">
+        <comment>Address's State</comment>
+      </column>
+      <column name="ZipCOde" type="Integer" key="no">
+        <comment>Address's zip code</comment>
+      </column>
+      <column name="Phone" type="String" key="no">
+        <comment>ten digit phone number.  () and - OK</comment>
+      </column>
+      <column name="Email" type="String" key="no">      
+        <comment>email address is optional</comment>
+      </column>
+    </table>
+
+    <table name="CreditCard">
+      <column name="Number" type="Integer" key="yes">
+        <comment>The 16 digit credit card number</comment>
+      </column>
+      <column name="Type" type="String" key="no">
+        <comment>Visa, Mastercard, Discover...</comment>
+      </column>
+      <column name="Owner" type="String" key="no">
+        <comment>The full name of the credit card holder</comment>
+      </column>
+      <column name="ExpMonth" type="Integer" key="no">
+        <comment>Month that this card expires</comment>
+      </column>
+      <column name="ExpYear" type="Integer" key="no">
+        <comment>Year that this card expires</comment>
+      </column>
+      <column name="Invoice" type="Integer" key="no">
+        <comment>The invoice this credit card paid for</comment>
+      </column>
+    </table>
+
+    <table name="Check">
+      <column name="AccountNum" type="Integer" key="no">
+        <comment>The checking account number</comment>
+      </column>
+      <column name="RoutingNum" type="Integer" key="no">
+        <comment>Bank routing number</comment>
+      </column>
+      <column name="Number" type="Integer" key="no">
+        <comment>The check number</comment>
+      </column>
+      <column name="Invoice" type="String" key="no">
+        <comment>The invoice this check paid for</comment>
+      </column>
+    </table>
+
+    <table name="Shipping">
+      <comment>Really, this information should be in the Shipping DB</comment>
+      <column name="Method" type="String" key="yes">
+        <comment>A shipping Method</comment>
+      </column>
+      <column name="Price" type="Float" key="no">
+        <comment>This cost of this method of shipping (might actually have to do with invoice subtotal and distance)</comment>
+      </column>
+      <column name="Duration" type="Integer" key="no">
+        <comment>Number of days this method takes (might have to do with distance)</comment>
+      </column>
+    </table>
+
+    <table name="Storage">
+      <comment>This info should be in the Inventory DB</comment>
+      <column name="Item" type="Integer" key="no">
+        <comment>The ID for this item</comment>
+      </column>
+      <column name="Warehouse" type="String" key="no">
+        <comment>Warehouse where this item is stored</comment>
+      </column>
+    </table>
+
+    <foreignkeyconstraint>
+      <source table="CreditCard">
+        <column name="Invoice" />
+      </source>
+      <target table="Invoice">
+        <column name="ID" />
+      </target>
+      <comment>Credit Card info must be linked to an Invoice</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Check">
+        <column name="Invoice" />
+      </source>
+      <target name="Invoice">
+        <column name="ID" />
+      </target>
+      <comment>Check info must be linked to an invoice</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Item">
+        <column name="Invoice" />
+      </source>
+      <target name="Invoice">
+        <column name="ID" />
+      </target>
+      <comment>Each item order is linked to an invoice</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Invoice">
+        <column name="Buyer" />
+      </source>
+      <target name="Person">
+        <column name="Name" />
+      </target>
+      <comment>A Buyer is a person</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Invoice">
+        <column name="Customer" />
+      </source>
+      <target name="Person">
+        <column name="Name" />
+      </target>
+      <comment>A Customer is a person</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="CreditCard">
+        <column name="Owner" />
+      </source>
+      <target name="Person">
+        <column name="Name" />
+     </target>
+      <comment>A Credit Card Owner is a person</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Invoice">
+        <column name="ShipMethod" />
+        <column name="Shipping" />
+      </source>
+      <target name="Shipping">
+        <column name="Method" />
+        <column name="Price" />
+      </target>
+      <comment>Shipping details are kept seperate</comment>
+    </foreignkeyconstraint>
+
+    <foreignkeyconstraint>
+      <source table="Item">
+        <column name="ID" />
+      </source>
+      <target name="Storage">
+        <column name="Item" />
+      </target>
+      <comment>Storage info for an item are kep seperate</comment>
+    </foreignkeyconstraint>
+  </Schema>
+
+<Data>
+    <Invoice>
+      <tuple>
+        <ID>0012453</ID>
+        <OrderDate>January 10, 2003</OrderDate>
+        <Buyer>Joe Peterson</Buyer>
+        <Customer>Joe Peterson</Customer>
+        <ShipMethod>USPS</ShipMethod>
+        <SubTotal>55.60</SubTotal>
+        <Shipping>20.00</Shipping>
+        <Taxes>0</Taxes>
+        <DiscountType>none</DiscountType>
+        <Discounts>0</Discounts>
+        <PayMethod>CreditCard</PayMethod>
+        <DeliveryDate>January 23, 2003</DeliveryDate>
+      </tuple>
+      <tuple>
+        <ID>0012454</ID>
+        <OrderDate>January 12, 2003</OrderDate>
+        <Buyer>Meg O'Brian</Buyer>
+        <Customer>Jim O'Brian</Customer>
+        <ShipMethod>Overnight</ShipMethod>
+        <SubTotal>111.30</SubTotal>
+        <Shipping>3.00</Shipping>
+        <Taxes>8.90</Taxes>
+        <DiscountType>Employee</DiscountType>
+        <Discounts>11.3</Discounts>
+        <PayMethod>Check</PayMethod>
+        <DeliveryDate>January 13, 2003</DeliveryDate>
+      </tuple>
+    </Invoice>
+
+    <Item>
+      <tuple>
+        <ID>2342134213</ID>
+        <Invoice>0012453</Invoice>
+        <Name>Make Lemonade</Name>
+        <Quantity>1</Quantity>
+        <UnitPrice>5.75</UnitPrice>
+      </tuple>
+      <tuple>
+        <ID>465424353</ID>
+        <Invoice>0012453</Invoice>
+        <Name>The Hobbit</Name>
+        <Quantity>1</Quantity>
+        <UnitPrice>6.45</UnitPrice>
+      </tuple>
+      <tuple>
+        <ID>2342342436</ID>
+        <Invoice>0012453</Invoice>
+        <Name>The Book of Lights</Name>
+        <Quantity>1</Quantity>
+        <UnitPrice>8.50</UnitPrice>
+      </tuple>
+      <tuple>
+        <ID>45345345345</ID>
+        <Invoice>0012453</Invoice>
+        <Name>The Odyssey</Name>
+        <Quantity>1</Quantity>
+        <UnitPrice>5.95</UnitPrice>
+      </tuple>
+      <tuple>
+        <ID>3453452756</ID>
+        <Invoice>0012453</Invoice>
+        <Name>Falling Up</Name>
+        <Quantity>1</Quantity>
+        <UnitPrice>28.95</UnitPrice>
+      </tuple>
+      <tuple>
+        <ID>64345756775</ID>
+        <Invoice>0012454</Invoice>
+        <Name>Men are from Mars, Women are from Venus</Name>
+        <Quantity>14</Quantity>
+        <UnitPrice>7.95</UnitPrice>
+      </tuple>
+    </Item>
+
+    <Person>
+      <tuple>
+        <FullName>Meg O'Brian</FullName>
+        <Street>453 83rd Ave NW</Street>
+        <City>Issaquah</City>
+        <State>WA</State>
+        <ZipCode>98027</ZipCode>
+        <Phone>206-456-9837</Phone>
+        <Email>meg@sumthin.com</Email>
+      </tuple>
+      <tuple>
+        <FullName>Jim O'Brian</FullName>
+        <Street>453 83rd Ave NW</Street>
+        <City>Issaquah</City>
+        <State>WA</State>
+        <ZipCode>98027</ZipCode>
+        <Phone>206-456-9837</Phone>
+        <Email></Email>
+      </tuple>
+      <tuple>
+        <FullName>Joe Peterson</FullName>
+        <Street>343 W Neat St</Street>
+        <City>Bellevue</City>
+        <State>WA</State>
+        <ZipCode>98004</ZipCode>
+        <Phone>(425)747-8673</Phone>
+        <Email>jpeterson@sumwhere.org</Email>
+      </tuple>
+    </Person>
+
+    <CreditCard>
+      <tuple>
+        <Number>1231595739472847</Number>
+        <Type>Visa</Type>
+        <Owner>Joe Peterson</Owner>
+        <ExpMonth>10</ExpMonth>
+        <ExpYear>04</ExpYear>
+        <Invoice>0012453</Invoice>
+      </tuple>
+    </CreditCard>
+
+    <Check>
+      <tuple>
+        <AccountNum>05772659</AccountNum>
+        <RoutingNum>341231231231</RoutingNum>
+	<Number>1045</Number>
+        <Invoice>0012454</Invoice>
+      </tuple>
+    </Check>
+
+    <Shipping>
+      <tuple>
+        <Method>Overnight</Method>
+        <Price>20.00</Price>
+        <Duration>1</Duration>
+      </tuple>
+      <tuple>
+        <Method>2 Day</Method>
+        <Price>15.00</Price>
+        <Duration>2</Duration>
+      </tuple>
+      <tuple>
+        <Method>Insured</Method>
+        <Price>5.00</Price>
+        <Duration>7</Duration>
+      </tuple>
+      <tuple>
+        <Method>USPS</Method>
+        <Price>3.00</Price>
+        <Duration>7</Duration>
+      </tuple>
+    </Shipping>
+
+    <Storage>
+      <tuple>
+        <Item>2342134213</Item>
+        <Warehouse>BigHouse</Warehouse>
+      </tuple>
+      <tuple>
+        <Item>465424353</Item>
+        <Warehouse>LittleHouse</Warehouse>
+      </tuple>
+      <tuple>
+        <Item>2342342436</Item>
+        <Warehouse>BigHouse</Warehouse>
+      </tuple>
+      <tuple>
+        <Item>45345345345</Item>
+        <Warehouse>BigHouse</Warehouse>
+      </tuple>
+      <tuple>
+        <Item>3453452756</Item>
+        <Warehouse>SuperHouse</Warehouse>
+      </tuple>
+      <tuple>
+        <Item>64345756775</Item>
+        <Warehouse>BigHouse</Warehouse>
+      </tuple>
+    </Storage>
+  </Data>  
+</database>

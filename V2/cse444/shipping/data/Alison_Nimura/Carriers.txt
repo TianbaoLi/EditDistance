@@ -1,0 +1,30 @@
+DHL|3242 SE Dover St, New York, NY 34523|http://www.dhl.com|325-352-3421|10:00 AM|International Express
+DHL|3242 SE Dover St, New York, NY 34523|http://www.dhl.com|325-352-3421|10:00 AM|Next Day
+DHL|235 N Main St, Los Angeles, CA 53263|http://www.dhl.com|417-582-3624|10:00 AM|Next Day
+DHL|932 SE Mann St, Seattle, WA 98306|http://www.dhl.com|206-753-3431|10:00 AM|International Express
+DHL|932 SE Mann St, Seattle, WA 98306|http://www.dhl.com|206-753-3431|10:00 AM|Next Day
+DHL|8312 S Corning St, Chicago, IL, 32533|http://www.dhl.com|983-723-3424|10:00 AM|International
+FedEx|325  N Clark St, Chicago, IL, 32523|http://www.fedex.com|983-231-3225|12:00 PM|Standard Overnight
+FedEx|325  N Clark St, Chicago, IL, 32523|http://www.fedex.com|983-231-3225|12:00 PM|FedEx Ground
+FedEx|352 E Mumu St, Los Angele, CA 83253|http://www.fedex.com|417-232-3426|12:00 PM|FedEx Ground
+FedEx|4312 NE 2nd, New York, NY, 89323|http://www.fedex.com|325-285-3925|12:00 PM|Express Saver
+UPS|789 N Crawford Lane, Los Angeles, CA 32523|http://www.ups.com|206-549-2314|11:00 AM|3-day Select
+UPS|789 N Crawford Lane, Los Angeles, CA 32523|http://www.ups.com|206-549-2314|11:00 AM|Expedited Ground
+UPS|329 N Meister Lane, Chicago, IL, 32523|http://www.ups.com|983-249-2144|11:00 AM|2nd Day Air
+USPS|325 E Lake St, Los Angeles, CA 89235|http://www.usps.com|452-342-3952|2:00 PM| 2-day Priority
+USPS|6434 S Court St, New York, NY 35252|http://www.usps.com|325-932-3421|2:00 PM|1-day Priority
+USPS|3245 N Station St, Seattle, WA, 98205|http://www.usps.com|206-328-9142|2:00 PM|2-day Priority
+USPS|3245 N Station St, Seattle, WA, 98205|http://www.usps.com|206-328-9142|2:00 PM|Economy
+USPS|3245 N Station St, Seattle, WA, 98205|http://www.usps.com|206-328-9142|2:00 PM|Standard Ground
+FedEx|4312 NE 2nd, New York, NY, 89323|http://www.fedex.com|325-285-3925|12:00 PM|Standard Overnight
+USPS|325 E Lake St, Los Angeles, CA 89235|http://www.usps.com|452-342-3952|2:00 PM|Economy
+DHL|3242 SE Dover St, New York, NY 34523|http://www.dhl.com|325-352-3421|10:00 AM|International
+UPS|334 NW Simmons St, New York, NY 89352|http://www.ups.com|325-352-2314|11:00 AM|Next Day Air
+USPS|6434 S Court St, New York, NY 35252|http://www.usps.com|325-932-3421|2:00 PM|Standard Ground
+UPS|789 N Crawford Lane, Los Angeles, CA 32523|http://www.ups.com|206-549-2314|11:00 AM|UPS Ground
+FedEx|352 E Mumu St, Los Angele, CA 83253|http://www.fedex.com|417-232-3426|12:00 PM|2day
+DHL|932 SE Mann St, Seattle, WA 98306|http://www.dhl.com|206-753-3431|10:00 AM|International
+DHL|235 N Main St, Los Angeles, CA 53263|http://www.dhl.com|417-582-3624|10:00 AM|International
+UPS|329 N Meister Lane, Chicago, IL, 32523|http://www.ups.com|983-249-2144|11:00 AM|UPS Ground
+FedEx|325  N Clark St, Chicago, IL, 32523|http://www.fedex.com|983-231-3225|12:00 PM|2day
+DHL|8312 S Corning St, Chicago, IL, 32533|http://www.dhl.com|983-723-3424|10:00 AM|Next Day

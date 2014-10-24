@@ -1,0 +1,435 @@
+<database name="ProductInventory">
+
+<createdby name="Nicholas Benson"/>
+
+<Schema>
+  <table name="Products">
+    <column name="ID" type="String" key="yes"/>
+    <column name="Description" type="String" key="no"/>
+    <column name="Type" type="String" key="no"/>    
+  </table>
+
+  <table name="Books">
+    <column name="Title" type="String" key="no">
+     <comment>
+     Book Title
+     </comment>
+    </column>
+
+
+    <column name="ISBN" type="String" key="yes">
+     <comment>
+     Library of Congress Catalog Number
+     </comment>
+    </column>
+
+    <column name="Publisher" type="String" key="no">
+     <comment>Book Publisher</comment>
+    </column>
+
+    <column name="Subject" type="String" key="no">
+     <comment>Book Subject</comment>
+    </column>
+  </table>
+
+  <table name="Authors">
+    <column name="ID" type="String" key="no"/>
+    <column name="AuthorName" type="String" key="no"/>
+  </table>
+
+  <table name="Music">
+    <column name="IDCode" type="String" key="yes">
+     <comment>Music Media Identification Code</comment>
+    </column>
+    
+    <column name="AlbumName" type="String" key="no">
+     <comment>Album Name</comment>
+    </column>
+
+    <column name="RecCompany" type="String" key="no">
+     <comment>Recording Company</comment>
+    </column>
+    
+    <column name="Genre" type="String" key="no">
+     <comment>Album Genre</comment>
+    </column>
+    
+    <column name="MusicProductType" type="String" key="no">
+     <comment>Music Product Type</comment>
+    </column>
+  </table>
+
+  <table name="Inventory">
+    <column name="ProductID" type="String" key="no">
+     <comment>Product Identifier</comment>
+    </column>
+    
+    <column name="ProductLocation" type="Integer" key="no">
+     <comment>Stocked Product Location</comment>
+    </column>
+
+    <column name="ProductQuantity" type="Integer" key="no">
+     <comment>Stocked Quantity</comment>
+    </column>
+  </table>
+
+  <table name="Prices">
+    <column name="ProductID" type="String" key="yes">
+     <comment>Product Identifier</comment>
+    </column>
+
+    <column name="NormalPrice" type="Money" key="no">
+     <comment>Normal Product Price</comment>
+    </column>
+
+    <column name="DiscountPrice" type="Money" key="no">
+     <comment>Discount Product Price</comment>
+    </column>
+  </table>
+
+  <table name="Keywords">
+    <column name="Keyword" type="String" key="no">
+     <comment>Product Keyword</comment>
+    </column>
+   
+    <column name="ProductID" type="String" key="no">
+     <comment>Product ID related to the keyword</comment>
+    </column>
+ </table>
+ 
+ <table name="Warehouses">
+   <column name="ID" type="Integer" key="yes">
+    <comment>Each wharehouse must have a unique ID</comment>
+   </column>
+
+   <column name="StreetAddressLine1" type="String" key="no"/>
+
+   <column name="StreetAddressLine2" type="String" key="no"/>
+   
+   <column name="City" type="String" key="no"/>
+   
+   <column name="StateProvince" type="String" key="no"/>
+   
+   <column name="ZipCode" type="String" key="no"/>
+
+   <column name="Country" type="String" key="no"/>
+
+   <column name="TelephoneNumber" type="String" key="no"/>
+
+   <column name="FaxNumber" type="String" key="no"/>
+
+   <column name="ManagerName" type="String" key="no"/>
+   
+   <column name="NumEmployees" type="Integer" key="no"/>
+   
+   <column name="FacilitySquareFootage" type="Integer" key="no"/>
+ </table>
+ 
+ <table name="ProductEvaluations">
+   <column name="EvaluationID" type="Integer" key="yes"/>
+   <column name="EvalProductID" type="String" key="no"/>
+   <column name="EvaluatorEmail" type="String" key="no"/>
+   <column name="EvaluatorName" type="String" key="no"/>
+   <column name="Comments" type="String" key="no"/>
+   <column name="Rating" type="Integer" key="no"/>
+   <column name="EvaluatorCity" type="String" key="no"/>
+   <column name="EvaluatorStateProvince" type="String" key="no"/>
+   <column name="EvaluatorCountry" type="String" key="no"/>
+ </table>
+
+ <table name="CustomerRecs">
+   <column name="EvalID" type="Integer" key="no"/>
+   <column name="RecProductID" type="String" key="no">
+     <comment>ID of a similar product that a customer recommends</comment>
+   </column>
+ </table>
+ 
+ <foreignkeyconstraint>
+   <source table="CustomerRecs"> <column name="EvalID"/>
+    </source>
+   <target table="ProductEvaluations"> <column name="EvaluationID"/>
+    </target>
+   <comment> Each recommendation must come from an evaluation</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+   <source table="CustomerRecs"> <column name="RecProductID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment>Only valid products can be recommended</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+   <source table="Authors"> <column name="ID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment>Only valid products can be authored</comment>
+  </foreignkeyconstraint>
+  
+
+  <foreignkeyconstraint>
+   <source table="ProductEvaluations"> <column name="EvaluationID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every evaluation must be linked to a valid product</comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+   <source table="Products"> <column name="ID"/>
+    </source>
+   <target table="Prices"> <column name="ProductID"/>
+    </target>
+   <comment> Every product must have a price
+    </comment>
+  </foreignkeyconstraint>
+    
+
+  <foreignkeyconstraint>
+   <source table="Books"> <column name="ISBN"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every book must have an entry in the products table.
+    </comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+   <source table="Books"> <column name="ISBN"/>
+    </source>
+   <target table="Prices"> <column name="ProductID"/>
+    </target>
+   <comment> Every book must have an entry in the prices table.
+    </comment>
+  </foreignkeyconstraint>  
+  
+  <foreignkeyconstraint>
+   <source table="Music"> <column name="IDCode"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every Music album must have an entry in the products table.
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+   <source table="Music"> <column name="IDCode"/>
+    </source>
+   <target table="Prices"> <column name="ProductID"/>
+    </target>
+   <comment> Every piece of Music must have an entry in the prices table.
+    </comment>
+  </foreignkeyconstraint> 
+
+  <foreignkeyconstraint>
+   <source table="Inventory"> <column name="ProductID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every stocked type of item must have an entry in the product table
+    </comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+   <source table="Inventory"> <column name="Location"/>
+    </source>
+   <target table="Warehouses"> <column name="ID"/>
+    </target>
+   <comment> Every location must correspond to a warehouse ID
+    </comment>
+  </foreignkeyconstraint>
+ 
+ <foreignkeyconstraint>
+   <source table="Prices"> <column name="ProductID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every price entry must correspond to a product
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+   <source table="Keywords"> <column name="ProductID"/>
+    </source>
+   <target table="Products"> <column name="ID"/>
+    </target>
+   <comment> Every keyword entry must refer to a product
+    </comment>
+  </foreignkeyconstraint>  
+  
+</Schema>
+
+
+
+
+
+<Data>
+
+  <Products>
+	<tuple>
+	  <ID> AB 33.1 H2341 C199 </ID>
+	  <Description> Take the guess-work out of making
+	   snowmen!</Description>
+	  <Type> Book </Type>
+	</tuple>
+	
+	<tuple>
+	  <ID> ALBUM92211B </ID>
+	  <Description> Eclectic mix of Sublime's Greatest Hits</Description>
+	  <Type> Music </Type>
+	</tuple>
+  </Products>
+
+  <Books>
+
+    <tuple>
+      <ISBN> AB 33.1 H2341 C199 </ISBN>
+      <Title>Snowman Making: Simplified</Title>
+      <Publisher>Santa's Workshop Publishing</Publisher>
+      <Subject>Home and Leisure</Subject>
+    </tuple>
+
+  </Books>
+
+  <Authors>
+    <tuple>
+      <ID>AB 33.1 H2341 C199</ID>
+      <AuthorName>Jack Frost</AuthorName>
+    </tuple>
+    <tuple>
+      <ID>ALBUM92211B</ID>
+      <AuthorName>Sublime</AuthorName>
+    </tuple>
+  </Authors>
+
+  <Music>
+    <tuple>
+      <IDCode>ALBUM92211B</IDCode>
+      <AlbumName>Second Hand Smoke</AlbumName>
+      <RecCompany>Interscope</RecCompany>
+      <Genre>Alternative</Genre>
+      <MusicProductType>Full-Length Album</MusicProductType>
+    </tuple>
+  </Music>
+  
+  <Inventory>
+    <tuple>
+      <ProductID>AB 33.1 H2341 C199 </ProductID>
+      <ProductLocation>1</ProductLocation>
+      <ProductQuantity>3000</ProductQuantity>
+    </tuple>
+    <tuple>
+      <ProductID>AB 33.1 H2341 C199 </ProductID>
+      <ProductLocation>2</ProductLocation>
+      <ProductQuantity>9000</ProductQuantity>
+    </tuple>
+    <tuple>
+      <ProductID>ALBUM92211B</ProductID>
+      <ProductLocation>2</ProductLocation>
+      <ProductQuantity>50</ProductQuantity>
+    </tuple>
+  </Inventory>
+
+  <Prices>
+    <tuple>
+      <ProductID>AB 33.1 H2341 C199 </ProductID>
+      <NormalPrice>39.95</NormalPrice>
+      <DiscountPrice>19.99</DiscountPrice>
+    </tuple>
+    <tuple>
+      <ProductID>ALBUM92211B</ProductID>
+      <NormalPrice>22.19</NormalPrice>
+      <DiscountPrice>14.99</DiscountPrice>
+    </tuple>
+  </Prices>
+
+  <Keywords>
+    <tuple>
+      <Keyword>snow</Keyword>
+      <ProductID>AB 33.1 H2341 C199 </ProductID>
+    </tuple>
+    <tuple>
+      <Keyword>ice</Keyword>
+      <ProductID>AB 33.1 H2341 C199 </ProductID>
+    </tuple>
+    <tuple>
+      <Keyword>beach</Keyword>
+      <ProductID>ALBUM92211B</ProductID>
+    </tuple>
+    <tuple>
+      <Keyword>los angeles</Keyword>
+      <ProductID>ALBUM92211B</ProductID>
+    </tuple>
+  </Keywords>
+
+  <Warehouses>
+    <tuple>
+      <ID>1</ID>
+      <StreetAddressLine1>123 AnyStreet</StreetAddressLine1>
+      <StreetAddressLine2></StreetAddressLine2>
+      <City>Topeka</City>
+      <StateProvince>Kansas</StateProvince>
+      <ZipCode>12345</ZipCode>
+      <Country>USA</Country>
+      <TelephoneNumber>(122) 555-1212</TelephoneNumber>
+      <FaxNumber>(122) 555-1233</FaxNumber>
+      <ManagerName>Barney Gumbal</ManagerName>
+      <NumEmployees>550</NumEmployees>
+      <FacilitySquareFootage>220000</FacilitySquareFootage>
+    </tuple>
+    <tuple>
+      <ID>2</ID>
+      <StreetAddressLine1>PO Box 1222</StreetAddressLine1>
+      <StreetAddressLine2>566 Sunset Boulevard</StreetAddressLine2>
+      <City>Los Angeles</City>
+      <StateProvince>California</StateProvince>
+      <ZipCode>90221</ZipCode>
+      <Country>USA</Country>
+      <TelephoneNumber>(211) 233-1254</TelephoneNumber>
+      <FaxNumber>(211) 233-1000</FaxNumber>
+      <ManagerName>Clancy Wiggam</ManagerName>
+      <NumEmployees>110</NumEmployees>
+      <FacilitySquareFootage>90000</FacilitySquareFootage>
+    </tuple>
+  </Warehouses>
+  
+  <ProductEvaluations>
+    <tuple>
+      <EvaluationID>1</EvaluationID>
+      <EvalProductID>AB 33.1 H2341 C199</EvalProductID>
+      <EvaluatorEmail>bill@microsoft.com</EvaluatorEmail>
+      <EvaluatorName>Billy G.</EvaluatorName>
+      <Comments>I wish it would have come with mittens!</Comments>
+      <Rating>2</Rating>
+      <EvaluatorCity>Redmond</EvaluatorCity>
+      <EvaluatorStateProvince>Washington</EvaluatorStateProvince>
+      <EvaluatorCountry>USA</EvaluatorCountry>
+    </tuple>
+    <tuple>
+      <EvaluationID>2</EvaluationID>
+      <EvalProductID>ALBUM92211B</EvalProductID>
+      <EvaluatorEmail>ilovemacintosh@hotmail.com</EvaluatorEmail>
+      <EvaluatorName>Steve J.</EvaluatorName>
+      <Comments>This baby rocks!  April 26, 1992, tell me...</Comments>
+      <Rating>10</Rating>
+      <EvaluatorCity>Mountain View</EvaluatorCity>
+      <EvaluatorStateProvince>California</EvaluatorStateProvince>
+      <EvaluatorCountry>USA</EvaluatorCountry>
+   </tuple>
+ </ProductEvaluations>
+
+<CustomerRecs>
+  <tuple>
+    <EvalID>1</EvalID>
+    <RecProductID>ALBUM92211B</RecProductID>
+  </tuple>
+  <tuple>
+    <EvalID>2</EvalID>
+    <RecProductID>AB 33.1 H2341 C199</RecProductID>
+  </tuple>
+</CustomerRecs>
+
+</Data>
+</database>

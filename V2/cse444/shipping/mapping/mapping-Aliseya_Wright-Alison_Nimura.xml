@@ -1,0 +1,104 @@
+<mapping>
+  <Aliseya_Wright correct="yes">
+    <Package m="Package">
+      <PackageID m="Package/TrackingNo"/>
+      <InvoiceNo m="Package/InvoiceNo"/>
+      <Weight m="Package/Weight"/>
+      <TotalItems m="Package/ItemAmount"/>
+      <OrderStatus m="Package/OrderStatus"/>
+      <StatusComment/>
+    </Package>
+    <ShipingRecord m="Package">
+      <Package m="Package/TrackingNo"/>
+      <Method m="Package/ShippingMethod"/>
+      <CompanyID m="Package/Carrier"/>
+      <SpecialInstructions m="Package/HandlingNotes"/>
+      <SourceWarehouse m="Package/Warehouse"/>
+      <PickUpTime m="Package/PickUpDate"/>
+    </ShipingRecord>
+    <DeliveryRecord m="Package">
+      <Package m="Package/TrackingNo"/>
+      <Name m="Package/RecipientName"/>
+      <Address m="Package/RecipientAddr"/>
+      <City/>
+      <State/>
+      <ZipCode/>
+      <ContactPhone m="Package/ContactNo"/>
+      <DeliveryTime m="Package/DeliveryDate"/>
+    </DeliveryRecord>
+    <ShippingVendors m="Carriers">
+      <ID m="Carriers/CarrierName"/>
+      <Name m="Carriers/CarrierName"/>
+      <Address m="Carriers/LocalAddr"/>
+      <City/>
+      <State/>
+      <ZipCode/>
+      <Phone m="Carriers/TelephoneNo"/>
+      <URL m="Carriers/Url"/>
+      <PickUpTime m="Carriers/PickUpTime"/>
+      <Warehouse/>
+    </ShippingVendors>
+    <Warehouse>
+      <ID/>
+      <Address/>
+      <City/>
+      <State/>
+      <ZipCode/>
+      <Phone/>
+    </Warehouse>
+    <ShippingMethods m="ShippingOptions">
+      <ID/>
+      <VendorID m="ShippingOptions/Carrier"/>
+      <type m="ShippingOptions/OptionName"/>
+      <MaxWeight m="ShippingOptions/MaxWeight"/>
+      <PricePerUnit m="ShippingOptions/PricePerUnit"/>
+      <Unit m="ShippingOptions/PricingMethod"/>
+      <BasePrice/>
+      <DeliveryTime m="ShippingOptions/DeliveryTime"/>
+    </ShippingMethods>
+    <Invoice m="Package">
+      <InvoiceNo m="Package/InvoiceNo"/>
+      <NumShipments/>
+      <NumItems m="Package/ItemAmount"/>
+    </Invoice>
+  </Aliseya_Wright>
+  <Alison_Nimura correct="yes">
+    <Package m="Package" c="Package ShipingRecord DeliveryRecord invoice">
+      <TrackingNo m="Package/PackageID"/>
+      <Carrier m="ShipingRecord/CompanyID"/>
+      <InvoiceNo m="Package/InvoiceNo"/>
+      <Weight m="Package/Weight"/>
+      <ItemAmount m="Package/TotalItems"/>
+      <ShippingMethod m="ShipingRecord/Method"/>
+      <HandlingNotes m="ShipingRecord/SpecialInstructions"/>
+      <Warehouse m="ShipingRecord/SourceWarehouse"/>
+      <RecipientName m="DeliveryRecord/Name"/>
+      <RecipientAddr m="DeliveryRecord/Address"/>
+      <ContactNo m="DeliveryRecord/ContactPhone"/>
+      <PickUpDate m="ShipingRecord/PickUpTime"/>
+      <EstDeliveryDate/>
+      <DeliveryDate m="DeliveryRecord/DeliveryTime"/>
+      <OrderStatus m="Package/OrderStatus"/>
+    </Package>
+    <Carriers m="ShippingVendors">
+      <CarrierName m="ShippingVendors/Name"/>
+      <LocalAddr m="ShippingVendors/Address"/>
+      <Url m="ShippingVendors/URL"/>
+      <TelephoneNo m="ShippingVendors/Phone"/>
+      <PickUpTime m="ShippingVendors/PickUpTime"/>
+      <Methods/>
+    </Carriers>
+    <ShippingOptions m="ShippingMethods">
+      <OptionName m="ShippingMethods/type"/>
+      <Carrier m="ShippingMethods/VendorID"/>
+      <PricingMethod m="ShippingMethods/Unit"/>
+      <PricePerUnit m="ShippingMethods/PricePerUnit"/>
+      <DeliveryTime m="ShippingMethods/DeliveryTime"/>
+      <MaxWeight m="ShippingMethods/MaxWeight"/>
+      <MaxLength/>
+      <MaxWidth/>
+      <MaxHeight/>
+      <DestCities/>
+    </ShippingOptions>
+  </Alison_Nimura>
+</mapping>

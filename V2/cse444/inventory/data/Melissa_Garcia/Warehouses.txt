@@ -1,0 +1,5 @@
+250 Montrose Avenue | Buffalo | New York | 14223 | (716)-983-5568 | (716)-564-3456 | Steve Manning | 90
+4233 9th Avenue NE  | Seattle | Washington | 98105 | (206)-432-8970 | (206)-789-9867 | David Myers | 78
+3245 Main Street NW | Seattle | Washington | 98195 | (206)-985-1422 | (206)-256-8976 | Jamie Simpson | 120
+146 Englewood Avenue | Syracuse | New York | 14260 | (718)-987-8765 | (718)-345-9808 | Donald Rumsfeld | 58
+139 West Hollywood Boulevard | HollyWood | California | 901210 | (626)-350-4345 | (626)-876-5698 | Roger Waters | 100

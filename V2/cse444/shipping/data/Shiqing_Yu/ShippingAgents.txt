@@ -1,0 +1,4 @@
+ups|www.ups.com|1-800-232-2222|M-F 8:00-5:00
+usps|www.usps.com|1-800-230-2222|M-F 8:00-5:00
+fedex|www.fedex.com|1-800-230-3333|M-F 8:00-5:00
+dhl|www.dhl.com|1-800-234-2222|M-F 8:00-5:00

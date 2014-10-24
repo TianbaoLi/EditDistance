@@ -1,0 +1,2006 @@
+<database name="BillingAndInvoice">
+
+<createdby name="Jordan Kiang"/>
+
+<Schema>
+
+  <table name="Invoices">
+  
+    <column name="Number" type="String" key="yes">
+      <comment>
+	A unique number assigned to each order.
+      </comment>
+    </column>
+
+    <column name="OrderDate" type="DateTime" key="no">
+      <comment>
+        The date and time when the order was placed. (MM/DD/YYYY)
+      </comment>
+    </column>
+
+    <column name="BillTo" type="Integer" key="no">
+      <comment>
+        The sixteen digit credit card number used to place this order.
+	This number should be listed in the credit card table.
+      </comment>
+    </column>
+
+    <column name="ShipTo" type="Integer" key="no">
+      <comment>
+        The customer number of the person to whom the order is being shipped.
+      </comment>
+    </column>
+
+    <column name="ShippingMethod" type="String" key="no">
+      <comment>
+        The method of shipping for the order.
+      </comment>
+    </column>
+
+    <column name="TotalPrice" type="Money" key="no">
+      <comment>
+        The total purchase price of the order.
+      </comment>
+    </column>
+
+    <column name="Discounts" type="Money" key="no">
+      <comment>
+        A money value less than or equal to zero representing total discounts.
+      </comment>
+    </column>
+
+    <column name="ShippingCost" type="Money" key="no">
+      <comment>
+        The cost of shipping the order.
+      </comment>
+    </column>
+
+    <column name="Taxes" type="Money" key="no">
+      <comment>
+        The total tax assessed on the order.
+      </comment>
+    </column>
+
+  </table>
+
+  <table name ="ItemsPurchased">
+  
+    <column name="InvoiceNumber" type="Integer" key="no">
+      <comment>
+        The number of the invoice for the order in which the item was sold.
+      </comment>
+    </column>
+
+    <column name="ItemNumber" type="Integer" key="no">
+      <comment>
+        A number that uniquely identifies each different product.
+      </comment>
+    </column>
+
+    <column name="ItemName" type="String" key="no">
+      <comment>
+        The name of the product, unique for each item.
+      </comment>
+    </column>
+
+    <column name="Quantity" type="Integer" key="no">
+      <comment>
+        The number of that item purchased in the particular order.
+      </comment>
+    </column>
+
+    <column name="PricePerUnit" type="Money" key="no">
+      <comment>
+        The price per unit of the item.
+      </comment>
+    </column>
+
+    <column name="ShipFrom" type="String" key="no">
+      <comment>
+        The warehouse that this product is being shipping from.
+      </comment>
+    </column>
+
+  </table>
+
+  <table name="Customers">
+ 
+    <column name="Number" type="Integer" key="yes">
+      <comment>
+        A unique indentifying number assigned to each cutomer.
+      </comment>
+    </column>	
+
+    <column name="CustomerName" type="String" key="no">
+      <comment>
+        The name of this customer.
+      </comment>
+    </column>
+
+    <column name="StreetAddress" type="String" key="no">
+      <comment>
+        The street address of the customer.
+      </comment>
+    </column>
+
+    <column name="City" type="String" key="no">
+      <comment>
+        The city in which the customer is located.
+      </comment>
+    </column>
+
+    <column name="State" type="String" key="no">
+      <comment>
+        The state in which the customer is located.
+      </comment>
+    </column>
+
+    <column name="Zip" type="Integer" key="no">
+      <comment>
+        The zip code of the customer.
+      </comment>
+    </column>
+
+    <column name="AreaCode" type="Integer" key="no">
+      <comment>
+        The three digit area code of customer's phone number.
+      </comment>
+    </column>
+      
+    <column name="PhoneNumber" type="Integer" key="no">
+      <comment>
+        The customer's phone number (xxx-xxxx);
+      </comment>
+    </column>
+      
+    <column name="Email" type="String" key="no">
+      <comment>
+        The customer's email address.
+      </comment>
+    </column>
+	
+  </table>
+
+  <table name="CreditCards">
+    
+    <column name="Number" type="Integer" key="yes">
+      <comment>
+        The sixteen digit credit card number, these should be unique.
+      </comment>
+    </column>
+
+    <column name="NameOnCard" type="String" key="no">
+      <comment>
+        The name of the card holder as listed on the card.
+      </comment>
+    </column>
+
+    <column name="CardType" type="String" key="no">
+      <comment>
+        The type of the credit card (VISA, MasterCard, AMEX).
+      </comment>
+    </column>
+
+    <column name="CustomerNumber" type="Integer" key="no">
+      <comment>
+        The customer number as listed in the Customer table.
+      </comment>
+    </column>
+
+    <column name="ExpMonth" type="Integer" key="no">
+      <comment>
+        The month (MM) when the card expires.
+      </comment>
+    </column>
+
+    <column name="ExpYear" type="Integer" key="no">
+      <comment>
+        The year (YY) when the card expires.
+      </comment>
+    </column>
+
+    <column name="Street" type="String" key="no">
+      <comment>
+        The street address registered for the credit card (in case different
+	from customer's address and/or shipping address.
+      </comment>
+    </column>
+    
+    <column name="City" type="String" key="no">
+      <comment>
+         The city the billing address is located in.
+      </comment>
+    </column>
+
+    <column name="State" type="String" key="no">
+      <comment>
+        The state the billing address is located in.
+      </comment>
+    </column>
+    
+    <column name="Zip" type="Integer" key="no">
+      <comment>
+        The zip code the billing address is located in.
+      </comment>
+    </column>
+
+    <column name="AreaCode" type="Integer" key="no">
+      <comment>
+        The area code of the phone number registered with the credit card.
+      </comment>
+    </column>
+
+    <column name="PhoneNumber" type="Integer" key="no">
+      <comment>
+        The phone number associated with the credit card.
+      </comment>
+    </column>
+
+  </table>
+  
+  <foreignkeyconstraint>
+    <source table="Invoices">
+      <column name="BillTo"/>
+    </source>
+    <target table="CreditCards">
+      <column name="Number"/>
+    </target>
+    <comment>
+      Each invoice is billed to a credit card.
+    </comment>
+  </foreignkeyconstraint>
+
+  <foreignkeyconstraint>
+    <source table="Invoices">
+      <column name="ShipTo"/>
+    </source>
+    <target table="Customers">
+      <column name="Number"/>
+    </target>
+    <comment>
+      Each recipient of a shipped order should be listed in the Customer table.
+    </comment>
+  </foreignkeyconstraint>
+  
+  <foreignkeyconstraint>
+    <source table="ItemsPurchased">
+      <column name="InvoiceNumber"/>
+    </source>
+    <target table="Invoices">
+      <column name="Number"/>
+    </target>
+    <comment>
+      Each item purchased should have an invoice number of a listed invoice.
+    </comment>
+  </foreignkeyconstraint>
+    
+  <foreignkeyconstraint>
+    <source table="CreditCards">
+      <column name="CustomerNumber"/>
+    </source>
+    <target table="Customers">
+      <column name="Number"/>
+    </target>
+    <comment>
+      Each credit card should be associated with a customer.
+      A customer may have more than one listed credit card.
+    </comment>
+  </foreignkeyconstraint>
+  
+</Schema>
+
+  <Data>
+    <Invoices>
+      <tuple>
+        <Number>number</Number>
+        <OrderDate>order_date</OrderDate>
+        <BillTo>bill_to</BillTo>
+        <ShipTo>ship_to</ShipTo>
+        <ShippingMethod>shipping_method</ShippingMethod>
+        <TotalPrice>item_price</TotalPrice>
+        <Discounts>discounts</Discounts>
+        <ShippingCost>shipping_cost</ShippingCost>
+        <Taxes>taxes|total_price</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>1293-MS-1228020952</Number>
+        <OrderDate>2002-12-28 09:42:05</OrderDate>
+        <BillTo>1293940020399400</BillTo>
+        <ShipTo>MS-948538495</ShipTo>
+        <ShippingMethod>UPS Next Day Air</ShippingMethod>
+        <TotalPrice>24.12</TotalPrice>
+        <Discounts>2</Discounts>
+        <ShippingCost>8.12</ShippingCost>
+        <Taxes>0|30.24</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>1362-KG-1229020657</Number>
+        <OrderDate>2002-12-29 06:57:42</OrderDate>
+        <BillTo>1362625264374850</BillTo>
+        <ShipTo>KG-222330000</ShipTo>
+        <ShippingMethod>UPS Next Day Air</ShippingMethod>
+        <TotalPrice>319.12</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>18.11</ShippingCost>
+        <Taxes>27.93|365.16</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>2223-FM-1224020932</Number>
+        <OrderDate>2002-12-24 09:32:59</OrderDate>
+        <BillTo>2223394948748480</BillTo>
+        <ShipTo>FM-000004858</ShipTo>
+        <ShippingMethod>UPS Next Day Air</ShippingMethod>
+        <TotalPrice>79.92</TotalPrice>
+        <Discounts>10</Discounts>
+        <ShippingCost>8.42</ShippingCost>
+        <Taxes>4.8|83.14</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>2923-NB-0103031727</Number>
+        <OrderDate>2003-01-03 17:27:22</OrderDate>
+        <BillTo>2923042922224959</BillTo>
+        <ShipTo>NB-002434467</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>42.91</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>5.21</ShippingCost>
+        <Taxes>3.76|51.88</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>2939-LP-1031021919</Number>
+        <OrderDate>2002-10-31 19:19:32</OrderDate>
+        <BillTo>2939492834748390</BillTo>
+        <ShipTo>LP-122234005</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>9.81</TotalPrice>
+        <Discounts>2</Discounts>
+        <ShippingCost>2.54</ShippingCost>
+        <Taxes>0.81|11.16</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3443-GB-0103031527</Number>
+        <OrderDate>2003-01-03 15:27:12</OrderDate>
+        <BillTo>3443984399999330</BillTo>
+        <ShipTo>GB-883223458</ShipTo>
+        <ShippingMethod>USPS First Class</ShippingMethod>
+        <TotalPrice>66.59</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>8.22</ShippingCost>
+        <Taxes>3.82|78.63</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3645-GU-1222021222</Number>
+        <OrderDate>2002-12-22 12:22:23</OrderDate>
+        <BillTo>3645234859687000</BillTo>
+        <ShipTo>GU-000238854</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>85.82</TotalPrice>
+        <Discounts>4</Discounts>
+        <ShippingCost>10.72</ShippingCost>
+        <Taxes>7.08|99.62</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3746-CS-0127031222</Number>
+        <OrderDate>2003-01-27 12:22:32</OrderDate>
+        <BillTo>3746435353648740</BillTo>
+        <ShipTo>CS-849599123</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>42.91</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>6.24</ShippingCost>
+        <Taxes>3.75|52.9</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3746-CS-1112020227</Number>
+        <OrderDate>2002-11-12 02:27:52</OrderDate>
+        <BillTo>3746435353648740</BillTo>
+        <ShipTo>CS-849599123</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>19.98</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.29</ShippingCost>
+        <Taxes>1.75|26.02</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3849-TT-1101021257</Number>
+        <OrderDate>2002-11-01 12:57:22</OrderDate>
+        <BillTo>3849502938487730</BillTo>
+        <ShipTo>TT-842999033</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>128.73</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>12.81</ShippingCost>
+        <Taxes>10.59|152.13</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3938-GM-1130021444</Number>
+        <OrderDate>2002-11-30 14:44:52</OrderDate>
+        <BillTo>3938596048373850</BillTo>
+        <ShipTo>GM-452094850</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>15.25</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.92</ShippingCost>
+        <Taxes>1.07|21.24</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3939-LP-1006021542</Number>
+        <OrderDate>2002-10-06 15:42:53</OrderDate>
+        <BillTo>3939394384934840</BillTo>
+        <ShipTo>LP-122234005</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>178.72</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>11.82</ShippingCost>
+        <Taxes>14.7|205.24</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3939-TN-1129021719</Number>
+        <OrderDate>2002-11-29 17:19:41</OrderDate>
+        <BillTo>3939478378993380</BillTo>
+        <ShipTo>TN-000231112</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>117.99</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>8.2</ShippingCost>
+        <Taxes>10.32|136.51</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3943-AE-1222021922</Number>
+        <OrderDate>2002-12-22 19:22:00</OrderDate>
+        <BillTo>3943909696499400</BillTo>
+        <ShipTo>AE-002340002</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>89.42</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.87</ShippingCost>
+        <Taxes>5.37|99.66</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3945-MS-1226020752</Number>
+        <OrderDate>2002-12-26 07:52:43</OrderDate>
+        <BillTo>3945858294952940</BillTo>
+        <ShipTo>MS-948538495</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>72.81</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>12.32</ShippingCost>
+        <Taxes>0|85.13</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3948-DE-1202021222</Number>
+        <OrderDate>2002-12-02 00:22:30</OrderDate>
+        <BillTo>3948657463539530</BillTo>
+        <ShipTo>DE-101233345</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>79.92</TotalPrice>
+        <Discounts>10</Discounts>
+        <ShippingCost>8.02</ShippingCost>
+        <Taxes>4.8|82.74</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3949-CE-1029021722</Number>
+        <OrderDate>2002-10-29 17:22:11</OrderDate>
+        <BillTo>3949505439785960</BillTo>
+        <ShipTo>CE-411120900</ShipTo>
+        <ShippingMethod>Fed Ex Ground</ShippingMethod>
+        <TotalPrice>41.83</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>3.1</ShippingCost>
+        <Taxes>2.09|47.02</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3949-WA-0106030722</Number>
+        <OrderDate>2003-01-06 07:22:35</OrderDate>
+        <BillTo>3949509609548300</BillTo>
+        <ShipTo>WA-011119234</ShipTo>
+        <ShippingMethod>USPS First Class</ShippingMethod>
+        <TotalPrice>12.24</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>2.48</ShippingCost>
+        <Taxes>0.61|15.33</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>3959-PH-1114021803</Number>
+        <OrderDate>2002-11-14 18:03:32</OrderDate>
+        <BillTo>3959606060996940</BillTo>
+        <ShipTo>PH-499518222</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>72.81</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.91</ShippingCost>
+        <Taxes>6.6|84.32</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>4948-FB-0106030622</Number>
+        <OrderDate>2003-01-06 06:22:10</OrderDate>
+        <BillTo>4948373647834940</BillTo>
+        <ShipTo>FB-008224094</ShipTo>
+        <ShippingMethod>Fed Ex Next Day Air</ShippingMethod>
+        <TotalPrice>99.95</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>6.15</ShippingCost>
+        <Taxes>8.25|114.35</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>5417-JB-0119030822</Number>
+        <OrderDate>2003-01-19 08:22:16</OrderDate>
+        <BillTo>5417992839484700</BillTo>
+        <ShipTo>JB-223949530</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>18.14</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>12.15</ShippingCost>
+        <Taxes>1.08|31.37</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>7464-JM-1026021638</Number>
+        <OrderDate>2002-10-26 16:38:41</OrderDate>
+        <BillTo>7464637489484840</BillTo>
+        <ShipTo>JM-340511920</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>23.22</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>9.25</ShippingCost>
+        <Taxes>1.4|33.87</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>8273-HJ-0107031222</Number>
+        <OrderDate>2003-01-07 12:22:30</OrderDate>
+        <BillTo>8273728499503280</BillTo>
+        <ShipTo>HJ-388290872</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>10.42</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>3.27</ShippingCost>
+        <Taxes>0.91|14.6</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>8484-CA-1219022121</Number>
+        <OrderDate>2002-12-19 21:21:03</OrderDate>
+        <BillTo>8484374378348740</BillTo>
+        <ShipTo>CA-666823442</ShipTo>
+        <ShippingMethod>Fed Ex 2-Day Air</ShippingMethod>
+        <TotalPrice>79.92</TotalPrice>
+        <Discounts>10</Discounts>
+        <ShippingCost>9.59</ShippingCost>
+        <Taxes>4|83.51</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>8574-TT-0112032317</Number>
+        <OrderDate>2003-01-12 23:17:43</OrderDate>
+        <BillTo>8574363637475480</BillTo>
+        <ShipTo>TT-842999033</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>48.96</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>3.16</ShippingCost>
+        <Taxes>4.03|56.15</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>8884-JJ-0103030630</Number>
+        <OrderDate>2003-01-03 06:30:40</OrderDate>
+        <BillTo>8884736478684500</BillTo>
+        <ShipTo>JJ-992341245</ShipTo>
+        <ShippingMethod>Fed Ex Ground</ShippingMethod>
+        <TotalPrice>9.99</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>3.37</ShippingCost>
+        <Taxes>0.87|14.23</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9294-SG-0115030918</Number>
+        <OrderDate>2003-01-15 09:18:12</OrderDate>
+        <BillTo>9294930059593400</BillTo>
+        <ShipTo>SG-018843954</ShipTo>
+        <ShippingMethod>USPS First Class</ShippingMethod>
+        <TotalPrice>32.92</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>5.82</ShippingCost>
+        <Taxes>2.72|41.46</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9384-JJ-1229022118</Number>
+        <OrderDate>2002-12-29 21:18:23</OrderDate>
+        <BillTo>9384858970593840</BillTo>
+        <ShipTo>JJ-294500091</ShipTo>
+        <ShippingMethod>Fed Ex Ground</ShippingMethod>
+        <TotalPrice>112.42</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>9.19</ShippingCost>
+        <Taxes>6.75|128.36</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9393-JW-1227021829</Number>
+        <OrderDate>2002-12-27 18:29:32</OrderDate>
+        <BillTo>9393898598599890</BillTo>
+        <ShipTo>JW-488248859</ShipTo>
+        <ShippingMethod>UPS Next Day Air</ShippingMethod>
+        <TotalPrice>149.97</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>6.52</ShippingCost>
+        <Taxes>7.5|163.99</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9457-DF-0104030020</Number>
+        <OrderDate>2003-01-04 00:20:20</OrderDate>
+        <BillTo>9457363675375840</BillTo>
+        <ShipTo>DF-093884511</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>72.81</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>12.32</ShippingCost>
+        <Taxes>6|91.13</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9494-EZ-1129022111</Number>
+        <OrderDate>2002-11-29 21:11:39</OrderDate>
+        <BillTo>9494859860594840</BillTo>
+        <ShipTo>EZ-533048578</ShipTo>
+        <ShippingMethod>USPS First Class</ShippingMethod>
+        <TotalPrice>49.95</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>6.82</ShippingCost>
+        <Taxes>4.12|60.89</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9494-GN-0102030522</Number>
+        <OrderDate>2003-01-02 05:22:57</OrderDate>
+        <BillTo>9494873737384400</BillTo>
+        <ShipTo>GN-554299853</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>52.42</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.89</ShippingCost>
+        <Taxes>4.46|61.77</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9498-SG-0103030022</Number>
+        <OrderDate>2003-01-03 00:22:32</OrderDate>
+        <BillTo>9498585949433840</BillTo>
+        <ShipTo>SG-018843954</ShipTo>
+        <ShippingMethod>Fed Ex Ground</ShippingMethod>
+        <TotalPrice>36.28</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>4.12</ShippingCost>
+        <Taxes>2.99|43.39</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9596-FT-1024020618</Number>
+        <OrderDate>2002-10-24 18:18:39</OrderDate>
+        <BillTo>9596050938485950</BillTo>
+        <ShipTo>FT-002349245</ShipTo>
+        <ShippingMethod>UPS Ground</ShippingMethod>
+        <TotalPrice>24.28</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>7.42</ShippingCost>
+        <Taxes>2.06|33.76</Taxes>
+      </tuple>
+
+      <tuple>
+        <Number>9827-AR-0109031239</Number>
+        <OrderDate>2003-01-09 12:39:42</OrderDate>
+        <BillTo>9827272638938370</BillTo>
+        <ShipTo>AR-002991123</ShipTo>
+        <ShippingMethod>USPS First Class</ShippingMethod>
+        <TotalPrice>112.42</TotalPrice>
+        <Discounts>0</Discounts>
+        <ShippingCost>7.12</ShippingCost>
+        <Taxes>9.78|129.32</Taxes>
+      </tuple>
+
+    </Invoices>
+
+    <ItemsPurchased>
+      <tuple>
+        <InvoiceNumber>invoice_number</InvoiceNumber>
+        <ItemNumber>item_number</ItemNumber>
+        <ItemName>item_name</ItemName>
+        <Quantity>quantity</Quantity>
+        <PricePerUnit>price_per_unit</PricePerUnit>
+        <ShipFrom>ship_from|estimated_ship_date</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>2923-NB-0103031727</InvoiceNumber>
+        <ItemNumber>239849212</ItemNumber>
+        <ItemName>George Foreman Grill</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>42.91</PricePerUnit>
+        <ShipFrom>San Jose, CA|2003-01-04 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>8273-HJ-0107031222</InvoiceNumber>
+        <ItemNumber>129934858</ItemNumber>
+        <ItemName>Chia Pet</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>5.26</PricePerUnit>
+        <ShipFrom>Renton, WA|2003-01-08 10:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3945-MS-1226020752</InvoiceNumber>
+        <ItemNumber>298495847</ItemNumber>
+        <ItemName>Cuisinart</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>72.81</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-12-28 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>1293-MS-1228020952</InvoiceNumber>
+        <ItemNumber>394959292</ItemNumber>
+        <ItemName>Super Salad Spinner</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>24.12</PricePerUnit>
+        <ShipFrom>St. Louis, MO|2002-12-29 11:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9384-JJ-1229022118</InvoiceNumber>
+        <ItemNumber>392005993</ItemNumber>
+        <ItemName>Ab-Cruncher</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>112.42</PricePerUnit>
+        <ShipFrom>Renton, WA|2002-12-31 12:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3938-GM-1130021444</InvoiceNumber>
+        <ItemNumber>129934858</ItemNumber>
+        <ItemName>Chia Pet</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>5.26</PricePerUnit>
+        <ShipFrom>Renton, WA|2002-12-01 11:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3938-GM-1130021444</InvoiceNumber>
+        <ItemNumber>321019249</ItemNumber>
+        <ItemName>Amazing Pasta Pot</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>9.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2002-11-30 17:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9596-FT-1024020618</InvoiceNumber>
+        <ItemNumber>728295950</ItemNumber>
+        <ItemName>Super Chopper</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>12.24</PricePerUnit>
+        <ShipFrom>Richmond, VA|2002-10-26 12:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3948-DE-1202021222</InvoiceNumber>
+        <ItemNumber>129490059</ItemNumber>
+        <ItemName>Bonzo Rotisserie</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>79.92</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-12-03 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9498-SG-0103030022</InvoiceNumber>
+        <ItemNumber>882737582</ItemNumber>
+        <ItemName>Tae-Fu Workout</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>18.14</PricePerUnit>
+        <ShipFrom>Richmond, VA|2003-01-04 14:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9294-SG-0115030918</InvoiceNumber>
+        <ItemNumber>474829294</ItemNumber>
+        <ItemName>Ginsu Knife Set</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>32.92</PricePerUnit>
+        <ShipFrom>San Jose, CA|2003-01-16 13:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3949-WA-0106030722</InvoiceNumber>
+        <ItemNumber>728295950</ItemNumber>
+        <ItemName>Super Chopper</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>12.24</PricePerUnit>
+        <ShipFrom>Richmond, VA|2003-01-07 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>8884-JJ-0103030630</InvoiceNumber>
+        <ItemNumber>321019249</ItemNumber>
+        <ItemName>Amazing Pasta Pot</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>9.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2003-01-04 11:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9457-DF-0104030020</InvoiceNumber>
+        <ItemNumber>298495847</ItemNumber>
+        <ItemName>Cuisinart</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>72.81</PricePerUnit>
+        <ShipFrom>San Jose, CA|2003-01-04 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3645-GU-1222021222</InvoiceNumber>
+        <ItemNumber>239849212</ItemNumber>
+        <ItemName>George Foreman Grill</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>42.91</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-12-22 10:00:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>4948-FB-0106030622</InvoiceNumber>
+        <ItemNumber>821882892</ItemNumber>
+        <ItemName>Bug-Off Bug Spray</ItemName>
+        <Quantity>5</Quantity>
+        <PricePerUnit>19.99</PricePerUnit>
+        <ShipFrom>Renton, WA|2003-01-06 15:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9494-GN-0102030522</InvoiceNumber>
+        <ItemNumber>412929382</ItemNumber>
+        <ItemName>Freezo Yogurt Maker</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>52.42</PricePerUnit>
+        <ShipFrom>Renton, WA|2003-01-02 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9827-AR-0109031239</InvoiceNumber>
+        <ItemNumber>392005993</ItemNumber>
+        <ItemName>Ab-Cruncher</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>112.42</PricePerUnit>
+        <ShipFrom>Renton, WA|2003-01-10 15:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>8574-TT-0112032317</InvoiceNumber>
+        <ItemNumber>728295950</ItemNumber>
+        <ItemName>Super Chopper</ItemName>
+        <Quantity>4</Quantity>
+        <PricePerUnit>12.24</PricePerUnit>
+        <ShipFrom>Richmond, VA|2003-01-13 17:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3849-TT-1101021257</InvoiceNumber>
+        <ItemNumber>239849212</ItemNumber>
+        <ItemName>George Foreman Grill</ItemName>
+        <Quantity>3</Quantity>
+        <PricePerUnit>42.91</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-11-04 13:00:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>1362-KG-1229020657</InvoiceNumber>
+        <ItemNumber>939901929</ItemNumber>
+        <ItemName>Furby</ItemName>
+        <Quantity>8</Quantity>
+        <PricePerUnit>39.89</PricePerUnit>
+        <ShipFrom>Memphis, TN|2002-12-31 14:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>2223-FM-1224020932</InvoiceNumber>
+        <ItemNumber>129490059</ItemNumber>
+        <ItemName>Bonzo Rotisserie</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>79.92</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-12-26 10:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3949-CE-1029021722</InvoiceNumber>
+        <ItemNumber>232924224</ItemNumber>
+        <ItemName>Super Vito Vitamins</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>11.32</PricePerUnit>
+        <ShipFrom>Memphis, TN|2002-10-30 12:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3949-CE-1029021722</InvoiceNumber>
+        <ItemNumber>873821093</ItemNumber>
+        <ItemName>Colon Cleanse</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>19.19</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2002-10-31 13:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>7464-JM-1026021638</InvoiceNumber>
+        <ItemNumber>309210929</ItemNumber>
+        <ItemName>Malibu Barbo Doll</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>23.22</PricePerUnit>
+        <ShipFrom>Renton, WA|2002-10-27 15:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9494-EZ-1129022111</InvoiceNumber>
+        <ItemNumber>309020393</ItemNumber>
+        <ItemName>Teddy Ruxpin</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>49.95</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-11-30 18:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3746-CS-1112020227</InvoiceNumber>
+        <ItemNumber>321019249</ItemNumber>
+        <ItemName>Amazing Pasta Pot</ItemName>
+        <Quantity>2</Quantity>
+        <PricePerUnit>9.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2002-11-12 11:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3939-LP-1006021542</InvoiceNumber>
+        <ItemNumber>239849212</ItemNumber>
+        <ItemName>George Foreman Grill</ItemName>
+        <Quantity>3</Quantity>
+        <PricePerUnit>42.91</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-10-08 10:00:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3939-LP-1006021542</InvoiceNumber>
+        <ItemNumber>229393901</ItemNumber>
+        <ItemName>No-Stick Pancake Griddle</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>19.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2002-10-08 10:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3939-LP-1006021542</InvoiceNumber>
+        <ItemNumber>639393931</ItemNumber>
+        <ItemName>Super Wok Cooker</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>29.42</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-10-08 11:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>2939-LP-1031021919</InvoiceNumber>
+        <ItemNumber>122309209</ItemNumber>
+        <ItemName>Fat-Away Formula</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>9.81</PricePerUnit>
+        <ShipFrom>Renton, WA|2002-11-02 12:00:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3959-PH-1114021803</InvoiceNumber>
+        <ItemNumber>298495847</ItemNumber>
+        <ItemName>Cuisinart</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>72.81</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-11-15 18:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3939-TN-1129021719</InvoiceNumber>
+        <ItemNumber>854939292</ItemNumber>
+        <ItemName>BreezeGen Fan</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>117.99</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-11-30 17:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>9393-JW-1227021829</InvoiceNumber>
+        <ItemNumber>903093091</ItemNumber>
+        <ItemName>Eagle-See Glasses</ItemName>
+        <Quantity>3</Quantity>
+        <PricePerUnit>49.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2002-12-28 18:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3943-AE-1222021922</InvoiceNumber>
+        <ItemNumber>212319932</ItemNumber>
+        <ItemName>Always-Dry Mukluks</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>89.42</PricePerUnit>
+        <ShipFrom>Anchorage, AK|2002-12-23 11:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>8484-CA-1219022121</InvoiceNumber>
+        <ItemNumber>129490059</ItemNumber>
+        <ItemName>Bonzo Rotisserie</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>79.92</PricePerUnit>
+        <ShipFrom>San Jose, CA|2002-12-21 09:15:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3443-GB-0103031527</InvoiceNumber>
+        <ItemNumber>321019249</ItemNumber>
+        <ItemName>Amazing Pasta Pot</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>9.99</PricePerUnit>
+        <ShipFrom>Fort Worth, TX|2003-01-05 17:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>5417-JB-0119030822</InvoiceNumber>
+        <ItemNumber>232924224</ItemNumber>
+        <ItemName>Super Vito Vitamins</ItemName>
+        <Quantity>5</Quantity>
+        <PricePerUnit>11.32</PricePerUnit>
+        <ShipFrom>Memphis, TN|2003-01-21 12:30:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>5417-JB-0119030822</InvoiceNumber>
+        <ItemNumber>882737582</ItemNumber>
+        <ItemName>Tae-Fu Workout</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>18.14</PricePerUnit>
+        <ShipFrom>Richmond, VA|2003-01-21 11:45:00</ShipFrom>
+      </tuple>
+
+      <tuple>
+        <InvoiceNumber>3746-CS-0127031222</InvoiceNumber>
+        <ItemNumber>239849212</ItemNumber>
+        <ItemName>George Foreman Grill</ItemName>
+        <Quantity>1</Quantity>
+        <PricePerUnit>42.91</PricePerUnit>
+        <ShipFrom>San Jose, CA|2003-01-31 12:33:00</ShipFrom>
+      </tuple>
+
+    </ItemsPurchased>
+
+    <Customers>
+      <tuple>
+        <Number>number</Number>
+        <CustomerName>first_name</CustomerName>
+        <StreetAddress>last_name</StreetAddress>
+        <City>street_address</City>
+        <State>city</State>
+        <Zip>state</Zip>
+        <AreaCode>zip</AreaCode>
+        <PhoneNumber>area_code</PhoneNumber>
+        <Email>phone|email</Email>
+      </tuple>
+
+      <tuple>
+        <Number>AE-002340002</Number>
+        <CustomerName>Andrew</CustomerName>
+        <StreetAddress>Ernie</StreetAddress>
+        <City>1293 Constitution Rd.</City>
+        <State>Paris</State>
+        <Zip>KY</Zip>
+        <AreaCode>40361</AreaCode>
+        <PhoneNumber>859</PhoneNumber>
+        <Email>2344449|andrewe@aol.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>AR-002991123</Number>
+        <CustomerName>Amad</CustomerName>
+        <StreetAddress>Rishad</StreetAddress>
+        <City>758 18th St. #24</City>
+        <State>Renton</State>
+        <Zip>WA</Zip>
+        <AreaCode>98055</AreaCode>
+        <PhoneNumber>425</PhoneNumber>
+        <Email>7224568|amad@attbi.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>CA-666823442</Number>
+        <CustomerName>Chester</CustomerName>
+        <StreetAddress>Arthur</StreetAddress>
+        <City>32 Saginaw Rd.</City>
+        <State>Burlington</State>
+        <Zip>VT</Zip>
+        <AreaCode>05401</AreaCode>
+        <PhoneNumber>802</PhoneNumber>
+        <Email>3495959|carthur@email.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>CE-411120900</Number>
+        <CustomerName>Cory</CustomerName>
+        <StreetAddress>Enston</StreetAddress>
+        <City>788 87th St. #81</City>
+        <State>Boston</State>
+        <Zip>MA</Zip>
+        <AreaCode>02120</AreaCode>
+        <PhoneNumber>857</PhoneNumber>
+        <Email>8473689|enston@freemail.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>CS-849599123</Number>
+        <CustomerName>Chad</CustomerName>
+        <StreetAddress>Samson</StreetAddress>
+        <City>8882 Peterson St.</City>
+        <State>Chicago</State>
+        <Zip>IL</Zip>
+        <AreaCode>60601</AreaCode>
+        <PhoneNumber>312</PhoneNumber>
+        <Email>9385267|samson@philton.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>DE-101233345</Number>
+        <CustomerName>Drew</CustomerName>
+        <StreetAddress>Elken</StreetAddress>
+        <City>8822 Broadway Blvd.</City>
+        <State>Elkin</State>
+        <Zip>NC</Zip>
+        <AreaCode>28621</AreaCode>
+        <PhoneNumber>336</PhoneNumber>
+        <Email>4054922|drewelken@eskimo.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>DF-093884511</Number>
+        <CustomerName>David</CustomerName>
+        <StreetAddress>Furman</StreetAddress>
+        <City>233 More Dr.</City>
+        <State>San Diego</State>
+        <Zip>CA</Zip>
+        <AreaCode>92101</AreaCode>
+        <PhoneNumber>619</PhoneNumber>
+        <Email>4888234|furman23@elego.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>EZ-533048578</Number>
+        <CustomerName>Emile</CustomerName>
+        <StreetAddress>Zola</StreetAddress>
+        <City>12 Llama Blvd.</City>
+        <State>Crawford</State>
+        <Zip>TX</Zip>
+        <AreaCode>76638</AreaCode>
+        <PhoneNumber>254</PhoneNumber>
+        <Email>2838468|zola@jaccuse.net</Email>
+      </tuple>
+
+      <tuple>
+        <Number>FB-008224094</Number>
+        <CustomerName>Francine</CustomerName>
+        <StreetAddress>Boylston</StreetAddress>
+        <City>1822 Princeton Ave.</City>
+        <State>San Francisco</State>
+        <Zip>CA</Zip>
+        <AreaCode>94121</AreaCode>
+        <PhoneNumber>415</PhoneNumber>
+        <Email>2929932|boil@mail.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>FM-000004858</Number>
+        <CustomerName>Fernando</CustomerName>
+        <StreetAddress>Mendoza</StreetAddress>
+        <City>911 Okra St.</City>
+        <State>Portland</State>
+        <Zip>MI</Zip>
+        <AreaCode>48875</AreaCode>
+        <PhoneNumber>517</PhoneNumber>
+        <Email>3939345|mendy@hotmail.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>FT-002349245</Number>
+        <CustomerName>Filber</CustomerName>
+        <StreetAddress>Torrenson</StreetAddress>
+        <City>156 Council St.</City>
+        <State>New York</State>
+        <Zip>NY</Zip>
+        <AreaCode>10001</AreaCode>
+        <PhoneNumber>212</PhoneNumber>
+        <Email>2429999|torr@uwa.edu</Email>
+      </tuple>
+
+      <tuple>
+        <Number>GB-883223458</Number>
+        <CustomerName>George</CustomerName>
+        <StreetAddress>Bush</StreetAddress>
+        <City>1600 Pennsylvania Ave.</City>
+        <State>Washington DC</State>
+        <Zip>DC</Zip>
+        <AreaCode>20500</AreaCode>
+        <PhoneNumber>202</PhoneNumber>
+        <Email>3998473|gwb@whitehouse.gov</Email>
+      </tuple>
+
+      <tuple>
+        <Number>GM-452094850</Number>
+        <CustomerName>George</CustomerName>
+        <StreetAddress>Mason</StreetAddress>
+        <City>1823 5th Ave. #200</City>
+        <State>Cairo</State>
+        <Zip>GA</Zip>
+        <AreaCode>31728</AreaCode>
+        <PhoneNumber>229</PhoneNumber>
+        <Email>8522947|foobar@statesec.org</Email>
+      </tuple>
+
+      <tuple>
+        <Number>GN-554299853</Number>
+        <CustomerName>Georgette</CustomerName>
+        <StreetAddress>Nixon</StreetAddress>
+        <City>231 Joschka St.</City>
+        <State>Miami</State>
+        <Zip>FL</Zip>
+        <AreaCode>33010</AreaCode>
+        <PhoneNumber>305</PhoneNumber>
+        <Email>1223229|nix@rentnet.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>GU-000238854</Number>
+        <CustomerName>Gene</CustomerName>
+        <StreetAddress>Ulman</StreetAddress>
+        <City>3888 Solana Rd.</City>
+        <State>Los Angeles</State>
+        <Zip>CA</Zip>
+        <AreaCode>90020</AreaCode>
+        <PhoneNumber>562</PhoneNumber>
+        <Email>9229422|ul@wsu.edu</Email>
+      </tuple>
+
+      <tuple>
+        <Number>HJ-388290872</Number>
+        <CustomerName>Homer</CustomerName>
+        <StreetAddress>Johnston</StreetAddress>
+        <City>129 Main St.</City>
+        <State>Ritzville</State>
+        <Zip>WA</Zip>
+        <AreaCode>99169</AreaCode>
+        <PhoneNumber>509</PhoneNumber>
+        <Email>8227643|hj42@ritznet.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>JB-223949530</Number>
+        <CustomerName>Justin</CustomerName>
+        <StreetAddress>Webb</StreetAddress>
+        <City>203 White Rd.</City>
+        <State>Ramer</State>
+        <Zip>AL</Zip>
+        <AreaCode>36069</AreaCode>
+        <PhoneNumber>334</PhoneNumber>
+        <Email>1384847|webbster@zombo.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>JJ-294500091</Number>
+        <CustomerName>Janet</CustomerName>
+        <StreetAddress>Jaxon</StreetAddress>
+        <City>9922 Pacific St.</City>
+        <State>Augusta</State>
+        <Zip>MI</Zip>
+        <AreaCode>49012</AreaCode>
+        <PhoneNumber>269</PhoneNumber>
+        <Email>4824929|jax823@aol.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>JJ-992341245</Number>
+        <CustomerName>Jieshi</CustomerName>
+        <StreetAddress>Jiang</StreetAddress>
+        <City>9834 University St.</City>
+        <State>Chicago</State>
+        <Zip>IL</Zip>
+        <AreaCode>60601</AreaCode>
+        <PhoneNumber>773</PhoneNumber>
+        <Email>3243923|jiang@qhnu.edu.cn</Email>
+      </tuple>
+
+      <tuple>
+        <Number>JM-340511920</Number>
+        <CustomerName>James</CustomerName>
+        <StreetAddress>McDonald</StreetAddress>
+        <City>332 Courtier Rd.</City>
+        <State>Anchorage</State>
+        <Zip>AK</Zip>
+        <AreaCode>99501</AreaCode>
+        <PhoneNumber>907</PhoneNumber>
+        <Email>9993847|mcdonald@scots.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>JW-488248859</Number>
+        <CustomerName>Jim</CustomerName>
+        <StreetAddress>Weinberger</StreetAddress>
+        <City>742 Hook St.</City>
+        <State>Andrews</State>
+        <Zip>IN</Zip>
+        <AreaCode>46702</AreaCode>
+        <PhoneNumber>260</PhoneNumber>
+        <Email>3934844|wein@hotmail.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>KG-222330000</Number>
+        <CustomerName>Keith</CustomerName>
+        <StreetAddress>Goldberg</StreetAddress>
+        <City>623 Peninsula Rd.</City>
+        <State>Butte</State>
+        <Zip>MT</Zip>
+        <AreaCode>59701</AreaCode>
+        <PhoneNumber>406</PhoneNumber>
+        <Email>9327485|keithgold@wwf.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>LP-122234005</Number>
+        <CustomerName>Linda</CustomerName>
+        <StreetAddress>Pettigrew</StreetAddress>
+        <City>0945 Turkey Ave.</City>
+        <State>Los Angeles</State>
+        <Zip>CA</Zip>
+        <AreaCode>90001</AreaCode>
+        <PhoneNumber>818</PhoneNumber>
+        <Email>1666288|pettigrew@ciccio.org</Email>
+      </tuple>
+
+      <tuple>
+        <Number>MS-948538495</Number>
+        <CustomerName>Marge</CustomerName>
+        <StreetAddress>Stantson</StreetAddress>
+        <City>882 Governess Ave.</City>
+        <State>Portland</State>
+        <Zip>OR</Zip>
+        <AreaCode>97201</AreaCode>
+        <PhoneNumber>503</PhoneNumber>
+        <Email>8344586|stant@hotmail.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>NB-002434467</Number>
+        <CustomerName>Nolan</CustomerName>
+        <StreetAddress>Bolger</StreetAddress>
+        <City>2344 Beale St.</City>
+        <State>Memphis</State>
+        <Zip>TN</Zip>
+        <AreaCode>37501</AreaCode>
+        <PhoneNumber>901</PhoneNumber>
+        <Email>2322445|nbolger@yahoo.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>PH-499518222</Number>
+        <CustomerName>Phil</CustomerName>
+        <StreetAddress>Henlen</StreetAddress>
+        <City>429 34th St. #4A</City>
+        <State>New York</State>
+        <Zip>NY</Zip>
+        <AreaCode>10292</AreaCode>
+        <PhoneNumber>212</PhoneNumber>
+        <Email>5938588|philh@scopes.net</Email>
+      </tuple>
+
+      <tuple>
+        <Number>SG-018843954</Number>
+        <CustomerName>Suzie</CustomerName>
+        <StreetAddress>Groner</StreetAddress>
+        <City>9933 6th St.</City>
+        <State>San Francisco</State>
+        <Zip>CA</Zip>
+        <AreaCode>94101</AreaCode>
+        <PhoneNumber>415</PhoneNumber>
+        <Email>9122432|grome@bayview.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>TN-000231112</Number>
+        <CustomerName>Tina</CustomerName>
+        <StreetAddress>Nordon</StreetAddress>
+        <City>382 Blix Rd.</City>
+        <State>Blair</State>
+        <Zip>IL</Zip>
+        <AreaCode>62858</AreaCode>
+        <PhoneNumber>618</PhoneNumber>
+        <Email>5747922|tinan@uva.edu</Email>
+      </tuple>
+
+      <tuple>
+        <Number>TT-842999033</Number>
+        <CustomerName>Thomas</CustomerName>
+        <StreetAddress>Thomlinson</StreetAddress>
+        <City>983 22nd Ave. #15P</City>
+        <State>St. Louis</State>
+        <Zip>MO</Zip>
+        <AreaCode>63101</AreaCode>
+        <PhoneNumber>314</PhoneNumber>
+        <Email>2022234|tthomas@isp.com</Email>
+      </tuple>
+
+      <tuple>
+        <Number>WA-011119234</Number>
+        <CustomerName>Wade</CustomerName>
+        <StreetAddress>Allen</StreetAddress>
+        <City>2222 3rd Ave.</City>
+        <State>Boston</State>
+        <Zip>MA</Zip>
+        <AreaCode>02101</AreaCode>
+        <PhoneNumber>617</PhoneNumber>
+        <Email>2422858|wade@yahoo.com</Email>
+      </tuple>
+
+    </Customers>
+
+    <CreditCards>
+      <tuple>
+        <Number>number</Number>
+        <NameOnCard>name_on_card</NameOnCard>
+        <CardType>card_type</CardType>
+        <CustomerNumber>customer_number</CustomerNumber>
+        <ExpMonth>exp_month</ExpMonth>
+        <ExpYear>exp_year</ExpYear>
+        <Street>street</Street>
+        <City>city</City>
+        <State>state</State>
+        <Zip>zip</Zip>
+        <AreaCode>area</AreaCode>
+        <PhoneNumber>phone</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>1293940020399400</Number>
+        <NameOnCard>Margorie Stantson</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>MS-948538495</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>882 Governess Ave.</Street>
+        <City>Portland</City>
+        <State>OR</State>
+        <Zip>97201</Zip>
+        <AreaCode>503</AreaCode>
+        <PhoneNumber>8344586</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>1362625264374850</Number>
+        <NameOnCard>Kieth Goldberg</NameOnCard>
+        <CardType>Discover</CardType>
+        <CustomerNumber>KG-222330000</CustomerNumber>
+        <ExpMonth>12</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>623 Peninsula Rd.</Street>
+        <City>Butte</City>
+        <State>MT</State>
+        <Zip>59701</Zip>
+        <AreaCode>406</AreaCode>
+        <PhoneNumber>9327485</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>2223394948748480</Number>
+        <NameOnCard>Fernando Mendoza</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>FM-000004858</CustomerNumber>
+        <ExpMonth>5</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>911 Okra St.</Street>
+        <City>Portland</City>
+        <State>MI</State>
+        <Zip>48875</Zip>
+        <AreaCode>517</AreaCode>
+        <PhoneNumber>3939345</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>2923042922224959</Number>
+        <NameOnCard>Nolan Bolger</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>NB-002434467</CustomerNumber>
+        <ExpMonth>3</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>2344 Beale St.</Street>
+        <City>Memphis</City>
+        <State>TN</State>
+        <Zip>37501</Zip>
+        <AreaCode>901</AreaCode>
+        <PhoneNumber>2322445</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>2939492834748390</Number>
+        <NameOnCard>Linda Pettigrew</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>LP-122234005</CustomerNumber>
+        <ExpMonth>12</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>0945 Turkey Ave.</Street>
+        <City>Los Angeles</City>
+        <State>CA</State>
+        <Zip>90001</Zip>
+        <AreaCode>818</AreaCode>
+        <PhoneNumber>1666288</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3443984399999330</Number>
+        <NameOnCard>George W. Bush</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>GB-883223458</CustomerNumber>
+        <ExpMonth>3</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>1600 Pennsylvania Ave.</Street>
+        <City>Washington DC</City>
+        <State>DC</State>
+        <Zip>20500</Zip>
+        <AreaCode>202</AreaCode>
+        <PhoneNumber>3998473</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3645234859687000</Number>
+        <NameOnCard>Gene H. Ulman</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>GU-000238854</CustomerNumber>
+        <ExpMonth>1</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>3888 Solana Rd.</Street>
+        <City>Los Angeles</City>
+        <State>CA</State>
+        <Zip>90020</Zip>
+        <AreaCode>562</AreaCode>
+        <PhoneNumber>9229422</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3746435353648740</Number>
+        <NameOnCard>Chad H. Samson</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>CS-849599123</CustomerNumber>
+        <ExpMonth>11</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>8882 Peterson St.</Street>
+        <City>Chicago</City>
+        <State>IL</State>
+        <Zip>60601</Zip>
+        <AreaCode>312</AreaCode>
+        <PhoneNumber>9385267</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3849502938487730</Number>
+        <NameOnCard>Tom Thomlinson</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>TT-842999033</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>983 22nd Ave. #15P</Street>
+        <City>St. Louis</City>
+        <State>MO</State>
+        <Zip>63101</Zip>
+        <AreaCode>314</AreaCode>
+        <PhoneNumber>2022234</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3938596048373850</Number>
+        <NameOnCard>George O. Mason</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>GM-452094850</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>1823 5th Ave. #200</Street>
+        <City>Cairo</City>
+        <State>GA</State>
+        <Zip>31728</Zip>
+        <AreaCode>229</AreaCode>
+        <PhoneNumber>8522947</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3939394384934840</Number>
+        <NameOnCard>Linda A. Pettigrew</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>LP-122234005</CustomerNumber>
+        <ExpMonth>10</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>0945 Turkey Ave.</Street>
+        <City>Los Angeles</City>
+        <State>CA</State>
+        <Zip>90001</Zip>
+        <AreaCode>818</AreaCode>
+        <PhoneNumber>1666288</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3939478378993380</Number>
+        <NameOnCard>Tina Nordon</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>TN-000231112</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>382 Blix Rd.</Street>
+        <City>Blair</City>
+        <State>IL</State>
+        <Zip>62858</Zip>
+        <AreaCode>618</AreaCode>
+        <PhoneNumber>5747922</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3943909696499400</Number>
+        <NameOnCard>Andrew Ernie</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>AE-002340002</CustomerNumber>
+        <ExpMonth>6</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>1293 Constitution Rd.</Street>
+        <City>Paris</City>
+        <State>KY</State>
+        <Zip>40361</Zip>
+        <AreaCode>859</AreaCode>
+        <PhoneNumber>2344449</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3945858294952940</Number>
+        <NameOnCard>Marge P. Stanston</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>MS-948538495</CustomerNumber>
+        <ExpMonth>12</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>882 Governess Ave.</Street>
+        <City>Portland</City>
+        <State>OR</State>
+        <Zip>97201</Zip>
+        <AreaCode>503</AreaCode>
+        <PhoneNumber>8344586</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3948657463539530</Number>
+        <NameOnCard>Drew Elken</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>DE-101233345</CustomerNumber>
+        <ExpMonth>4</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>8822 Broadway Blvd.</Street>
+        <City>Elkin</City>
+        <State>NC</State>
+        <Zip>28621</Zip>
+        <AreaCode>336</AreaCode>
+        <PhoneNumber>4054922</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3949505439785960</Number>
+        <NameOnCard>Cory Enston</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>CE-411120900</CustomerNumber>
+        <ExpMonth>6</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>822 Minster St.</Street>
+        <City>Boston</City>
+        <State>MA</State>
+        <Zip>02120</Zip>
+        <AreaCode>857</AreaCode>
+        <PhoneNumber>2923492</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3949509609548300</Number>
+        <NameOnCard>Wade Allen</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>WA-011119234</CustomerNumber>
+        <ExpMonth>12</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>2222 3rd Ave.</Street>
+        <City>Boston</City>
+        <State>MA</State>
+        <Zip>02101</Zip>
+        <AreaCode>617</AreaCode>
+        <PhoneNumber>2422858</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>3959606060996940</Number>
+        <NameOnCard>Phil Henlen</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>PH-499518222</CustomerNumber>
+        <ExpMonth>10</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>429 34th St. #4A</Street>
+        <City>New York</City>
+        <State>NY</State>
+        <Zip>10292</Zip>
+        <AreaCode>212</AreaCode>
+        <PhoneNumber>5938588</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>4948373647834940</Number>
+        <NameOnCard>Francine A. Boylston</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>FB-008224094</CustomerNumber>
+        <ExpMonth>4</ExpMonth>
+        <ExpYear>6</ExpYear>
+        <Street>1822 Princeton Ave.</Street>
+        <City>San Francisco</City>
+        <State>CA</State>
+        <Zip>94121</Zip>
+        <AreaCode>415</AreaCode>
+        <PhoneNumber>2929932</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>5417992839484700</Number>
+        <NameOnCard>Justin Webb</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>JB-223949530</CustomerNumber>
+        <ExpMonth>1</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>1823 Main St.</Street>
+        <City>Montgomery</City>
+        <State>AL</State>
+        <Zip>36101</Zip>
+        <AreaCode>334</AreaCode>
+        <PhoneNumber>2923044</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>7464637489484840</Number>
+        <NameOnCard>James McDonald</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>JM-340511920</CustomerNumber>
+        <ExpMonth>7</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>332 Courtier Rd.</Street>
+        <City>Anchorage</City>
+        <State>AK</State>
+        <Zip>99501</Zip>
+        <AreaCode>907</AreaCode>
+        <PhoneNumber>9993847</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>8273728499503280</Number>
+        <NameOnCard>Homer Johnston</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>HJ-388290872</CustomerNumber>
+        <ExpMonth>8</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>129 Main St.</Street>
+        <City>Ritzville</City>
+        <State>WA</State>
+        <Zip>99169</Zip>
+        <AreaCode>509</AreaCode>
+        <PhoneNumber>8227643</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>8484374378348740</Number>
+        <NameOnCard>Chester A. Arthur</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>CA-666823442</CustomerNumber>
+        <ExpMonth>5</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>32 Saginaw Rd.</Street>
+        <City>Burlington</City>
+        <State>VT</State>
+        <Zip>05401</Zip>
+        <AreaCode>802</AreaCode>
+        <PhoneNumber>3495959</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>8574363637475480</Number>
+        <NameOnCard>Thomas U. Thomlinson</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>TT-842999033</CustomerNumber>
+        <ExpMonth>6</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>983 22nd Ave. #15P</Street>
+        <City>St. Louis</City>
+        <State>MO</State>
+        <Zip>63101</Zip>
+        <AreaCode>314</AreaCode>
+        <PhoneNumber>2022234</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>8884736478684500</Number>
+        <NameOnCard>Jieshi Jiang</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>JJ-992341245</CustomerNumber>
+        <ExpMonth>11</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>2832 Laurel Dr.</Street>
+        <City>Seattle</City>
+        <State>WA</State>
+        <Zip>98101</Zip>
+        <AreaCode>206</AreaCode>
+        <PhoneNumber>9922049</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9294930059593400</Number>
+        <NameOnCard>Suzanne Groner</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>SG-018843954</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>9933 6th St.</Street>
+        <City>San Francisco</City>
+        <State>CA</State>
+        <Zip>94101</Zip>
+        <AreaCode>415</AreaCode>
+        <PhoneNumber>9122432</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9384858970593840</Number>
+        <NameOnCard>Janet J. Jaxon</NameOnCard>
+        <CardType>Discover</CardType>
+        <CustomerNumber>JJ-294500091</CustomerNumber>
+        <ExpMonth>11</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>9922 Pacific St.</Street>
+        <City>Augusta</City>
+        <State>MI</State>
+        <Zip>49012</Zip>
+        <AreaCode>269</AreaCode>
+        <PhoneNumber>4824929</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9393898598599890</Number>
+        <NameOnCard>Jim Weinberger</NameOnCard>
+        <CardType>AMEX</CardType>
+        <CustomerNumber>JW-488248859</CustomerNumber>
+        <ExpMonth>9</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>742 Hook St.</Street>
+        <City>Andrews</City>
+        <State>IN</State>
+        <Zip>46702</Zip>
+        <AreaCode>260</AreaCode>
+        <PhoneNumber>3934844</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9457363675375840</Number>
+        <NameOnCard>David P. Furman</NameOnCard>
+        <CardType>Discover</CardType>
+        <CustomerNumber>DF-093884511</CustomerNumber>
+        <ExpMonth>1</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>233 More Dr.</Street>
+        <City>San Diego</City>
+        <State>CA</State>
+        <Zip>92101</Zip>
+        <AreaCode>619</AreaCode>
+        <PhoneNumber>4888234</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9494859860594840</Number>
+        <NameOnCard>Emile Zola</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>EZ-533048578</CustomerNumber>
+        <ExpMonth>7</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>12 Llama Blvd.</Street>
+        <City>Crawford</City>
+        <State>TX</State>
+        <Zip>76638</Zip>
+        <AreaCode>254</AreaCode>
+        <PhoneNumber>2838468</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9494873737384400</Number>
+        <NameOnCard>G. Nixon</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>GN-554299853</CustomerNumber>
+        <ExpMonth>3</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>231 Joschka St.</Street>
+        <City>Miami</City>
+        <State>FL</State>
+        <Zip>33010</Zip>
+        <AreaCode>305</AreaCode>
+        <PhoneNumber>1223229</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9498585949433840</Number>
+        <NameOnCard>Suzie Groner</NameOnCard>
+        <CardType>Mastercard</CardType>
+        <CustomerNumber>SG-018843954</CustomerNumber>
+        <ExpMonth>5</ExpMonth>
+        <ExpYear>3</ExpYear>
+        <Street>9933 6th St.</Street>
+        <City>San Francisco</City>
+        <State>CA</State>
+        <Zip>94101</Zip>
+        <AreaCode>415</AreaCode>
+        <PhoneNumber>9122432</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9596050938485950</Number>
+        <NameOnCard>Filber Torrenson</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>FT-002349245</CustomerNumber>
+        <ExpMonth>5</ExpMonth>
+        <ExpYear>5</ExpYear>
+        <Street>156 Council St.</Street>
+        <City>New York</City>
+        <State>NY</State>
+        <Zip>10001</Zip>
+        <AreaCode>212</AreaCode>
+        <PhoneNumber>2429999</PhoneNumber>
+      </tuple>
+
+      <tuple>
+        <Number>9827272638938370</Number>
+        <NameOnCard>Amad Rishad</NameOnCard>
+        <CardType>VISA</CardType>
+        <CustomerNumber>AR-002991123</CustomerNumber>
+        <ExpMonth>7</ExpMonth>
+        <ExpYear>4</ExpYear>
+        <Street>758 18th St. #24</Street>
+        <City>Renton</City>
+        <State>WA</State>
+        <Zip>98055</Zip>
+        <AreaCode>425</AreaCode>
+        <PhoneNumber>7224568</PhoneNumber>
+      </tuple>
+
+    </CreditCards>
+
+  </Data>
+
+</database>
+

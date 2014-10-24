@@ -1,0 +1,87 @@
+<mapping>
+  <Ryan_Eyers>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/BookSellPrice"/>
+      <Category m="Books/Category"/>
+      <Keyword m="Books/Keyword"/>
+      <Publisher m="Books/Publisher"/>
+    </Books>
+    <Music m="Music">
+      <Title m="Music/Album"/>
+      <Artist m="Music/Artist"/>
+      <Record_Label m="Music/Label"/>
+      <Catalog_Number m="Music/ASIN"/>
+      <Price m="Music/CDSellPrice"/>
+      <Genre m="Music/Genre"/>
+      <Type m="Music/CDType"/>
+      <Running_Time/>
+      <Number_Of_Discs/>
+      <Year_Released/>
+    </Music>
+    <Availability m="Availability">
+      <ID m="Availability/ItemID"/>
+      <Status m="Availability/InStock"/>
+      <Amount_In_Stock/>
+      <Warehouses_Located m="Availability/LocsAvailable"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <Address m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zip_Code m="Warehouses/Zip"/>
+      <Telephone_Number m="Warehouses/Telephone"/>
+      <Fax_Number m="Warehouses/Fax"/>
+      <Manager m="Warehouses/Manager"/>
+      <Number_Of_Employees m="Warehouses/EmployeeCount"/>
+      <Volume_Of_Business/>
+    </Warehouses>
+  </Ryan_Eyers>
+  <Melissa_Garcia>
+    <Items m="Books">
+      <Type/>
+      <ID m="Availability/ID"/>
+    </Items>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <BookListPrice m="Books/Price"/>
+      <BookSellPrice m="Books/Price"/>
+      <Publisher m="Books/Publisher"/>
+      <PubYear/>
+      <CustomerRating/>
+      <Category m="Books/Category"/>
+      <Keyword m="Books/Keyword"/>
+    </Books>
+    <Music m="Music">
+      <Album m="Music/Title"/>
+      <Artist m="Music/Artist"/>
+      <Label m="Music/Record_Label"/>
+      <ASIN m="Music/Catalog_Number"/>
+      <CDListPrice m="Music/Price"/>
+      <CDSellPrice m="Music/Price"/>
+      <ChartNumber/>
+      <Genre m="Music/Genre"/>
+      <CDType m="Music/Type"/>
+    </Music>
+    <Availability m="Availability">
+      <ItemID m="Availability/ID"/>
+      <InStock m="Availability/Status"/>
+      <ShipTime/>
+      <LocsAvailable m="Availability/Warehouses_Located"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <StreetAddress m="Warehouses/Address"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zip m="Warehouses/Zip_Code"/>
+      <Telephone m="Warehouses/Telephone_Number"/>
+      <Fax m="Warehouses/Fax_Number"/>
+      <Manager m="Warehouses/Manager"/>
+      <EmployeeCount m="Warehouses/Number_Of_Employees"/>
+    </Warehouses>
+  </Melissa_Garcia>
+</mapping>

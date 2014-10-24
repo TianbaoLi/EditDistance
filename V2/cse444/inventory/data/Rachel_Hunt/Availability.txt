@@ -1,0 +1,19 @@
+1402888007 | University Bookstore | 44
+1402888007 | Elliott Bay Book Company | 76
+0691024170 | University Bookstore | 120
+0691024170 | Elliott Bay Book Company | 21
+0385495323 | University Bookstore | 78
+0385495323 | Elliott Bay Book Company | 6
+0385495323 | Barnes & Noble Booksellers | 4
+0471010901 | Barnes & Noble Booksellers | 99
+0152023984 | University Bookstore | 350
+0152023984 | Barnes & Noble Booksellers | 450
+0151008116 | Elliott Bay Book Company | 34
+0151008116 | Barnes & Noble Booksellers | 79
+0553278827 | Elliott Bay Book Company | 6
+0898864275 | University Bookstore | 200
+0898864275 | Barnes & Noble Booksellers | 150
+0898864275 | Elliott Bay Book Company | 60
+0395528089 | Barnes & Noble Booksellers | 8
+0942637763 | University Bookstore | 14
+0942637763 | Barnes & Noble Booksellers | 24

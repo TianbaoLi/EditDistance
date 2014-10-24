@@ -1,0 +1,5 @@
+Airborne Express|8881212222|http://www.airborne.com
+DHL|8881251111|http://www.dhl.com
+FedEx|8882145689|http://www.fedex.com
+UPS|8885551212|http://www.ups.com
+USPS|8881111212|http://www.usps.com

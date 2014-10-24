@@ -1,0 +1,78 @@
+<mapping>
+  <Aaron_Day>
+    <Books m="BooksAndMusic">
+      <Title m="BooksAndMusic/Title"/>
+      <Author m="BooksAndMusic/Author"/>
+      <Publisher m="BooksAndMusic/Publisher"/>
+      <ISBN m="BooksAndMusic/ItemID"/>
+      <Price m="BooksAndMusic/SuggestedPrice"/>
+      <DiscountPrice m="BooksAndMusic/OurPrice"/>
+      <Category m="BooksAndMusic/Category"/>
+      <Keywords m="BooksAndMusic/Keywords"/>
+    </Books>
+    <Music m="BooksAndMusic">
+      <AlbumName m="BooksAndMusic/Title"/>
+      <Artist m="BooksAndMusic/Author"/>
+      <RecordingCompany m="BooksAndMusic/Publisher"/>
+      <ID m="Warehouse/Id"/>
+      <Price m="BooksAndMusic/SuggestedPrice"/>
+      <DiscountPrice m="BooksAndMusic/OurPrice"/>
+      <Genre m="BooksAndMusic/Category"/>
+      <Type m="BooksAndMusic/ItemType"/>
+      <Rating/>
+    </Music>
+    <Availability m="Availability">
+      <Warehouse m="Availability/WarehouseID"/>
+      <Title/>
+      <ID m="Availability/ItemID"/>
+      <Quantity m="Availability/Amount"/>
+    </Availability>
+    <Warehouses m="Warehouse">
+      <Location m="Warehouse/Address"/>
+      <TelephoneNumber m="Warehouse/TelephoneNumber"/>
+      <FaxNumber m="Warehouse/FaxNumber"/>
+      <Manager m="Warehouse/Manager"/>
+      <MaxNumEmployees m="Warehouse/MaxEmployees"/>
+      <CurrentNumEmployees m="Warehouse/CurEmployees"/>
+      <BookCapacity m="Warehouse/MaxCapacity"/>
+      <CurrentNumBooks m="Warehouse/CurCapacity"/>
+      <CDCapacity m="Warehouse/MaxCapacity"/>
+      <CurrentNumCDs m="Warehouse/CurCapacity"/>
+      <CurrentNumRats/>
+      <CurrentNumCats/>
+    </Warehouses>
+  </Aaron_Day>
+  <Colin_Bleckner>
+    <BooksAndMusic m="Books" c="Books Music">
+      <Title m="Books/Title" c="Books/Title Music/AlbumName"/>
+      <Author m="Books/Author" c="Books/Author Music/Artist"/>
+      <Publisher m="Books/Publisher" c="Books/Publisher Music/Publisher"/>
+      <ItemID m="Books/ISBN" c="Books/ISBN Music/ID"/>
+      <ItemType/>
+      <SuggestedPrice m="Books/Price" c="Books/Price Music/Price"/>
+      <OurPrice m="Books/DiscountPrice" c="Books/DiscountPrice Music/DiscountedPrice"/>
+      <Category m="Books/Category" c="Books/Category Music/Genre"/>
+      <Keywords m="Books/Keywords"/>
+      <Description m="Books/Keywords"/>
+    </BooksAndMusic>
+    <Availability m="Availability">
+      <ItemID m="Availability/ID"/>
+      <WarehouseID m="Availability/Warehouse"/>
+      <Amount m="Availability/Quantity"/>
+    </Availability>
+    <Warehouse m="Warehouses">
+      <Address m="Warehouses/Location"/>
+      <City m="Warehouses/Location"/>
+      <State m="Warehouses/Location"/>
+      <Zip m="Warehouses/Location"/>
+      <TelephoneNumber m="Warehouses/TelephoneNumber"/>
+      <FaxNumber m="Warehouses/FaxNumber"/>
+      <Manager m="Warehouses/Manager"/>
+      <Id/>
+      <MaxEmployees m="Warehouses/MaxNumEmployees"/>
+      <CurEmployees m="Warehouses/CurrentNumEmployees"/>
+      <MaxCapacity m="Warehouses/BookCapacity" c="Warehouses/BookCapacity Warehouse/CDCapacity"/>
+      <CurCapacity m="Warehouses/CurrentNumBooks" c="Warehouses/CurrentNumBooks Warehouse/CurrentNumCDs"/>
+    </Warehouse>
+  </Colin_Bleckner>
+</mapping>

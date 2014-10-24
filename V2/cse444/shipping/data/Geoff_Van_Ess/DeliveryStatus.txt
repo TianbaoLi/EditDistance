@@ -1,0 +1,5 @@
+1|Suite 16|Tom Harding|11111 23rd Street|New York|New York|12352||||Pending
+2|Shackland|Gregory Peck|64 Hatter Lane|Chicago|Illinois|11111||13:41 01/10/03||In Progress
+3|Peir 32|Linda Blair|65 45th Street|Seattle|Washington|98102||12:05 01/05/03|17:43 01/08/03|Completed
+4|The Den|Scott Carter|1212 Overthere Lane|Boise|Idaho|12438||17:08 01/11/03||In Progress
+5|Housey|Kevin Chan|55 55th|San Jose|California|99992||||Pending

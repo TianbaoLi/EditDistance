@@ -1,0 +1,20 @@
+ups|seattle|sea's address|8am, 11am, 3pm|001
+dhl|seattle|dhl's address|8am, 11am, 3pm|001
+ups|boston|bos's address|9am, 11am, 3pm|002
+usps|boston|bos's address|8am, 3pm|002
+ups|seattle|sea's address|8am, 11am, 3pm|002
+dhl|seattle|dhl's address|8am, 11am, 3pm|002
+ups|boston|bos's address|9am, 11am, 3pm|001
+usps|boston|bos's address|8am, 3pm|001
+ups|seattle|sea's address|8am, 11am, 3pm|001
+dhl|seattle|dhl's address|8am, 11am, 3pm|001
+ups|boston|bos's address|9am, 11am, 3pm|002
+fedex|boston|bos's address|8am, 3pm|002
+fedex|seattle|sea's address|8am, 11am, 3pm|002
+fedex|seattle|dhl's address|8am, 11am, 3pm|002
+fedex|boston|bos's address|9am, 11am, 3pm|001
+fedex|boston|bos's address|8am, 3pm|001
+dhl|seattle|sea's address|8am, 11am, 3pm|002
+dhl|seattle|dhl's address|8am, 11am, 3pm|002
+dhl|boston|bos's address|9am, 11am, 3pm|001
+dhl|boston|bos's address|8am, 3pm|001

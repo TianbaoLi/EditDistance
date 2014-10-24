@@ -1,0 +1,8 @@
+1st North Pole|Juno|AL|10001     |800-NTH-POLE |800-NTH-POL2 |Santa Claus|N-01                |15|10|5000|2340
+7744 9th Ave SW|New York|NY|30331     |905-355-4392 |905-355-4393 |Sam Vannostrum|NE-11               |53|30|500|362
+18 Jean St|Yakima|WA|90645     |425-778-7978 |425-778-7979 |Will Delly|NW-10               |234|123|14123|543
+5043 Brooklyn Ave NE|Seattle|WA|98115     |206-985-4392 |206-985-4393 |Art Vandelay|NW-15               |17|3|100|12
+672 10 Place|Houston|TX|50874     |390-567-6495 |390-567-6496 |Peter Pan|S-04                |1500|1200|1000000|692381
+66 6th Steet|He|LL|31337     |666-999-1666 |666-999-1667 |Lucifer|S-666               |999|666|999999|666666
+100012 Pike NE|Atlanta|GA|44853     |332-667-4848 |332-667-4849 |Max Payne|SE-50               |159300|17|123912809|1234
+23 2nd St|San Jose|CA|78021     |445-485-2202 |445-485-2203 |Papa Smurf|SW-01               |100|23|1000|555

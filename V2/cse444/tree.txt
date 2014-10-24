@@ -1,0 +1,260 @@
+文件夹 PATH 列表
+卷序列号为 B237-2643
+D:\TURINGMAC\DESKTOP\CSE444
+│  comments.xml
+│  
+├─billing
+│  ├─data
+│  │  ├─Ben_Irwin
+│  │  │      Invoice.txt
+│  │  │      Item.txt
+│  │  │      Person.txt
+│  │  │      Shipment.txt
+│  │  │      Users.txt
+│  │  │      
+│  │  ├─Dennis_Jacobs
+│  │  │      Customers.txt
+│  │  │      Invoices.txt
+│  │  │      Items.txt
+│  │  │      Purchases.txt
+│  │  │      
+│  │  └─Jordan_Kiang
+│  │          CreditCards.txt
+│  │          Customers.txt
+│  │          Invoices.txt
+│  │          ItemsPurchased.txt
+│  │          
+│  └─schemas
+│          Ben_Irwin.xml
+│          Dennis_Jacobs.xml
+│          Derek_Leslie-Cook.xml
+│          Derek_Mehlhorn.xml
+│          Ho_Joon_Lim.xml
+│          Jebum_Kim.xml
+│          Jordan_Kiang.xml
+│          Karthik_Jeyablan.xml
+│          Margaret_Lye.xml
+│          Moran_Lee.xml
+│          Paul_Larpenteur.xml
+│          Scott_Jones.xml
+│          Tessa_MacDuff.xml
+│          Vadim_Lobanov.xml
+│          Vivian_Li.xml
+│          
+├─inventory
+│  ├─data
+│  │  ├─Aaron_Day
+│  │  │      Availability.txt
+│  │  │      Books.txt
+│  │  │      Music.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  ├─Alex_Cho
+│  │  │      Artist.txt
+│  │  │      Author.txt
+│  │  │      Availability.txt
+│  │  │      BookCategories.txt
+│  │  │      Books.txt
+│  │  │      CDCategories.txt
+│  │  │      CDs.txt
+│  │  │      CDTypes.txt
+│  │  │      Manager.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  ├─Barrett_Arney
+│  │  │      Books.txt
+│  │  │      CDs.txt
+│  │  │      Inventory.txt
+│  │  │      ProductAvailability.txt
+│  │  │      ProductAvailablity.txt
+│  │  │      WarehouseInformation.txt
+│  │  │      
+│  │  ├─Colin_Bleckner
+│  │  │      Availability.txt
+│  │  │      BooksAndMusic.txt
+│  │  │      Warehouse.txt
+│  │  │      
+│  │  ├─Jagroop_Singh_Dhillon
+│  │  │      BookAvailability.txt
+│  │  │      Books.txt
+│  │  │      CdAvailability.txt
+│  │  │      CompactDiscs.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  ├─Jake_Foster
+│  │  │      Availability.txt
+│  │  │      Books.txt
+│  │  │      Music.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  ├─Melissa_Garcia
+│  │  │      Availability.txt
+│  │  │      Books.txt
+│  │  │      Items.txt
+│  │  │      Music.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  ├─Rachel_Hunt
+│  │  │      Artist.txt
+│  │  │      Author.txt
+│  │  │      Availability.txt
+│  │  │      Book.txt
+│  │  │      CD.txt
+│  │  │      Keyword.txt
+│  │  │      Type.txt
+│  │  │      Warehouse.txt
+│  │  │      
+│  │  ├─Ryan_Eyers
+│  │  │      Availability.txt
+│  │  │      Books.txt
+│  │  │      Music.txt
+│  │  │      Warehouses.txt
+│  │  │      
+│  │  └─Xenia_Hertzenberg
+│  │          Availability.txt
+│  │          Books.txt
+│  │          CDs.txt
+│  │          Contacts.txt
+│  │          Warehouse.txt
+│  │          
+│  ├─mapping
+│  │      mapping-Aaron_Day-Colin_Bleckner.xml
+│  │      mapping-Aaron_Day-Ryan_Eyers.xml
+│  │      mapping-Aaron_Day-Xenia_Hertzenberg.xml
+│  │      mapping-Alex_Cho-Melissa_Garcia.xml
+│  │      mapping-Barrett_Arney-Jake_Foster.xml
+│  │      mapping-Barrett_Arney-Melissa_Garcia.xml
+│  │      mapping-Barrett_Arney-Ryan_Eyers.xml
+│  │      mapping-Jagroop_Singh_Dhillon-Alex_Cho.xml
+│  │      mapping-Jagroop_Singh_Dhillon-Rachel_Hunt.xml
+│  │      mapping-Melissa_Garcia-Jake_Foster.xml
+│  │      mapping-Rachel_Hunt-Alex_Cho.xml
+│  │      mapping-Ryan_Eyers-Melissa_Garcia.xml
+│  │      mapping-Xenia_Hertzenberg-Colin_Bleckner.xml
+│  │      
+│  └─schemas
+│          Aaron_Day.xml
+│          Adam_Fuchs.xml
+│          Alex_Cho.xml
+│          Barrett_Arney.xml
+│          Christopher_Good.xml
+│          Colin_Bleckner.xml
+│          Jacques_Crocker.xml
+│          Jagroop_Singh_Dhillon.xml
+│          Jake_Foster.xml
+│          Margaret_Lye.xml
+│          Melissa_Garcia.xml
+│          Nicholas_Benson.xml
+│          Paul_Collins.xml
+│          Rachel_Hunt.xml
+│          Rob_Hanson.xml
+│          Ryan_Eyers.xml
+│          Xenia_Hertzenberg.xml
+│          
+└─shipping
+    ├─data
+    │  ├─Adam_Moore
+    │  │      Package.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingVendor.txt
+    │  │      
+    │  ├─Aliseya_Wright
+    │  │      DeliveryRecord.txt
+    │  │      Invoice.txt
+    │  │      Package.txt
+    │  │      ShipingRecord.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingVendors.txt
+    │  │      Warehouse.txt
+    │  │      
+    │  ├─Alison_Nimura
+    │  │      Carriers.txt
+    │  │      Package.txt
+    │  │      ShippingOptions.txt
+    │  │      
+    │  ├─Bryan_Shiflett
+    │  │      Customer.txt
+    │  │      Methods.txt
+    │  │      Package.txt
+    │  │      Vendors.txt
+    │  │      
+    │  ├─Chris_Mordue
+    │  │      Methods.txt
+    │  │      Packages.txt
+    │  │      Shipping.txt
+    │  │      Transit.txt
+    │  │      Vendors.txt
+    │  │      Warehouses.txt
+    │  │      
+    │  ├─Dave_Sedlacek
+    │  │      Packages.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingProviders.txt
+    │  │      
+    │  ├─Geoff_Van_Ess
+    │  │      DeliveryStatus.txt
+    │  │      LocalAgents.txt
+    │  │      Packages.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingVendors.txt
+    │  │      
+    │  ├─JungJoon_Park
+    │  │      Package.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingVendors.txt
+    │  │      
+    │  ├─Michael_Stark
+    │  │      OrderInfo.txt
+    │  │      Package.txt
+    │  │      ShippingMethods.txt
+    │  │      ShippingVendors.txt
+    │  │      VendorInfo.txt
+    │  │      
+    │  └─Shiqing_Yu
+    │          Package.txt
+    │          ShippingAgentLocalOffice.txt
+    │          ShippingAgents.txt
+    │          ShippingMethod.txt
+    │          ShippingMethodInfo.txt
+    │          
+    ├─mapping
+    │      mapping-Adam_Moore-Aliseya_Wright.xml
+    │      mapping-Adam_Moore-Alison_Nimura.xml
+    │      mapping-Adam_Moore-Dave_Sedlacek.xml
+    │      mapping-Adam_Moore-Michael_Stark.xml
+    │      mapping-Aliseya_Wright-Alison_Nimura.xml
+    │      mapping-Aliseya_Wright-Michael_Stark.xml
+    │      mapping-Alison_Nimura-Bryan_Shiflett.xml
+    │      mapping-Alison_Nimura-Dan_Thompson.xml
+    │      mapping-Alison_Nimura-Michael_Stark.xml
+    │      mapping-Bryan_Shiflett-Dan_Thompson.xml
+    │      mapping-Bryan_Shiflett-Dave_Sedlacek.xml
+    │      mapping-Bryan_Shiflett-Geoff_Van_Ess.xml
+    │      mapping-Bryan_Shiflett-Michael_Stark.xml
+    │      mapping-Chris_Mordue-Michael_Stark.xml
+    │      mapping-Chris_Mordue-Shiqing_Yu.xml
+    │      mapping-Dave_Sedlacek-Geoff_Van_Ess.xml
+    │      mapping-Geoff_Van_Ess-JungJoon_Park.xml
+    │      mapping-Geoff_Van_Ess-Michael_Stark.xml
+    │      mapping-Michael_Stark-Shiqing_Yu.xml
+    │      
+    └─schemas
+            Adam_Moore.xml
+            Aliseya_Wright.xml
+            Alison_Nimura.xml
+            Blake_Norrish.xml
+            Brian_Rogers.xml
+            Bryan_Shiflett.xml
+            Chris_Mordue.xml
+            Dan_Thompson.xml
+            Dave_Sedlacek.xml
+            Geoff_Van_Ess.xml
+            Jai_Patel.xml
+            John_Weekes.xml
+            JungJoon_Park.xml
+            Lam_Nguyen.xml
+            Michael_Stark.xml
+            Michelle_Moravan.xml
+            Sawssan_Taha.xml
+            Shiqing_Yu.xml
+            

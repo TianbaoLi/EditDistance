@@ -1,0 +1,202 @@
+
+<database name="BillingAndInvoice">
+
+<createdby name="Moran Lee"/>
+
+<Schema>
+	<table name="Invoice">
+
+		<column name="ID" type="Integer" key="yes">
+			<comment>The Invoice ID is a unique number.</comment>
+		</column>
+
+		<column name="OrderDate" type="Date" key="no">
+		</column>
+
+		<column name="Items" type="Integer" key="no">
+			<comment>The number of Items ordered.</comment>
+		</column>
+
+		<column name="Buyer">
+			<column name="BuyerName" type="String" key="no"/>
+			<column name="BuyerID" type="Integer" key="no"/>
+		</column>
+
+		<column name="Receiver">
+			<column name="ReceiverName" type="String" key="no"/>
+			<column name="ReceiverID" type="Integer" key="no"/>
+		</column>
+
+
+		<column name="ShippingMethod" type="String" key="no">
+		</column>
+
+		<column name="Price">
+			<column name="Subtotal" type="Money" key="no"/>
+			<column name="Shipping" type="Money" key="no">
+				<comment>Total shipping and handling cost.</comment>
+			</column>
+			<column name="Total" type="Money" key="no"/>
+		</column>
+
+
+	</table>
+
+	<table name="Item">
+	<comment>Information for one item.</comment>
+
+		<column name="InvoiceID" type="Integer" key="no">
+			<comment>Each item is identified by the corresponding invoice number</comment>
+		</column>
+
+		<column name="ItemID" type="Integer" key="no">
+		</column>
+
+		<column name="ItemType" type="String" key="no">
+			<comment>Book, CD title, Toy,.. </comment>
+		</column>
+
+		<column name="Title" type="String" key="no">
+		</column>
+
+		<column name="Price">
+			<column name="ItemPrice" type="Money" key="no">
+				<comment>Item Price per unit.</comment>
+			</column>
+			<column name="Discount" type="Float" key="no">
+				<comment>Discount percentage per each item.</comment>
+			</column>
+			<column name="ShippingCost" type="Money" key="no"/>
+			<column name="Tax" type="Money" key="no">
+				<comment>Sales Tax price per item.</comment>
+			</column>
+		</column>
+
+		<column name="Quantity" type="Integer" key="no">
+		</column>
+
+		<column name="Warehouse" type="String" key="no">
+			<comment>the warehouse from which the items are shipped.</comment>
+		</column>
+		<column name="DeliveryDate" type="Date" key="no">
+			<comment>Expected delivery date</comment>
+		</column>
+
+	</table>
+
+
+	<table name="Customer">
+
+		<column name="CustomerID" type="Integer" key="yes">
+			<comment>The customer ID is key for each customer.</comment>
+		</column>
+
+		<column name="Name" type="String" key="no"/>
+
+		<column name="Address">
+			<column name="Street" type="String" key="no"/>
+			<column name="City" type="String" key="no"/>
+			<column name="State" type="String" key="no"/>
+			<column name="Zip" type="Integer" key="no"/>
+		</column>
+
+		<column name="Contact">
+			<column name="Email" type="String" key="no"/>
+			<column name="Phone" type="String" key="no"/>
+		</column>
+
+
+	</table>
+
+
+	<table name="Payment">
+	<comment>Payment Information for each invoice</comment>
+		<column name="InvoiceID" type="Integer" key="no">
+			<comment>Each payment is identified by the corresponding invoice
+
+number</comment>
+		</column>
+		<column name="PaymentMethod" type="String" key="no"/>
+		<column name="CreditCard">
+			<column name="Type" type="String" key="no"/>
+			<column name="Number" type="Integer" key="no"/>
+			<column name="Exp Date" type="Date" key="no"/>
+			<column name="CardHolder" type="String" key="no"/>
+			<column name="Billing Zip" type="Integer" key="no"/>
+		</column>
+
+
+
+	</table>
+
+
+	<foreignkeyconstraint>
+		<source table="Item">
+			<column name="InvoiceID"/>
+		</source>
+		<target table="Invoice">
+			<column name="ID"/>
+		</target>
+			<comment>The corresponding invoice ID for each item
+				must have a record in Invoice Table</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table="Payment">
+			<column name="InvoiceID"/>
+		</source>
+		<target table="Invoice">
+			<column name="ID"/>
+		</target>
+			<comment>The corresponding invoice ID for each Payment info.
+				 must have a record in Invoice Table</comment>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table="Invoice">
+			<column name="Buyer.BuyerID"/>
+		</source>
+		<target table="Customer">
+			<column name="CustomerID"/>
+		</target>
+	</foreignkeyconstraint>
+
+	<foreignkeyconstraint>
+		<source table="Invoice">
+			<column name="Receiver.ReceiverID"/>
+		</source>
+		<target table="Customer">
+			<column name="CustomerID"/>
+		</target>
+	</foreignkeyconstraint>
+</Schema>
+
+<Data>
+	<Invoice>
+		<tuple>
+			<ID>00000001</ID>
+			<OrderDate>2002-12-03</OrderDate>
+			<Items>2</Items>
+			<Buyer>
+				<BuyerName>Moran Lee</BuyerName>
+				<BuyerID>000001</BuyerID>
+			</Buyer>
+			<Receiver>
+				<ReceiverName>Moran Lee</ReceiverName>
+				<ReceiverID>000001</ReceiverID>
+			</Receiver>
+			<ShippingMethod>Ground</ShippingMethod>
+			<Price>
+				<Subtotal>13.00</Subtotal>
+				<Shipping>3.5</Shipping>
+				<Total>16.5</Total>
+			</Price>
+		</tuple>
+	</Invoice>
+
+</Data>
+
+
+</database>
+
+

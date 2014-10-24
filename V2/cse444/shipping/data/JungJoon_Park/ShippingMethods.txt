@@ -1,0 +1,8 @@
+FedEX Ground|Pound|2.056|Delivery in  5 business days|150|130|
+FedEX 2Day|Pound|8.971|4:30pm in 2 business days|150|130|To most cities
+FedEX 2Day|Pound|8.971|4:30pm in 3 business days|150|130|To most cities
+FedEX Overnight|Pound|11.56|3:00pm the next business day|150|130|To most cities
+UPS Ground|Pound|2.88|5 days|150|130|To most cities
+UPS 3 Day Select|Pound|7.23|Guaranteed by End of Day -- 3 Days|150|130|To most cities
+UPS 2nd Day Air|Pound|9.42|Guaranteed by End of Day -- 2 Days|150|130|To most cities
+UPS Next Day Air|Pound|13.3|Guaranteed by 10:30 A.M. -- Next Day|150|130|To most cities

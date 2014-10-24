@@ -1,0 +1,110 @@
+<mapping>
+  <Geoff_Van_Ess correct="yes">
+    <ShippingMethods m="ShippingMethods">
+      <Method m="ShippingMethods/ShippingOptions"/>
+      <Company m="Package/ShippingCompany"/>
+      <Price m="ShippingMethods/PricePerUnit"/>
+      <UnitOfPrice m="ShippingMethods/UnitOfPricing"/>
+      <GaurenteedDeliveryTime m="ShippingMethods/GuaranteedTimeToDelivery"/>
+      <AverageTimeToDeliver/>
+      <Restrictions m="ShippingMethods/MaximumWeight"/>
+    </ShippingMethods>
+    <ShippingVendors m="ShippingVendors">
+      <Vendor m="ShippingVendors/VendorName"/>
+      <HQAddress/>
+      <HQCity/>
+      <HQState/>
+      <HQZipCode/>
+      <Url m="ShippingVendors/URL"/>
+      <PhoneNumber m="ShippingVendors/TollFreeNumber"/>
+    </ShippingVendors>
+    <Packages m="Package">
+      <InvoiceNumber m="Package/InvoiceNumber"/>
+      <WeightPounds m="Package/Weight"/>
+      <WeightOunces m="Package/Weight"/>
+      <ItemCount m="Package/NumberOfItems"/>
+      <Method m="Package/ShippingMethod"/>
+      <Company m="Package/ShippingCompany"/>
+      <TrackingNumber m="Package/TrackingNumber"/>
+      <SpecialInstructions m="Package/DirectionsToTheHouse" c="Package/DirectionsToTheHouse Package/SignatureWaived"/>
+    </Packages>
+    <LocalAgents m="ShippingVendors">
+      <Warehouse/>
+      <Company m="ShippingVendors/VendorName"/>
+      <DailyPickUpTime m="ShippingVendors/DailyPickUpTime_WarehouseA"/>
+      <LocalAddress m="ShippingVendors/LocalAddress"/>
+      <LocalCity m="ShippingVendors/LocalAddress"/>
+      <LocalState m="ShippingVendors/LocalAddress"/>
+      <LocalZipCode m="ShippingVendors/LocalAddress"/>
+      <LocalPhoneNumber m="ShippingVendors/TollFreeNumber"/>
+    </LocalAgents>
+    <DeliveryStatus m="Package">
+      <TrackingNumber m="Package/TrackingNumber"/>
+      <Warehouse m="Package/SourceWarehouse"/>
+      <DeliveryName m="Package/DeliveryName"/>
+      <DeliveryAddress m="Package/Address_Street"/>
+      <DeliveryCity m="Package/Address_City"/>
+      <DeliveryState m="Package/Address_State"/>
+      <DeliveryZipCode m="Package/Address_Zipcode"/>
+      <DeliveryContact m="Package/HomePhoneNumber"/>
+      <PickUpTime m="Package/PickUpTime"/>
+      <DeliveryTime m="Package/DeliveryTime"/>
+      <Status m="Package/OrderStatus"/>
+    </DeliveryStatus>
+  </Geoff_Van_Ess>
+  <JungJoon_Park correct="yes">
+    <Package m="Packages" c="Packages DeliveryStatus">
+      <InvoiceNumber m="Packages/InvoiceNumber"/>
+      <Weight m="Packages/WeightPounds"/>
+      <Length/>
+      <Width/>
+      <Height/>
+      <NumberOfItems m="Packages/ItemCount"/>
+      <ShippingMethod m="Packages/Method"/>
+      <TrackingNumber m="Packages/TrackingNumber"/>
+      <ShippingCompany m="Packages/Company"/>
+      <SignatureWaived m="Packages/SpecialInstructions"/>
+      <DirectionsToTheHouse m="Packages/SpecialInstructions"/>
+      <SourceWarehouse m="DeliveryStatus/Warehouse"/>
+      <DeliveryName m="DeliveryStatus/DeliveryName"/>
+      <Address_Street m="DeliveryStatus/DeliveryAddress"/>
+      <Address_State m="DeliveryStatus/DeliveryState"/>
+      <Address_City m="DeliveryStatus/DeliveryCity"/>
+      <Address_Country/>
+      <Address_Zipcode m="DeliveryStatus/DeliveryZipCode"/>
+      <PickUpTime m="DeliveryStatus/PickUpTime"/>
+      <DeliveryTime m="DeliveryStatus/DeliveryTime"/>
+      <OrderStatus m="DeliveryStatus/Status"/>
+      <HomePhoneNumber m="DeliveryStatus/DeliveryContact"/>
+      <WorkPhoneNumber m="DeliveryStatus/DeliveryContact"/>
+      <Email/>
+      <PackingMethod/>
+      <Insurance/>
+    </Package>
+    <ShippingVendors m="ShippingVendors">
+      <VendorName m="ShippingVendors/Vendor"/>
+      <LocalAddress m="LocalAgents/LocalAddress"/>
+      <URL m="ShippingVendors/Url"/>
+      <TollFreeNumber m="ShippingVendors/PhoneNumber"/>
+      <DailyPickUpTime_WarehouseA m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseB m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseC m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseD m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseE m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseF m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseG m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseH m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseI m="LocalAgents/DailyPickUpTime"/>
+      <DailyPickUpTime_WarehouseJ m="LocalAgents/DailyPickUpTime"/>
+    </ShippingVendors>
+    <ShippingMethods m="ShippingMethods">
+      <ShippingOptions m="ShippingMethods/Method"/>
+      <UnitOfPricing m="ShippingMethods/UnitOfPrice"/>
+      <PricePerUnit m="ShippingMethods/Price"/>
+      <GuaranteedTimeToDelivery m="ShippingMethods/GaurenteedDeliveryTime"/>
+      <MaximumWeight m="ShippingMethods/Restrictions"/>
+      <MaximumSize/>
+      <SelectedCitiesOfDestination/>
+    </ShippingMethods>
+  </JungJoon_Park>
+</mapping>

@@ -1,0 +1,174 @@
+<database name="Inventory">
+	<createdby name="Paul Collins" />
+
+
+	<Schema>
+	
+		<table name="Books">
+			<column name="ItemID" type="Integer" key="yes">
+				<comment>A unique identifier for each book within this company.</comment>
+			</column>
+			<column name="ISBN" type="Integer" key="no"></column>
+			<column name="Title" type="String" key="no"></column>
+			<column name="Author" type="String" key="no"></column>
+			<column name="Publisher" type="String" key="no"></column>
+			<column name="PublicationDate" type="DateTime" key="no"></column>
+			<column name="Category" type="String" key="no"></column>
+			<column name="Keywords" type="String" key="no"></column>
+			<column name="MSRP" type="Real" key="no">
+				<comment>The manufacturer suggested retail price within this company.</comment>
+			</column>
+		</table>
+		
+		<table name="Music">
+			<column name="ItemID" type="Integer" key="yes">
+				<comment>A unique identifier for each album.</comment>
+			</column>
+			<column name="AlbumName" type="String" key="no"></column>
+			<column name="Artist" type="String" key="no"></column>
+			<column name="Label" type="String" key="no"></column>
+			<column name="ReleaseDate" type="DateTime" key="no"></column>
+			<column name="Genre" type="String" key="no"></column>
+			<column name="Format" type="String" key="no">
+				<comment>The format/medium that contains this album (CD, cassette, vinyl, etc.)</comment>
+			</column>
+			<column name="AlbumInfo" type="String" key="no">
+				<comment>Additional identifying information about an album (single, boxed set, etc.)</comment>
+			</column>
+			<column name="MSRP" type="Real" key="no">
+				<comment>The manufacturer suggested retail price.</comment>
+			</column>
+		</table>
+		
+		<table name="Warehouses">
+			<column name="WarehouseID" type="Integer" key="yes">
+				<comment>A unique identifier for each warehouse within this company.</comment>
+			</column>
+			<column name="Address" type="String" key="no"></column>
+			<column name="City" type="String" key="no"></column>
+			<column name="State" type="String" key="no"></column>
+			<column name="ZIPCode" type="Integer" key="no"></column>
+			<column name="Manager" type="String" key="no"></column>
+			<column name="TelephoneNumber" type="Integer" key="no"></column>
+			<column name="FaxNumber" type="Integer" key="no"></column>
+			<column name="EmailAddress" type="String" key="no"></column>
+			<column name="Employees" type="Integer" key="no"></column>
+			<column name="Sales to Date" type="Real" key="no"></column>
+		</table>
+		
+		<table name="Stock">
+			<column name="FK_ItemID" type="Integer" key="yes">
+				<comment>The foreign key for an item (book or album).</comment>
+			</column>
+			<column name="FK_WarehouseID" type="Integer" key="yes">
+				<comment>The foreign key for a warehouse.</comment>
+			</column>
+			<column name="QuantityAvailable" type="Integer" key="no"></column>
+			<column name="LastShipDate" type="DateDime" key="no">
+				<comment>The most recent date and time on which this item (book or album) shipped from the warehouse FK_WarehouseID.</comment>
+			</column>
+			<column name="MSRPModifier" type="Real" key="no"></column>
+		</table>
+		
+		<foreignkeyconstraint>
+			<source table="Stock">
+				<column name="FK_ItemID"></column>
+			</source>
+			<target table="Books">
+				<column name="ItemID"></column>
+			</target>
+			<target table="Music">
+				<column name="ItemID"></column>
+			</target>
+		</foreignkeyconstraint>
+		
+		<foreignkeyconstraint>
+			<source table="Stock">
+				<column name="FK_WarehouseID"></column>
+			</source>
+			<target table="Warehouses">
+				<column name="WarehouseID"></column>
+			</target>
+		</foreignkeyconstraint>
+	
+	</Schema>
+	
+	
+	<Data>
+	
+		<Books>
+			<tuple>
+				<ItemID>00000001</ItemID>
+				<ISBN>0345397762 </ISBN>
+				<Title>Life in the Fat Lane (Garfield, No 28)</Title>
+				<Author>Jim Davis</Author>
+				<Publisher>Fawcett Books</Publisher>
+				<PublicationDate>10/01/1995</PublicationDate>
+				<Category>Comedy</Category>
+				<Keywords>Garfield, Jim Davis, Odie</Keywords>
+				<MSRP>7.95</MSRP>
+			</tuple>
+			<tuple>
+				<ItemID>00000003</ItemID>
+				<ISBN>0345441095 </ISBN>
+				<Title>Garfield Beefs Up: His 37th Book (Garfield, 37)</Title>
+				<Author>Jim Davis</Author>
+				<Publisher>Ballantine Books (Trd Pap)</Publisher>
+				<PublicationDate>10/03/2000</PublicationDate>
+				<Category>Comedy</Category>
+				<Keywords>Garfield, Jim Davis, Odie</Keywords>
+				<MSRP>8.95</MSRP>
+			</tuple>
+		</Books>
+	
+		<Music>
+			<tuple>
+				<ItemID>00000002</ItemID>
+				<AlbumName>The Best of Tom Jones</AlbumName>
+				<Artist>Tom Jones</Artist>
+				<Label>Polygram Records</Label>
+				<ReleaseDate>06/16/1998</ReleaseDate>
+				<Genre>Classics</Genre>
+				<Format>Audio CD</Format>
+				<AlbumInfo>none</AlbumInfo>
+				<MSRP>18.98</MSRP>
+			</tuple>
+		</Music>
+		
+		<Warehouses>
+			<tuple>
+				<WarehouseID>00000001</WarehouseID>
+				<Address>123 Fake St.</Address>
+				<City>SpringField</City>
+				<State>IL</State>
+				<ZIPCode>55555</ZIPCode>
+				<Manager></Manager>
+				<TelephoneNumber>1235551234</TelephoneNumber>
+				<FaxNumber>1235556789</FaxNumber>
+				<EmailAddress>01@somecompany.com</EmailAddress>
+				<Employees>42</Employees>
+				<SalesToDate>0</SalesToDate>
+			</tuple>
+		</Warehouses>
+	
+		<Availability>
+			<tuple>
+				<FK_ItemID>00000001</FK_ItemID>
+				<FK_WarehouseID>00000001</FK_WarehouseID>
+				<QuantityAvailable>154</QuantityAvailable>
+				<LastShipDate>03/09/2002</LastShipDate>
+				<MSRPModifier>-5.00</MSRPModifier>
+			</tuple>
+			<tuple>
+				<FK_ItemID>00000002</FK_ItemID>
+				<FK_WarehouseID>00000001</FK_WarehouseID>
+				<QuantityAvailable>91</QuantityAvailable>
+				<LastShipDate>12/20/2002</LastShipDate>
+				<MSRPModifier>0.00</MSRPModifier>
+			</tuple>
+		</Availability>
+	
+	</Data>
+	
+	
+</database>

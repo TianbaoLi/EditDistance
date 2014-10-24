@@ -1,0 +1,850 @@
+<database name="Shipping and Delivery">
+   <createdby name="Bryan Shiflett"/>
+   <Schema>
+      <table name="Package">
+         <column name="TrackNumber" type="Char(6)" key="no">
+            <comment>Number assigned by shipping company upon shipment.</comment>
+         </column>
+         <column name="Insured" type="Char(1)" key="no">
+            <comment>Y or N, if the package is insured.</comment>
+         </column>
+         <column name="DeclaredValue" type="Money(8)" key="no">
+            <comment>The value of the package, as declared by the customer.</comment>
+         </column>
+         <column name="Weight" type="Real(4)" key="no">
+            <comment>The weight of the package.</comment>
+         </column>
+         <column name="ItemCount" type="SmallInt(2)" key="no">
+            <comment>The number of items in the package.</comment>
+         </column>
+         <column name="InvoiceID" type="Char(10)" key="yes">
+            <comment>The reference number of the customer order.</comment>
+         </column>
+         <column name="ShipMethod" type="VarChar(10)" key="yes">
+            <comment>Technique of shipping, such as ground, next day or three day.</comment>
+         </column>
+         <column name="ShipperID" type="VarChar(5)" key="yes">
+            <comment>The name of the shipping company, ups, fedex or dhl.</comment>
+         </column>
+         <column name="PackageStatus" type="VarChar(10)" key="no">
+            <comment>The status of the package, pending, in transit or delivered.</comment>
+         </column>
+         <column name="SourceWarehouse" type="Char(2)" key="no">
+            <comment>The warehouse shipping the package (state abbreviation).</comment>
+         </column>
+         <column name="PickupDateTime" type="DateTime(8)" key="no">
+            <comment>The date and time the shipping company receives the package.</comment>
+         </column>
+         <column name="DeliveryDateTime" type="DateTime(8)" key="no">
+            <comment>The date and time the shipping company delivers the package.</comment>
+         </column>
+      </table>
+      <table name="Customer">
+         <column name="BillTo" type="Varchar(50)" key="no">
+            <comment>The name of the person to bill the shipment to.</comment>
+         </column>
+         <column name="ShipTo" type="Varchar(50)" key="no">
+            <comment>The name of the person to ship the package to.</comment>
+         </column>
+         <column name="Phone" type="Char(13)" key="no">
+            <comment>The phone number of the BillTo person.</comment>
+         </column>
+         <column name="OrderNumber" type="Char(10)" key="yes">
+            <comment>The unique identification order for the customer's shipping request.</comment>
+         </column>
+         <column name="BillToAddress" type="VarChar(100)" key="no">
+            <comment>The address of the BillTo person.</comment>
+         </column>
+         <column name="ShipToAddress" type="VarChar(100)" key="no">
+            <comment>The address of the ShipTo person.</comment>
+         </column>
+         <column name="Comments" type="VarChar(255)" key="no">
+            <comment>Special comments or instructions for the shipping company.</comment>
+         </column>
+      </table>
+      <table name="Methods">
+         <column name="ShipMethod" type="VarChar(10)" key="yes">
+            <comment>The technique of shipment, such as ground, next day or three day</comment>
+         </column>
+         <column name="ShipperID" type="VarChar(5)" key="yes">
+            <comment>The name of the shipping company, ups, dhl or fedex.</comment>
+         </column>
+         <column name="PricePerPound" type="Money(8)" key="no">
+            <comment>The price per pound to ship the package.</comment>
+         </column>
+         <column name="PriceEach" type="Money(8)" key="no">
+            <comment>The price per item to ship the package.</comment>
+         </column>
+         <column name="FixedFee" type="Money(8)" key="no">
+            <comment>The flat rate to ship a package.</comment>
+         </column>
+         <column name="MaxItems" type="SmallInt(2)" key="no">
+            <comment>The maximum number of items the company will ship.</comment>
+         </column>
+         <column name="MaxWeight" type="SmallInt(2)" key="no">
+            <comment>The maximum a package can weigh.</comment>
+         </column>
+         <column name="DeliveryGuarantee" type="TinyInt(1)" key="no">
+            <comment>The number of days in which time the delivery is promised.</comment>
+         </column>
+      </table>
+      <table name="Vendors">
+         <column name="ShipperID" type="VarChar(5)" key="yes">
+            <comment>The name of the shipping company.</comment>
+         </column>
+         <column name="Address1" type="VarChar(255)" key="no">
+            <comment>The first line of the address of the shipping company.</comment>
+         </column>
+         <column name="Address2" type="VarChar(255)" key="no">
+            <comment>The second line of the address of the shipping company.</comment>
+         </column>
+         <column name="City" type="VarChar(50)" key="no">
+            <comment>The city of the shipping company.</comment>
+         </column>
+         <column name="State" type="Char(2)" key="no">
+            <comment>The abbreviation of the state of the shipping company.</comment>
+         </column>
+         <column name="Zip" type="Int(4)" key="no">
+            <comment>The zip code of the shipping company.</comment>
+         </column>
+         <column name="URL" type="VarChar(100)" key="no">
+            <comment>The website of the shipping company.</comment>
+         </column>
+         <column name="Phone" type="Char(12)" key="no">
+            <comment>The phone number of the shipping company.</comment>
+         </column>
+      </table>
+      <foreignkeyconstraint>
+         <source table="Customer">
+            <column name="OrderNumber"/>
+         </source>
+         <target table="Package">
+            <column name="InvoiceID"/>
+         </target>
+         <comment>Every transaction creates a unique order number.</comment>
+      </foreignkeyconstraint>
+      <foreignkeyconstraint>
+         <source table="Package">
+            <column name="ShipMethod, ShipperID"/>
+         </source>
+         <target table="Methods">
+            <column name="ShipMethod, ShipperID"/>
+         </target>
+         <comment>Each combination of shipping company and shipping technique is unique, and must exist for every order.</comment>
+      </foreignkeyconstraint>
+      <foreignkeyconstraint>
+         <source table="Package">
+            <column name="ShipperID"/>
+         </source>
+         <target table="Vendors">
+            <column name="ShipperID"/>
+         </target>
+         <comment>Each shipping company has a unique name and information about themselves.</comment>
+      </foreignkeyconstraint>
+      <foreignkeyconstraint>
+         <source table="Methods">
+            <column name="ShipperID"/>
+         </source>
+         <target table="Vendors">
+            <column name="ShipperID"/>
+         </target>
+         <comment>Each shipping company has a unique name and information about themselves.</comment>
+      </foreignkeyconstraint>
+   </Schema>
+  <Data>
+    <Package>
+      <tuple>
+        <TrackNumber>uaaaa1</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>300</DeclaredValue>
+        <Weight>13</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>3098624</InvoiceID>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>CA</SourceWarehouse>
+        <PickupDateTime>1/2/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/5/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa1</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>125</DeclaredValue>
+        <Weight>3</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>2917834</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>CA</SourceWarehouse>
+        <PickupDateTime>1/2/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa2</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>250</DeclaredValue>
+        <Weight>21</Weight>
+        <ItemCount>17</ItemCount>
+        <InvoiceID>4150880</InvoiceID>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/2/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/3/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa3</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>550</DeclaredValue>
+        <Weight>8</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>3244032</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>MO</SourceWarehouse>
+        <PickupDateTime>1/3/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/10/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa2</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>300</DeclaredValue>
+        <Weight>12</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>5824512</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/4/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa3</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>500</DeclaredValue>
+        <Weight>35</Weight>
+        <ItemCount>5</ItemCount>
+        <InvoiceID>4608000</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/4/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa4</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>150</DeclaredValue>
+        <Weight>20</Weight>
+        <ItemCount>2</ItemCount>
+        <InvoiceID>6287960</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>CA</SourceWarehouse>
+        <PickupDateTime>1/4/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa5</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>35</DeclaredValue>
+        <Weight>1</Weight>
+        <ItemCount>3</ItemCount>
+        <InvoiceID>2887387</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/5/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/10/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa4</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>45</DeclaredValue>
+        <Weight>1</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>3335024</InvoiceID>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/6/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa6</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>400</DeclaredValue>
+        <Weight>10</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>3565319</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/6/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/11/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa5</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>135</DeclaredValue>
+        <Weight>10</Weight>
+        <ItemCount>8</ItemCount>
+        <InvoiceID>5322732</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>ID</SourceWarehouse>
+        <PickupDateTime>1/6/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/13/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa6</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>2180</DeclaredValue>
+        <Weight>50</Weight>
+        <ItemCount>4</ItemCount>
+        <InvoiceID>6244032</InvoiceID>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/7/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/8/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>daaaa1</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>1565</DeclaredValue>
+        <Weight>30</Weight>
+        <ItemCount>4</ItemCount>
+        <InvoiceID>3983360</InvoiceID>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>CA</SourceWarehouse>
+        <PickupDateTime>1/8/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/9/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa7</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>2100</DeclaredValue>
+        <Weight>25</Weight>
+        <ItemCount>2</ItemCount>
+        <InvoiceID>5711872</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>in transit</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/9/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>daaaa2</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>40</DeclaredValue>
+        <Weight>2</Weight>
+        <ItemCount>91</ItemCount>
+        <InvoiceID>2768401</InvoiceID>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/10/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/13/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>daaaa3</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>325</DeclaredValue>
+        <Weight>19</Weight>
+        <ItemCount>16</ItemCount>
+        <InvoiceID>3102720</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PackageStatus>in transit</PackageStatus>
+        <SourceWarehouse>CA</SourceWarehouse>
+        <PickupDateTime>1/11/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>faaaa7</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>1800</DeclaredValue>
+        <Weight>300</Weight>
+        <ItemCount>3</ItemCount>
+        <InvoiceID>3348294</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PackageStatus>in transit</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/12/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa8</TrackNumber>
+        <Insured>y</Insured>
+        <DeclaredValue>75</DeclaredValue>
+        <Weight>45</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>2251928</InvoiceID>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>in transit</PackageStatus>
+        <SourceWarehouse>OR</SourceWarehouse>
+        <PickupDateTime>1/13/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber>uaaaa9</TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>220</DeclaredValue>
+        <Weight>90</Weight>
+        <ItemCount>3</ItemCount>
+        <InvoiceID>3451926</InvoiceID>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>delivered</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/13/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime>1/14/2003 7:20:55 PM</DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber></TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>10</DeclaredValue>
+        <Weight>2</Weight>
+        <ItemCount>20</ItemCount>
+        <InvoiceID>5407346</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PackageStatus>pending</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/14/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber></TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>1700</DeclaredValue>
+        <Weight>20</Weight>
+        <ItemCount>20</ItemCount>
+        <InvoiceID>4029574</InvoiceID>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PackageStatus>pending</PackageStatus>
+        <SourceWarehouse>IL</SourceWarehouse>
+        <PickupDateTime>1/14/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+      <tuple>
+        <TrackNumber></TrackNumber>
+        <Insured>n</Insured>
+        <DeclaredValue>250</DeclaredValue>
+        <Weight>2</Weight>
+        <ItemCount>1</ItemCount>
+        <InvoiceID>2944492</InvoiceID>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PackageStatus>pending</PackageStatus>
+        <SourceWarehouse>WA</SourceWarehouse>
+        <PickupDateTime>1/14/2003 7:20:55 PM</PickupDateTime>
+        <DeliveryDateTime></DeliveryDateTime>
+      </tuple>
+
+    </Package>
+
+    <Customer>
+      <tuple>
+        <BillTo>William Johnson</BillTo>
+        <ShipTo>William Johnson</ShipTo>
+        <Phone>360.754.1356</Phone>
+        <OrderNumber>3098624</OrderNumber>
+        <BillToAddress>6911 Fordham Ct., Tacoma, WA 97621</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Signature Required</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Steve Jennings</BillTo>
+        <ShipTo>Steve Jennings</ShipTo>
+        <Phone>206.253.8994</Phone>
+        <OrderNumber>2917834</OrderNumber>
+        <BillToAddress>2344 64th Ave S, Seattle, WA 98115</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Signature Required</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Katelyn Allen</BillTo>
+        <ShipTo>Katelyn Allen</ShipTo>
+        <Phone>909.655.7821</Phone>
+        <OrderNumber>5824512</OrderNumber>
+        <BillToAddress>34021 Brawney Ave, Lynnwood, WA 97653</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Bob Smith</BillTo>
+        <ShipTo>Bob Smith</ShipTo>
+        <Phone>415.589.9222</Phone>
+        <OrderNumber>4150880</OrderNumber>
+        <BillToAddress>111 Horsehead Rc, Billings, MT 84653</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Leave with Mgr.</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Bradley Matthews</BillTo>
+        <ShipTo>Marley Lemon</ShipTo>
+        <Phone>614.826.3664</Phone>
+        <OrderNumber>4608000</OrderNumber>
+        <BillToAddress>23 Jester St., Winchester, RI 01256</BillToAddress>
+        <ShipToAddress>PO Box 64388 St. Paul, MN 55164</ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Sheri Cruzan</BillTo>
+        <ShipTo>Sheri Cruzan</ShipTo>
+        <Phone>360.412.8697</Phone>
+        <OrderNumber>6287960</OrderNumber>
+        <BillToAddress>8923 Ryan Albert Dr, Washtukna, WA 99337</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Gary Goldman</BillTo>
+        <ShipTo>Gary Goldman</ShipTo>
+        <Phone>818.793.5504</Phone>
+        <OrderNumber>2887387</OrderNumber>
+        <BillToAddress>5326 117th St, Portland, OR 97201</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>John Stewert</BillTo>
+        <ShipTo>John Stewert</ShipTo>
+        <Phone>509.523.3465</Phone>
+        <OrderNumber>3335024</OrderNumber>
+        <BillToAddress>23334 Gummybear Dr, Salem, MO 56485</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Signature Required</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Robert McDouglas</BillTo>
+        <ShipTo>Robert McDouglas</ShipTo>
+        <Phone>909.655.2611</Phone>
+        <OrderNumber>3565319</OrderNumber>
+        <BillToAddress>11 Karl Malone Lp, Salt Lake City, UT 76523</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Signature Required</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Scott Murphy</BillTo>
+        <ShipTo>Scott Murphy</ShipTo>
+        <Phone>253.472.8989</Phone>
+        <OrderNumber>5322732</OrderNumber>
+        <BillToAddress>5593 Lazy St, Tumwater, WA 98513</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Dave Nowell</BillTo>
+        <ShipTo>Dave Nowell</ShipTo>
+        <Phone>626.565.8332</Phone>
+        <OrderNumber>3244032</OrderNumber>
+        <BillToAddress>756 Atlantic Ave, Richmond Hill, NY 11026</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Bob McKenna</BillTo>
+        <ShipTo>Bob McKenna</ShipTo>
+        <Phone>425.438.2145</Phone>
+        <OrderNumber>3983360</OrderNumber>
+        <BillToAddress>10316 Lake City Way NE, Seattle, WA 98125</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Apartment Upstairs</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Shawn Byerly</BillTo>
+        <ShipTo>Shawn Byerly</ShipTo>
+        <Phone>206.632.1246</Phone>
+        <OrderNumber>5711872</OrderNumber>
+        <BillToAddress>2909 Pacific Ave, Lacey, WA 98503</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>William Johnson</BillTo>
+        <ShipTo>Jack Johnson</ShipTo>
+        <Phone>425.446.5632</Phone>
+        <OrderNumber>2768401</OrderNumber>
+        <BillToAddress>38473 Carpenter Rd, Olympia, WA 98506</BillToAddress>
+        <ShipToAddress>13 Creaky Door Ln, Tupulo, MS 50231</ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Ronny Williams</BillTo>
+        <ShipTo>Ronny Williams</ShipTo>
+        <Phone>909.655.4646</Phone>
+        <OrderNumber>3102720</OrderNumber>
+        <BillToAddress>151 Bacardi Ct, Sacramento, CA 95623</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Boyd Frank</BillTo>
+        <ShipTo>Boyd Frank</ShipTo>
+        <Phone>360.754.8459</Phone>
+        <OrderNumber>3348294</OrderNumber>
+        <BillToAddress>1117 Tacoma Ave, Yelm, WA 98520</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments>Leave on porch</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Bob Jennings</BillTo>
+        <ShipTo>Bob Jennings</ShipTo>
+        <Phone>213.629.8484</Phone>
+        <OrderNumber>2251928</OrderNumber>
+        <BillToAddress>1 Liberty Pl., Philadelphia, PN 02356</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Sarah Folsom</BillTo>
+        <ShipTo>Sarah Folsom</ShipTo>
+        <Phone>253.626.7845</Phone>
+        <OrderNumber>3451926</OrderNumber>
+        <BillToAddress>61 Pennsylvania Ave, Baltimore, MD 03564</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Bryan Raines</BillTo>
+        <ShipTo>Dean Long</ShipTo>
+        <Phone>909.922.5216</Phone>
+        <OrderNumber>5407346</OrderNumber>
+        <BillToAddress>87965 211th St, Seattle, WA 98032</BillToAddress>
+        <ShipToAddress>635 Park Avenue, Boardwalk, CA 96235</ShipToAddress>
+        <Comments>Signature Required</Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Kate Riley</BillTo>
+        <ShipTo>Kate Riley</ShipTo>
+        <Phone>412.357.9348</Phone>
+        <OrderNumber>6244032</OrderNumber>
+        <BillToAddress>555 55th Ave S, Pulman, WA 99652</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>John Patrick</BillTo>
+        <ShipTo>John Patrick</ShipTo>
+        <Phone>860.554.9233</Phone>
+        <OrderNumber>4029574</OrderNumber>
+        <BillToAddress>8134 85th Dr SE, San Fransisco, CA 96503</BillToAddress>
+        <ShipToAddress></ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+      <tuple>
+        <BillTo>Kyle McDonald</BillTo>
+        <ShipTo>E. A. Stirbunny</ShipTo>
+        <Phone>466.983.4162</Phone>
+        <OrderNumber>2944492</OrderNumber>
+        <BillToAddress>3900 Cleveland Ave, Tulsa, OK 35642</BillToAddress>
+        <ShipToAddress>9538 Cadbury Ln, Austin, TX 86503</ShipToAddress>
+        <Comments></Comments>
+      </tuple>
+
+    </Customer>
+
+    <Methods>
+      <tuple>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PricePerPound>.5</PricePerPound>
+        <PriceEach>12.5</PriceEach>
+        <FixedFee>20</FixedFee>
+        <MaxItems>50</MaxItems>
+        <MaxWeight>200</MaxWeight>
+        <DeliveryGuarantee>7</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PricePerPound>5</PricePerPound>
+        <PriceEach>75</PriceEach>
+        <FixedFee>100</FixedFee>
+        <MaxItems>5</MaxItems>
+        <MaxWeight>100</MaxWeight>
+        <DeliveryGuarantee>1</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>ups</ShipperID>
+        <PricePerPound>2.5</PricePerPound>
+        <PriceEach>35</PriceEach>
+        <FixedFee>50</FixedFee>
+        <MaxItems>15</MaxItems>
+        <MaxWeight>150</MaxWeight>
+        <DeliveryGuarantee>3</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PricePerPound>.6</PricePerPound>
+        <PriceEach>11</PriceEach>
+        <FixedFee>15</FixedFee>
+        <MaxItems>40</MaxItems>
+        <MaxWeight>250</MaxWeight>
+        <DeliveryGuarantee>6</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PricePerPound>4.95</PricePerPound>
+        <PriceEach>40</PriceEach>
+        <FixedFee>80</FixedFee>
+        <MaxItems>7</MaxItems>
+        <MaxWeight>75</MaxWeight>
+        <DeliveryGuarantee>1</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>dhl</ShipperID>
+        <PricePerPound>2.75</PricePerPound>
+        <PriceEach>22</PriceEach>
+        <FixedFee>35</FixedFee>
+        <MaxItems>20</MaxItems>
+        <MaxWeight>175</MaxWeight>
+        <DeliveryGuarantee>3</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>ground</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PricePerPound>.35</PricePerPound>
+        <PriceEach>10</PriceEach>
+        <FixedFee>25</FixedFee>
+        <MaxItems>10000</MaxItems>
+        <MaxWeight>350</MaxWeight>
+        <DeliveryGuarantee>5</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>next day</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PricePerPound>7.5</PricePerPound>
+        <PriceEach>50</PriceEach>
+        <FixedFee>70</FixedFee>
+        <MaxItems>100</MaxItems>
+        <MaxWeight>50</MaxWeight>
+        <DeliveryGuarantee>1</DeliveryGuarantee>
+      </tuple>
+
+      <tuple>
+        <ShipMethod>three day</ShipMethod>
+        <ShipperID>fedex</ShipperID>
+        <PricePerPound>3</PricePerPound>
+        <PriceEach>27</PriceEach>
+        <FixedFee>42.5</FixedFee>
+        <MaxItems>1000</MaxItems>
+        <MaxWeight>125</MaxWeight>
+        <DeliveryGuarantee>3</DeliveryGuarantee>
+      </tuple>
+
+    </Methods>
+
+    <Vendors>
+      <tuple>
+        <ShipperID>ups</ShipperID>
+        <Address1>55 Glenlake Pkway NE</Address1>
+        <Address2></Address2>
+        <City>Atlanta</City>
+        <State>GA</State>
+        <Zip>30328</Zip>
+        <URL>www.ups.com</URL>
+        <Phone>800-PICK-UPS</Phone>
+      </tuple>
+
+      <tuple>
+        <ShipperID>fedex</ShipperID>
+        <Address1>942 South Shady Grove Rd</Address1>
+        <Address2></Address2>
+        <City>Memphis</City>
+        <State>TN</State>
+        <Zip>38120</Zip>
+        <URL>www.fedex.com</URL>
+        <Phone>800-GO-FEDEX</Phone>
+      </tuple>
+
+      <tuple>
+        <ShipperID>dhl</ShipperID>
+        <Address1>50 California St</Address1>
+        <Address2></Address2>
+        <City>San Fransisco</City>
+        <State>CA</State>
+        <Zip>94111</Zip>
+        <URL>www.dhl.com</URL>
+        <Phone>800-CALL-DHL</Phone>
+      </tuple>
+
+    </Vendors>
+
+  </Data>
+</database>

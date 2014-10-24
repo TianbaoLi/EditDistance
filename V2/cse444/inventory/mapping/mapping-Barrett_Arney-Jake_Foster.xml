@@ -1,0 +1,86 @@
+<mapping>
+  <Barrett_Arney>
+    <Inventory c="Books Music">
+      <ProductID c="Books/ISBN Music/IDNumber"/>
+      <ProductType/>
+      <Price c="Books/SellingPrice Music/SellingPrice"/>
+    </Inventory>
+    <Books m="Books">
+      <ISBN m="Books/ISBN"/>
+      <Title m="Books/BookTitle"/>
+      <Author m="Books/Author"/>
+      <Genre m="Books/Category"/>
+      <Price m="Books/SellingPrice"/>
+      <CustomerRating m="Books/Rating"/>
+      <ProductID m="Books/ISBN"/>
+    </Books>
+    <CDs m="Music">
+      <UniversalID m="Music/IDNumber"/>
+      <Album m="Music/CDTitle"/>
+      <Artist m="Music/Artist"/>
+      <Genre m="Music/Genre"/>
+      <Price m="Music/SellingPrice"/>
+      <CustomerRating m="Music/Rating"/>
+      <ProductID m="Music/IDNumber"/>
+    </CDs>
+    <ProductAvailability m="Availability">
+      <ProductID m="Availability/ItemNumber"/>
+      <WarehouseName m="Availability/WarehouseID"/>
+      <Quantity m="Availability/Quantity"/>
+      <InStock/>
+      <ExpectedInStock/>
+    </ProductAvailability>
+    <WarehouseInformation m="Warehouses">
+      <WarehouseName m="Warehouses/IDNumber"/>
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <ZIP m="Warehouses/Zip"/>
+      <PhoneNumber m="Warehouses/Telephone"/>
+      <FaxNumber m="Warehouses/FAX"/>
+      <Manager m="Warehouses/ManagerName"/>
+      <StorageRating/>
+      <Trucks/>
+      <StaffSize m="Warehouses/NumEmployees"/>
+    </WarehouseInformation>
+  </Barrett_Arney>
+  <Jake_Foster>
+    <Books m="Books">
+      <BookTitle m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+      <SellingPrice m="Books/Price"/>
+      <DiscountedPrice m="Books/Price"/>
+      <Category m="Books/Genre"/>
+      <Keywords/>
+      <Rating m="Books/CustomerRating"/>
+    </Books>
+    <Music m="CDs">
+      <CDTitle m="CDs/Album"/>
+      <Artist m="CDs/Artist"/>
+      <Company/>
+      <IDNumber m="CDs/ProductID"/>
+      <SellingPrice m="CDs/Price"/>
+      <Genre m="CDs/Genre"/>
+      <CDType/>
+      <Rating m="CDs/CustomerRating"/>
+    </Music>
+    <Availability m="ProductAvailability">
+      <ItemNumber m="ProductAvailability/ProductID"/>
+      <WarehouseID m="ProductAvailability/WarehouseName"/>
+      <Quantity m="ProductAvailability/Quantity"/>
+    </Availability>
+    <Warehouses m="WarehouseInformation">
+      <IDNumber m="WarehouseInformation/WarehouseName"/>
+      <StreetAddress m="WarehouseInformation/StreetAddress"/>
+      <City m="WarehouseInformation/City"/>
+      <State/>
+      <Zip m="WarehouseInformation/ZIP"/>
+      <Telephone m="WarehouseInformation/PhoneNumber"/>
+      <FAX m="WarehouseInformation/FaxNumber"/>
+      <ManagerName m="WarehouseInformation/Manager"/>
+      <NumEmployees m="WarehouseInformation/StaffSize"/>
+      <ItemsShippedAnnually/>
+      <AnnualOperatingCost/>
+    </Warehouses>
+  </Jake_Foster>
+</mapping>

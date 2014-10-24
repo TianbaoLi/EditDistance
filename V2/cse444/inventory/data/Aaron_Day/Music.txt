@@ -1,0 +1,20 @@
+From the Choir Girl Hotel|Tori Amos|Atlantic|11111111|18|12|Rock|Album|11
+To Venus and Back|Tori Amos|Atlantic|22222222|22|15|Rock|Double Disc Album|11
+Strange Little Girls|Tori Amos|Atlantic|33333333|15|15|Rock|Album|7
+Boys For Pele|Tori Amos|Atlantic|44444444|16|16|Rock|Album|7
+Scarlet's Walk|Tori Amos|Atlantic|55555555|16|16|Rock|Album|7
+Little Earthquakes|Tori Amos|Atlantic|66666666|18|14|Rock|Album|8
+Under the Pink|Tori Amos|Atlantic|77777777|16|14|Rock|Album|8
+Winter|Tori Amos|Atlantic|88888888|7|5|Rock|Single|10
+Nirvana|Nirvana|Interscope|99999999|19|19|Rock|Album|10
+Riot Act|Pearl Jam|Sony|12222222|15|15|Rock|Album|9
+Pearl Jam|Ten|Sony|13333333|18|12|Rock|Album|9
+Almost Happy|K's Choice|Red Int / Red Ink|14444444|20|17|Rock|Double Disc Album|9
+Dookie|Green Day|Warner Brothers|15555555|15|12|Punk|Album|6
+A New Day Has Come|Celion Dion|Evil|66666666|2|1|Putrid|Album|-1
+Adore|Smashing Pumpkins|Virgin Records|17589724|18|5|Incredible|Album|12
+Mellon Collie and the Infinite Sadness|Smashing Pumpkins|Virgin Records|24098076|21|18|Impressive|Double Disc Album|10
+Parachutes|Coldplay|Capitol|27809409|18|18|Cool|Album|8
+Pisces Iscariot|Smashing Pumpkins|Virgin Records|12309856|17|17|Rock|Album|8
+Formica Blues|Mono|Polygram Records|90065702|14|10|Odd|Album|8
+Vespertine|Bjork|Elektra/Asylum|89740129|15|15|Musical|Album|9

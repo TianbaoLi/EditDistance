@@ -1,0 +1,84 @@
+<mapping>
+  <Xenia_Hertzenberg>
+    <Books m="BooksAndMusic">
+      <Author m="BooksAndMusic/Author"/>
+      <Title m="BooksAndMusic/Title"/>
+      <ISBN m="BooksAndMusic/ItemID"/>
+      <Publisher m="BooksAndMusic/Publisher"/>
+      <Edition/>
+      <Type m="BooksAndMusic/ItemType"/>
+      <category m="BooksAndMusic/Category"/>
+      <Keywords m="BooksAndMusic/Keywords"/>
+      <Price m="BooksAndMusic/SuggestedPrice"/>
+      <Discount m="BooksAndMusic/OurPrice"/>
+      <Rating/>
+    </Books>
+    <CDs m="BooksAndMusic">
+      <Artist m="BooksAndMusic/Author"/>
+      <Title m="BooksAndMusic/Title"/>
+      <CD_ID m="BooksAndMusic/ItemID"/>
+      <R_Company m="BooksAndMusic/Publisher"/>
+      <Type m="BooksAndMusic/ItemType"/>
+      <Genre m="BooksAndMusic/Category"/>
+      <Price m="BooksAndMusic/SuggestedPrice"/>
+      <Discount m="BooksAndMusic/OurPrice"/>
+      <Rating/>
+    </CDs>
+    <Warehouse m="Warehouse">
+      <Warehouse_ID m="Warehouse/Id"/>
+      <Street m="Warehouse/Address"/>
+      <City m="Warehouse/City"/>
+      <State m="Warehouse/State"/>
+      <Zip m="Warehouse/Zip"/>
+      <Contact_ID m="Warehouse/Manager"/>
+      <NumEmployees m="Warehouse/CurEmployees"/>
+      <Capacity m="Warehouse/CurCapacity"/>
+    </Warehouse>
+    <Contacts m="Warehouse">
+      <Contact_ID m="Warehouse/Manager"/>
+      <Warehouse_ID m="Warehouse/Id"/>
+      <phone_n m="Warehouse/TelephoneNumber"/>
+      <fax_n m="Warehouse/FaxNumber"/>
+      <name m="Warehouse/Manager"/>
+      <Title/>
+    </Contacts>
+    <Availability m="Availability">
+      <Product_ID m="Availability/ItemID"/>
+      <Warehouse_ID m="Availability/WarehouseID"/>
+      <Quantity m="Availability/Amount"/>
+    </Availability>
+  </Xenia_Hertzenberg>
+  <Colin_Bleckner>
+    <BooksAndMusic m="Books" c="Books CDs">
+      <Title m="Books/Title"/>
+      <Author m="Books/Author"/>
+      <Publisher m="Books/Publisher"/>
+      <ItemID m="Books/ISBN"/>
+      <ItemType m="Books/Type"/>
+      <SuggestedPrice m="Books/Price"/>
+      <OurPrice m="Books/Discount"/>
+      <Category m="Books/category"/>
+      <Keywords m="Books/Keywords"/>
+      <Description/>
+    </BooksAndMusic>
+    <Availability m="Availability">
+      <ItemID m="Availability/Product_ID"/>
+      <WarehouseID m="Availability/Warehouse_ID"/>
+      <Amount m="Availability/Quantity"/>
+    </Availability>
+    <Warehouse m="Warehouse">
+      <Address m="Warehouse/Street"/>
+      <City m="Warehouse/City"/>
+      <State m="Warehouse/State"/>
+      <Zip m="Warehouse/Zip"/>
+      <TelephoneNumber m="Contacts/phone_n"/>
+      <FaxNumber m="Contacts/fax_n"/>
+      <Manager m="Contacts/name"/>
+      <Id m="Warehouse/Warehouse_ID"/>
+      <MaxEmployees/>
+      <CurEmployees m="Warehouse/NumEmployees"/>
+      <MaxCapacity/>
+      <CurCapacity m="Warehouse/Capacity"/>
+    </Warehouse>
+  </Colin_Bleckner>
+</mapping>

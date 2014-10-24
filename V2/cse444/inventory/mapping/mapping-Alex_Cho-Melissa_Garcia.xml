@@ -1,0 +1,109 @@
+<mapping>
+  <Alex_Cho>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <ISBN m="Books/ISBN"/>
+      <Price m="Books/BookListPrice"/>
+      <DiscountPrice m="Books/BookSellPrice"/>
+      <Edition/>
+      <CopyrightYear m="Books/PubYear"/>
+      <Publisher m="Books/Publisher"/>
+      <Description m="Books/Keyword"/>
+    </Books>
+    <BookCategories m="Books">
+      <Category m="Books/Category"/>
+      <ISBN m="Books/ISBN"/>
+    </BookCategories>
+    <Author m="Books">
+      <FirstName m="Books/Author"/>
+      <LastName m="Books/Author"/>
+      <ISBN m="Books/ISBN"/>
+    </Author>
+    <CDs m="Music">
+      <Title m="Music/Album"/>
+      <ASIN m="Music/ASIN"/>
+      <Price m="Music/CDListPrice"/>
+      <DiscountPrice m="Music/CDSellPrice"/>
+      <ReleaseDate/>
+      <Studio m="Music/Label"/>
+      <Description/>
+    </CDs>
+    <Artist m="Music">
+      <FirstName m="Music/Artist"/>
+      <LastName m="Music/Artist"/>
+      <GroupName m="Music/Artist"/>
+      <ASIN m="Music/ASIN"/>
+    </Artist>
+    <CDCategories m="Music">
+      <Category m="Music/Genre"/>
+      <ASIN m="Music/ASIN"/>
+    </CDCategories>
+    <CDTypes m="Music">
+      <Type m="Music/CDType"/>
+      <ASIN m="Music/ASIN"/>
+    </CDTypes>
+    <Warehouses m="Warehouses">
+      <Id/>
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <ZipCode m="Warehouses/Zip"/>
+      <Country/>
+      <Telephone m="Warehouses/Telephone"/>
+      <Fax m="Warehouses/Fax"/>
+      <ManagerName m="Warehouses/Manager"/>
+      <NumberOfEmployees m="Warehouses/EmployeeCount"/>
+    </Warehouses>
+    <Availability m="Availability">
+      <ItemId m="Availability/ItemID"/>
+      <ItemType/>
+      <WarehouseId m="Availability/LocsAvailable"/>
+      <Quantity m="Availability/InStock"/>
+    </Availability>
+  </Alex_Cho>
+  <Melissa_Garcia>
+    <Items m="Warehouses">
+      <Type m="Availability/ItemType"/>
+      <ID m="Warehouses/Id"/>
+    </Items>
+    <Books m="Books">
+      <Title m="Books/Title"/>
+      <Author m="Author/LastName"/>
+      <ISBN m="Books/ISBN"/>
+      <BookListPrice m="Books/Price"/>
+      <BookSellPrice m="Books/DiscountPrice"/>
+      <Publisher m="Books/Publisher"/>
+      <PubYear m="Books/CopyrightYear"/>
+      <CustomerRating/>
+      <Category m="BookCategories/Category"/>
+      <Keyword/>
+    </Books>
+    <Music m="CDs">
+      <Album m="CDs/Title"/>
+      <Artist m="Artist/LastName"/>
+      <Label m="CDs/Studio"/>
+      <ASIN m="CDs/ASIN"/>
+      <CDListPrice m="CDs/Price"/>
+      <CDSellPrice m="CDs/DiscountPrice"/>
+      <ChartNumber/>
+      <Genre m="CDCategories/Category"/>
+      <CDType m="CDTypes/Type"/>
+    </Music>
+    <Availability m="Availability">
+      <ItemID m="Availability/ItemType"/>
+      <InStock m="Availability/Quantity"/>
+      <ShipTime/>
+      <LocsAvailable m="Availability/WarehouseId"/>
+    </Availability>
+    <Warehouses m="Warehouses">
+      <StreetAddress m="Warehouses/StreetAddress"/>
+      <City m="Warehouses/City"/>
+      <State m="Warehouses/State"/>
+      <Zip m="Warehouses/ZipCode"/>
+      <Telephone m="Warehouses/Telephone"/>
+      <Fax m="Warehouses/Fax"/>
+      <Manager m="Warehouses/ManagerName"/>
+      <EmployeeCount m="Warehouses/NumberOfEmployees"/>
+    </Warehouses>
+  </Melissa_Garcia>
+</mapping>

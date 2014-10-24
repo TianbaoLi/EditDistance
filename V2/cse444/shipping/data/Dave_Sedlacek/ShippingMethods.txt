@@ -1,0 +1,12 @@
+Ground|UPS|lbs|3.13|7|70|84
+TwoDay|UPS|lbs|5.45|3|70|84
+NextDay|UPS|lbs|8.35|1|70|84
+Ground|FedEx|lbs|3.21|10|70|72
+TwoDay|FedEx|lbs|6.76|2|70|72
+NextDay|FedEx|lbs|8.21|1|50|72
+NextDay|DHL|lbs|11.03|1|40|60
+NextDayLtr|UPS|ea|10|1|1|
+TwoDayLtr|UPS|ea|7|3|1|
+GroundLtr|DHL|ea|4|8|1|
+NextDayLtr|FedEx|ea|12|1|1|
+TwoDayLtr|FedEx|ea|8|2|1|

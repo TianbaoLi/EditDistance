@@ -1,0 +1,6 @@
+Ground|Perlb|3.00|UPS|5 days|70 lbs.|3 ft.|3 ft.|3 ft.|27 ft.|U.S.A
+2-Day|Perlb|8.00|UPS|2 days|70 lbs.|3 ft.|3 ft.|3 ft.|27 ft.|U.S.A
+NextDay|NumofItems|20.00|UPS|1 day|10 lbs.|2 ft.|2 ft.|2 ft.|8 ft.|Continental U.S.
+Standard|Perlb|1.00|UsPS|10 days|20 lbs.|2 ft.|2 ft.|2 ft.|8 ft.|U.S.A
+OverNight|FixedRate|50.00|FedEx|1 days|25 lbs.|3 ft.|2 ft.|2 ft.|12 ft.|Continental U.S.
+Regular|Perlb|12.00|FedEx|4 days|50 lbs.|3 ft.|2 ft.|3 ft.|18 ft.|U.S.A

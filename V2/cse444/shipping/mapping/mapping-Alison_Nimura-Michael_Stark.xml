@@ -1,0 +1,99 @@
+<mapping>
+  <Alison_Nimura correct="doublechecked">
+    <Package m="Package">
+      <TrackingNo m="Package/TrackingNo"/>
+      <Carrier m="OrderInfo/ShipCo"/>
+      <InvoiceNo m="Package/OrderNo"/>
+      <Weight m="Package/Weight"/>
+      <ItemAmount m="Package/NoItems"/>
+      <ShippingMethod m="OrderInfo/ShipMethod"/>
+      <HandlingNotes m="Package/DeliveryInst"/>
+      <Warehouse m="Package/SrcWarehouse"/>
+      <RecipientName m="OrderInfo/DeliveryName"/>
+      <RecipientAddr m="OrderInfo/StreetAdd"/>
+      <ContactNo m="OrderInfo/Contact"/>
+      <PickUpDate m="Package/PickupTime"/>
+      <EstDeliveryDate m="Package/ExpectedDelivery"/>
+      <DeliveryDate m="Package/DeliveryTime"/>
+      <OrderStatus m="Package/DeliveryStatus"/>
+    </Package>
+    <Carriers m="ShippingVendors">
+      <CarrierName m="ShippingVendors/Name"/>
+      <LocalAddr m="ShippingVendors/StreetAddress"/>
+      <Url m="VendorInfo/URL"/>
+      <TelephoneNo m="VendorInfo/PhoneNumber"/>
+      <PickUpTime m="ShippingVendors/SchedPickupTime"/>
+      <Methods m="ShippingMethods/Method"/>
+    </Carriers>
+    <ShippingOptions m="ShippingMethods">
+      <OptionName m="ShippingMethods/Method"/>
+      <Carrier m="ShippingMethods/VendorName"/>
+      <PricingMethod/>
+      <PricePerUnit m="ShippingMethods/PricePerUnit"/>
+      <DeliveryTime m="ShippingMethods/GuaranteedShipDur"/>
+      <MaxWeight m="ShippingMethods/MaxWeight"/>
+      <MaxLength m="ShippingMethods/MaxDepth"/>
+      <MaxWidth m="ShippingMethods/MaxWidth"/>
+      <MaxHeight m="ShippingMethods/MaxHeight"/>
+      <DestCities m="ShippingMethods/RestrictedCities"/>
+    </ShippingOptions>
+  </Alison_Nimura>
+  <Michael_Stark correct="doublechecked">
+    <Package m="Package">
+      <OrderNo m="Package/InvoiceNo"/>
+      <Weight m="Package/Weight"/>
+      <Width/>
+      <Height/>
+      <Depth/>
+      <NoItems m="Package/ItemAmount"/>
+      <TrackingNo m="Package/TrackingNo"/>
+      <DeliveryInst m="Package/HandlingNotes"/>
+      <SrcWarehouse m="Package/Warehouse"/>
+      <PickupTime m="Package/PickUpDate"/>
+      <DeliveryTime m="Package/DeliveryDate"/>
+      <DeliveryStatus m="Package/OrderStatus"/>
+      <ShippingCost/>
+      <ExpectedDelivery m="Package/EstDeliveryDate"/>
+    </Package>
+    <OrderInfo m="Package">
+      <OrderNo m="Package/InvoiceNo"/>
+      <ShipMethod m="ShippingOptions/OptionName"/>
+      <ShipCo m="Package/Carrier"/>
+      <DeliveryName m="Package/RecipientName"/>
+      <StreetAdd m="Package/RecipientAddr"/>
+      <City m="Package/RecipientAddr"/>
+      <State m="Package/RecipientAddr"/>
+      <Zip m="Package/RecipientAddr"/>
+      <Contact m="Package/ContactNo"/>
+      <OrderShippingCost/>
+    </OrderInfo>
+    <ShippingVendors m="Carriers">
+      <Name m="Carriers/CarrierName"/>
+      <AssocWarehouse/>
+      <StreetAddress m="Carriers/LocalAddr"/>
+      <City m="Carriers/LocalAddr"/>
+      <State m="Carriers/LocalAddr"/>
+      <Zip m="Carriers/LocalAddr"/>
+      <SchedPickupTime m="Carriers/PickUpTime"/>
+    </ShippingVendors>
+    <VendorInfo m="Carriers">
+      <Name m="Carriers/CarrierName"/>
+      <PhoneNumber m="Carriers/TelephoneNo"/>
+      <URL m="Carriers/Url"/>
+    </VendorInfo>
+    <ShippingMethods m="ShippingOptions">
+      <VendorName m="ShippingOptions/Carrier"/>
+      <Method m="ShippingOptions/OptionName"/>
+      <UnitPriceDescriptor/>
+      <PricePerUnit m="ShippingOptions/PricePerUnit"/>
+      <GuaranteedShipDur m="ShippingOptions/DeliveryTime"/>
+      <MaxWeight m="ShippingOptions/MaxWeight"/>
+      <MaxWidth m="ShippingOptions/MaxWidth"/>
+      <MaxHeight m="ShippingOptions/MaxHeight"/>
+      <MaxDepth m="ShippingOptions/MaxLength"/>
+      <RestrictedCities m="ShippingOptions/DestCities"/>
+      <MinPrice/>
+      <MaxPrice/>
+    </ShippingMethods>
+  </Michael_Stark>
+</mapping>

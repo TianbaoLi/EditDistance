@@ -1,0 +1,20 @@
+Great Expectations|Charles Dickens|MadeUp|12345678|8|6|Fiction|best book ever
+The Great Gatsby|F. Scott Fitzgerald|MadeUp|22345678|9|7|Fiction|pretty good
+The Catcher in the Rhye|J.D. Salinger|MadeUp|32345678|8|8|Fiction|must read
+Romeo and Juliet|William Shakespeare|MadeUp|42345678|15|12|Old Fiction|romance, sword fights, lots of death
+The Grapes of Wrath|John Steinbeck|MadeUp|52345678|9|9|Fiction|depressing
+The Hitchhiker's Guide to the Galaxy|Douglas Adams|BeatsMe|62345678|8|8|Humor|funniest book ever
+So Long and Thanks for all the Fish|Douglas Adams|BeatsMe|72345678|8|5|Humor|havn't read it yet
+Hard Times|Charles Dickens|BeatsMe|82345678|8|1|Fiction|most boring book ever
+Oliver Twist|Charles Dickens|BeatsMe|92345678|8|8|Fiction|etertaining
+Moby Dick|Herman Melville|BeatsMe|11345678|8|7|Classic Fiction|Que Queg is the coolest guy ever
+Green Eggs and Ham|Dr. Seuss|BeatsMe|13345678|10|9|Childrens Book|why would anyone eat green eggs
+The Cat in the Hat|Dr. Seuss|Somebody|14345678|8|7|Childrens Book|cats are scarry, they shouldn't wear hats
+A Wrinkle in Time|Madeleine L'Engle|Somebody|15345678|8|8|Fantasy|crazy, wild, fantasy
+A Brief History of Time|Stephen Hawking|Somebody|16345678|8|7|Science|try and understand it
+The Universe in a Nutshell|Stephen Hawking|Somebody|17345678|12|12|Science|lots of pictures
+The Eagle Flys West|Some Guy|Somebody|18345678|25|25|Fiction|the most made up book ever, doesnt actually exist
+To Kill a Mocking Bird|Harper Lee|Somebody|55555555|8|2|Fiction|kinda dull, you gotta read it anyways cause its got some meaning
+A Tale of Two Cities|Charles Dickens|Somebody|77777777|13|9|Fiction|it was the best of times, it was the worst of times
+The Hobbit|J.RR Tolien|Somebody|99999999|15|15|Fiction|hobbits, dwarves, elves, wizards, orcs, trolls, dragons, what more could you want
+Hamlet|William Shakespeare|Me|33333333|8|3|Fiction|old book, lots of people die, a little over rated

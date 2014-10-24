@@ -1,0 +1,456 @@
+<database name="Invoice">
+	<createdby name="Ho Joon Lim"/> 
+	<Schema>
+		<table name="Customer">
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="LastName" type="String" key="no">
+				<comment>Last name of person to send a bill</comment>
+			</column>
+			<column name="FirstName" type="String" key="no">
+				<comment>First name of person to send a bill</comment>
+			</column>
+			<column name="Company" type="String" key="no"/>
+			<column name="Street1" type="String" key="no">
+				<comment>
+				The first line of street address for billing.
+				</comment>
+			</column>
+			<column name="Street2" type="String" key="no">
+				<comment> 
+				The second line of street address (e.g. apartment number) for billing
+    				</comment>
+			</column>
+			<column name="City" type="String" key="no"/>
+			<column name="State" type="String" key="no"/>
+			<column name="Zip" type="Integer" key="no"/>
+			<column name="HomePhoneNumber" type="String" key="no"/>
+			<column name="WorkPhoneNumber" type="String" key="no"/>
+			<column name="Email" type="String" key="no"/>
+		</table> 
+
+		<table name="Invoice">
+			<comment>Address in Invoice table is for shipping purpose</comment>
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="Date" type="Date" key="no"/>
+			<column name="CustomerID" type="Integer" key="no"/>
+			<column name="ShippingAddress" type="Integer" key="no"/>
+			<column name="PaymentType" type="String" key="no"/>
+			<column name="CardType" type="String" key="no"/>
+			<column name="CardNumber" type="Integer" key="no"/>
+			<column name="ExpireDate" type="Date" key="no"/>
+			<column name="NameOnCard" type="String" key="no"/>
+			<column name="ShippingMethod" type="String" key="no">
+				<comment>
+				For the simplicity of the invoice domain, ShippingMethod only contains the name of service as well as the carrier (e.g. Fedex Saver). This part can be incorporated with the Shipping domain later.
+				</comment>
+			</column>
+			<column name="TrackingNumber" type="String" key="no">
+				<comment>
+				The tracking number often consists of numbers and alphabet letters.
+				</comment>
+			</column>
+			<column name="ShippedDate" type="Date" key="no"/>
+			<column name="DiscountType" type="Integer" key="no"/>
+			<column name="Subtotal" type="Float" key="no">
+				<comment>
+				The total price excluding tax, if any, and shipping cost
+				</comment>
+			</column>
+			<column name="Tax" type="Float" key="no">
+				<comment>
+				Tax percentage depending on the shipping address
+				</comment>
+			</column>
+			<column name="ShippingCost" type="Float" key="no">
+				<comment>
+				Shipping cost based on ShippingMethod. This can be incorporated with the Shipping domain later.
+				</comment>
+			</column>
+			<column name="Total" type="Float" key="no">
+				<comment>
+				The total cost including tax and shipping cost.
+				</comment>
+			</column>	
+		</table>
+		<table name="PaymentType">
+			<comment>
+			different payment methods
+			</comment>
+			<column name="Type" type="String" key="yes"/>
+		</table>
+		<table name="Card">
+			<comment>
+			different credit card type
+			</comment>
+			<column name="Type" type="String" key="yes"/>
+		</table>
+		<table name="ShippingMethod">
+			<column name="Carrier" type="String" key="yes"/>
+		</table>
+		<table name="ShippingAddress">
+			<comment>
+			Shipping addresses can be saved for each customer and reused.
+			</comment>
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="CustomerID" type="Integer" key="no"/>
+			<column name="Company" type="String" key="no"/>
+			<column name="Street1" type="String" key="no">
+		        	<comment>
+				The first line of street address for shipping.
+				</comment>
+                	</column>
+			<column name="Street2" type="String" key="no">
+				<comment>
+				The second line of street address (e.g. apartment number) for shipping
+				</comment>
+			</column>
+			<column name="City" type="String" key="no"/>
+			<column name="State" type="String" key="no"/>
+			<column name="Zip" type="Integer" key="no"/>
+		</table>
+		<table name="Discount">
+			<comment>
+			Information on various types of discounts as coupon.
+			</comment>
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="Name" type="String" key="no"/>
+			<column name="Amount" type="Float" key="no"/>
+			<column name="Min" type="Float" key="no">
+				<comment>
+				Minimum purchase amount in order to make this couple valid
+			       </comment>
+		        </column>	       
+			<column name="ValidUntil" type="Date" key="no">
+				<comment>
+				Coupon is not valid after ValidUntil
+				</comment>
+			</column>
+		</table>
+		<table name="Items">
+			<column name="ID" type="Integer" key="yes"/>
+			<column name="CustomerID" type="Integer" key="no"/>
+			<column name="ProductID" type="String" key="no"/>
+			<column name="Name" type="String" key="no"/>
+			<column name="Catagory" type="String" key="no">
+				<comment> Catagory of items (e.g. CD, book, audio tape, etc)
+    				</comment>
+			</column>
+			<column name="UnitPrice" type="Float" key="no"/>
+			<column name="Quantity" type="Integer" key="no"/>
+			<column name="InvoiceID" type="Integer" key="no"/>
+		</table>
+		<table name="Catagory">
+			<column name="Name" type="String" key="yes">
+		       		<comment> Catagory Names: CD, book, audio tape, etc
+				</comment>
+			</column>	
+		</table>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="CustomerID"/>
+			</source>
+			<target table="Customer">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="ShippingAddress"/>
+			</source>
+			<target table="ShippingAddress">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="PaymentType"/>
+			</source>
+			<target table="PaymentType">
+				<column name="Type"/>
+			</target>
+		</foreignkeyconstraint>	
+		<foreignkeyconstraint>
+		        <source table="Invoice">
+				<column name="CardType"/>
+			</source>
+			<target table="Card">
+				<column name="Type"/>
+			</target>
+		</foreignkeyconstraint> 
+		<foreignkeyconstraint> 
+		        <source table="Invoice"> 
+				<column name="DiscountType"/>
+			</source>
+			<target table="Discount">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="ShippingAddress">
+				<column name="CustomerID"/>
+			</source>
+			<target table="Customer">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Invoice">
+				<column name="ShippingMethod"/>
+			</source>
+			<target table="ShippingMethod">
+				<column name="Carrier"/>
+			</target>
+                </foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="CustomerID"/>
+			</source>
+			<target table="Customer">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="InvoiceID"/>
+			</source>
+			<target table="Invoice">
+				<column name="ID"/>
+			</target>
+		</foreignkeyconstraint>
+		<foreignkeyconstraint>
+			<source table="Items">
+				<column name="Catagory"/>
+			</source>
+			<target table="Catagory">
+				<column name="Name"/>
+			</target>
+		</foreignkeyconstraint>
+	</Schema>
+
+	<Data>
+		<Customer>
+			<tuple>
+				<ID>000001</ID>
+				<LastName>Lim</LastName>
+				<FirstName>Felix</FirstName>
+				<Company>A's</Company>
+				<Street1>100 Everett Ave</Street1>
+				<Street2></Street2>
+				<City>Seattle</City>
+				<State>WA</State>
+				<Zip>98145</Zip>
+				<HomePhoneNumber>(206)232-1232</HomePhoneNumber>
+				<WorkPhoneNumber>(206)611-3212</WorkPhoneNumber>
+				<Email>fl@a.com</Email>
+			</tuple>
+			<tuple>
+				<ID>000002</ID>
+				<LastName>McDonald</LastName>
+				<FirstName>Jack</FirstName>
+				<Company></Company>
+				<Street1>1121 21st St.</Street1>
+				<Street2>A101</Street2>
+				<City>New York</City>
+				<State>NY</State>
+				<Zip>10110</Zip>
+				<HomePhoneNumber>(518)222-0103</HomePhoneNumber>
+				<WorkPhoneNumber>(518)103-3982</WorkPhoneNumber>
+				<Email>jmc@aol.com</Email>
+			</tuple>
+		</Customer>
+		<Invoice>
+			<tuple>
+				<ID>000001</ID>
+				<Date>12/19/2002</Date>
+				<CustomerID>000001</CustomerID>
+				<ShippingAddress>000001</ShippingAddress>
+				<PaymentType>Credit Card</PaymentType>
+				<CardType>VISA</CardType>
+				<CardNumber>1111222233334444</CardNumber>
+				<ExpireDate>06/30/05</ExpireDate>
+				<NameOnCard>Felix Lim</NameOnCard>
+				<ShippingMethod>FedEx</ShippingMethod>
+				<TrackingNumber>1A932E592Z0</TrackingNumber>
+				<ShippedDate>12/20/2002</ShippedDate>
+				<DiscountType>001</DiscountType>
+				<Subtotal>89.80</Subtotal>
+				<Tax>8.9</Tax>
+				<ShippingCost>10.95</ShippingCost>
+				<Total>108.74</Total>
+			</tuple>
+                        <tuple>        
+                                <ID>000002</ID>  
+                                <Date>12/24/2002</Date> 
+                                <CustomerID>000001</CustomerID> 
+                                <ShippingAddress>000002</ShippingAddress>
+                                <PaymentType>Credit Card</PaymentType>
+                                <CardType>Master</CardType>      
+                                <CardNumber>2323432313332223</CardNumber>
+                                <ExpireDate>03/31/03</ExpireDate>
+                                <NameOnCard>Felix Lim</NameOnCard>            
+                                <ShippingMethod>USPS</ShippingMethod>
+                                <TrackingNumber>132334202</TrackingNumber>
+                                <ShippedDate>12/30/02</ShippedDate>
+                                <DiscountType></DiscountType>
+                                <Subtotal>39.95</Subtotal>           
+                                <Tax>8.9</Tax>
+                                <ShippingCost>5.00</ShippingCost>
+                                <Total>48.50</Total>
+                        </tuple> 
+                        <tuple>        
+                                <ID>000003</ID>  
+                                <Date>1/2/2003</Date> 
+                                <CustomerID>000002</CustomerID> 
+                                <ShippingAddress>000003</ShippingAddress>
+                                <PaymentType>Cheque</PaymentType>
+                                <CardType></CardType>      
+                                <CardNumber></CardNumber>
+                                <ExpireDate></ExpireDate>
+                                <NameOnCard></NameOnCard>            
+                                <ShippingMethod>UPS</ShippingMethod>
+                                <TrackingNumber>Z10302A0323</TrackingNumber>
+                                <ShippedDate>1/4/2003</ShippedDate>
+                                <DiscountType>001</DiscountType>
+                                <Subtotal>57.99</Subtotal>           
+                                <Tax>7.0</Tax>
+                                <ShippingCost>8.00</ShippingCost>
+                                <Total>70.05</Total>
+                        </tuple> 
+		</Invoice>
+		<PaymentType>
+			<tuple>
+				<Type>Cheque</Type>
+			</tuple>
+			<tuple>
+				<Type>C.O.D.</Type>
+			</tuple>
+			<tuple>
+				<Type>Credit Card</Type>
+			</tuple>
+		</PaymentType>
+		<Card>
+			<tuple>
+				<Type>VISA</Type>
+			</tuple>
+			<tuple>
+				<Type>Master</Type>
+			</tuple>
+			<tuple>
+				<Type>American Express</Type>
+			</tuple>
+			<tuple>
+				<Type>DISCOVER</Type>
+			</tuple>
+		</Card>
+		<ShippingAddress>
+			<tuple>
+				<ID>000001</ID>
+				<CustomerID>000001</CustomerID>
+				<Company>University of Washington</Company>
+                                <Street1>Department of Computer Science and Engineering</Street1>
+                                <Street2>114 Sieg Hall</Street2>          
+                                <City>Seattle</City>
+                                <State>WA</State>
+                                <Zip>98195</Zip>
+			</tuple>
+                        <tuple>
+                                <ID>000002</ID>                  
+                                <CustomerID>000001</CustomerID>    
+                                <Company></Company>  
+                                <Street1>100 Everett Ave</Street1>
+                                <Street2></Street2>
+                                <City>Seattle</City>
+                                <State>WA</State>
+                                <Zip>98145</Zip>
+                        </tuple>
+                        <tuple>
+                                <ID>000003</ID>                  
+                                <CustomerID>000002</CustomerID>    
+                                <Company></Company>  
+                                <Street1>1121 21st St.</Street1>
+                                <Street2></Street2>
+                                <City>New York</City>
+                                <State>NY</State>
+                                <Zip>10110</Zip>
+                        </tuple>
+		</ShippingAddress>
+		<ShippingMethod>
+			<tuple>
+				<Carrier>FedEx</Carrier>
+			</tuple>
+			<tuple>
+				<Carrier>UPS</Carrier>
+			</tuple>
+			<tuple>
+				<Carrier>USPS</Carrier>
+			</tuple>
+		</ShippingMethod>
+		<Discount>
+			<tuple>
+				<ID>001</ID>
+				<Name>First Purchaser Discount</Name>
+				<Amount>10.00</Amount>
+				<Min>50.00</Min>
+				<ValidUntil>3/31/2004</ValidUntil>
+			</tuple>
+		</Discount>
+		<Items>
+			<tuple>
+				<ID>00001</ID>
+				<CustomerID>000001</CustomerID>
+				<ProductID>0-817-44059-3</ProductID>
+				<Name>John Shaw's Nature Photography Field Guide</Name>
+				<UnitPrice>19.95</UnitPrice>
+				<Quantity>2</Quantity>
+				<InvoiceID>000001</InvoiceID>
+			</tuple>
+                        <tuple>
+                                <ID>00002</ID>
+                                <CustomerID>000001</CustomerID>
+                                <ProductID>0-817-43712-6</ProductID>
+				<Name>Understand Exposure</Name>
+                                <UnitPrice>19.95</UnitPrice>
+                                <Quantity>1</Quantity>
+                                <InvoiceID>000001</InvoiceID>          
+                        </tuple>         
+                        <tuple>
+                                <ID>00003</ID>
+                                <CustomerID>000001</CustomerID>
+                                <ProductID>N5549-90-IN</ProductID>
+				<Name>The Lord of the Rings-The Fellowship of the Ring(Extended Edition)</Name>
+                                <UnitPrice>29.99</UnitPrice>
+                                <Quantity>1</Quantity>
+                                <InvoiceID>000001</InvoiceID>          
+                        </tuple>         
+                        <tuple>
+                                <ID>00004</ID>
+                                <CustomerID>000002</CustomerID>
+                                <ProductID>0-596-00289-0</ProductID>
+				<Name>Mastering Regular Expressions</Name>
+                                <UnitPrice>39.95</UnitPrice>
+                                <Quantity>1</Quantity>
+                                <InvoiceID>000002</InvoiceID>          
+                        </tuple>         
+                        <tuple>
+                                <ID>00005</ID>
+                                <CustomerID>000001</CustomerID>
+                                <ProductID>1-903450-73-X</ProductID>
+				<Name>Foundation Actionscript for Macromedia Flash MX</Name>
+                                <UnitPrice>29.95</UnitPrice>
+                                <Quantity>1</Quantity>
+                                <InvoiceID>000003</InvoiceID>          
+                        </tuple>         
+                        <tuple>
+                                <ID>00006</ID>
+                                <CustomerID>000001</CustomerID>
+                                <ProductID>B00003CXBK</ProductID>
+				<Name>Mononoke Princess</Name>
+                                <UnitPrice>28.04</UnitPrice>
+                                <Quantity>1</Quantity>
+                                <InvoiceID>000003</InvoiceID>          
+                        </tuple>         
+		</Items>
+	</Data>
+
+</database>
+

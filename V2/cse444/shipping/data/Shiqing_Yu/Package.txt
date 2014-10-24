@@ -1,0 +1,20 @@
+1234567890|12|1|Standard|9876543210|ups|001|Kevin Spacey|my address|206-123-4567|none|1/14/2003|1/20/2003||0
+1234567891|19|11|Standard|9876543211|ups|002|Mary jones|Mary's address|206-111-4567|none|1/11/2003|1/3/2003||1
+1234567892|4|3|Overnight|9876543212|usps|001|Kevin Moore|Kevin's address|206-123-6767|none|1/16/2003|1/20/2003||1
+1234567893|4|9|secondday|9876543213|usps|002|James Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567894|4|9|secondday|9876543214|ups|002|Moore|mes's address|204-123-6767|special care(glasses)|1/4/2003|1/14/2003||1
+1234567895|4|9|standard|9876543215|usps|001|Jades ore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567896|4|9|secondday|9876543216|usps|002|J Moo|J's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567897|4|9|secondday|9876543217|ups|002|Joos Moore|J's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567898|4|9|standard|9876543218|ups|002|Jams oore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/9/2003||1
+1234567899|4|9|standard|9876543219|usps|002|d Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567810|4|9|secondday|9876543220|usps|002|s Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567811|4|9|secondday|9876543221|usps|002|e|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567822|4|9|secondday|9876543222|usps|002|re|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567823|4|9|secondday|9876543223|ups|002|55 Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567824|4|9|secondday|9876543224|dhl|002|Mary Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567825|4|9|secondday|9876543225|usps|002|Ja|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567826|4|9|secondday|9876543225|usps|002|James Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567826|4|9|secondday|9876543226|uss|002|Jamoore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567827|4|9|secondday|9876543227|usps|002|ames Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1
+1234567828|4|9|secondday|9876543228|usps|002|444James Moore|James's address|204-123-6767|special care(glasses)|1/3/2003|1/4/2003||1

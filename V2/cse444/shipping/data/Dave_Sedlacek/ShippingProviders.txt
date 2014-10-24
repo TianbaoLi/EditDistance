@@ -1,0 +1,8 @@
+UPS|853 Main St|800-321-1234|www.ups.com|Seattle|93298632|1900-01-01 16:00:00
+UPS|329 Main St|800-321-1234|www.ups.com|Kansas City|93298632|1900-01-01 15:30:00
+UPS|631 Main St|800-321-1234|www.ups.com|Boise|93298632|1900-01-01 15:30:00
+FedEx|958 Main St|800-753-2636|www.fedex.com|Seattle|3487515|1900-01-01 15:00:00
+FedEx|366 Main St|800-753-2636|www.fedex.com|Kansas City|3487515|1900-01-01 16:15:00
+FedEx|272 Main St|800-753-2636|www.fedex.com|Boise|3487515|1900-01-01 15:00:00
+DHL|818 Main St|800-182-7553|www.dhl.com|Boise|3654981|1900-01-01 15:45:00
+DHL|442 Main St|800-182-7553|www.dhl.com|Seattle|3654981|1900-01-01 15:45:00

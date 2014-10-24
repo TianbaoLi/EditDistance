@@ -1,0 +1,302 @@
+<database name="InvoiceDB">
+<createdby name="Vivian Li" /> 
+<Schema>
+
+<table name="Invoice">
+<column name="InvoiceID" type="Integer" key="yes">
+<comment>The InvoiceID is key for all invoice we are processing.</comment> 
+</column>
+<column name="OrderDate" type="Date" key="no">
+<comment>The date the order was placed .</comment> 
+</column>
+<column name="BuyerName" type="String" key="no">
+<comment>The name of the Person who placed the order</comment> 
+</column>
+<column name="BuyerPhone" type="Integer" key="no">
+</column>
+<column name="ReceiverName" type="String" key="no">
+<comment>The name of the person whom the order will be shipped to</comment> 
+</column>
+<column name="ReceiverPhone" type="String" key="no">
+</column>
+<column name="BillingName" type="String" key="no">
+<comment>The name of the person whom the bill is sent to</comment> 
+</column>
+<column name="BillingPhone" type="String" key="no">
+</column>
+<column name="ShippingMethod" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="PaymentMethod" type="String" key="no">
+<comment></comment> 
+</column>
+</table>
+
+<table name="Cost">
+<column name="InvoiceID" type="Integer" key="yes">
+<comment>The InvoiceID is the key for all the entries in Cost</comment> 
+</column>
+<column name="TotalCost" type="Integer" key="no">
+<comment>The final amount of cost for the particular invoice.</comment> 
+</column>
+<column name="ItemCost" type="Integer" key="no">
+<comment>The sum of the price of all the goods.</comment> 
+</column>
+<column name="Discount" type="Integer" key="no">
+<comment>The amount of the discount if there is any.</comment> 
+</column>
+<column name="Shipping" type="Integer" key="no">
+<comment>The shipping cost.</comment> 
+</column>
+<column name="Tax" type="Integer" key="no">
+<comment>The tax cost.</comment> 
+</column>
+</table>
+
+<table name="CreditCard">
+<column name="HolderName" type="String" key="yes">
+<comment>The name of the Credit card holder.</comment> 
+</column>
+<column name="HolderPhone" type="Integer" key="yes">
+</column>
+<column name="CardType" type="String" key="no"> 
+</column>
+<column name="CardNum" type="Integer" key="no"> 
+</column>
+<column name="ExpDate" type="Date" key="no">
+</column>
+</table>
+
+<table name="Purchase">
+<column name="InvoiceID" type="Integer" key="no">
+<comment>The InvoiceID where the order of the item has been placed.</comment> 
+</column>
+<column name="ProductID" type="Integer" key="no">
+<comment>Every product has a unique ID</comment> 
+</column>
+<column name="ItemName" type="String" key="no">
+</column>
+<column name="UnitPrice" type="Money" key="no">
+</column>
+<column name="Quantity" type="Integer" key="no">
+</column>
+<column name="Category" type="String" key="no">
+</column>
+<column name="Warehouse" type="String" key="no">
+<comment>The warehouse where the items are going to be shipped.</comment> 
+</column>
+<column name="ExpShipDate" type="Date" key="no">
+</column>
+</table>
+
+<table name="Customer">
+<column name="PerName" type="String" key="yes">
+<comment>The name of the customer.</comment> 
+</column>
+<column name="Phone" type="Integer" key="yes">
+<comment>The phone number of the customer.</comment> 
+</column>
+<column name="Email" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="Street" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="City" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="State" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="Country" type="String" key="no">
+<comment></comment> 
+</column>
+<column name="ZipCode" type="Integer" key="no">
+<comment></comment> 
+</column>
+</table>
+
+
+<foreignkeyconstraint>
+<source table="Invoice">
+<column name="InvoiceID"/> 
+</source>
+<target table="Cost">
+<column name="InvoiceID"/> 
+</target>
+<comment>Every invoice must have a cost summary in the Cost table.</comment> 
+</foreignkeyconstraint>
+
+<foreignkeyconstraint>
+<source table="invoice">
+<column name="BuyerName" />
+<column name="BuyerPhone" />
+</source>
+<target table="Customer">
+<column name="PerName"/>
+<column name="Phone"/>
+</target>
+<comment>Every Buyer's name and phone is a unique identification of who the person is
+and he/she can be found in the Customer table.</comment> 
+</foreignkeyconstraint>
+
+<foreignkeyconstraint>
+<source table="invoice">
+<column name="ReceiverName" />
+<column name="ReceiverPhone" />
+</source>
+<target table="Customer">
+<column name="PerName"/>
+<column name="Phone"/>
+</target>
+</foreignkeyconstraint>
+
+<foreignkeyconstraint>
+<source table="invoice">
+<column name="BillingName" />
+<column name="BillingPhone" />
+</source>
+<target table="Customer">
+<column name="PerName"/>
+<column name="Phone"/>
+</target>
+</foreignkeyconstraint>
+
+</Schema>
+
+<Data>
+
+<Invoice>
+<tuple>
+<InvoiceID>000111</InvoiceID>
+<OrderDate>Dec 22, 2002</OrderDate>
+<BuyerName>John Smith</BuyerName>
+<BuyerPhone>(206)245-2233</BuyerPhone>
+<ReceiverName>John Smith</ReceiverName>
+<ReceiverPhone>(206)245-2233</ReceiverPhone>
+<BillingName>John Smith</BillingName>
+<BillingPhone>(206)245-2233</BillingPhone>
+<ShippingMethod>Standard Shipping(3-7 business days)</ShippingMethod>
+</tuple>
+<tuple>
+<InvoiceID>000125</InvoiceID>
+<OrderDate>Jan 12, 2003</OrderDate>
+<BuyerName>Heather Mayer</BuyerName>
+<BuyerPhone>(206)889-5252</BuyerPhone>
+<ReceiverName>Linda Cornell</ReceiverName>
+<ReceiverPhone>(612)398-2229</ReceiverPhone>
+<BillingName>Heather Mayer</BillingName>
+<BillingPhone>(206)889-5252</BillingPhone>
+<ShippingMethod>Two Day Shipping (2 business days)</ShippingMethod>
+</tuple>
+</Invoice>
+
+<Cost>
+<tuple>
+<InvoiceID>000111</InvoiceID>
+<TotalCost>$26.10</TotalCost>
+<ItemCost>$21.00</ItemCost>
+<Discount>$0.00</Discount>
+<Shipping>$3.00</Shipping>
+<Tax>$2.10</Tax>
+</tuple>
+<tuple>
+<InvoiceID>000125</InvoiceID>
+<TotalCost>$24.80</TotalCost>
+<ItemCost>$18.00</ItemCost>
+<Discount>$0.00</Discount>
+<Shipping>$5.00</Shipping>
+<Tax>$1.80</Tax>
+</tuple>
+</Cost>
+
+<CreditCard>
+<tuple>
+<HolderName>John Smith</HolderName>
+<HolderPhone>(206)245-2233</HolderPhone>
+<CardType>Visa</CardType>
+<CardNum>7375983762435098</CardNum>
+<ExpDate>03/05</ExpDate>
+</tuple>
+<tuple>
+<HolderName>Heather Mayer</HolderName>
+<HolderPhone>(206)889-5252</HolderPhone>
+<CardType>Master</CardType>
+<CardNum>9803287603761834</CardNum>
+<ExpDate>01/04</ExpDate>
+</tuple>
+</CreditCard>
+
+<Purchase>
+<tuple>
+<InvoiceID>000111</InvoiceID>
+<ProductID>ISBN5001</ProductID>
+<ItemName>SQL for Nerds</ItemName>
+<UnitPrice>$21.00</UnitPrice>
+<Quantity>1</Quantity>
+<Category>Book</Category>
+<Warehouse>Seatte, WA</Warehouse>
+<ExpShipDate>Dec 28, 2002</ExpShipDate>
+</tuple>
+
+<tuple>
+<InvoiceID>000111</InvoiceID>
+<ProductID>ISBN8035</ProductID>
+<ItemName>Official Guide to Ally McBeal</ItemName>
+<UnitPrice>$8.00</UnitPrice>
+<Quantity>1</Quantity>
+<Category>Book</Category>
+<Warehouse>Seattle, WA</Warehouse>
+<ExpShipDate>Jan 14, 2003</ExpShipDate>
+</tuple>
+
+<tuple>
+<InvoiceID>000125</InvoiceID>
+<ProductID>907654</ProductID>
+<ItemName>Christmas Songs</ItemName>
+<UnitPrice>$10.00</UnitPrice>
+<Quantity>1</Quantity>
+<Category>CD</Category>
+<Warehouse>Seattle, WA</Warehouse>
+<ExpShipDate>Jan 14, 2003</ExpShipDate>
+</tuple>
+</Purchase>
+
+<Customer>
+<tuple>
+<PerName>John Smith</PerName>
+<Phone>(206)245-2233</Phone>
+<Email>jsmith@att.com</Email>
+<Street>322 EastLake Apt 201</Street>
+<City>Seattle</City>
+<State>WA</State>
+<ZipCode>98100</ZipCode>
+<Country>USA</Country>
+</tuple>
+<tuple>
+<PerName>Heather Mayer</PerName>
+<Phone>(206)889-5252</Phone>
+<Email>heather33@hotmail.com</Email>
+<Street>3221 Roosevelt Way Apt. 602</Street>
+<City>Seattle</City>
+<State>WA</State>
+<ZipCode>98105</ZipCode>
+<Country>USA</Country>
+</tuple>
+<tuple>
+<PerName>Linda Cornell</PerName>
+<Phone>(612)398-2229</Phone>
+<Email>LCornell@mit.edu</Email>
+<Street>4100 11th Ave Apt 505</Street>
+<City>Minneapolis</City>
+<State>MN</State>
+<ZipCode>55414</ZipCode>
+<Country>USA</Country>
+</tuple>
+</Customer>
+
+</Data>
+</database>
+
+
+
